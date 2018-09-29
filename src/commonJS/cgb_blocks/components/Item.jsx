@@ -137,7 +137,7 @@ class Item extends React.Component {
 						<IconButton
 							className="cgb-remove-item cgb-button"
 							icon="minus"
-							onClick={ removeItem }
+							onClick={ () => removeItem( index ) }
 						/>
 					</div>
 				</div>

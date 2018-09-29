@@ -28,9 +28,7 @@ const composeWithContainer = ( component ) => compose( [
 
 		const {
 			pullItemsFromAttributes,
-			pushItemsToAttribues,
 			pullSettingsFromAttributes,
-			pushSettingsToAttribues,
 			ensureOneItem,
 			ensureOneSelected,
 		} = dispatch( 'cgb-store' );

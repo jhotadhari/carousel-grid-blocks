@@ -1,8 +1,4 @@
 /**
- * External dependencies
- */
-
-/**
  * WordPress dependencies
  */
 const { setLocaleData } = wp.i18n;
@@ -13,7 +9,7 @@ const { setLocaleData } = wp.i18n;
 import registerBlockCarousel from './cgb_blocks_loader/registerBlockCarousel';
 import registerBlockGrid from './cgb_blocks_loader/registerBlockGrid';
 
-setLocaleData( cgbBlocks.locale, 'cgb' );	// ???
+setLocaleData( cgbBlocks.locale, 'cgb' );
 
 registerBlockCarousel();
 registerBlockGrid();

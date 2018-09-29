@@ -1,6 +1,6 @@
 == Description ==
 
-Two Gutenbergs image blocks that interact with each other and share the same state.
+Two Gutenberg image blocks that interact with each other and share the same state.
 
 * This Plugin is generated with [generator-pluginboilerplate version 1.2.3](https://github.com/jhotadhari/generator-pluginboilerplate)
 

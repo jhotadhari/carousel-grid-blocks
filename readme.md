@@ -1,6 +1,6 @@
 WordPress Plugin
 
-Two Gutenbergs image blocks that interact with each other and share the same state.
+Two Gutenberg image blocks that interact with each other and share the same state.
 
 > Further information: [./dist/trunk/README.md](https://github.com/jhotadhari/carousel-grid-blocks/tree/master/dist/trunk)
 

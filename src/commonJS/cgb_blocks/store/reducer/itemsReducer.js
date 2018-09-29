@@ -59,7 +59,8 @@ export function pullItemsFromAttributes( state = DEFAULT_STATE, action ) {
 }
 
 export function pushItemsToAttribues( state = DEFAULT_STATE, action ) {
-	const { items, blocks } = state;
+	const { items } = state;
+	const blocks = getCgbBlocks();
 	[...blocks].map( block => updateBlockAttributes( block.clientId, { imageIds: pluck( [...items], 'id' ) } ) );
 	return {
 		...state,

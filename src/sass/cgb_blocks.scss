@@ -1,0 +1,121 @@
+
+@import "bourbon";
+@import "./vendor/carousel";
+
+.cgb-block {
+
+    &-item {
+        position: relative;
+
+        &-image {
+            margin: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                position: relative;
+                display: block;
+                object-fit: cover;
+                min-width: 100%;
+                min-height: 100%;
+                max-width: none;
+                max-height: none;
+
+
+
+                // ??? hover transform opt in
+                transform: scale(1);
+                transition: transform 0.3s;
+            }
+        }
+        &:hover &-image img {
+            // ??? hover transform opt in
+            transform: scale(1.05);
+        }
+
+        &-info {
+            position: absolute;
+            width: calc( 100% - 2em);
+            bottom: 1em;
+            background: #ccc;
+            margin: auto 1em;
+            padding: 0.5em;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &-controls {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &-inner {
+                display: none;
+                background: #f33;
+                padding: 1em;
+                justify-content: center;
+                align-items: center;
+            }
+
+        }
+        &:hover &-controls-inner {
+            display: flex;
+        }
+
+    }
+
+    &-grid {
+        display: grid;
+        margin: 1.5em auto;
+        padding: 0;
+        grid-template-columns: repeat( auto-fill, minmax( 200px, 1fr ) );
+        grid-gap: 1em;
+        grid-auto-flow: dense;
+
+        &-item {
+
+            // ??? handeld by js        del!!!
+            // box-shadow: none;
+            // transition: box-shadow 0.3s;
+            // &.selected {
+            //     box-shadow: 5px 5px #f00, 5px -5px #f00, -5px 5px #f00, -5px -5px #f00
+            // }
+
+            &.landscape {
+            }
+
+            &.portrait {
+                grid-row-end: span 2;
+            }
+        }
+
+    }
+
+    &-carousel {
+
+        .control-dots {
+            list-style: none;
+
+            .dot {
+                width: 11px;    // ??? move bier
+                height: 11px;   // ??? move bier
+                border-radius: 0;
+            }
+
+        }
+    }
+
+}

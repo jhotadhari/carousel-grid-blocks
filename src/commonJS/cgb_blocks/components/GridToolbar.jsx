@@ -4,20 +4,11 @@
  */
 import Toolbar 							from './Toolbar.jsx';
 
-class GridToolbar extends React.Component {
+const GridToolbar = () => [
+	<Toolbar/>,
+];
 
-	constructor(props) {
-		super(props);
-	}
-
-	render() {
-
-		return ([
-
-			<Toolbar/>,
-
-		]);
-	}
-}
+cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
+cgbBlocks.components.GridToolbar = GridToolbar;
 
 export default GridToolbar;

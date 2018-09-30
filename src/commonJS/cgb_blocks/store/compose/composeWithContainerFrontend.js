@@ -21,7 +21,7 @@ const {
 } = wp.data;
 
 // pull state from attributes, overwrites store state
-const composeWithContainer = ( component ) => compose( [
+const composeWithContainerFrontend = ( component ) => compose( [
 	withDispatch( ( dispatch, ownProps ) => {
 
 		const props = {};
@@ -39,7 +39,7 @@ const composeWithContainer = ( component ) => compose( [
 				ensureOneItem,
 				ensureOneSelected,
 			]),
-			pullSettingsFromAttributes,						// settings
+			pullSettingsFromAttributes: pullSettingsFromAttributes,	// settings
 		};
 
 	} ),
@@ -73,4 +73,4 @@ const composeWithContainer = ( component ) => compose( [
 
 ] )( component );
 
-export default composeWithContainer;
+export default composeWithContainerFrontend;

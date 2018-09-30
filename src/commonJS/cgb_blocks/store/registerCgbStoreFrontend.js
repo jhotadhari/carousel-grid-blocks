@@ -9,19 +9,21 @@ const {
 /**
  * Internal dependencies
  */
-import reducer 				from './reducer/reducer';
-import * as actions 		from './actions';
+import reducerFrontend 		from './reducer/reducerFrontend';
+import * as actionsFrontend from './actions/actionsFrontend';
 import * as selectors 		from './selectors';
 import * as resolvers 		from './resolvers';
 
-const registerCgbStore = () => {
+// console.log( 'reducerFrontend', reducerFrontend );		// ??? debug
+
+const registerCgbStoreFrontend = () => {
 
 	if ( undefined !== cgbBlocks.store )
 		return cgbBlocks.store;
 
 	const store = registerStore( 'cgb-store', {
-		reducer,
-		actions,
+		reducer: reducerFrontend,
+		actions: actionsFrontend,
 		selectors,
 		resolvers,
 	} );
@@ -31,4 +33,4 @@ const registerCgbStore = () => {
 	return store;
 };
 
-export default registerCgbStore;
+export default registerCgbStoreFrontend;

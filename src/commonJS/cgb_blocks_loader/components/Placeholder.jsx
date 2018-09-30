@@ -1,7 +1,7 @@
 
 const Placeholder = (props) => <div className='cgb-placeholder'>
 	<img
-		src={ cgbBlocks.themeDirUrl + '/images/placeholder.jpg' }
+		src={ cgbBlocks.pluginDirUrl + '/images/placeholder.jpg' }
 		width="600"
 		height="400"
 	/>

@@ -19,7 +19,7 @@ const {
 /**
  * Internal dependencies
  */
-import Placeholder 		from '../cgb_blocks/components/Placeholder.jsx';
+import Placeholder 		from '../cgb_blocks_loader/components/Placeholder.jsx';
 
 
 const registerBlockCarousel = () => {
@@ -54,33 +54,38 @@ const registerBlockCarousel = () => {
 
 			if ( ! attributes.scriptsloaded) {
 				// load the main editor component, rerender the block
-				loadJS( [cgbBlocks.themeDirUrl + '/js/cgb_blocks.min.js'] ).then( () => setAttributes( { scriptsloaded: true } ) );
+				loadJS( [cgbBlocks.pluginDirUrl + '/js/cgb_blocks_editor.min.js'] ).then( () => setAttributes( { scriptsloaded: true } ) );
 				// until loaded, display a placeholder
 				return ([
 					<Placeholder/>
 				]);
 			} else {
 
+				const {
+					CarouselToolbar,
+					CarouselInspector,
+					Carousel,
+				} = cgbBlocks.components;
+
 				return ([
 
 					<BlockControls>
 						<div className={ 'components-toolbar' }>
-							<cgbBlocks.components.CarouselToolbar/>
+							<CarouselToolbar/>
 						</div>
 					</BlockControls>,
 
 					<InspectorControls>
-						<cgbBlocks.components.CarouselInspector/>
+						<CarouselInspector/>
 					</InspectorControls>,
 
-					<cgbBlocks.components.Carousel/>
+					<Carousel/>
 				]);
 			}
 
 		},
 
 		save( { attributes, className } ) {
-			// console.log( 'save attributes', attributes );		// ??? debug
 			return null;
 		},
 

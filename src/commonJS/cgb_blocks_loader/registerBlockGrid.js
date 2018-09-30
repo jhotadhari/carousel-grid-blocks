@@ -19,7 +19,8 @@ const {
 /**
  * Internal dependencies
  */
-import Placeholder 		from '../cgb_blocks/components/Placeholder.jsx';
+import defaults 		from './defaults';
+import Placeholder 		from '../cgb_blocks_loader/components/Placeholder.jsx';
 
 const registerBlockGrid = () => {
 
@@ -46,7 +47,7 @@ const registerBlockGrid = () => {
 			},
 			itemWidth: {
 				type: 'string',
-				default: 200,
+				default: defaults.itemWidth,
 			},
 		},
 
@@ -58,26 +59,33 @@ const registerBlockGrid = () => {
 
 			if ( ! attributes.scriptsloaded) {
 				// load the main editor component, rerender the block
-				loadJS( [cgbBlocks.themeDirUrl + '/js/cgb_blocks.min.js'] ).then( () => setAttributes( { scriptsloaded: true } ) );
+				loadJS( [cgbBlocks.pluginDirUrl + '/js/cgb_blocks_editor.min.js'] ).then( () => setAttributes( { scriptsloaded: true } ) );
 				// until loaded, display placeholder
 				return ([ <Placeholder/> ]);
 			} else {
+
+				const {
+					GridToolbar,
+					GridInspector,
+					Grid,
+				} = cgbBlocks.components;
+
 				return ([
 
 					<BlockControls>
 						<div className={ 'components-toolbar' }>
-							<cgbBlocks.components.GridToolbar/>
+							<GridToolbar/>
 						</div>
 					</BlockControls>,
 
 					<InspectorControls>
-						<cgbBlocks.components.GridInspector
+						<GridInspector
 							itemWidth={ itemWidth }
 							setAttributes={ setAttributes }
 						/>
 					</InspectorControls>,
 
-					<cgbBlocks.components.Grid
+					<Grid
 						itemWidth={ itemWidth }
 					/>
 
@@ -87,7 +95,6 @@ const registerBlockGrid = () => {
 		},
 
 		save( { attributes, className } ) {
-			// console.log( 'save attributes', attributes );		// ??? debug
 			return null;
 		},
 

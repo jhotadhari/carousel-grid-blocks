@@ -1,4 +1,8 @@
-/**
+
+// console.log( 'cgbBlocks', cgbBlocks );		// ??? debug
+
+
+/*
  * External dependencies
  */
 import PropTypes from 'prop-types';
@@ -7,22 +11,17 @@ import { get } from 'lodash';
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-const {
-    Button,
-    IconButton,
-} = wp.components;
-
-const {
-	MediaUpload,
-} = wp.editor;
+// const { __ } = wp.i18n;
+// const {
+//     Button,
+//     IconButton,
+// } = wp.components;
 
 /**
  * Internal dependencies
  */
-import composeWithItems 			from '../store/composeWithItems.js';
-// import composeWithSettings 		from '../store/composeWithSettings.js';
 
+const { ItemControls } = cgbBlocks.components;
 
 class Item extends React.Component {
 
@@ -53,13 +52,9 @@ class Item extends React.Component {
 		const {
 			index,
 			item,
-			items,
-			updateItemFromMedia,
 			selectedIndex,
 			className,
 			setSelected,
-			removeItem,
-			// transitionTime,
 			style,
 		} = this.props;
 		const { id, fetched, title, orientation } = item;
@@ -117,30 +112,10 @@ class Item extends React.Component {
 				{/*
 					controls
 				*/}
-				<div className="cgb-block-item-controls">
-					<div className="cgb-block-item-controls-inner">
-						<MediaUpload
-							type="image"
-							value={ id }
-							onSelect={ ( media ) => updateItemFromMedia( index, media ) }
-							render={ ({ open }) =>
-								<Button
-									onClick={ open }
-									className="button button-large"
-								>
-									{ '??? Pick Image' }
-								</Button>
-
-							}
-						/>
-
-						<IconButton
-							className="cgb-remove-item cgb-button"
-							icon="minus"
-							onClick={ () => removeItem( index ) }
-						/>
-					</div>
-				</div>
+				<ItemControls
+					index={ index }
+					item={ item }
+				/>
 
 
 			</div>
@@ -158,18 +133,5 @@ Item.propTypes = {
 Item.defaultProps = {
 	style: {},
 }
-
-Item = composeWithItems( Item, [
-	'items',
-	'fetchItem',
-	'updateItemFromMedia',
-	'selectedIndex',
-	'setSelected',
-	'removeItem',
-] );
-
-// Item = composeWithSettings( Item, [
-// 	'transitionTime',
-// ] );
 
 export default Item;

@@ -6,36 +6,36 @@ const {
     IconButton,
 } = wp.components;
 
+const {
+	MediaUpload,
+} = wp.editor;
+
 /**
  * Internal dependencies
  */
-import composeWithItems 				from '../store/composeWithItems.js';
+import composeWithItemsEditor 				from '../store/compose/composeWithItemsEditor.js';
 
-class Toolbar extends React.Component {
+const Toolbar = ({
+	addItems,
+}) => [
 
-	constructor(props) {
-		super(props);
-	}
-
-	render() {
-
-		const {
-			addItem,
-		} = this.props;
-
-		return ([
-
+	<MediaUpload
+		type="image"
+		multiple={ true }
+		onSelect={ addItems }
+		render={ ({ open }) =>
 			<IconButton
-				title={ 'Add Item' }
+				title={ 'Add Items' }
 				className={ 'components-toolbar__control' }
 				icon={ 'plus' }
-				onClick={ addItem }
+				onClick={ open }
 			/>
 
-		]);
-	}
-}
+		}
+	/>
 
-export default composeWithItems( Toolbar, [
-	'addItem',
+];
+
+export default composeWithItemsEditor( Toolbar, [
+	'addItems',
 ] );

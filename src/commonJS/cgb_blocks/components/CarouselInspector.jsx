@@ -11,43 +11,24 @@ const {
  * Internal dependencies
  */
 import Inspector 							from './Inspector.jsx';
-import composeWithItems 					from '../store/composeWithItems.js';
-// import composeWithSettings 				from '../store/composeWithSettings.js';
 
+const CarouselInspector = () => [
+	<Inspector/>,
 
-class CarouselInspector extends React.Component {
+	<PanelBody
+		title={'Carousel settings'}
+		initialOpen={ true }
+	>
+		<TextControl
+			label={ 'nothing to control ???' }
+			value={ '???' }
+			onChange={ ( newVal ) => console.log( 'newVal', newVal ) }
+		/>
+	</PanelBody>,
 
-	constructor(props) {
-		super(props);
-	}
+];
 
-	render() {
-
-		// const {
-		// 	// ???
-		// } = this.props;
-
-		return ([
-
-			<Inspector/>,
-
-			<PanelBody
-				title={'Carousel settings'}
-				initialOpen={ true }
-			>
-				<TextControl
-					label={ 'nothing to control ???' }
-					value={ '???' }
-					onChange={ ( newVal ) => console.log( 'newVal', newVal ) }
-				/>
-			</PanelBody>,
-
-		])
-	}
-}
+cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
+cgbBlocks.components.CarouselInspector = CarouselInspector;
 
 export default CarouselInspector;
-
-// export default composeWithSettings( CarouselInspector, [
-// 	// 'transitionTime',
-// ] );

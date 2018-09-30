@@ -4,20 +4,11 @@
  */
 import Toolbar 							from './Toolbar.jsx';
 
-class CarouselToolbar extends React.Component {
+const CarouselToolbar = () => [
+	<Toolbar/>,
+];
 
-	constructor(props) {
-		super(props);
-	}
-
-	render() {
-
-		return ([
-
-			<Toolbar/>
-
-		]);
-	}
-}
+cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
+cgbBlocks.components.CarouselToolbar = CarouselToolbar;
 
 export default CarouselToolbar;

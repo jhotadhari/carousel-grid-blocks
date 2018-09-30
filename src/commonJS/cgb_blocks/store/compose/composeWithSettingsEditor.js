@@ -15,7 +15,7 @@ const {
 	withDispatch,
 } = wp.data;
 
-const composeWithSettings = ( component, settingKeys ) => compose( [
+const composeWithSettingsEditor = ( component, settingKeys ) => compose( [
 	withSelect( ( select ) => {
 		const props = {};
 
@@ -50,4 +50,4 @@ const composeWithSettings = ( component, settingKeys ) => compose( [
 	} ),
 ] )( component );
 
-export default composeWithSettings;
+export default composeWithSettingsEditor;

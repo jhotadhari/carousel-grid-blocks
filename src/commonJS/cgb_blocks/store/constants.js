@@ -1,7 +1,7 @@
 
 export const DEFAULT_ITEM = {
 	id: undefined,
-	url: cgbBlocks.themeDirUrl + '/images/placeholder.jpg',
+	url: cgbBlocks.pluginDirUrl + '/images/placeholder.jpg',
 	title: '',
 	alt: '',
 	caption: '',
@@ -9,7 +9,7 @@ export const DEFAULT_ITEM = {
 		full: {
 			width: 600,
 			height: 400,
-			url: cgbBlocks.themeDirUrl + '/images/placeholder.jpg',
+			url: cgbBlocks.pluginDirUrl + '/images/placeholder.jpg',
 		}
 	},
 	orientation: 'landscape',

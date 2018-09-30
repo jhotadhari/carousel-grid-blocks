@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import concatenateReducers from 'redux-concatenate-reducers'
-
-/**
  * WordPress dependencies
  */
 const {
@@ -15,7 +10,7 @@ const {
 	withDispatch,
 } = wp.data;
 
-const composeWithItems = ( component, requested ) => compose( [
+const composeWithItemsFrontend = ( component, requested ) => compose( [
 	withSelect( ( select ) => {
 		const props = {};
 
@@ -51,15 +46,10 @@ const composeWithItems = ( component, requested ) => compose( [
 		const props = {};
 
 		const {
-			// items
-			pushItemsToAttribues,
-			addItem,
-			removeItem,
 			updateItem,
 			ensureOneItem,
 			ensureOneSelected,
 			setSelected,
-			updateItemFromMedia,
 		} = dispatch( 'cgb-store' );
 
 
@@ -69,35 +59,8 @@ const composeWithItems = ( component, requested ) => compose( [
 
 			switch( prop ){
 
-				case 'addItem':
-					props[prop] = concatenateReducers([
-						addItem,
-						pushItemsToAttribues,
-					]);
-					break;
-
-				case 'removeItem':
-					props[prop] = concatenateReducers([
-						removeItem,
-						ensureOneItem,
-						ensureOneSelected,
-						pushItemsToAttribues,
-					]);
-					break;
-
 				case 'updateItem':
-					props[prop] = concatenateReducers([
-						updateItem,
-						pushItemsToAttribues,
-					]);
-					break;
-
-				case 'updateItemFromMedia':
-					props[prop] = concatenateReducers([
-						updateItemFromMedia,
-						ensureOneSelected,
-						pushItemsToAttribues,
-					]);
+					props[prop] = updateItem
 					break;
 
 				case 'setSelected':
@@ -112,4 +75,4 @@ const composeWithItems = ( component, requested ) => compose( [
 	} ),
 ] )( component );
 
-export default composeWithItems;
+export default composeWithItemsFrontend;

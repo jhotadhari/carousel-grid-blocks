@@ -12,39 +12,27 @@ const {
  */
 import Inspector 							from './Inspector.jsx';
 
-class GridInspector extends React.Component {
+const GridInspector = ({
+	setAttributes,
+	itemWidth,
+}) => [
+	<Inspector/>,
 
-	constructor(props) {
-		super(props);
-	}
+	<PanelBody
+		title={'Grid settings'}
+		initialOpen={ true }
+	>
+		<TextControl
+			label={ 'Item Width' }
+			value={ itemWidth }
+			type={ 'number' }
+			onChange={ ( newWidth ) => setAttributes( { itemWidth: newWidth } ) }
+		/>
+	</PanelBody>,
 
-	render() {
+];
 
-		const {
-			setAttributes,
-			itemWidth,
-		} = this.props;
-
-		return ([
-
-			<Inspector/>,
-
-			<PanelBody
-				title={'Grid settings'}
-				initialOpen={ true }
-			>
-				<TextControl
-					label={ 'Item Width' }
-					value={ itemWidth }
-					type={ 'number' }
-					onChange={ ( newWidth ) => setAttributes( { itemWidth: newWidth } ) }
-				/>
-			</PanelBody>,
-
-
-
-		])
-	}
-}
+cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
+cgbBlocks.components.GridInspector = GridInspector;
 
 export default GridInspector;

@@ -8,13 +8,9 @@ const {
 
 import {
 	updateItem,
-	getBlocksFromEditor,
-	updateStateBlocks,
-} from './actions';
+} from './actions/actions';
 
 import { DEFAULT_ITEM } 	from './constants';
-import getCgbBlocks 		from './helper/getCgbBlocks';
-
 
 export function* fetchItem( state, index ) {
 	const { items } = state.itemsReducer;

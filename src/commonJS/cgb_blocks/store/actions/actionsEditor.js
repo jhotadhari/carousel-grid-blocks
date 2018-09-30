@@ -46,6 +46,15 @@ export function updateItemFromMedia( index, media ) {
 	};
 }
 
+export function moveItem( index, newIndex ) {
+	return {
+		type: 'MOVE_ITEM',
+		index,
+		newIndex,
+	};
+}
+
+
 /*
 	settings
 */

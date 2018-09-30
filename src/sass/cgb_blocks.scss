@@ -2,6 +2,12 @@
 @import "bourbon";
 @import "./vendor/carousel";
 
+.cgb-flex-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .cgb-block {
 
     &-item {
@@ -45,10 +51,6 @@
             background: #ccc;
             margin: auto 1em;
             padding: 0.5em;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         &-controls {
@@ -58,17 +60,34 @@
             width: 100%;
             height: 100%;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
 
             &-inner {
                 display: none;
-                background: #f33;
-                padding: 1em;
-                justify-content: center;
-                align-items: center;
-            }
+                background: transparentize( #000, 0.2 );
+                padding: 0.5em;
+
+                // & > * {
+                //     margin: 0.5em;
+                //     &:last-child {
+                //         margin-right: 0;
+                //     }
+                // }
+           }
+
+           .components-button {
+
+               background: transparentize( #fff, 0.2 );
+
+               margin: 0.5em;
+
+               &.remove {
+                   color: #f00;
+                   &:hover {
+                       color: #f00;
+                   }
+               }
+           }
 
         }
         &:hover &-controls-inner {
@@ -118,4 +137,10 @@
         }
     }
 
+}
+
+.cgb-block-item-controls-popover {
+    .components-popover__content{
+        padding: 1em;
+    }
 }

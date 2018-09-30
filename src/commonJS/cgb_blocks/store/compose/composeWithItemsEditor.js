@@ -59,6 +59,7 @@ const composeWithItemsEditor = ( component, requested ) => compose( [
 			ensureOneSelected,
 			setSelected,
 			updateItemFromMedia,
+			moveItem,
 		} = dispatch( 'cgb-store' );
 
 
@@ -101,6 +102,14 @@ const composeWithItemsEditor = ( component, requested ) => compose( [
 
 				case 'setSelected':
 					props[prop] = setSelected;
+					break;
+
+				case 'moveItem':
+					props[prop] = concatenateReducers([
+						moveItem,
+						ensureOneSelected,
+						pushItemsToAttribues,
+					]);
 					break;
 
 			};

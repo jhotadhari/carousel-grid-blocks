@@ -102,6 +102,7 @@ class Cgb_Register_Blocks {
 			'react-dom',
 			'wp-components',
 		);
+
 		wp_register_script(
 			$handle,
 			Cgb_Carousel_Grid_Blocks::plugin_dir_url() . '/js/' . $handle . '_loader.min.js',

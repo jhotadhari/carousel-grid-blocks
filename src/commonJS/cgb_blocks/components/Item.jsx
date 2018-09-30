@@ -100,7 +100,7 @@ class Item extends React.Component {
 				{/*
 					caption info
 				*/}
-				<div className="cgb-block-item-info">
+				<div className="cgb-block-item-info cgb-flex-row">
 					{ title &&
 						<span>
 							{ title }

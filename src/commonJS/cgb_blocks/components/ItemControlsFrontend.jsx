@@ -7,7 +7,7 @@ let ItemControlsFrontend = ( {
 		title,
 		orientation
 	},
-} ) => <div className="cgb-block-item-controls">
+} ) => <div className="cgb-block-item-controls cgb-flex-row">
 	<div className="cgb-block-item-controls-inner">
 
 

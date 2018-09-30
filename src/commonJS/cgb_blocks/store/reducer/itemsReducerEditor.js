@@ -7,6 +7,8 @@ import {
 	findWhere,
 } from 'underscore';
 
+import arrayMove from 'array-move';
+
 import {
 	get,
 } from 'lodash';
@@ -127,6 +129,22 @@ export function addItems( state = DEFAULT_STATE, action ) {
 	};
 }
 
+
+export function moveItem( state = DEFAULT_STATE, action ) {
+	const { items } = state;
+	const { index, newIndex } = action;
+	const newItems = arrayMove( [...items], index, newIndex );
+
+	return {
+		...state,
+		items: [
+			...newItems,
+		],
+	};
+}
+
+
+
 const itemsReducer = ( state = DEFAULT_STATE, action ) => {
 
 	switch ( action.type ) {
@@ -157,6 +175,9 @@ const itemsReducer = ( state = DEFAULT_STATE, action ) => {
 
 		case 'SET_SELECTED':
 			return setSelected( state, action );
+
+		case 'MOVE_ITEM':
+			return moveItem( state, action );
 
 	}
 

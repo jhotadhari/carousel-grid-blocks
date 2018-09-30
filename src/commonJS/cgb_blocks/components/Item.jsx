@@ -1,12 +1,13 @@
-
-// console.log( 'cgbBlocks', cgbBlocks );		// ??? debug
-
-
 /*
  * External dependencies
  */
 import PropTypes from 'prop-types';
-import { get } from 'lodash';
+import {
+	get,
+	filter,
+	pick,
+	isEqual,
+} from 'lodash';
 
 /**
  * WordPress dependencies
@@ -36,10 +37,18 @@ class Item extends React.Component {
 	}
 
 	shouldComponentUpdate( nextProps, nextState ) {
-		return ! _.isEqual(
-			this.props.item,
-			nextProps.item
-		);
+		const pickPaths = [
+			'item',
+			'imageHoverEffect',
+			'imageHighlightEffect',
+			'imageHighlightBoxShadowColor',
+			'imageHighlightBoxShadowWidth',
+		];
+
+		return ! isEqual(
+			pick( this.props,pickPaths ),
+			pick( nextProps, pickPaths )
+		)
 	}
 
 	componentDidUpdate( prevProps, prevState, snapshot ) {
@@ -56,6 +65,7 @@ class Item extends React.Component {
 			className,
 			setSelected,
 			style,
+			imageHoverEffect,
 		} = this.props;
 		const { id, fetched, title, orientation } = item;
 
@@ -89,7 +99,10 @@ class Item extends React.Component {
 
 					<img
 						src={ url }
-						className={ [ orientation ].join(' ') }
+						className={ [
+							orientation,
+							imageHoverEffect !== 'none' ? 'cgb-on-hover-' + imageHoverEffect : null,
+						].filter( effect => effect !== null ).join(' ') }
 						width={ width }
 						height={ height }
 					/>

@@ -19,8 +19,8 @@ const {
 /**
  * Internal dependencies
  */
+import defaults 		from './defaults';
 import Placeholder 		from '../cgb_blocks_loader/components/Placeholder.jsx';
-
 
 const registerBlockCarousel = () => {
 
@@ -37,19 +37,24 @@ const registerBlockCarousel = () => {
 		},
 
 		attributes: {
-			imageIds: {
+			imageIds: {			// common
 				type: 'array',
 				default: [],
 			},
-			settings: {
+			settings: {			// common
 				type: 'string',
 				default: '',
+			},
+			imageHoverEffect: {
+				type: 'string',
+				default: defaults.imageHoverEffect,
 			},
 		},
 
 		edit( {  attributes, className, setAttributes } ) {
 			const {
 				imageIds,
+				imageHoverEffect,
 			} = attributes;
 
 			if ( ! attributes.scriptsloaded) {
@@ -76,10 +81,15 @@ const registerBlockCarousel = () => {
 					</BlockControls>,
 
 					<InspectorControls>
-						<CarouselInspector/>
+						<CarouselInspector
+							setAttributes={ setAttributes }
+							imageHoverEffect={ imageHoverEffect }
+						/>
 					</InspectorControls>,
 
-					<Carousel/>
+					<Carousel
+						imageHoverEffect={ imageHoverEffect }
+					/>
 				]);
 			}
 

@@ -14,8 +14,6 @@ import * as actionsFrontend from './actions/actionsFrontend';
 import * as selectors 		from './selectors';
 import * as resolvers 		from './resolvers';
 
-// console.log( 'reducerFrontend', reducerFrontend );		// ??? debug
-
 const registerCgbStoreFrontend = () => {
 
 	if ( undefined !== cgbBlocks.store )

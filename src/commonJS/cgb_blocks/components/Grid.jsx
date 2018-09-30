@@ -13,40 +13,75 @@
 
 const { Item } = cgbBlocks.components;
 
-const Grid = ( {
-	items,
-	itemWidth,
-	selectedIndex,
-	transitionTime,
-} ) => <div className="cgb-block">
 
-	{ items && items.length &&
-		<div
-			className={ 'cgb-block-grid' }
-			style={ {
-				gridTemplateColumns: 'repeat( auto-fill, minmax( ' + itemWidth + 'px, 1fr ) )',
-			} }
-		>
+class Grid extends React.Component {
 
-			{ [...items].map( ( item, index ) => (
-
-				<Item
-					key={ index }
-					index={ index }
-					item={ item }
-					className={ 'cgb-block-grid-item' }
-					style={ {
-						transition: 'box-shadow ' + ( transitionTime / 1000 ) + 's',
-						boxShadow: index === selectedIndex ? '5px 5px #f00, 5px -5px #f00, -5px 5px #f00, -5px -5px #f00' : 'none',
-					} }
-				/>
-
-			) ) }
-
-		</div>
+	constructor(props) {
+		super(props);
 	}
 
-</div>;
+	render() {
+		const {
+			items,
+			itemWidth,
+			selectedIndex,
+			transitionTime,
+			imageHoverEffect,
+			imageHighlightEffect,
+			imageHighlightBoxShadowColor,
+			imageHighlightBoxShadowWidth,
+
+		} = this.props;
+
+		const getItemsStyle = ( index ) => {
+			let itemStyle = null;
+			switch( imageHighlightEffect ) {
+			case 'boxShadow':
+				itemStyle = {
+					transition: 'box-shadow ' + ( transitionTime / 1000 ) + 's',
+					boxShadow: index === selectedIndex ? `${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowColor}, ${imageHighlightBoxShadowWidth}px -${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowColor}, -${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowColor}, -${imageHighlightBoxShadowWidth}px -${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowColor}` : 'none',
+				};
+			}
+			return itemStyle;
+		}
+
+		return ([
+
+			<div className="cgb-block">
+
+				{ items && items.length &&
+					<div
+						className={ 'cgb-block-grid' }
+						style={ {
+							gridTemplateColumns: 'repeat( auto-fill, minmax( ' + itemWidth + 'px, 1fr ) )',
+						} }
+					>
+
+						{ [...items].map( ( item, index ) => (
+
+							<Item
+								key={ index }
+								index={ index }
+								item={ item }
+								className={ 'cgb-block-grid-item' }
+								imageHoverEffect={ imageHoverEffect }
+								imageHighlightEffect={ imageHighlightEffect }
+								imageHighlightBoxShadowColor={ imageHighlightBoxShadowColor }
+								imageHighlightBoxShadowWidth={ imageHighlightBoxShadowWidth }
+								style={ { ...getItemsStyle( index ) } }
+							/>
+
+						) ) }
+
+					</div>
+				}
+
+			</div>
+
+		])
+	}
+}
+
 
 
 export default Grid;

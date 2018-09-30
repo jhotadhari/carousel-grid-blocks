@@ -31,17 +31,20 @@
                 min-height: 100%;
                 max-width: none;
                 max-height: none;
+            }
+        }
 
-
-
-                // ??? hover transform opt in
+        // image hover effects
+        &-image img {
+            &.cgb-on-hover-scale{
                 transform: scale(1);
                 transition: transform 0.3s;
             }
         }
         &:hover &-image img {
-            // ??? hover transform opt in
-            transform: scale(1.05);
+            &.cgb-on-hover-scale{
+                transform: scale(1.05);
+            }
         }
 
         &-info {
@@ -66,13 +69,6 @@
                 display: none;
                 background: transparentize( #000, 0.2 );
                 padding: 0.5em;
-
-                // & > * {
-                //     margin: 0.5em;
-                //     &:last-child {
-                //         margin-right: 0;
-                //     }
-                // }
            }
 
            .components-button {
@@ -106,13 +102,6 @@
 
         &-item {
 
-            // ??? handeld by js        del!!!
-            // box-shadow: none;
-            // transition: box-shadow 0.3s;
-            // &.selected {
-            //     box-shadow: 5px 5px #f00, 5px -5px #f00, -5px 5px #f00, -5px -5px #f00
-            // }
-
             &.landscape {
             }
 
@@ -129,9 +118,9 @@
             list-style: none;
 
             .dot {
-                width: 11px;    // ??? move bier
-                height: 11px;   // ??? move bier
-                border-radius: 0;
+                width: 11px;        // ??? move bier
+                height: 11px;       // ??? move bier
+                border-radius: 0;   // ??? move bier
             }
 
         }

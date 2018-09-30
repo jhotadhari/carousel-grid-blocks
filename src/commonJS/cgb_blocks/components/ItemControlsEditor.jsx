@@ -67,7 +67,6 @@ let ItemControlsEditor = ( {
 
 	</div>
 
-
 	<div className="cgb-block-item-controls-inner cgb-flex-row">
 
 		<IconButton

@@ -17,7 +17,7 @@ const Inspector = ({
 	updateSetting,
 }) => [
 	<PanelBody
-		title={'Common settings for all cgb blocks'}
+		title={ __( 'Common settings for all cgb blocks within this post', 'cgb' ) }
 		initialOpen={ true }
 	>
 		<TextControl

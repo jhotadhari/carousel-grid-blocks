@@ -1,3 +1,11 @@
+/*
+ * External dependencies
+ */
+import {
+	filter,
+	flatten,
+	chain,
+} from 'underscore';
 /**
  * WordPress dependencies
  */
@@ -21,7 +29,7 @@ const getCgbBlocks = ( uidsOrBlocks ) => {
 		return null;
 	} );
 	// flatten, filter nulls and return
-	return [...cgbBlocks].reduce( ( acc, val ) => acc.concat( val ), [] ).filter( block => null !== block );
+	return chain( [...cgbBlocks] ).flatten().filter( block => null !== block ).value();
 };
 
 export default getCgbBlocks;

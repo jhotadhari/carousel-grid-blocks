@@ -4,7 +4,7 @@
 const { __ } = wp.i18n;
 const {
     PanelBody,
-    TextControl,
+    SelectControl,
 } = wp.components;
 
 /**
@@ -12,18 +12,27 @@ const {
  */
 import Inspector 							from './Inspector.jsx';
 
-const CarouselInspector = () => [
+const CarouselInspector = ({
+	setAttributes,
+	imageHoverEffect,
+}) => [
 	<Inspector/>,
 
 	<PanelBody
 		title={'Carousel settings'}
 		initialOpen={ true }
 	>
-		<TextControl
-			label={ 'nothing to control ???' }
-			value={ '???' }
-			onChange={ ( newVal ) => console.log( 'newVal', newVal ) }
+
+		<SelectControl
+			label={ __( 'Image Hover Effect', 'cgb' ) }
+			value={ imageHoverEffect }
+			options={ [
+				{ label: __( 'None', 'cgb' ), value: 'none' },
+				{ label: __( 'Scale', 'cgb' ), value: 'scale' },
+			] }
+			onChange={ ( newImageHoverEffect ) => setAttributes( { imageHoverEffect: newImageHoverEffect } ) }
 		/>
+
 	</PanelBody>,
 
 ];

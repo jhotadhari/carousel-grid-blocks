@@ -37,7 +37,7 @@ export function pullSettingsFromAttributes( state = DEFAULT_STATE, action ) {
 			if ( ! isEmpty( acc ) ) return acc;
 			const blockSettings = get( block, [ 'attributes', 'settings' ] );
 			try {
-				return blockSettings ? JSON.parse( blockSettings ) : acc;	/// ???
+				return blockSettings ? JSON.parse( blockSettings ) : acc;
 			} catch(e) {
 				return {};
 			}

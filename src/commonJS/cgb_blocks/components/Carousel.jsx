@@ -18,6 +18,7 @@ const Carousel = ( {
 	selectedIndex,
 	setSelected,
 	transitionTime,
+	imageHoverEffect,
 } ) => <div className="cgb-block">
 
 	{ items.length > 0 &&
@@ -39,6 +40,7 @@ const Carousel = ( {
 						item={ item }
 						className={ 'cgb-block-carousel-item' }
 						transitionTime={ transitionTime }
+						imageHoverEffect={ imageHoverEffect }
 					/>
 				) ) }
 			</ResponsiveCarousel>

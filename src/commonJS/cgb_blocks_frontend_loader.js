@@ -40,8 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			} = cgbBlocks.components;
 
 			[...blockWrappers].map( ( blockWrapper ) => {
-
-
 				const serializedData = blockWrapper.getAttribute('data-cgb');
 				let data = {};
 				try {
@@ -52,14 +50,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 				[... blockWrapper.getElementsByClassName( 'cgb-grid' )].map( ( grid ) => {
 					const itemWidth = data.itemWidth || defaults.itemWidth;
-
 					ReactDOM.render( <Grid
 						itemWidth={ itemWidth }
+						imageHoverEffect={ data.imageHoverEffect || defaults.imageHoverEffect }
+						imageHighlightEffect={ data.imageHighlightEffect || defaults.imageHighlightEffect }
+						imageHighlightBoxShadowColor={ data.imageHighlightBoxShadowColor || defaults.imageHighlightBoxShadowColor }
+						imageHighlightBoxShadowWidth={ data.imageHighlightBoxShadowWidth || defaults.imageHighlightBoxShadowWidth }
 					/>, grid );
 				});
 
 				[...blockWrapper.getElementsByClassName( 'cgb-carousel' )].map( ( carousel ) => {
-					ReactDOM.render( <Carousel/>, carousel );
+					ReactDOM.render( <Carousel
+						imageHoverEffect={ data.imageHoverEffect || defaults.imageHoverEffect }
+					/>, carousel );
 				});
 
 			});

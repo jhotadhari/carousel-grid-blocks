@@ -1,6 +1,7 @@
 
 const defaults = {
-	itemWidth: 200,
+	columns: 'auto',
+	margin: '5',
 	imageHoverEffect: 'scale',
 	imageHighlightEffect: 'boxShadow',
 	imageHighlightBoxShadowColor: '#999',

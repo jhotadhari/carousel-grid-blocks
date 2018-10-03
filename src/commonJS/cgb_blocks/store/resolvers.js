@@ -1,4 +1,6 @@
 
+
+const shortid = require('shortid');
 /**
  * WordPress dependencies
  */
@@ -20,15 +22,22 @@ export function* fetchItem( state, index ) {
 		const newItem = {
 			...DEFAULT_ITEM,
 			...[items][index],
-			id: response.id,
-			url: response.source_url,
-			title: response.title.rendered,
-			alt: response.alt_text,
-			caption: response.caption.rendered,
-			sizes: response.media_details.sizes,
-			orientation: response.media_details.width > response.media_details.height ? 'landscape' : 'portrait',
-			fetched: true,
+			key: items[index]['key'] ? items[index]['key'] : shortid.generate(),
 			selected: items[index]['selected'],
+			fetched: true,
+			// img atts
+			src: response.source_url,
+			srcSet: response.cgb_srcset,
+			sizes: response.cgb_sizes,
+			width: response.media_details.width,
+			height: response.media_details.height,
+			alt: response.alt_text,
+			// media response
+			id: response.id,
+			orientation: response.media_details.width > response.media_details.height ? 'landscape' : 'portrait',
+			title: response.title.rendered,
+			caption: response.caption.rendered,
+			mediaSizes: response.media_details.sizes,
 		};
 		return updateItem( index, newItem );
 	} );

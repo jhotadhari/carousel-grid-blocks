@@ -1,20 +1,31 @@
+const shortid = require('shortid');
 
 export const DEFAULT_ITEM = {
-	id: undefined,
-	url: cgbBlocks.pluginDirUrl + '/images/placeholder.jpg',
-	title: '',
+	key: shortid.generate(),
+	orientation: 'landscape',
+	selected: false,
+	fetched: false,
+
+	// img atts
+	src: cgbBlocks.pluginDirUrl + '/images/placeholder.jpg',
+	srcSet: undefined,
+	sizes: undefined,
+	width: 600,
+	height: 400,
 	alt: '',
+
+	// media response
+	id: undefined,
+	title: '',
 	caption: '',
-	sizes: {
+	mediaSizes: {
 		full: {
 			width: 600,
 			height: 400,
 			url: cgbBlocks.pluginDirUrl + '/images/placeholder.jpg',
 		}
 	},
-	orientation: 'landscape',
-	fetched: false,
-	selected: false,
+
 };
 
 export const DEFAULT_STATE = {

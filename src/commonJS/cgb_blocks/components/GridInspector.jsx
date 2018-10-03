@@ -17,7 +17,8 @@ import defaults 							from '../../cgb_blocks_loader/defaults';
 
 const GridInspector = ({
 	setAttributes,
-	itemWidth,
+	columns,
+	margin,
 	imageHoverEffect,
 	imageHighlightEffect,
 	imageHighlightBoxShadowColor,
@@ -31,11 +32,18 @@ const GridInspector = ({
 	>
 
 		<TextControl
-			label={ __( 'Item Width', 'cgb'  ) }
-			value={ itemWidth }
-			type={ 'number' }
-			onChange={ ( newVal ) => setAttributes( { itemWidth: newVal } ) }
+			label={ __( 'Columns', 'cgb'  ) + ' [int|"auto"]' }
+			value={ columns }
+			onChange={ ( newVal ) => setAttributes( { columns: newVal } ) }
 		/>
+
+		<TextControl
+			label={ __( 'Margin', 'cgb'  ) + ' [px]' }
+			value={ margin }
+			type={ 'number' }
+			onChange={ ( newVal ) => setAttributes( { margin: newVal } ) }
+		/>
+
 
 		<SelectControl
 			label={ __( 'Image Hover Effect', 'cgb' ) }

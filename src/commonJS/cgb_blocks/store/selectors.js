@@ -1,12 +1,39 @@
 /**
+ * External dependencies
+ */
+import {
+	get,
+} from 'lodash';
+
+
+/**
  * Internal dependencies
  */
 
 import findSelectedIndex from './helper/findSelectedIndex';
 
+
+const itemsToPhotoSet = ( items ) => [...items].map( item => {
+
+	return {
+		src: item.src,
+		width: item.width,
+		height: item.height,
+		key: item.key,
+		// srcSet: item.srcSet,
+		// sizes: item.sizes,
+		// alt: item.alt,
+	}
+
+} );
+
+
 // items
 export function getItems( state ) {
 	return state.itemsReducer.items;
+};
+export function getPhotoSet( state ) {
+	return itemsToPhotoSet( state.itemsReducer.items );
 };
 
 export function fetchItem( state, index ) {

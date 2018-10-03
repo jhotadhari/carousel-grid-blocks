@@ -45,10 +45,17 @@ const registerBlockGrid = () => {
 				type: 'string',
 				default: '',
 			},
-			itemWidth: {
+
+			columns: {
 				type: 'string',
-				default: defaults.itemWidth,
+				default: defaults.columns,
 			},
+			margin: {
+				type: 'string',
+				default: defaults.margin,
+			},
+
+
 			imageHoverEffect: {
 				type: 'string',
 				default: defaults.imageHoverEffect,
@@ -69,7 +76,8 @@ const registerBlockGrid = () => {
 
 		edit( {  attributes, className, setAttributes } ) {
 			const {
-				itemWidth,
+				columns,
+				margin,
 				imageHoverEffect,
 				imageHighlightEffect,
 				imageHighlightBoxShadowColor,
@@ -101,7 +109,8 @@ const registerBlockGrid = () => {
 					<InspectorControls>
 						<GridInspector
 							setAttributes={ setAttributes }
-							itemWidth={ itemWidth }
+							columns={ columns }
+							margin={ parseInt( margin ) }
 							imageHoverEffect={ imageHoverEffect }
 							imageHighlightEffect={ imageHighlightEffect }
 							imageHighlightBoxShadowColor={ imageHighlightBoxShadowColor }
@@ -110,7 +119,8 @@ const registerBlockGrid = () => {
 					</InspectorControls>,
 
 					<Grid
-						itemWidth={ itemWidth }
+						columns={ columns }
+						margin={ parseInt( margin ) }
 						imageHoverEffect={ imageHoverEffect }
 						imageHighlightEffect={ imageHighlightEffect }
 						imageHighlightBoxShadowColor={ imageHighlightBoxShadowColor }

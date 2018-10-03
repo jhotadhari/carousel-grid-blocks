@@ -1,6 +1,6 @@
 # Carousel Grid Blocks #
 **Tags:** gutenberg,block,slider,grid,gallery  
-Donate link: 
+**Donate link:** https://waterproof-webdesign.info/donate  
 **Contributors:** [jhotadhari](https://profiles.wordpress.org/jhotadhari)  
 **Tested up to:** 4.9.8  
 **Requires at least:** 4.9.6  
@@ -9,7 +9,7 @@ Donate link:
 **License:** GNU General Public License v2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
-Two Gutenbergs image blocks that interact with each other and share the same state.
+Two Gutenberg image blocks that interact with each other and share the same state.
 
 
 ## Description ##
@@ -26,6 +26,10 @@ Upload and install this Plugin the same way you'd install any other plugin.
 ## Upgrade Notice ##
 
 ## Changelog ##
+
+0.0.2
+changed grid to react-photo-gallery, drag and drop sortable with react-sortable-hoc;
+updated babel
 
 0.0.1
 might work

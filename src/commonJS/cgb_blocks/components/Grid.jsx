@@ -1,18 +1,5 @@
-/**
- * External dependencies
- */
-// import PropTypes from 'prop-types';
 
-/**
- * WordPress dependencies
- */
-// const { __ } = wp.i18n;
-// const {
-//     IconButton,
-// } = wp.components;
-
-const { Item } = cgbBlocks.components;
-
+import GridGallery from './GridGallery.jsx';
 
 class Grid extends React.Component {
 
@@ -22,63 +9,44 @@ class Grid extends React.Component {
 
 	render() {
 		const {
-			items,
-			itemWidth,
-			selectedIndex,
-			transitionTime,
-			imageHoverEffect,
-			imageHighlightEffect,
-			imageHighlightBoxShadowColor,
-			imageHighlightBoxShadowWidth,
+			items,								// from items
+			moveItem,							// from items
+			photoSet,							// from items
+			columns,							// from atts
+			margin,								// from atts
+			transitionTime,						// from settings
+			imageHoverEffect,					// from atts
+			imageHighlightEffect,				// from atts
+			imageHighlightBoxShadowColor,		// from atts
+			imageHighlightBoxShadowWidth,		// from atts
 
 		} = this.props;
 
-		const getItemsStyle = ( index ) => {
-			let itemStyle = null;
-			switch( imageHighlightEffect ) {
-			case 'boxShadow':
-				itemStyle = {
-					transition: 'box-shadow ' + ( transitionTime / 1000 ) + 's',
-					boxShadow: index === selectedIndex ? `${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowColor}, ${imageHighlightBoxShadowWidth}px -${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowColor}, -${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowColor}, -${imageHighlightBoxShadowWidth}px -${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowColor}` : 'none',
-				};
-			}
-			return itemStyle;
-		}
 
 		return ([
+			<div>
 
-			<div className="cgb-block">
-
-				{ items && items.length &&
-					<div
-						className={ 'cgb-block-grid' }
-						style={ {
-							gridTemplateColumns: 'repeat( auto-fill, minmax( ' + itemWidth + 'px, 1fr ) )',
+				{ items.length &&
+					<GridGallery
+						photos={ photoSet }
+						items={ items }
+						imageHoverEffect={ imageHoverEffect }
+						imageHighlightEffect={ imageHighlightEffect }
+						imageHighlightBoxShadowColor={ imageHighlightBoxShadowColor }
+						imageHighlightBoxShadowWidth={ imageHighlightBoxShadowWidth }
+						columns={ columns }
+						margin={ margin }
+						axis={ 'xy' }
+						useDragHandle={ true }
+						onSortEnd={ ( { oldIndex, newIndex } ) => {
+							moveItem( oldIndex, newIndex )
 						} }
-					>
-
-						{ [...items].map( ( item, index ) => (
-
-							<Item
-								key={ index }
-								index={ index }
-								item={ item }
-								className={ 'cgb-block-grid-item' }
-								imageHoverEffect={ imageHoverEffect }
-								imageHighlightEffect={ imageHighlightEffect }
-								imageHighlightBoxShadowColor={ imageHighlightBoxShadowColor }
-								imageHighlightBoxShadowWidth={ imageHighlightBoxShadowWidth }
-								style={ { ...getItemsStyle( index ) } }
-							/>
-
-						) ) }
-
-					</div>
+					/>
 				}
 
 			</div>
+		]);
 
-		])
 	}
 }
 

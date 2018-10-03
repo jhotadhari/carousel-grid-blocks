@@ -33,16 +33,33 @@ const Carousel = ( {
 				onClickItem={ ( event ) => console.log( 'onClickItem', event ) }
 				transitionTime={ transitionTime }
 			>
-				{ [...items].map( ( item, index ) => (
-					<Item
-						key={ index }
-						index={ index }
-						item={ item }
-						className={ 'cgb-block-carousel-item' }
-						transitionTime={ transitionTime }
-						imageHoverEffect={ imageHoverEffect }
-					/>
-				) ) }
+				{ [...items].map( ( item, index ) => {
+
+					return (
+						<Item
+							key={ item.key }
+							index={ index }
+							item={ item }
+							className={ 'cgb-block-carousel-item' }
+							transitionTime={ transitionTime }
+							imageHoverEffect={ imageHoverEffect }
+
+							itemStyle={ {} }
+							imageStyle={ {} }
+							imgStyle={ {} }
+
+							controls={ [
+								'selectImage',
+								'fullscreen',
+								'remove',
+								'moveLeft',
+								'moveImage',
+								'moveRight',
+							] }
+						/>
+					);
+
+				} ) }
 			</ResponsiveCarousel>
 
 		</div>

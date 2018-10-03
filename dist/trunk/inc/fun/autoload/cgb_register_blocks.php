@@ -5,6 +5,78 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+
+
+
+
+
+function cgb_register_field_sizes() {
+	register_rest_field( 'attachment',
+		'cgb_sizes',
+		array(
+			'get_callback'    => 'cgb_get_field_sizes',
+			'update_callback' => null,
+			'schema'          => null,
+			)
+		);
+}
+
+function cgb_get_field_sizes( $object, $field_name, $request ) {
+	$image = wp_get_attachment_metadata( $object['id'] );
+	$image_url = wp_get_attachment_url( $object['id'] );
+	return wp_calculate_image_sizes( 'full', $image_url, null, $object['id'] );
+}
+
+add_action( 'rest_api_init', 'cgb_register_field_sizes' );
+
+
+
+
+
+
+
+
+function cgb_register_field_srcset() {
+	register_rest_field( 'attachment',
+		'cgb_srcset',
+		array(
+			'get_callback'    => 'cgb_get_field_srcset',
+			'update_callback' => null,
+			'schema'          => null,
+			)
+		);
+}
+
+function cgb_get_field_srcset( $object, $field_name, $request ) {
+	$image = wp_get_attachment_metadata( $object['id'] );
+	$image_url = wp_get_attachment_url( $object['id'] );
+	$size_array = array();
+	foreach( $image['sizes'] as $size ){
+		array_push( $size_array, array( $size['width'], $size['height'] ) );
+	}
+	$srcset = wp_calculate_image_srcset( $size_array, $image_url, $image['image_meta'], $object['id'] );
+	return $srcset ? $srcset : $image_url . ' ' .$image['width'] . 'w';
+}
+
+add_action( 'rest_api_init', 'cgb_register_field_srcset' );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Cgb_Register_Blocks {
 
 	protected static $instance = null;

@@ -2,16 +2,13 @@
  * External dependencies
  */
 import PropTypes from 'prop-types';
-import { get } from 'lodash';
 
 /**
  * WordPress dependencies
  */
 const { __ } = wp.i18n;
 const {
-    Button,
     IconButton,
-    Dropdown,
 } = wp.components;
 
 const {
@@ -21,8 +18,9 @@ const {
 /**
  * Internal dependencies
  */
-import composeWithItemsEditor 		from '../store/compose/composeWithItemsEditor.js';
-import MoveItemToIndex 				from './MoveItemToIndex.jsx';
+import composeWithItemsEditor 				from '../store/compose/composeWithItemsEditor.js';
+import ItemControlsMoveToIndex 				from './ItemControlsMoveToIndex.jsx';
+import ItemControlsDragHandle 				from './ItemControlsDragHandle.jsx';
 
 let ItemControlsEditor = ( {
 	index,
@@ -36,72 +34,77 @@ let ItemControlsEditor = ( {
 	updateItemFromMedia,
 	removeItem,
 	moveItem,
+	controls,
 } ) => <div className="cgb-block-item-controls cgb-flex-row">
 
 	<div className="cgb-block-item-controls-inner">
 
-		<MediaUpload
-			type="image"
-			value={ id }
-			onSelect={ ( media ) => updateItemFromMedia( index, media ) }
-			render={ ({ open }) =>
-				<IconButton
-					icon="format-image"
-					onClick={ open }
-				/>
-			}
-		/>
+		{ controls.includes( 'selectImage' ) &&
+			<MediaUpload
+				type="image"
+				value={ id }
+				onSelect={ ( media ) => updateItemFromMedia( index, media ) }
+				render={ ({ open }) =>
+					<IconButton
+						icon="format-image"
+						label={ __( 'Select Image', 'cgb' ) }
+						onClick={ open }
+					/>
+				}
+			/>
+		}
 
-		<IconButton
-			icon="editor-expand"
-			label={ __( 'Fullscreen', 'cgb' ) }
-			onClick={ () => console.log( 'fullscreen' ) }
-		/>
+		{ controls.includes( 'fullscreen' ) &&
+			<IconButton
+				icon="editor-expand"
+				label={ __( 'Fullscreen', 'cgb' ) }
+				onClick={ () => console.log( 'fullscreen' ) }
+			/>
+		}
 
-		<IconButton
-			icon="minus"
-			className={ 'remove' }
-			label={ __( 'Remove Image From Block', 'cgb' ) }
-			onClick={ () => removeItem( index ) }
-		/>
+		{ controls.includes( 'remove' ) &&
+			<IconButton
+				icon="minus"
+				className={ 'remove' }
+				label={ __( 'Remove Image From Block', 'cgb' ) }
+				onClick={ () => removeItem( index ) }
+			/>
+		}
 
 	</div>
 
 	<div className="cgb-block-item-controls-inner cgb-flex-row">
 
-		<IconButton
-			icon="arrow-left-alt2"
-			label={ __( 'Move Image Left', 'cgb' ) }
-			onClick={ () => moveItem( index, index - 1 ) }
-			disabled={ items.length === 1 || index === 0 }
-		/>
+		{ controls.includes( 'moveLeft' ) &&
+			<IconButton
+				icon="arrow-left-alt2"
+				label={ __( 'Move Image Left', 'cgb' ) }
+				onClick={ () => moveItem( index, index - 1 ) }
+				disabled={ items.length === 1 || index === 0 }
+			/>
+		}
 
-		<Dropdown
-			position="bottom center"
-			contentClassName={ 'cgb-block-item-controls-popover cgb-flex-row' }
-			expandOnMobile={false}
-			renderToggle={ ( { isOpen, onToggle, onClose } ) => (
-				<IconButton
-					icon="share-alt2"
-					aria-expanded={ isOpen }
-					label={ __( 'Move Image To New Position', 'cgb' ) }
-					onClick={ onToggle }
-				/>
-			) }
-			renderContent={ ( { isOpen, onToggle, onClose } ) => ([
-				<MoveItemToIndex
-					index={ index }
-					onClose={ onClose }
-				/>
-			]) }
-		/>
+		{ controls.includes( 'dragHandle' ) &&
+			<ItemControlsDragHandle
+				disabled={ items.length === 1 }
+				label={ __( 'Move Image', 'cgb' ) }
+			/>
+		}
 
-		<IconButton
-			icon="arrow-right-alt2"
-			label={ __( 'Move Image Right', 'cgb' ) }
-			onClick={ () => moveItem( index, index + 1 ) }
-			disabled={ items.length === 1 || index + 1 === items.length }
-		/>
+		{ controls.includes( 'moveImage' ) &&
+			<ItemControlsMoveToIndex
+				index={ index }
+			/>
+		}
+
+		{ controls.includes( 'moveRight' ) &&
+			<IconButton
+				icon="arrow-right-alt2"
+				label={ __( 'Move Image Right', 'cgb' ) }
+				onClick={ () => moveItem( index, index + 1 ) }
+				disabled={ items.length === 1 || index + 1 === items.length }
+			/>
+		}
 
 	</div>
 

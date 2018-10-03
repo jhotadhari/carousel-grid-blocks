@@ -49,9 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 
 				[... blockWrapper.getElementsByClassName( 'cgb-grid' )].map( ( grid ) => {
-					const itemWidth = data.itemWidth || defaults.itemWidth;
+					const columns = data.columns || defaults.columns;
+					const margin = data.margin || defaults.margin;
+
 					ReactDOM.render( <Grid
-						itemWidth={ itemWidth }
+						columns={ columns }
+						margin={ margin }
 						imageHoverEffect={ data.imageHoverEffect || defaults.imageHoverEffect }
 						imageHighlightEffect={ data.imageHighlightEffect || defaults.imageHighlightEffect }
 						imageHighlightBoxShadowColor={ data.imageHighlightBoxShadowColor || defaults.imageHighlightBoxShadowColor }

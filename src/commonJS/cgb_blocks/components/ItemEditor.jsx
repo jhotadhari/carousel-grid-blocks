@@ -20,6 +20,7 @@ ItemEditor.defaultProps = {
 }
 
 ItemEditor = composeWithItemsEditor( ItemEditor, [
+	'items',
 	'fetchItem',
 	'selectedIndex',
 	'setSelected',

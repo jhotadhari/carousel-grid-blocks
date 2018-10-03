@@ -7,6 +7,8 @@ import {
 	findWhere,
 } from 'underscore';
 
+const shortid = require('shortid');
+
 import arrayMove from 'array-move';
 
 import {
@@ -63,6 +65,7 @@ export function pullItemsFromAttributes( state = DEFAULT_STATE, action ) {
 		return item ? item : {
 			...DEFAULT_ITEM,
 			id: id,
+			key: shortid.generate(),
 		};
 	});
 
@@ -81,7 +84,6 @@ export function pushItemsToAttribues( state = DEFAULT_STATE, action ) {
 	};
 }
 
-
 export function updateItemFromMedia( state = DEFAULT_STATE, action ) {
 	const { items } = state;
 	const { index, media } = action;
@@ -90,16 +92,16 @@ export function updateItemFromMedia( state = DEFAULT_STATE, action ) {
 		...newItems[index],
 		...pick( media, [
 			'id',
-			'url',
 			'title',
 			'alt',
 			'caption',
-			'sizes',
 			'orientation'
 		] ),
-		fetched: true,
+		src: media.url,
+		mediaSizes: media.sizes,
+		fetched: false,	// need sizes, srcSet...
 	};
-	newItems[index] = newItem;
+
 	return {
 		...state,
 		items: newItems,
@@ -110,15 +112,19 @@ export function addItems( state = DEFAULT_STATE, action ) {
 	const { items } = state;
 	const { medias } = action;
 	const additionalItems = [...medias].map( media => {
-		return { ...pick( media, [
-			'id',
-			'url',
-			'title',
-			'alt',
-			'caption',
-			'sizes',
-			'orientation'
-		] ) }
+		return {
+			...DEFAULT_ITEM,
+			...pick( media, [
+				'id',
+				'title',
+				'alt',
+				'caption',
+				'orientation'
+			] ),
+			src: media.url,
+			mediaSizes: media.sizes,
+			key: shortid.generate(),
+		}
 	});
 	return {
 		...state,
@@ -128,7 +134,6 @@ export function addItems( state = DEFAULT_STATE, action ) {
 		],
 	};
 }
-
 
 export function moveItem( state = DEFAULT_STATE, action ) {
 	const { items } = state;
@@ -142,8 +147,6 @@ export function moveItem( state = DEFAULT_STATE, action ) {
 		],
 	};
 }
-
-
 
 const itemsReducer = ( state = DEFAULT_STATE, action ) => {
 

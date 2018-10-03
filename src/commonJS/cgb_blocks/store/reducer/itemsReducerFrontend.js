@@ -12,6 +12,8 @@ import {
 	isEmpty,
 } from 'lodash';
 
+const shortid = require('shortid');
+
 /**
  * WordPress dependencies
  */
@@ -23,26 +25,15 @@ import { DEFAULT_ITEM, DEFAULT_STATE } 	from '../constants';
 import {
 	ensureOneItem,
 	ensureOneSelected,
-	// addItem,
-	// removeItem,
 	updateItem,
 	setSelected,
 }						 				from './itemsReducer';
 
-// console.log( 'ensureOneItem', ensureOneItem );		// ??? debug
-
 export function pullItemsFromAttributes( state = DEFAULT_STATE, action ) {
 	const { items } = state;
-
-
 	const blockWrappers = document.getElementsByClassName( 'cgb-block-wrapper' );
-
-	// console.log( 'blockWrappers', blockWrappers );		// ??? debug
-
 	const imagesIds = [...blockWrappers].reduce( ( acc, blockWrapper ) => {
 		if ( acc.length ) return acc;
-
-
 			const serializedData = blockWrapper.getAttribute('data-cgb');
 			let data = {};
 			try {
@@ -50,25 +41,16 @@ export function pullItemsFromAttributes( state = DEFAULT_STATE, action ) {
 			} catch(e) {
 				data = {};
 			}
-			// console.log( 'data', data );		// ??? debug
-
 			const blockImageIds = get( data, [ 'imageIds' ] );
 			return undefined !== blockImageIds ? blockImageIds : acc;
-
 	}, [] );
-
-
-
-
-	// console.log( 'imagesIds', imagesIds );		// ??? debug
-
-
 
 	const newItems = [...imagesIds].map( ( id ) => {
 		const item = findWhere( items, { id: id } );
 		return item ? item : {
 			...DEFAULT_ITEM,
 			id: id,
+			key: shortid.generate(),
 		};
 	});
 
@@ -76,11 +58,7 @@ export function pullItemsFromAttributes( state = DEFAULT_STATE, action ) {
 		...state,
 		items: newItems,
 	};
-
-
-
 }
-
 
 const itemsReducerFrontend = ( state = DEFAULT_STATE, action ) => {
 

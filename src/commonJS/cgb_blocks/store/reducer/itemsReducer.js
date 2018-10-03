@@ -1,3 +1,7 @@
+
+const shortid = require('shortid');
+
+
 /**
  * Internal dependencies
  */
@@ -8,6 +12,7 @@ export function ensureOneItem( state = DEFAULT_STATE, action ) {
 	const { items } = state;
 	const newItems = items.length ? [...items] : [ {
 		...DEFAULT_ITEM,
+		key: shortid.generate(),
 	} ];
 	return {
 		...state,

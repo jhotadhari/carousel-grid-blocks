@@ -21,6 +21,7 @@ ItemFrontend.defaultProps = {
 }
 
 ItemFrontend = composeWithItemsFrontend( ItemFrontend, [
+	'items',
 	'fetchItem',
 	'selectedIndex',
 	'setSelected',

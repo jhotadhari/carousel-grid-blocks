@@ -2,6 +2,10 @@
   "next": [
     ""
   ],
+  "0.0.2": [
+    "changed grid to react-photo-gallery, drag and drop sortable with react-sortable-hoc;",
+    "updated babel"
+  ],
   "0.0.1": [
     "might work"
   ]

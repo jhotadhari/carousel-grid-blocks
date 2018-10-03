@@ -15,7 +15,8 @@ let GridEditor = Grid;
 
 GridEditor = composeWithItemsEditor( GridEditor, [
 	'items',
-	'selectedIndex',
+	'photoSet',
+	'moveItem',
 ] )
 
 GridEditor = composeWithContainerEditor( GridEditor );

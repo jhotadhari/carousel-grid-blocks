@@ -15,7 +15,7 @@ let GridFrontend = Grid;
 
 GridFrontend = composeWithItemsFrontend( GridFrontend, [
 	'items',
-	'selectedIndex',
+	'photoSet',
 ] )
 
 GridFrontend = composeWithContainerFrontend( GridFrontend );

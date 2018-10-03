@@ -10,18 +10,22 @@
 
 .cgb-block {
 
+    &-grid-item,
+    &-carousel-item,
     &-item {
         position: relative;
+        display: flex;
 
         &-image {
             margin: 0;
             overflow: hidden;
-            width: 100%;
-            height: 100%;
 
             display: flex;
             justify-content: center;
             align-items: center;
+
+            width: 100%;
+            height: 100%;
 
             img {
                 position: relative;
@@ -31,21 +35,14 @@
                 min-height: 100%;
                 max-width: none;
                 max-height: none;
+                cursor: pointer;
             }
         }
 
-        // image hover effects
-        &-image img {
-            &.cgb-on-hover-scale{
-                transform: scale(1);
-                transition: transform 0.3s;
-            }
+        &.selected {
+            z-index: 5;
         }
-        &:hover &-image img {
-            &.cgb-on-hover-scale{
-                transform: scale(1.05);
-            }
-        }
+
 
         &-info {
             position: absolute;
@@ -62,6 +59,7 @@
             top: 0;
             width: 100%;
             height: 100%;
+            z-index: 6;
 
             flex-direction: column;
 
@@ -92,26 +90,6 @@
 
     }
 
-    &-grid {
-        display: grid;
-        margin: 1.5em auto;
-        padding: 0;
-        grid-template-columns: repeat( auto-fill, minmax( 200px, 1fr ) );
-        grid-gap: 1em;
-        grid-auto-flow: dense;
-
-        &-item {
-
-            &.landscape {
-            }
-
-            &.portrait {
-                grid-row-end: span 2;
-            }
-        }
-
-    }
-
     &-carousel {
 
         .control-dots {
@@ -123,6 +101,23 @@
                 border-radius: 0;   // ??? move bier
             }
 
+        }
+    }
+
+    // image hover effects
+    &-grid-item,
+    &-carousel-item,
+    &-item {
+        &-image img {
+            &.cgb-on-hover-scale{
+                transform: scale(1);
+                transition: transform 0.3s;
+            }
+        }
+        &:hover &-image img {
+            &.cgb-on-hover-scale{
+                transform: scale(1.05);
+            }
         }
     }
 

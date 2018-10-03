@@ -3,25 +3,12 @@
  */
 import PropTypes from 'prop-types';
 import {
-	get,
 	filter,
-	pick,
-	isEqual,
 } from 'lodash';
-
-/**
- * WordPress dependencies
- */
-// const { __ } = wp.i18n;
-// const {
-//     Button,
-//     IconButton,
-// } = wp.components;
 
 /**
  * Internal dependencies
  */
-
 const { ItemControls } = cgbBlocks.components;
 
 class Item extends React.Component {
@@ -30,90 +17,80 @@ class Item extends React.Component {
 		super(props);
 	}
 
-	componentDidMount() {
-		const { index, item, fetchItem } = this.props;
-		if ( undefined !== item.id && ! item.fetched )
-			fetchItem( index );
-	}
-
-	shouldComponentUpdate( nextProps, nextState ) {
-		const pickPaths = [
-			'item',
-			'imageHoverEffect',
-			'imageHighlightEffect',
-			'imageHighlightBoxShadowColor',
-			'imageHighlightBoxShadowWidth',
-		];
-
-		return ! isEqual(
-			pick( this.props,pickPaths ),
-			pick( nextProps, pickPaths )
-		)
-	}
-
-	componentDidUpdate( prevProps, prevState, snapshot ) {
-		const { index, item, fetchItem } = this.props;
-		if ( undefined !== item.id && ! item.fetched )
-			fetchItem( index );
-	}
-
 	render() {
 		const {
-			index,
-			item,
-			selectedIndex,
-			className,
-			setSelected,
-			style,
-			imageHoverEffect,
+			index,				// from 	GridGallery -> GridItem
+			item,				// from		GridItem
+			items,				// from 	items
+			fetchItem,			// from 	items
+			className,			// from 	GridItem
+			controls,			// from 	GridItem
+			setSelected,		// from 	items
+			itemStyle,			// from 	GridItem
+			imageStyle,			// from 	GridItem
+			imgStyle,			// from 	GridItem
+			photo,				// from 	items -> Grid -> GridGallery -> GridItem
+			imageHoverEffect,	// from 	attributes -> Grid -> GridGallery -> GridItem
 		} = this.props;
-		const { id, fetched, title, orientation } = item;
 
-		const size =
-			// get( item, [ 'sizes', 'thumbnail' ] ) ||
-			get( item, [ 'sizes', 'medium' ] ) ||
-			get( item, [ 'sizes', 'large' ] ) ||
-			get( item, [ 'sizes', 'full' ] );
+		const {
+			src,
+			alt,
+			srcSet,
+			sizes,
+			title,
+			orientation,
+		} = item;
 
-		const width = size.width;
-		const height = size.height;
-		const url = size.source_url || size.url;
+		const height = photo ? photo.height : null;
+		const width = photo ? photo.width : null;
+
+		if ( undefined !== item.id && ! item.fetched )
+			fetchItem( index );
 
 		return ([
 			<div
-				key={index}
+				onClick={ ( event ) => 'BUTTON' !== event.target.tagName ? setSelected( undefined === index ? 0 : index ) : null }
 				className={ [
 					className,
-					'cgb-block-item',
-					orientation,
-					index === selectedIndex ? 'selected' : '',
-				].join(' ') }
-				style={ style }
-				onClick={ ( event ) => 'BUTTON' !== event.target.tagName ? setSelected( undefined === index ? 0 : index ) : null }
+					item.selected ? 'selected' : null,
+				].filter( a => a !== null ).join(' ') }
+				style={ {...itemStyle} }
 			>
 
 				{/*
 					image
 				*/}
-				<div className="cgb-block-item-image">
-
+				<div
+					className={ [
+						className + '-image',
+						'cgb-flex-row',
+						imageHoverEffect !== 'none' ? 'cgb-on-hover-' + imageHoverEffect : null,
+					].filter( a => a !== null ).join(' ') }
+					style={ imageStyle }
+				>
 					<img
-						src={ url }
+						src={ src }
+						alt={ alt }
+						srcSet={ srcSet }
+						sizes={ sizes }
+						title={ title }
+						style={ imgStyle }
 						className={ [
 							orientation,
 							imageHoverEffect !== 'none' ? 'cgb-on-hover-' + imageHoverEffect : null,
-						].filter( effect => effect !== null ).join(' ') }
+						].filter( a => a !== null ).join(' ') }
 						width={ width }
 						height={ height }
 					/>
-
 				</div>
-
 
 				{/*
 					caption info
 				*/}
-				<div className="cgb-block-item-info cgb-flex-row">
+				<div
+					className={ className + '-info cgb-flex-row' }
+				>
 					{ title &&
 						<span>
 							{ title }
@@ -121,15 +98,15 @@ class Item extends React.Component {
 					}
 				</div>
 
-
 				{/*
 					controls
 				*/}
 				<ItemControls
+					className={ className + '-controls cgb-flex-row' }
 					index={ index }
 					item={ item }
+					controls={ controls }
 				/>
-
 
 			</div>
 
@@ -137,7 +114,6 @@ class Item extends React.Component {
 
 	}
 }
-
 
 Item.propTypes = {
 	style: PropTypes.object,

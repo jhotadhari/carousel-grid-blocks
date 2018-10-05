@@ -10,6 +10,7 @@ import loadJS from 'load-js';
 const { __ } = wp.i18n;
 const {
 	registerBlockType,
+	createBlock,
 } = wp.blocks;
 const {
 	InspectorControls,
@@ -28,14 +29,28 @@ const registerBlockCarousel = () => {
 		title: __( 'Cgb Image Carousel' ),
 		icon: 'format-gallery',
 		category: 'common',
-
-
 		supports: {
 			html: false,
 			align: true,
 			align: [ 'left', 'right', 'full' ],
 		},
-
+		transforms: {
+			to: [
+				{
+					type: 'block',
+					blocks: [ 'cgb/grid' ],
+					transform: ( {
+						imageIds,
+						settings,
+						imageHoverEffect,
+					} ) => createBlock( 'cgb/grid', {
+						imageIds: imageIds || [],
+						settings: settings || '',
+						imageHoverEffect: imageHoverEffect || defaults.imageHoverEffect,
+					} ),
+				},
+			],
+		},
 		attributes: {
 			imageIds: {			// common
 				type: 'array',
@@ -50,7 +65,6 @@ const registerBlockCarousel = () => {
 				default: defaults.imageHoverEffect,
 			},
 		},
-
 		edit( {  attributes, className, setAttributes } ) {
 			const {
 				imageIds,
@@ -94,13 +108,10 @@ const registerBlockCarousel = () => {
 			}
 
 		},
-
 		save( { attributes, className } ) {
 			return null;
 		},
-
 	} );
-
 }
 
 export default registerBlockCarousel;

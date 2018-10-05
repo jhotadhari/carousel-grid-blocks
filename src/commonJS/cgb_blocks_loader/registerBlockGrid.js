@@ -10,6 +10,7 @@ import loadJS from 'load-js';
 const { __ } = wp.i18n;
 const {
 	registerBlockType,
+	createBlock
 } = wp.blocks;
 const {
 	InspectorControls,
@@ -28,14 +29,28 @@ const registerBlockGrid = () => {
 		title: __( 'Cgb Image Grid' ),
 		icon: 'grid-view',
 		category: 'common',
-
 		supports: {
 			html: false,
 			align: true,
 			align: [ 'left', 'right', 'full' ],
-			// multiple: false,
 		},
-
+		transforms: {
+			to: [
+				{
+					type: 'block',
+					blocks: [ 'cgb/carousel' ],
+					transform: ( {
+						imageIds,
+						settings,
+						imageHoverEffect,
+					} ) => createBlock( 'cgb/carousel', {
+						imageIds: imageIds || [],
+						settings: settings || '',
+						imageHoverEffect: imageHoverEffect || defaults.imageHoverEffect,
+					} ),
+				},
+			],
+		},
 		attributes: {
 			imageIds: {			// common
 				type: 'array',
@@ -73,7 +88,6 @@ const registerBlockGrid = () => {
 				default:  defaults.imageHighlightBoxShadowWidth,
 			},
 		},
-
 		edit( {  attributes, className, setAttributes } ) {
 			const {
 				columns,
@@ -129,17 +143,11 @@ const registerBlockGrid = () => {
 
 				]);
 			}
-
 		},
-
 		save( { attributes, className } ) {
 			return null;
 		},
-
 	} );
-
 }
 
 export default registerBlockGrid;
-
-

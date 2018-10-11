@@ -8,6 +8,12 @@ export function pullItemsFromAttributes() {
 	};
 }
 
+export function overwriteItems( newItems ) {
+	return {
+		type: 'OVERWRITE_ITEMS',
+		newItems,
+	};
+}
 
 export function ensureOneItem() {
 	return {

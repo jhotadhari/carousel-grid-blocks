@@ -52,6 +52,12 @@ const registerBlockCarousel = () => {
 			],
 		},
 		attributes: {
+
+			imageSource: {		// common
+				type: 'string',
+				default: 'custom',		// custom || posts
+			},
+
 			imageIds: {			// common
 				type: 'array',
 				default: [],
@@ -67,7 +73,6 @@ const registerBlockCarousel = () => {
 		},
 		edit( {  attributes, className, setAttributes } ) {
 			const {
-				imageIds,
 				imageHoverEffect,
 			} = attributes;
 

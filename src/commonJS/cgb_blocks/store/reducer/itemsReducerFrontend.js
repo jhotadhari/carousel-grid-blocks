@@ -27,9 +27,10 @@ import {
 	ensureOneSelected,
 	updateItem,
 	setSelected,
+	overwriteItems,
 }						 				from './itemsReducer';
 
-export function pullItemsFromAttributes( state = DEFAULT_STATE, action ) {
+export function pullItemsFromAttributes( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 	const { items } = state;
 	const blockWrappers = document.getElementsByClassName( 'cgb-block-wrapper' );
 	const imagesIds = [...blockWrappers].reduce( ( acc, blockWrapper ) => {
@@ -60,12 +61,14 @@ export function pullItemsFromAttributes( state = DEFAULT_STATE, action ) {
 	};
 }
 
-const itemsReducerFrontend = ( state = DEFAULT_STATE, action ) => {
-
+const itemsReducerFrontend = ( state = { items: [ ...DEFAULT_STATE.items ] }, action ) => {
 	switch ( action.type ) {
 
 		case 'PULL_ITEMS_FROM_ATTRIBUTES':
 			return pullItemsFromAttributes( state, action );
+
+		case 'OVERWRITE_ITEMS':
+			return overwriteItems( state, action );
 
 		case 'ENSURE_ONE_ITEM':
 			return ensureOneItem( state, action );

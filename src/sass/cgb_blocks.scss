@@ -1,6 +1,4 @@
-
 @import "bourbon";
-@import "./vendor/carousel";
 
 .cgb-flex-row {
     display: flex;
@@ -8,99 +6,130 @@
     align-items: center;
 }
 
-.cgb-block {
+.cgb-block-item-controls-popover {
+    .components-popover__content{
+        padding: 1em;
+    }
+}
 
+.edit-post-block-sidebar__panel {
+    .cgb-inspector-panel {
+        .components-panel__body {
+            margin-left: 0.5em;
+            border-top: none;
+        }
+    }
+}
+
+body.gutenberg-editor-page,
+body {
+
+    @import "./vendor/carousel";
+
+    .cgb-block {
+
+        &-grid-item,
+        &-carousel-item,
+        &-item {
+            position: relative;
+            display: flex;
+
+            &-image {
+                margin: 0;
+                overflow: hidden;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                width: 100%;
+                height: 100%;
+
+                img {
+                    position: relative;
+                    display: block;
+                    object-fit: cover;
+                    min-width: 100%;
+                    min-height: 100%;
+                    max-width: none;
+                    max-height: none;
+                    cursor: pointer;
+                }
+            }
+
+            &.selected {
+                z-index: 5;
+            }
+
+
+            &-info {
+                position: absolute;
+                width: calc( 100% - 2em);
+                bottom: 1em;
+                background: #ccc;
+                margin: auto 1em;
+                padding: 0.5em;
+            }
+
+            &-controls {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 6;
+
+                flex-direction: column;
+
+                &-inner {
+                    display: none;
+                    background: transparentize( #000, 0.2 );
+                    padding: 0.5em;
+               }
+
+               .components-button {
+
+                   background: transparentize( #fff, 0.2 );
+
+                   margin: 0.5em;
+
+                   &.remove {
+                       color: #f00;
+                       &:hover {
+                           color: #f00;
+                       }
+                   }
+               }
+
+            }
+
+        }
+
+        &-carousel {
+
+            .control-dots {
+                list-style: none;
+
+                .dot {
+                    width: 11px;        // ??? move theme
+                    height: 11px;       // ??? move theme
+                    border-radius: 0;   // ??? move theme
+                }
+
+            }
+        }
+
+
+    }
+}
+
+
+.cgb-block {
     &-grid-item,
     &-carousel-item,
     &-item {
-        position: relative;
-        display: flex;
-
-        &-image {
-            margin: 0;
-            overflow: hidden;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            width: 100%;
-            height: 100%;
-
-            img {
-                position: relative;
-                display: block;
-                object-fit: cover;
-                min-width: 100%;
-                min-height: 100%;
-                max-width: none;
-                max-height: none;
-                cursor: pointer;
-            }
-        }
-
-        &.selected {
-            z-index: 5;
-        }
-
-
-        &-info {
-            position: absolute;
-            width: calc( 100% - 2em);
-            bottom: 1em;
-            background: #ccc;
-            margin: auto 1em;
-            padding: 0.5em;
-        }
-
-        &-controls {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 6;
-
-            flex-direction: column;
-
-            &-inner {
-                display: none;
-                background: transparentize( #000, 0.2 );
-                padding: 0.5em;
-           }
-
-           .components-button {
-
-               background: transparentize( #fff, 0.2 );
-
-               margin: 0.5em;
-
-               &.remove {
-                   color: #f00;
-                   &:hover {
-                       color: #f00;
-                   }
-               }
-           }
-
-        }
         &:hover &-controls-inner {
             display: flex;
-        }
-
-    }
-
-    &-carousel {
-
-        .control-dots {
-            list-style: none;
-
-            .dot {
-                width: 11px;        // ??? move bier
-                height: 11px;       // ??? move bier
-                border-radius: 0;   // ??? move bier
-            }
-
         }
     }
 
@@ -123,8 +152,3 @@
 
 }
 
-.cgb-block-item-controls-popover {
-    .components-popover__content{
-        padding: 1em;
-    }
-}

@@ -1,13 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-
-// const imgWithClick = { cursor: 'pointer' };
 
 import {
   SortableElement,
 } from "react-sortable-hoc";
-
-const { Item } = cgbBlocks.components;
 
 import composeWithItemsFrontend 		from '../store/compose/composeWithItemsFrontend.js';
 import composeWithSettingsFrontend 		from '../store/compose/composeWithSettingsFrontend.js';
@@ -25,6 +20,7 @@ let GridItem = ({
 	imageHighlightEffect,			// from 	attributes -> Grid -> GridGallery
 	imageHighlightBoxShadowColor,	// from 	attributes -> Grid -> GridGallery
 	imageHighlightBoxShadowWidth,	// from 	attributes -> Grid -> GridGallery
+	ItemComponent,
 }) => {
 
 	const imgStyle = {};
@@ -48,7 +44,7 @@ let GridItem = ({
 	}
 
 	return (
-		<Item
+		<ItemComponent
 			itemStyle={ { margin: margin + 'px' } }
 			imageStyle={ { ...getImageStyle( sortIndex ) } }
 			imgStyle={ { ...imgStyle } }
@@ -67,13 +63,6 @@ let GridItem = ({
 		/>
 	);
 };
-
-
-
-
-
-
-
 
 // // ??? muss noch
 // export const photoPropType = PropTypes.shape({

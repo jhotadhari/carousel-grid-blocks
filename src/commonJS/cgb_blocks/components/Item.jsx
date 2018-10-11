@@ -9,7 +9,6 @@ import {
 /**
  * Internal dependencies
  */
-const { ItemControls } = cgbBlocks.components;
 
 class Item extends React.Component {
 
@@ -31,6 +30,7 @@ class Item extends React.Component {
 			imgStyle,			// from 	GridItem
 			photo,				// from 	items -> Grid -> GridGallery -> GridItem
 			imageHoverEffect,	// from 	attributes -> Grid -> GridGallery -> GridItem
+			ItemControlsComponent,
 		} = this.props;
 
 		const {
@@ -46,7 +46,7 @@ class Item extends React.Component {
 		const width = photo ? photo.width : null;
 
 		if ( undefined !== item.id && ! item.fetched )
-			fetchItem( index );
+			fetchItem( index, item );
 
 		return ([
 			<div
@@ -101,7 +101,7 @@ class Item extends React.Component {
 				{/*
 					controls
 				*/}
-				<ItemControls
+				<ItemControlsComponent
 					className={ className + '-controls cgb-flex-row' }
 					index={ index }
 					item={ item }

@@ -21,6 +21,8 @@ const CarouselInspector = ({
 	<PanelBody
 		title={'Carousel settings'}
 		initialOpen={ true }
+		icon="format-gallery"
+		className={ 'cgb-inspector-panel' }
 	>
 
 		<SelectControl
@@ -37,7 +39,7 @@ const CarouselInspector = ({
 
 ];
 
-cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
-cgbBlocks.components.CarouselInspector = CarouselInspector;
+// cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
+// cgbBlocks.components.CarouselInspector = CarouselInspector;
 
 export default CarouselInspector;

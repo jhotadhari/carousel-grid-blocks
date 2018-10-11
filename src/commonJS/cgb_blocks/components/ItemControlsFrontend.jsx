@@ -23,7 +23,5 @@ let ItemControlsFrontend = ( {
 
 </div>;
 
-cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
-cgbBlocks.components.ItemControls		= ItemControlsFrontend;
 
 export default ItemControlsFrontend;

@@ -36,9 +36,10 @@ import {
 	ensureOneSelected,
 	updateItem,
 	setSelected,
+	overwriteItems,
 }						 				from './itemsReducer';
 
-export function removeItem( state = DEFAULT_STATE, action ) {
+export function removeItem( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 	const { items } = state;
 	const { index } = action;
 	const newItems = [...items];
@@ -50,7 +51,7 @@ export function removeItem( state = DEFAULT_STATE, action ) {
 	};
 }
 
-export function pullItemsFromAttributes( state = DEFAULT_STATE, action ) {
+export function pullItemsFromAttributes( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 	const { items } = state;
 	const blocks = getCgbBlocks();
 
@@ -75,7 +76,7 @@ export function pullItemsFromAttributes( state = DEFAULT_STATE, action ) {
 	};
 }
 
-export function pushItemsToAttribues( state = DEFAULT_STATE, action ) {
+export function pushItemsToAttribues( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 	const { items } = state;
 	const blocks = getCgbBlocks();
 	[...blocks].map( block => updateBlockAttributes( block.clientId, { imageIds: pluck( [...items], 'id' ) } ) );
@@ -84,7 +85,7 @@ export function pushItemsToAttribues( state = DEFAULT_STATE, action ) {
 	};
 }
 
-export function updateItemFromMedia( state = DEFAULT_STATE, action ) {
+export function updateItemFromMedia( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 	const { items } = state;
 	const { index, media } = action;
 	const newItems = [...items];
@@ -108,7 +109,7 @@ export function updateItemFromMedia( state = DEFAULT_STATE, action ) {
 	};
 }
 
-export function addItems( state = DEFAULT_STATE, action ) {
+export function addItems( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 	const { items } = state;
 	const { medias } = action;
 	const additionalItems = [...medias].map( media => {
@@ -126,16 +127,18 @@ export function addItems( state = DEFAULT_STATE, action ) {
 			key: shortid.generate(),
 		}
 	});
+	// empty current items, if it's just the one default image
+	const currentItems = 1 === items.length && null === items[0]['id'] ? [] : [...items];
 	return {
 		...state,
 		items: [
-			...items,
+			...currentItems,
 			...additionalItems,
 		],
 	};
 }
 
-export function moveItem( state = DEFAULT_STATE, action ) {
+export function moveItem( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 	const { items } = state;
 	const { index, newIndex } = action;
 	const newItems = arrayMove( [...items], index, newIndex );
@@ -148,12 +151,15 @@ export function moveItem( state = DEFAULT_STATE, action ) {
 	};
 }
 
-const itemsReducer = ( state = DEFAULT_STATE, action ) => {
+const itemsReducer = ( state = { items: [ ...DEFAULT_STATE.items ] }, action ) => {
 
 	switch ( action.type ) {
 
 		case 'PULL_ITEMS_FROM_ATTRIBUTES':
 			return pullItemsFromAttributes( state, action );
+
+		case 'OVERWRITE_ITEMS':
+			return overwriteItems( state, action );
 
 		case 'PUSH_ITEMS_TO_ATTRIBUES':
 			return pushItemsToAttribues( state, action );

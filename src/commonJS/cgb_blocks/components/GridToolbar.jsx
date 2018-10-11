@@ -8,7 +8,4 @@ const GridToolbar = () => [
 	<Toolbar/>,
 ];
 
-cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
-cgbBlocks.components.GridToolbar = GridToolbar;
-
 export default GridToolbar;

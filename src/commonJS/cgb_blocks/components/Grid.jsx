@@ -19,9 +19,8 @@ class Grid extends React.Component {
 			imageHighlightEffect,				// from atts
 			imageHighlightBoxShadowColor,		// from atts
 			imageHighlightBoxShadowWidth,		// from atts
-
+			ItemComponent,		// from atts
 		} = this.props;
-
 
 		return ([
 			<div>
@@ -41,6 +40,7 @@ class Grid extends React.Component {
 						onSortEnd={ ( { oldIndex, newIndex } ) => {
 							moveItem( oldIndex, newIndex )
 						} }
+						ItemComponent={ ItemComponent }
 					/>
 				}
 

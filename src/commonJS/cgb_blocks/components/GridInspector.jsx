@@ -28,7 +28,9 @@ const GridInspector = ({
 
 	<PanelBody
 		title={'Grid settings'}
+		icon="grid-view"
 		initialOpen={ true }
+		className={ 'cgb-inspector-panel' }
 	>
 
 		<TextControl
@@ -87,7 +89,7 @@ const GridInspector = ({
 
 ];
 
-cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
-cgbBlocks.components.GridInspector = GridInspector;
+// cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
+// cgbBlocks.components.GridInspector = GridInspector;
 
 export default GridInspector;

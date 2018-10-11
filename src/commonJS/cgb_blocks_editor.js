@@ -1,17 +1,103 @@
 /**
+ * External dependencies
+ */
+import PropTypes from 'prop-types';
+/**
  * Internal dependencies
  */
-
 import registerCgbStoreEditor 		from './cgb_blocks/store/registerCgbStoreEditor';
-
 registerCgbStoreEditor();
+// compose
+import composeWithItems 		from './cgb_blocks/store/compose/composeWithItemsEditor';
+import composeWithSettings 		from './cgb_blocks/store/compose/composeWithSettingsEditor';
+import composeWithContainer		from './cgb_blocks/store/compose/composeWithContainerEditor';
+const composeWithProps = injectedProps => WrappedComponent => {
+	const WithProps = props => <WrappedComponent{...injectedProps} {...props} />
+	return WithProps
+};
 
-// dont mix order
+
+cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
+
+
+/**
+ *	ItemControls
+ *
+ */
 import ItemControls				from './cgb_blocks/components/ItemControlsEditor.jsx';
-import Item						from './cgb_blocks/components/ItemEditor.jsx';
-import Carousel 				from './cgb_blocks/components/CarouselEditor.jsx';
-import Grid			 			from './cgb_blocks/components/GridEditor.jsx';
+
+/**
+ *	Item
+ *
+ */
+import Item						from './cgb_blocks/components/Item.jsx';
+let _Item = Item;
+_Item.propTypes = {
+	style: PropTypes.object,
+}
+_Item.defaultProps = {
+	style: {},
+}
+_Item = composeWithItems( _Item, [
+	'items',
+	'fetchItem',
+	'selectedIndex',
+	'setSelected',
+	'removeItem',
+] );
+_Item = composeWithProps( { ItemControlsComponent: ItemControls } )( _Item );
+
+/**
+ *	Grid
+ *
+ */
+import Grid			 			from './cgb_blocks/components/Grid.jsx';
+let _Grid = Grid;
+_Grid = composeWithItems( _Grid, [
+	'items',
+	'photoSet',
+	'moveItem',
+] )
+
+_Grid = composeWithContainer( _Grid );
+
+_Grid = composeWithSettings( _Grid, [
+	'transitionTime',
+] );
+_Grid = composeWithProps( { ItemComponent: _Item } )( _Grid );
+cgbBlocks.components.Grid = _Grid;
+
+/**
+ *	Carousel
+ *
+ */
+import Carousel			 			from './cgb_blocks/components/Carousel.jsx';
+let _Carousel = Carousel;
+_Carousel = composeWithItems( _Carousel, [
+	'items',
+	'selectedIndex',
+	'setSelected',
+] )
+
+_Carousel = composeWithContainer( _Carousel );
+
+_Carousel = composeWithSettings( _Carousel, [
+	'transitionTime',
+] );
+_Carousel = composeWithProps( { ItemComponent: _Item } )( _Carousel );
+cgbBlocks.components.Carousel = _Carousel;
+
+/**
+ *	Inspector
+ *	Toolbar
+ *
+ */
 import CarouselInspector 		from './cgb_blocks/components/CarouselInspector.jsx';
 import CarouselToolbar 			from './cgb_blocks/components/CarouselToolbar.jsx';
+cgbBlocks.components.CarouselInspector = CarouselInspector;
+cgbBlocks.components.CarouselToolbar = CarouselToolbar;
+
 import GridInspector 			from './cgb_blocks/components/GridInspector.jsx';
 import GridToolbar 				from './cgb_blocks/components/GridToolbar.jsx';
+cgbBlocks.components.GridInspector = GridInspector;
+cgbBlocks.components.GridToolbar = GridToolbar;

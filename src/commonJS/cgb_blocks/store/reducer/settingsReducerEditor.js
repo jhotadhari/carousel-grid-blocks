@@ -28,7 +28,7 @@ const {
 import { DEFAULT_STATE } 	from '../constants';
 import getCgbBlocks 		from '../helper/getCgbBlocks';
 
-export function pullSettingsFromAttributes( state = DEFAULT_STATE, action ) {
+export function pullSettingsFromAttributes( state = { settings: { ...DEFAULT_STATE.settings } }, action ) {
 	const { settings } = state;
 	const blocks = getCgbBlocks();
 	const newSettings = {
@@ -49,7 +49,7 @@ export function pullSettingsFromAttributes( state = DEFAULT_STATE, action ) {
 	};
 }
 
-export function pushSettingsToAttribues( state = DEFAULT_STATE, action ) {
+export function pushSettingsToAttribues( state = { settings: { ...DEFAULT_STATE.settings } }, action ) {
 	const { settings } = state;
 	const blocks = getCgbBlocks();
 	const newSettingsAttr = JSON.stringify( { ...settings } );
@@ -61,7 +61,7 @@ export function pushSettingsToAttribues( state = DEFAULT_STATE, action ) {
 	};
 }
 
-export function updateSetting( state = DEFAULT_STATE, action ) {
+export function updateSetting( state = { settings: { ...DEFAULT_STATE.settings } }, action ) {
 	const { settings } = state;
 	const { key, newValue } = action;
 	const newSettings = {...settings};
@@ -72,7 +72,7 @@ export function updateSetting( state = DEFAULT_STATE, action ) {
 	};
 }
 
-const settingsReducerEditor = ( state = DEFAULT_STATE, action ) => {
+const settingsReducerEditor = ( state = { settings: { ...DEFAULT_STATE.settings } }, action ) => {
 
 	switch ( action.type ) {
 

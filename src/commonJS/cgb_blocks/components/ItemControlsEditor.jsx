@@ -19,6 +19,7 @@ const {
  * Internal dependencies
  */
 import composeWithItemsEditor 				from '../store/compose/composeWithItemsEditor.js';
+import composeWithSettingsEditor 			from '../store/compose/composeWithSettingsEditor.js';
 import ItemControlsMoveToIndex 				from './ItemControlsMoveToIndex.jsx';
 import ItemControlsDragHandle 				from './ItemControlsDragHandle.jsx';
 
@@ -35,6 +36,7 @@ let ItemControlsEditor = ( {
 	removeItem,
 	moveItem,
 	controls,
+	// itemsSource,
 } ) => <div className="cgb-block-item-controls cgb-flex-row">
 
 	<div className="cgb-block-item-controls-inner">
@@ -118,7 +120,8 @@ ItemControlsEditor = composeWithItemsEditor( ItemControlsEditor, [
 	'items',
 ] );
 
-cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
-cgbBlocks.components.ItemControls		= ItemControlsEditor;
+ItemControlsEditor = composeWithSettingsEditor( ItemControlsEditor, [
+	'itemsSource',
+] );
 
 export default ItemControlsEditor;

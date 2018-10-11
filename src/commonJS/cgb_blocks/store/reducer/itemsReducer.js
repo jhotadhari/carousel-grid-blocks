@@ -8,7 +8,7 @@ const shortid = require('shortid');
 import { DEFAULT_ITEM, DEFAULT_STATE } 	from '../constants';
 import findSelectedIndex 				from '../helper/findSelectedIndex';
 
-export function ensureOneItem( state = DEFAULT_STATE, action ) {
+export function ensureOneItem( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 	const { items } = state;
 	const newItems = items.length ? [...items] : [ {
 		...DEFAULT_ITEM,
@@ -20,7 +20,7 @@ export function ensureOneItem( state = DEFAULT_STATE, action ) {
 	};
 }
 
-export function ensureOneSelected( state = DEFAULT_STATE, action ) {
+export function ensureOneSelected( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 	const { items } = state;
 	const newItems = [...items];
 	if ( -1 === findSelectedIndex( newItems ) )
@@ -31,7 +31,7 @@ export function ensureOneSelected( state = DEFAULT_STATE, action ) {
 	};
 }
 
-export function updateItem( state = DEFAULT_STATE, action ) {
+export function updateItem( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 	const { items } = state;
 	const { index, newItem } = action;
 	const newItems = [...items];
@@ -42,13 +42,23 @@ export function updateItem( state = DEFAULT_STATE, action ) {
 	};
 }
 
-export function setSelected( state = DEFAULT_STATE, action ) {
+export function setSelected( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 	const { items } = state;
 	const { newIndex } = action;
 	const newItems = [...items].map( ( item, i ) => { return {
 		...item,
 		selected: i === newIndex,
 	} } );
+	return {
+		...state,
+		items: newItems,
+	};
+}
+
+// export function overwriteItems( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
+export function overwriteItems( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
+	const { items } = state;
+	const { newItems } = action;
 	return {
 		...state,
 		items: newItems,

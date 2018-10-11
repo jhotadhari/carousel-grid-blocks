@@ -14,9 +14,11 @@ const {
  * Internal dependencies
  */
 import composeWithItemsEditor 				from '../store/compose/composeWithItemsEditor.js';
+import composeWithSettingsEditor 			from '../store/compose/composeWithSettingsEditor.js';
 
-const Toolbar = ({
+let Toolbar = ({
 	addItems,
+	itemsSource,
 }) => [
 
 	<MediaUpload
@@ -25,9 +27,10 @@ const Toolbar = ({
 		onSelect={ addItems }
 		render={ ({ open }) =>
 			<IconButton
-				title={ 'Add Items' }
+				title={ 'custom' === itemsSource.key ? 'Add Items' : 'Add Items is available in custom mode' }
 				className={ 'components-toolbar__control' }
 				icon={ 'plus' }
+				disabled={ 'custom' !== itemsSource.key }
 				onClick={ open }
 			/>
 
@@ -36,6 +39,12 @@ const Toolbar = ({
 
 ];
 
-export default composeWithItemsEditor( Toolbar, [
+Toolbar = composeWithItemsEditor( Toolbar, [
 	'addItems',
 ] );
+
+Toolbar = composeWithSettingsEditor( Toolbar, [
+	'itemsSource',
+] );
+
+export default Toolbar;

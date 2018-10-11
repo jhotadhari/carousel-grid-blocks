@@ -32,5 +32,21 @@ export const DEFAULT_STATE = {
 	items: [{...DEFAULT_ITEM, selected: true}],
 	settings: {
 		transitionTime: 350,
+		itemsSource: {
+			key: 'custom',
+			options: {
+				posttype: 'post',
+				baseURL: '/wp/v2/posts',
+			},
+		}
 	},
 };
+
+
+// ??? example
+// itemsSource: {
+// 	key: 'archivePostType',
+// 	options: {
+// 		posttype: 'post',
+// 	},
+// }

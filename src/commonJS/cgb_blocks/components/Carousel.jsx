@@ -11,7 +11,6 @@ const { __ } = wp.i18n;
 /**
  * Internal dependencies
  */
-const { Item } = cgbBlocks.components;
 
 const Carousel = ( {
 	items,
@@ -19,6 +18,7 @@ const Carousel = ( {
 	setSelected,
 	transitionTime,
 	imageHoverEffect,
+	ItemComponent,
 } ) => <div className="cgb-block">
 
 	{ items.length > 0 &&
@@ -26,6 +26,8 @@ const Carousel = ( {
 
 			<ResponsiveCarousel
 				showThumbs={ false }
+				showStatus={ items.length > 1 }
+				showIndicators={ items.length > 1 }
 				infiniteLoop={ true }
 				dynamicHeight={ true }
 				selectedItem={ selectedIndex }
@@ -36,7 +38,7 @@ const Carousel = ( {
 				{ [...items].map( ( item, index ) => {
 
 					return (
-						<Item
+						<ItemComponent
 							key={ item.key }
 							index={ index }
 							item={ item }

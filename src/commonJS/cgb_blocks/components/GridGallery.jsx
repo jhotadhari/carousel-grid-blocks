@@ -48,6 +48,7 @@ class RawGridGallery extends Gallery {
 			imageHighlightEffect,
 			imageHighlightBoxShadowColor,
 			imageHighlightBoxShadowWidth,
+			ItemComponent,
 		} = this.props;
 
 		return (
@@ -67,6 +68,7 @@ class RawGridGallery extends Gallery {
 								imageHighlightEffect={ imageHighlightEffect }
 								imageHighlightBoxShadowColor={ imageHighlightBoxShadowColor }
 								imageHighlightBoxShadowWidth={ imageHighlightBoxShadowWidth }
+								ItemComponent={ ItemComponent }
 
 							/>
 						);
@@ -87,6 +89,7 @@ const GridGallery = SortableContainer( ( {
 	imageHighlightBoxShadowWidth,
 	columns,
 	margin,
+	ItemComponent,
 } ) => {
 	return <RawGridGallery
 		photos={ photos }
@@ -99,6 +102,7 @@ const GridGallery = SortableContainer( ( {
 		imageHighlightEffect={ imageHighlightEffect }
 		imageHighlightBoxShadowColor={ imageHighlightBoxShadowColor }
 		imageHighlightBoxShadowWidth={ imageHighlightBoxShadowWidth }
+		ItemComponent={ ItemComponent }
 	/>;
 });
 

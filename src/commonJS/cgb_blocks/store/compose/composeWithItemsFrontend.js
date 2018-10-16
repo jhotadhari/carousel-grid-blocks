@@ -18,7 +18,6 @@ const composeWithItemsFrontend = ( component, requested ) => compose( [
 
 		const {
 			getItems,
-			getPhotoSet,
 			getSelectedIndex,
 			fetchItem,
 		} = select( 'cgb-store' );
@@ -27,10 +26,6 @@ const composeWithItemsFrontend = ( component, requested ) => compose( [
 			switch( prop ){
 				case 'items':
 					props[prop] = getItems();
-					break;
-
-				case 'photoSet':
-					props[prop] = getPhotoSet();
 					break;
 
 				case 'selectedIndex':

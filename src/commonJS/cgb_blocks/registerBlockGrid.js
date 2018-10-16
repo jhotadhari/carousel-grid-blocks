@@ -1,7 +1,9 @@
 /**
  * External dependencies
  */
-// import _ from 'underscore';
+import {
+	get,
+} from 'lodash';
 import loadJS from 'load-js';
 
 /**
@@ -20,8 +22,9 @@ const {
 /**
  * Internal dependencies
  */
-import defaults 		from './defaults';
-import Placeholder 		from '../cgb_blocks_loader/components/Placeholder.jsx';
+import parseSerialized 		from './utils/parseSerialized';
+import getCgbDefault		from './getCgbDefault';
+import Placeholder 			from './components/Placeholder.jsx';
 
 const registerBlockGrid = () => {
 
@@ -46,7 +49,7 @@ const registerBlockGrid = () => {
 					} ) => createBlock( 'cgb/carousel', {
 						imageIds: imageIds || [],
 						settings: settings || '',
-						imageHoverEffect: imageHoverEffect || defaults.imageHoverEffect,
+						imageHoverEffect: imageHoverEffect || getCgbDefault( 'imageHoverEffect' ),
 					} ),
 				},
 			],
@@ -67,31 +70,27 @@ const registerBlockGrid = () => {
 				default: '',
 			},
 
-			columns: {
+			gridSettings: {
 				type: 'string',
-				default: defaults.columns,
+				default:  JSON.stringify( getCgbDefault( 'gridSettings' ) ),
 			},
-			margin: {
-				type: 'string',
-				default: defaults.margin,
-			},
-
 
 			imageHoverEffect: {
 				type: 'string',
-				default: defaults.imageHoverEffect,
+				default: getCgbDefault( 'imageHoverEffect' ),
 			},
+			imageHoverEffectSettings: {
+				type: 'string',
+				default:  JSON.stringify( getCgbDefault( 'imageHoverEffectSettings' ) ),
+			},
+
 			imageHighlightEffect: {
 				type: 'string',
-				default:  defaults.imageHighlightEffect,
+				default:  getCgbDefault( 'imageHighlightEffect' ),
 			},
-			imageHighlightBoxShadowColor: {
+			imageHighlightEffectSettings: {
 				type: 'string',
-				default:  defaults.imageHighlightBoxShadowColor,
-			},
-			imageHighlightBoxShadowWidth: {
-				type: 'string',
-				default:  defaults.imageHighlightBoxShadowWidth,
+				default:  JSON.stringify( getCgbDefault( 'imageHighlightEffectSettings' ) ),
 			},
 		},
 		edit( {  attributes, className, setAttributes } ) {
@@ -100,10 +99,11 @@ const registerBlockGrid = () => {
 				margin,
 				imageHoverEffect,
 				imageHighlightEffect,
-				imageHighlightBoxShadowColor,
-				imageHighlightBoxShadowWidth,
 			} = attributes;
 
+			const gridSettings = parseSerialized( attributes.gridSettings );
+			const imageHighlightEffectSettings = parseSerialized( attributes.imageHighlightEffectSettings );
+			const imageHoverEffectSettings = parseSerialized( attributes.imageHoverEffectSettings );
 
 			if ( ! attributes.scriptsloaded) {
 				// load the main editor component, rerender the block
@@ -129,22 +129,20 @@ const registerBlockGrid = () => {
 					<InspectorControls>
 						<GridInspector
 							setAttributes={ setAttributes }
-							columns={ columns }
-							margin={ parseInt( margin ) }
+							gridSettings={ gridSettings }
 							imageHoverEffect={ imageHoverEffect }
+							imageHoverEffectSettings={ imageHoverEffectSettings }
 							imageHighlightEffect={ imageHighlightEffect }
-							imageHighlightBoxShadowColor={ imageHighlightBoxShadowColor }
-							imageHighlightBoxShadowWidth={ imageHighlightBoxShadowWidth }
+							imageHighlightEffectSettings={ imageHighlightEffectSettings }
 						/>
 					</InspectorControls>,
 
 					<Grid
-						columns={ columns }
-						margin={ parseInt( margin ) }
+						gridSettings={ gridSettings }
 						imageHoverEffect={ imageHoverEffect }
+						imageHoverEffectSettings={ imageHoverEffectSettings }
 						imageHighlightEffect={ imageHighlightEffect }
-						imageHighlightBoxShadowColor={ imageHighlightBoxShadowColor }
-						imageHighlightBoxShadowWidth={ imageHighlightBoxShadowWidth }
+						imageHighlightEffectSettings={ imageHighlightEffectSettings }
 					/>
 
 				]);

@@ -13,8 +13,9 @@ const { setLocaleData } = wp.i18n;
 /**
  * Internal dependencies
  */
-import defaults 		from './cgb_blocks_loader/defaults';
-import Placeholder 		from './cgb_blocks_loader/components/Placeholder.jsx';
+import getCgbDefault 		from './cgb_blocks/getCgbDefault';
+import parseSerialized 		from './cgb_blocks/utils/parseSerialized';
+import Placeholder 			from './cgb_blocks/components/Placeholder.jsx';
 
 setLocaleData( cgbBlocks.locale, 'cgb' );
 
@@ -40,31 +41,28 @@ document.addEventListener('DOMContentLoaded', () => {
 			} = cgbBlocks.components;
 
 			[...blockWrappers].map( ( blockWrapper ) => {
-				const serializedData = blockWrapper.getAttribute('data-cgb');
-				let data = {};
-				try {
-					data = JSON.parse( serializedData );
-				} catch(e) {
-					data = {};
-				}
+
+				const data = parseSerialized( blockWrapper.getAttribute('data-cgb') );
+				const gridSettings = data.gridSettings || getCgbDefault( 'gridSettings' );
+				const imageHoverEffect = data.imageHoverEffect || getCgbDefault( 'imageHoverEffect' );
+				const imageHoverEffectSettings = data.imageHoverEffectSettings || getCgbDefault( 'imageHoverEffectSettings' );
+				const imageHighlightEffect = data.imageHighlightEffect ||getCgbDefault( 'imageHighlightEffect' );
+				const imageHighlightEffectSettings = data.imageHighlightEffectSettings || getCgbDefault( 'imageHighlightEffectSettings' );
 
 				[... blockWrapper.getElementsByClassName( 'cgb-grid' )].map( ( grid ) => {
-					const columns = data.columns || defaults.columns;
-					const margin = data.margin || defaults.margin;
-
 					ReactDOM.render( <Grid
-						columns={ columns }
-						margin={ margin }
-						imageHoverEffect={ data.imageHoverEffect || defaults.imageHoverEffect }
-						imageHighlightEffect={ data.imageHighlightEffect || defaults.imageHighlightEffect }
-						imageHighlightBoxShadowColor={ data.imageHighlightBoxShadowColor || defaults.imageHighlightBoxShadowColor }
-						imageHighlightBoxShadowWidth={ data.imageHighlightBoxShadowWidth || defaults.imageHighlightBoxShadowWidth }
+						gridSettings={ gridSettings }
+						imageHoverEffect={ imageHoverEffect }
+						imageHoverEffectSettings={ imageHoverEffectSettings }
+						imageHighlightEffect={ imageHighlightEffect }
+						imageHighlightEffectSettings={ imageHighlightEffectSettings }
 					/>, grid );
 				});
 
 				[...blockWrapper.getElementsByClassName( 'cgb-carousel' )].map( ( carousel ) => {
 					ReactDOM.render( <Carousel
-						imageHoverEffect={ data.imageHoverEffect || defaults.imageHoverEffect }
+						imageHoverEffect={ imageHoverEffect }
+						imageHoverEffectSettings={ imageHoverEffectSettings }
 					/>, carousel );
 				});
 

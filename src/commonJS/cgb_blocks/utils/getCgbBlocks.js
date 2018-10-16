@@ -6,6 +6,7 @@ import {
 	flatten,
 	chain,
 } from 'underscore';
+
 /**
  * WordPress dependencies
  */

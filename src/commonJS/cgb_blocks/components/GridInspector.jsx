@@ -1,4 +1,11 @@
 /**
+ * External dependencies
+ */
+import {
+	get,
+} from 'lodash';
+
+/**
  * WordPress dependencies
  */
 const { __ } = wp.i18n;
@@ -8,21 +15,40 @@ const {
     SelectControl,
     ColorPalette,
 } = wp.components;
+const { applyFilters } = wp.hooks;
 
 /**
  * Internal dependencies
  */
-import Inspector 							from './Inspector.jsx';
-import defaults 							from '../../cgb_blocks_loader/defaults';
+import Inspector 				from './Inspector.jsx';
+import getCgbDefault			from '../getCgbDefault';
+
+const getOptions = key => {
+	let options = [];
+	switch( key ) {
+		case 'imageHoverEffect':
+			options = [
+				{ label: __( 'None', 'cgb' ), value: 'none' },
+				{ label: __( 'Scale', 'cgb' ), value: 'scale' },
+			];
+			break;
+		case 'imageHighlightEffect':
+			options = [
+				{ label: __( 'None', 'cgb' ), value: 'none' },
+				{ label: __( 'Box Shadow', 'cgb' ), value: 'boxShadow' },
+			];
+			break;
+	}
+	return applyFilters( 'cgb/GridInspector/options/' + key, options );
+}
 
 const GridInspector = ({
 	setAttributes,
-	columns,
-	margin,
+	gridSettings,
 	imageHoverEffect,
+	imageHoverEffectSettings,
 	imageHighlightEffect,
-	imageHighlightBoxShadowColor,
-	imageHighlightBoxShadowWidth,
+	imageHighlightEffectSettings,
 }) => [
 	<Inspector/>,
 
@@ -35,61 +61,68 @@ const GridInspector = ({
 
 		<TextControl
 			label={ __( 'Columns', 'cgb'  ) + ' [int|"auto"]' }
-			value={ columns }
-			onChange={ ( newVal ) => setAttributes( { columns: newVal } ) }
+			value={ get( gridSettings, ['columns'] ) }
+			onChange={ ( newVal ) => setAttributes( {
+				gridSettings: JSON.stringify( {
+					...gridSettings,
+					columns: newVal,
+				} ),
+			} ) }
 		/>
 
 		<TextControl
 			label={ __( 'Margin', 'cgb'  ) + ' [px]' }
-			value={ margin }
+			value={ get( gridSettings, ['margin'] ) }
 			type={ 'number' }
-			onChange={ ( newVal ) => setAttributes( { margin: newVal } ) }
+			onChange={ ( newVal ) => setAttributes( {
+				gridSettings: JSON.stringify( {
+					...gridSettings,
+					margin: newVal,
+				} ),
+			} ) }
 		/>
-
 
 		<SelectControl
 			label={ __( 'Image Hover Effect', 'cgb' ) }
 			value={ imageHoverEffect }
-			options={ [
-				{ label: __( 'None', 'cgb' ), value: 'none' },
-				{ label: __( 'Scale', 'cgb' ), value: 'scale' },
-			] }
+			options={ getOptions( 'imageHoverEffect' ) }
 			onChange={ ( newVal ) => setAttributes( { imageHoverEffect: newVal } ) }
 		/>
 
 		<SelectControl
 			label={ __( 'Image Highlight Effect', 'cgb' ) }
 			value={ imageHighlightEffect }
-			options={ [
-				{ label: __( 'None', 'cgb' ), value: 'none' },
-				{ label: __( 'Box Shadow', 'cgb' ), value: 'boxShadow' },
-			] }
+			options={ getOptions( 'imageHighlightEffect' ) }
 			onChange={ ( newVal ) => setAttributes( { imageHighlightEffect: newVal } ) }
 		/>
 
 		{ 'boxShadow' === imageHighlightEffect && [
 
 			<ColorPalette
-				value={ imageHighlightBoxShadowColor }
-				onChange={ ( newVal ) => undefined !== newVal
-					? setAttributes( { imageHighlightBoxShadowColor: newVal } )
-					: setAttributes( { imageHighlightBoxShadowColor: defaults.imageHighlightBoxShadowColor } )
-				}
+				value={ get( imageHighlightEffectSettings, ['boxShadowColor'] ) }
+				onChange={ ( newVal ) => setAttributes( {
+					imageHighlightEffectSettings: JSON.stringify( {
+						...imageHighlightEffectSettings,
+						boxShadowColor: undefined !== newVal ? newVal : get( getCgbDefault( 'imageHighlightEffectSettings' ), ['boxShadowColor'] ),
+					} )
+				} ) }
 			/>,
 
 			<TextControl
 				label={ __( 'Image Highlight Box Shadow width', 'cgb' ) }
-				value={ imageHighlightBoxShadowWidth }
+				value={ get( imageHighlightEffectSettings, ['boxShadowWidth'] ) }
 				type={ 'number' }
-				onChange={ ( newVal ) => setAttributes( { imageHighlightBoxShadowWidth: newVal } ) }
+				onChange={ ( newVal ) =>  setAttributes( {
+					imageHighlightEffectSettings: JSON.stringify( {
+						...imageHighlightEffectSettings,
+						boxShadowWidth: undefined !== newVal ? newVal : get( getCgbDefault( 'imageHighlightEffectSettings' ), ['boxShadowWidth'] ),
+					} )
+				} ) }
 			/>
 		]}
 
 	</PanelBody>,
 
 ];
-
-// cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
-// cgbBlocks.components.GridInspector = GridInspector;
 
 export default GridInspector;

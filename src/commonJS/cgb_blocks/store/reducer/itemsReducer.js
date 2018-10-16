@@ -6,7 +6,7 @@ const shortid = require('shortid');
  * Internal dependencies
  */
 import { DEFAULT_ITEM, DEFAULT_STATE } 	from '../constants';
-import findSelectedIndex 				from '../helper/findSelectedIndex';
+import findSelectedIndex 				from '../../utils/findSelectedIndex';
 
 export function ensureOneItem( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 	const { items } = state;

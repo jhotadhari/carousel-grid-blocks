@@ -26,7 +26,7 @@ const {
  * Internal dependencies
  */
 import { DEFAULT_STATE } 	from '../constants';
-import getCgbBlocks 		from '../helper/getCgbBlocks';
+import getCgbBlocks 		from '../../utils/getCgbBlocks';
 
 export function pullSettingsFromAttributes( state = { settings: { ...DEFAULT_STATE.settings } }, action ) {
 	const { settings } = state;

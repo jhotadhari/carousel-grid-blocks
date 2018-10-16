@@ -30,7 +30,7 @@ const {
  * Internal dependencies
  */
 import { DEFAULT_ITEM, DEFAULT_STATE } 	from '../constants';
-import getCgbBlocks 					from '../helper/getCgbBlocks';
+import getCgbBlocks 					from '../../utils/getCgbBlocks';
 import {
 	ensureOneItem,
 	ensureOneSelected,

@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-// import _ from 'underscore';
 import loadJS from 'load-js';
 
 /**
@@ -20,8 +19,9 @@ const {
 /**
  * Internal dependencies
  */
-import defaults 		from './defaults';
-import Placeholder 		from '../cgb_blocks_loader/components/Placeholder.jsx';
+import parseSerialized 		from './utils/parseSerialized';
+import getCgbDefault		from './getCgbDefault';
+import Placeholder 			from './components/Placeholder.jsx';
 
 const registerBlockCarousel = () => {
 
@@ -46,7 +46,7 @@ const registerBlockCarousel = () => {
 					} ) => createBlock( 'cgb/grid', {
 						imageIds: imageIds || [],
 						settings: settings || '',
-						imageHoverEffect: imageHoverEffect || defaults.imageHoverEffect,
+						imageHoverEffect: imageHoverEffect || getCgbDefault( 'imageHoverEffect' ),
 					} ),
 				},
 			],
@@ -68,13 +68,19 @@ const registerBlockCarousel = () => {
 			},
 			imageHoverEffect: {
 				type: 'string',
-				default: defaults.imageHoverEffect,
+				default: getCgbDefault( 'imageHoverEffect' ),
+			},
+			imageHoverEffectSettings: {
+				type: 'string',
+				default:  JSON.stringify( getCgbDefault( 'imageHoverEffectSettings' ) ),
 			},
 		},
 		edit( {  attributes, className, setAttributes } ) {
 			const {
 				imageHoverEffect,
 			} = attributes;
+
+			const imageHoverEffectSettings = parseSerialized( attributes.imageHoverEffectSettings );
 
 			if ( ! attributes.scriptsloaded) {
 				// load the main editor component, rerender the block
@@ -103,11 +109,13 @@ const registerBlockCarousel = () => {
 						<CarouselInspector
 							setAttributes={ setAttributes }
 							imageHoverEffect={ imageHoverEffect }
+							imageHoverEffectSettings={ imageHoverEffectSettings }
 						/>
 					</InspectorControls>,
 
 					<Carousel
 						imageHoverEffect={ imageHoverEffect }
+						imageHoverEffectSettings={ imageHoverEffectSettings }
 					/>
 				]);
 			}

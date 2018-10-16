@@ -32,12 +32,7 @@ const registerCgbStore = ( {
 		resolvers,
 	} );
 
-	// cgbBlocks.store = store;
-
-	const { getItemsSource } = select( 'cgb-store' );
-
-	let currentItemsSource = getItemsSource();
-
+	let currentItemsSource = select( 'cgb-store' ).getItemsSource();
 	let unsubscribe = null;
 	const initItems = ( unsubscribe ) => {
 		let previousItemsSource = currentItemsSource;

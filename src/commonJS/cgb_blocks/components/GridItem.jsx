@@ -1,8 +1,17 @@
+/**
+ * External dependencies
+ */
 import PropTypes from 'prop-types';
+import {
+	get,
+} from 'lodash';
 
 import {
   SortableElement,
 } from "react-sortable-hoc";
+
+
+import getCgbDefault				from '../getCgbDefault';
 
 import composeWithItemsFrontend 		from '../store/compose/composeWithItemsFrontend.js';
 import composeWithSettingsFrontend 		from '../store/compose/composeWithSettingsFrontend.js';
@@ -17,9 +26,9 @@ let GridItem = ({
 	items,							// from 	items
 	transitionTime,					// from 	settings
 	imageHoverEffect,				// from 	attributes -> Grid -> GridGallery
+	imageHoverEffectSettings,				// from 	attributes -> Grid -> GridGallery
 	imageHighlightEffect,			// from 	attributes -> Grid -> GridGallery
-	imageHighlightBoxShadowColor,	// from 	attributes -> Grid -> GridGallery
-	imageHighlightBoxShadowWidth,	// from 	attributes -> Grid -> GridGallery
+	imageHighlightEffectSettings,			// from 	attributes -> Grid -> GridGallery
 	ItemComponent,
 }) => {
 
@@ -34,10 +43,12 @@ let GridItem = ({
 		let style = {};
 		switch( imageHighlightEffect ) {
 		case 'boxShadow':
+			const boxShadowWidth = get( imageHighlightEffectSettings, ['boxShadowWidth'] ) || get( getCgbDefault( 'imageHighlightEffectSettings' ), ['boxShadowWidth'] );
+			const boxShadowColor = get( imageHighlightEffectSettings, ['boxShadowColor'] ) || get( getCgbDefault( 'imageHighlightEffectSettings' ), ['boxShadowColor'] );
 			style = {
 				...style,
 				transition: 'box-shadow ' + ( transitionTime / 1000 ) + 's',
-				boxShadow: sortIndex === selectedIndex ? `${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowColor}, ${imageHighlightBoxShadowWidth}px -${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowColor}, -${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowColor}, -${imageHighlightBoxShadowWidth}px -${imageHighlightBoxShadowWidth}px ${imageHighlightBoxShadowColor}` : 'none',
+				boxShadow: sortIndex === selectedIndex ? `${boxShadowWidth}px ${boxShadowWidth}px ${boxShadowColor}, ${boxShadowWidth}px -${boxShadowWidth}px ${boxShadowColor}, -${boxShadowWidth}px ${boxShadowWidth}px ${boxShadowColor}, -${boxShadowWidth}px -${boxShadowWidth}px ${boxShadowColor}` : 'none',
 			};
 		}
 		return style;

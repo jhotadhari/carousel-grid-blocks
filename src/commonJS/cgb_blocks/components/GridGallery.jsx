@@ -1,25 +1,42 @@
 /**
  * External dependencies
  */
+import {
+	get,
+} from 'lodash';
 import Gallery from 'react-photo-gallery';
-import { SortableContainer } from "react-sortable-hoc";
-import { computeSizes, computeSizesColumns } from '../utils';	// from 'react-photo-gallery/src/utils';  // why doesn't that work?
+import { SortableContainer } from 'react-sortable-hoc';
+import { computeSizes, computeSizesColumns } from '../../vendor/react-photo-gallery/utils';	// from 'react-photo-gallery/src/utils';  // why doesn't that work?
 
 /**
  * Internal dependencies
  */
-import GridItem from './GridItem.jsx';
+import itemsToPhotoSet 	from '../utils/itemsToPhotoSet';
+import GridItem 		from './GridItem.jsx';
 
 class RawGridGallery extends Gallery {
 
 	render() {
 		const containerWidth = this.state.containerWidth;
 		// no containerWidth until after first render with refs, skip calculations and render nothing
-		if ( !containerWidth ) return <div ref={ c => ( this._gallery = c ) } />;
-		const { ImageComponent } = this.props;
-		// subtract 1 pixel because the browser may round up a pixel
-		const { margin, onClick, direction } = this.props;
-		let { columns } = this.props;
+		if ( ! containerWidth )
+			return <div ref={ c => ( this._gallery = c ) } />;
+
+		const {
+			ImageComponent,
+			onClick,
+			direction,
+			imageHoverEffect,
+			imageHoverEffectSettings,
+			imageHighlightEffect,
+			imageHighlightEffectSettings,
+			ItemComponent,
+		} = this.props;
+
+		let {
+			columns,
+			margin,
+		} = this.props;
 
 		// set default breakpoints if user doesn't specify columns prop
 		if ( columns === undefined ) {
@@ -30,9 +47,8 @@ class RawGridGallery extends Gallery {
 		}
 		const photos = this.props.photos;
 
-		const _width = containerWidth - 1;
+		const _width = containerWidth - 1;	// subtract 1 pixel because the browser may round up a pixel
 		let galleryStyle, thumbs;
-
 		if ( direction === 'row' ) {
 			galleryStyle = { display: 'flex', flexWrap: 'wrap', flexDirection: 'row' };
 			thumbs = computeSizes( { width: _width, columns, margin, photos } );
@@ -43,19 +59,10 @@ class RawGridGallery extends Gallery {
 			galleryStyle.height = thumbs[thumbs.length - 1].containerHeight;
 		}
 
-		const {
-			imageHoverEffect,
-			imageHighlightEffect,
-			imageHighlightBoxShadowColor,
-			imageHighlightBoxShadowWidth,
-			ItemComponent,
-		} = this.props;
-
 		return (
 			<div className="react-photo-gallery--gallery">
 				<div ref={ c => ( this._gallery = c ) } style={ galleryStyle }>
 					{ thumbs.map( ( photo, index ) => {
-
 						return (
 							<ImageComponent
 								margin={ margin }
@@ -65,11 +72,10 @@ class RawGridGallery extends Gallery {
 								key={ photo.key }
 								photo={ photo }
 								imageHoverEffect={ imageHoverEffect }
+								imageHoverEffectSettings={ imageHoverEffectSettings }
 								imageHighlightEffect={ imageHighlightEffect }
-								imageHighlightBoxShadowColor={ imageHighlightBoxShadowColor }
-								imageHighlightBoxShadowWidth={ imageHighlightBoxShadowWidth }
+								imageHighlightEffectSettings={ imageHighlightEffectSettings }
 								ItemComponent={ ItemComponent }
-
 							/>
 						);
 					} ) }
@@ -80,28 +86,32 @@ class RawGridGallery extends Gallery {
 
 }
 
+
+
+
+
+
 const GridGallery = SortableContainer( ( {
-	photos,
 	items,
 	imageHoverEffect,
 	imageHighlightEffect,
-	imageHighlightBoxShadowColor,
-	imageHighlightBoxShadowWidth,
-	columns,
-	margin,
+	imageHighlightEffectSettings,
+	gridSettings,
 	ItemComponent,
 } ) => {
+
+	let { columns, margin } = gridSettings;
+
 	return <RawGridGallery
-		photos={ photos }
+		photos={ itemsToPhotoSet( items ) }
 		items={ items }
-		columns={ ! isNaN( columns ) ? parseInt( columns ) : undefined }
-		margin={ margin }
+		columns={ undefined === columns || isNaN( columns ) ? undefined : parseInt( columns ) }
+		margin={ parseInt( margin ) }
 		direction={ 'row' }
 		ImageComponent={ GridItem }
 		imageHoverEffect={ imageHoverEffect }
 		imageHighlightEffect={ imageHighlightEffect }
-		imageHighlightBoxShadowColor={ imageHighlightBoxShadowColor }
-		imageHighlightBoxShadowWidth={ imageHighlightBoxShadowWidth }
+		imageHighlightEffectSettings={ imageHighlightEffectSettings }
 		ItemComponent={ ItemComponent }
 	/>;
 });

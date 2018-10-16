@@ -11,14 +11,13 @@ class Grid extends React.Component {
 		const {
 			items,								// from items
 			moveItem,							// from items
-			photoSet,							// from items
-			columns,							// from atts
-			margin,								// from atts
+			gridSettings,								// from atts
+
 			transitionTime,						// from settings
 			imageHoverEffect,					// from atts
+			imageHoverEffectSettings,					// from atts
 			imageHighlightEffect,				// from atts
-			imageHighlightBoxShadowColor,		// from atts
-			imageHighlightBoxShadowWidth,		// from atts
+			imageHighlightEffectSettings,		// from atts
 			ItemComponent,		// from atts
 		} = this.props;
 
@@ -27,14 +26,14 @@ class Grid extends React.Component {
 
 				{ items.length &&
 					<GridGallery
-						photos={ photoSet }
 						items={ items }
 						imageHoverEffect={ imageHoverEffect }
+						imageHoverEffectSettings={ imageHoverEffectSettings }
 						imageHighlightEffect={ imageHighlightEffect }
-						imageHighlightBoxShadowColor={ imageHighlightBoxShadowColor }
-						imageHighlightBoxShadowWidth={ imageHighlightBoxShadowWidth }
-						columns={ columns }
-						margin={ margin }
+						imageHighlightEffectSettings={ imageHighlightEffectSettings }
+
+						gridSettings={ gridSettings }
+
 						axis={ 'xy' }
 						useDragHandle={ true }
 						onSortEnd={ ( { oldIndex, newIndex } ) => {
@@ -49,7 +48,5 @@ class Grid extends React.Component {
 
 	}
 }
-
-
 
 export default Grid;

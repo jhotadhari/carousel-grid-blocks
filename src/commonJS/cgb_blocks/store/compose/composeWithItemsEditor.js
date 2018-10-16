@@ -23,7 +23,6 @@ const composeWithItemsEditor = ( component, requested ) => compose( [
 
 		const {
 			getItems,
-			getPhotoSet,
 			getSelectedIndex,
 			fetchItem,
 		} = select( 'cgb-store' );
@@ -32,10 +31,6 @@ const composeWithItemsEditor = ( component, requested ) => compose( [
 			switch( prop ){
 				case 'items':
 					props[prop] = getItems();
-					break;
-
-				case 'photoSet':
-					props[prop] = getPhotoSet();
 					break;
 
 				case 'selectedIndex':
@@ -66,7 +61,6 @@ const composeWithItemsEditor = ( component, requested ) => compose( [
 			updateItemFromMedia,
 			moveItem,
 		} = dispatch( 'cgb-store' );
-
 
 		if ( ! requested ) return props;
 

@@ -72,6 +72,7 @@ class Cgb_Register_Blocks {
 		return array(
 			'pluginDirUrl' => Cgb_Carousel_Grid_Blocks::plugin_dir_url(),
 			'locale' => gutenberg_get_jed_locale_data( 'cgb' ),
+			'is_active_wp_rest_filter' => class_exists( 'Wp_Rest_Filter_Loader' ),
 		);
 		return array();
 	}

@@ -4,7 +4,7 @@
 import concatenateReducers from 'redux-concatenate-reducers'
 import {
 	isEqual,
-} from 'underscore';
+} from 'lodash';
 
 /**
  * WordPress dependencies
@@ -31,12 +31,12 @@ const composeWithContainerFrontend = ( component ) => compose( [
 		const {
 			getItems,
 			getSetting,
+			getItemsSource,
 			pullItemsFromArchive,
 		} = select( 'cgb-store' );
 
-		const itemsSource = getSetting( 'itemsSource' );
 		props.items = getItems();
-		props.itemsSource = itemsSource;
+		props.itemsSource = getItemsSource();
 		props.pullItemsFromArchive = pullItemsFromArchive;
 
 		return props;
@@ -59,10 +59,10 @@ const composeWithContainerFrontend = ( component ) => compose( [
 				ensureOneSelected,
 			]),
 			// pullSettingsFromAttributes: pullSettingsFromAttributes,	// settings
-			pullSettingsFromAttributes: concatenateReducers([	// items
+			pullSettingsFromAttributes: concatenateReducers([
 				pullSettingsFromAttributes,
-				// ensureOneItem,
-				// ensureOneSelected,
+				ensureOneItem,
+				ensureOneSelected,
 			]),
 		};
 
@@ -81,12 +81,6 @@ const composeWithContainerFrontend = ( component ) => compose( [
 				this.pullItems();
 			}
 
-			componentDidUpdate( prevProps ) {
-				if ( undefined === this.props.itemsSource || ! isEqual( this.props.itemsSource, prevProps.itemsSource ) ){
-					this.pullItems();
-				}
-			}
-
 			pullItems(){
 				const {
 					pullItemsFromAttributes,
@@ -103,16 +97,12 @@ const composeWithContainerFrontend = ( component ) => compose( [
 						pullItemsFromArchive( itemsSource.key, itemsSource.options, Math.random() );
 						break;
 				};
-
-
 			}
 
 			render() {
 				return (
 					<WrappedComponent
 						{ ...this.props }
-						// pullItemsFromAttributes={ this.pullItemsFromAttributes }
-						// pullSettingsFromAttributes={ this.pullSettingsFromAttributes }
 					/>
 				);
 			}

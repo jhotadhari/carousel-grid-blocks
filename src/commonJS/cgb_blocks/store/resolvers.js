@@ -66,16 +66,10 @@ export function* pullItemsFromArchive( state, key, options, ) {
 
 	switch( key ) {
 		case 'archivePostType':
-			let baseURL;
-			if ( undefined !== select( 'core' ) ) {
-				let posttype = select( 'core' ).getEntity( 'postType', options.posttype );
-				baseURL = posttype.baseURL;
-			} else {
-				baseURL = options.baseURL;
-			}
+			const { url } = options;
 
 			let newItemIds = undefined;
-			const fetched = yield apiFetch( { path: baseURL } ).then( ( response ) => {
+			const fetched = yield apiFetch( { path: url } ).then( ( response ) => {
 				newItemIds = pluck( response, 'featured_media').filter( id => 0 !== id );
 				return newItemIds;
 			} );

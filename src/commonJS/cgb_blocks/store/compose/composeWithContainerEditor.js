@@ -82,12 +82,6 @@ const composeWithContainerEditor = ( component ) => compose( [
 				this.pullItems();
 			}
 
-			componentDidUpdate( prevProps ) {
-				if ( undefined === this.props.itemsSource || ! isEqual( this.props.itemsSource, prevProps.itemsSource ) ){
-					this.pullItems();
-				}
-			}
-
 			pullItems(){
 				const {
 					pullItemsFromAttributes,
@@ -104,8 +98,6 @@ const composeWithContainerEditor = ( component ) => compose( [
 						pullItemsFromArchive( itemsSource.key, itemsSource.options, Math.random() );
 						break;
 				};
-
-
 			}
 
 			render() {

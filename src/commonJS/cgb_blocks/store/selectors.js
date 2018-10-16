@@ -57,4 +57,8 @@ export function getSetting( state, key ) {
 	return state.settingsReducer.settings[key];
 };
 
+export function getItemsSource( state ) {
+	return getSetting( state, 'itemsSource' );
+};
+
 

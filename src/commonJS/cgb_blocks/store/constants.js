@@ -36,7 +36,8 @@ export const DEFAULT_STATE = {
 			key: 'custom',
 			options: {
 				posttype: 'post',
-				baseURL: '/wp/v2/posts',
+				url: '/wp/v2/posts',
+				includeTaxonomyTerms: [],
 			},
 		}
 	},

@@ -45,6 +45,11 @@ _Item = composeWithItems( _Item, [
 	'setSelected',
 	'removeItem',
 ] );
+
+_Item = composeWithSettings( _Item, [
+	'transitionTime',
+] );
+
 _Item = composeWithProps( { ItemControlsComponent: ItemControls } )( _Item );
 
 /**
@@ -82,6 +87,7 @@ _Carousel = composeWithItems( _Carousel, [
 _Carousel = composeWithContainer( _Carousel );
 
 _Carousel = composeWithSettings( _Carousel, [
+	'itemsSource',
 	'transitionTime',
 ] );
 _Carousel = composeWithProps( { ItemComponent: _Item } )( _Carousel );

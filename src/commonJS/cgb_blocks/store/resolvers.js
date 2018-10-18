@@ -31,6 +31,7 @@ export function* fetchItem( state, index, item ) {
 
 	let newItem = undefined;
 	yield null === id || undefined === id ? items[index] : apiFetch( { path: '/wp/v2/media/' + id } ).then( ( response ) => {
+
 		newItem = {
 			...DEFAULT_ITEM,
 			...item,

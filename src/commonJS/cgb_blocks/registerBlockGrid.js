@@ -43,13 +43,19 @@ const registerBlockGrid = () => {
 					type: 'block',
 					blocks: [ 'cgb/carousel' ],
 					transform: ( {
+						imageSource,
 						imageIds,
 						settings,
+						imageCaptionSettings,
 						imageHoverEffect,
+						imageHoverEffectSettings,
 					} ) => createBlock( 'cgb/carousel', {
+						imageSource: imageSource,
 						imageIds: imageIds || [],
 						settings: settings || '',
+						imageCaptionSettings: imageCaptionSettings || JSON.stringify( getCgbDefault( 'imageCaptionSettings' ) ),
 						imageHoverEffect: imageHoverEffect || getCgbDefault( 'imageHoverEffect' ),
+						imageHoverEffectSettings: imageHoverEffectSettings || JSON.stringify( getCgbDefault( 'imageHoverEffectSettings' ) ),
 					} ),
 				},
 			],
@@ -60,7 +66,6 @@ const registerBlockGrid = () => {
 				type: 'string',
 				default: 'custom',		// custom || posts
 			},
-
 			imageIds: {			// common
 				type: 'array',
 				default: [],
@@ -69,12 +74,14 @@ const registerBlockGrid = () => {
 				type: 'string',
 				default: '',
 			},
-
 			gridSettings: {
 				type: 'string',
 				default:  JSON.stringify( getCgbDefault( 'gridSettings' ) ),
 			},
-
+			imageCaptionSettings: {
+				type: 'string',
+				default:  JSON.stringify( getCgbDefault( 'imageCaptionSettings' ) ),
+			},
 			imageHoverEffect: {
 				type: 'string',
 				default: getCgbDefault( 'imageHoverEffect' ),
@@ -102,6 +109,7 @@ const registerBlockGrid = () => {
 			} = attributes;
 
 			const gridSettings = parseSerialized( attributes.gridSettings );
+			const imageCaptionSettings = parseSerialized( attributes.imageCaptionSettings );
 			const imageHighlightEffectSettings = parseSerialized( attributes.imageHighlightEffectSettings );
 			const imageHoverEffectSettings = parseSerialized( attributes.imageHoverEffectSettings );
 
@@ -130,6 +138,7 @@ const registerBlockGrid = () => {
 						<GridInspector
 							setAttributes={ setAttributes }
 							gridSettings={ gridSettings }
+							imageCaptionSettings={ imageCaptionSettings }
 							imageHoverEffect={ imageHoverEffect }
 							imageHoverEffectSettings={ imageHoverEffectSettings }
 							imageHighlightEffect={ imageHighlightEffect }
@@ -139,6 +148,7 @@ const registerBlockGrid = () => {
 
 					<Grid
 						gridSettings={ gridSettings }
+						imageCaptionSettings={ imageCaptionSettings }
 						imageHoverEffect={ imageHoverEffect }
 						imageHoverEffectSettings={ imageHoverEffectSettings }
 						imageHighlightEffect={ imageHighlightEffect }

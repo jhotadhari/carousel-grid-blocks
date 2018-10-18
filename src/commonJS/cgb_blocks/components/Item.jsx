@@ -9,6 +9,7 @@ import {
 /**
  * Internal dependencies
  */
+import rgbaToCssProp					from '../utils/rgbaToCssProp';
 
 class Item extends React.Component {
 
@@ -29,7 +30,12 @@ class Item extends React.Component {
 			imageStyle,			// from 	GridItem
 			imgStyle,			// from 	GridItem
 			photo,				// from 	items -> Grid -> GridGallery -> GridItem
-			imageHoverEffect,	// from 	attributes -> Grid -> GridGallery -> GridItem
+
+			transitionTime,
+			imageCaptionSettings,
+			imageHoverEffect,
+			imageHoverEffectSettings,
+
 			ItemControlsComponent,
 		} = this.props;
 
@@ -39,6 +45,7 @@ class Item extends React.Component {
 			srcSet,
 			sizes,
 			title,
+			caption,
 			orientation,
 		} = item;
 
@@ -47,6 +54,86 @@ class Item extends React.Component {
 
 		if ( undefined !== item.id && ! item.fetched )
 			fetchItem( index, item );
+
+		const {
+			show,
+			position,
+			margin,
+			padding,
+			backgroundColor,
+			color,
+			parts,
+		} = imageCaptionSettings;
+
+		const marginParts = {
+			val: margin.match(/\d+/g),
+			unit: margin.match(/\D+/g),
+		};
+
+		let captionIsVisible = false;
+		switch( show ){
+			case 'show':
+				captionIsVisible = true;
+				break
+			case 'hide':
+				captionIsVisible = false;
+				break
+			case 'showOnhover':
+				captionIsVisible = 'showOnhover';
+				break
+			case 'showIfSelected':
+				captionIsVisible = item.selected;
+				break
+		}
+
+		const captionStyle = {
+			width: 'calc( 100% - ' + ( marginParts.val * 2 ) + marginParts.unit + ' )',
+			margin: 'auto ' + margin,
+			padding: padding,
+			background: rgbaToCssProp( backgroundColor ),
+			color: color,
+			transition: 'opacity ' + ( transitionTime / 1000 ) + 's',
+			...( 'bottom' === position && { bottom: margin } ),
+			...( 'top' === position && { top: margin } ),
+			...( 'top' === position && { display: 'table' } ),
+			...( 'center' === position && {
+				top: '50%',
+				left: '50%',
+				transform: 'translate(-50%, -50%)',
+				margin: 'auto',
+				display: 'table',
+			} ),
+			...( 'full' === position && {
+				top: '0',
+				left: '0',
+				margin: '0',
+				width: '100%',
+				height: '100%',
+			} ),
+		};
+
+		const CaptionPart = ( { partKey } ) => {
+			switch( partKey ){
+				case 'title':
+					return [
+						<div
+							className={ className + '-info-title' }
+						>
+							{ title }
+						</div>
+					];
+				case 'caption':
+					return [
+						<div
+							dangerouslySetInnerHTML={ { __html: caption } }
+							className={ className + '-info-caption' }
+						>
+						</div>
+					];
+			}
+
+			return [ <span>{ '' }</span> ];
+		};
 
 		return ([
 			<div
@@ -88,15 +175,23 @@ class Item extends React.Component {
 				{/*
 					caption info
 				*/}
-				<div
-					className={ className + '-info cgb-flex-row' }
-				>
-					{ title &&
-						<span>
-							{ title }
-						</span>
-					}
-				</div>
+				{ 'hide' !== imageCaptionSettings.show &&
+					<div
+						className={ [
+							className + '-info',
+							captionIsVisible === true ? 'is-visible' : 'is-hidden',
+							captionIsVisible === 'showOnhover' ? 'is-visible-on-hover' : null,
+						].filter( a => a !== null ).join(' ') }
+						style={ captionStyle }
+					>
+						{ [...parts].map( part =>
+							<CaptionPart
+								key={ part }
+								partKey={ part }
+							/>
+						) }
+					</div>
+				}
 
 				{/*
 					controls

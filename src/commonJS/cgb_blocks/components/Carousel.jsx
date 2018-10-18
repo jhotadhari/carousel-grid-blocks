@@ -16,58 +16,71 @@ const Carousel = ( {
 	items,
 	selectedIndex,
 	setSelected,
+	itemsSource,
 	transitionTime,
+	imageCaptionSettings,
 	imageHoverEffect,
 	ItemComponent,
-} ) => <div className="cgb-block">
+} ) => {
 
-	{ items.length > 0 &&
-		<div className="cgb-block-carousel">
+	const controls = [
+		'fullscreen',
+		...( 'custom' === itemsSource.key ? [
+			'selectImage',
+			'remove',
+			'moveLeft',
+			'moveImage',
+			'moveRight',
+		] : [] ),
+	];
 
-			<ResponsiveCarousel
-				showThumbs={ false }
-				showStatus={ items.length > 1 }
-				showIndicators={ items.length > 1 }
-				infiniteLoop={ true }
-				dynamicHeight={ true }
-				selectedItem={ selectedIndex }
-				onChange={ ( event ) => setSelected( event ) }			// on beging
-				onClickItem={ ( event ) => console.log( 'onClickItem', event ) }
-				transitionTime={ transitionTime }
-			>
-				{ [...items].map( ( item, index ) => {
+	return (
+		<div className="cgb-block">
 
-					return (
-						<ItemComponent
-							key={ item.key }
-							index={ index }
-							item={ item }
-							className={ 'cgb-block-carousel-item' }
-							transitionTime={ transitionTime }
-							imageHoverEffect={ imageHoverEffect }
+			{ items.length > 0 &&
+				<div className="cgb-block-carousel">
 
-							itemStyle={ {} }
-							imageStyle={ {} }
-							imgStyle={ {} }
+					<ResponsiveCarousel
+						showThumbs={ false }
+						showStatus={ items.length > 1 }
+						showIndicators={ items.length > 1 }
+						infiniteLoop={ true }
+						dynamicHeight={ true }
+						selectedItem={ selectedIndex }
+						onChange={ ( event ) => setSelected( event ) }			// on beging
+						onClickItem={ ( event ) => console.log( 'onClickItem', event ) }
+						transitionTime={ transitionTime }
+					>
+						{ [...items].map( ( item, index ) => {
 
-							controls={ [
-								'selectImage',
-								'fullscreen',
-								'remove',
-								'moveLeft',
-								'moveImage',
-								'moveRight',
-							] }
-						/>
-					);
+							return (
+								<ItemComponent
+									key={ item.key }
+									index={ index }
+									item={ item }
+									className={ 'cgb-block-carousel-item' }
+									transitionTime={ transitionTime }
+									imageCaptionSettings={ imageCaptionSettings }
+									imageHoverEffect={ imageHoverEffect }
 
-				} ) }
-			</ResponsiveCarousel>
+									itemStyle={ {} }
+									imageStyle={ {} }
+									imgStyle={ {} }
+
+									controls={ controls }
+								/>
+							);
+
+						} ) }
+					</ResponsiveCarousel>
+
+				</div>
+			}
 
 		</div>
-	}
+	);
 
-</div>;
+};
 
 
 export default Carousel;

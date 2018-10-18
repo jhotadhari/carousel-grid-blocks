@@ -10,36 +10,41 @@ const {
 /**
  * Internal dependencies
  */
-import Inspector 							from './Inspector.jsx';
+import InspectorCommon 					from './InspectorCommon.jsx';
+import InspectorImage			from './InspectorImage.jsx';
 
 const CarouselInspector = ({
 	setAttributes,
+	imageCaptionSettings,
 	imageHoverEffect,
+	imageHoverEffectSettings,
 }) => [
-	<Inspector/>,
+	<InspectorCommon/>,
 
 	<PanelBody
 		title={'Carousel settings'}
-		initialOpen={ true }
+		initialOpen={ false }
 		icon="format-gallery"
 		className={ 'cgb-inspector-panel' }
 	>
-
-		<SelectControl
-			label={ __( 'Image Hover Effect', 'cgb' ) }
-			value={ imageHoverEffect }
-			options={ [
-				{ label: __( 'None', 'cgb' ), value: 'none' },
-				{ label: __( 'Scale', 'cgb' ), value: 'scale' },
-			] }
-			onChange={ ( newImageHoverEffect ) => setAttributes( { imageHoverEffect: newImageHoverEffect } ) }
-		/>
+		<span>
+			nix ???
+		</span>
 
 	</PanelBody>,
 
-];
+	<InspectorImage
+		setAttributes={ setAttributes }
+		include={ [
+			'imageCaption',
+			'imageHoverEffect',
+		] }
+		imageCaptionSettings={ imageCaptionSettings }
+		imageHoverEffect={ imageHoverEffect }
+		imageHoverEffectSettings={ imageHoverEffectSettings }
+	/>,
 
-// cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
-// cgbBlocks.components.CarouselInspector = CarouselInspector;
+
+];
 
 export default CarouselInspector;

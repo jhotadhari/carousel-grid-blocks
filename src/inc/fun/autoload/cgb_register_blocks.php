@@ -197,6 +197,7 @@ class Cgb_Register_Blocks {
 			'gridSettings',
 			'imageHoverEffectSettings',
 			'imageHighlightEffectSettings',
+			'imageCaptionSettings',
 		) );
 
 		$html_arr = array(

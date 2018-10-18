@@ -13,49 +13,34 @@ const {
     PanelBody,
     TextControl,
     SelectControl,
-    ColorPalette,
 } = wp.components;
-const { applyFilters } = wp.hooks;
 
 /**
  * Internal dependencies
  */
-import Inspector 				from './Inspector.jsx';
-import getCgbDefault			from '../getCgbDefault';
+import InspectorCommon			from './InspectorCommon.jsx';
+import InspectorImage			from './InspectorImage.jsx';
+// import getCgbDefault			from '../getCgbDefault';
+// import getInspectorOptions		from '../getInspectorOptions';
 
-const getOptions = key => {
-	let options = [];
-	switch( key ) {
-		case 'imageHoverEffect':
-			options = [
-				{ label: __( 'None', 'cgb' ), value: 'none' },
-				{ label: __( 'Scale', 'cgb' ), value: 'scale' },
-			];
-			break;
-		case 'imageHighlightEffect':
-			options = [
-				{ label: __( 'None', 'cgb' ), value: 'none' },
-				{ label: __( 'Box Shadow', 'cgb' ), value: 'boxShadow' },
-			];
-			break;
-	}
-	return applyFilters( 'cgb/GridInspector/options/' + key, options );
-}
+
 
 const GridInspector = ({
 	setAttributes,
 	gridSettings,
+	imageCaptionSettings,
 	imageHoverEffect,
 	imageHoverEffectSettings,
 	imageHighlightEffect,
 	imageHighlightEffectSettings,
 }) => [
-	<Inspector/>,
+	<InspectorCommon/>,
+
 
 	<PanelBody
 		title={'Grid settings'}
 		icon="grid-view"
-		initialOpen={ true }
+		initialOpen={ false }
 		className={ 'cgb-inspector-panel' }
 	>
 
@@ -82,46 +67,21 @@ const GridInspector = ({
 			} ) }
 		/>
 
-		<SelectControl
-			label={ __( 'Image Hover Effect', 'cgb' ) }
-			value={ imageHoverEffect }
-			options={ getOptions( 'imageHoverEffect' ) }
-			onChange={ ( newVal ) => setAttributes( { imageHoverEffect: newVal } ) }
-		/>
-
-		<SelectControl
-			label={ __( 'Image Highlight Effect', 'cgb' ) }
-			value={ imageHighlightEffect }
-			options={ getOptions( 'imageHighlightEffect' ) }
-			onChange={ ( newVal ) => setAttributes( { imageHighlightEffect: newVal } ) }
-		/>
-
-		{ 'boxShadow' === imageHighlightEffect && [
-
-			<ColorPalette
-				value={ get( imageHighlightEffectSettings, ['boxShadowColor'] ) }
-				onChange={ ( newVal ) => setAttributes( {
-					imageHighlightEffectSettings: JSON.stringify( {
-						...imageHighlightEffectSettings,
-						boxShadowColor: undefined !== newVal ? newVal : get( getCgbDefault( 'imageHighlightEffectSettings' ), ['boxShadowColor'] ),
-					} )
-				} ) }
-			/>,
-
-			<TextControl
-				label={ __( 'Image Highlight Box Shadow width', 'cgb' ) }
-				value={ get( imageHighlightEffectSettings, ['boxShadowWidth'] ) }
-				type={ 'number' }
-				onChange={ ( newVal ) =>  setAttributes( {
-					imageHighlightEffectSettings: JSON.stringify( {
-						...imageHighlightEffectSettings,
-						boxShadowWidth: undefined !== newVal ? newVal : get( getCgbDefault( 'imageHighlightEffectSettings' ), ['boxShadowWidth'] ),
-					} )
-				} ) }
-			/>
-		]}
-
 	</PanelBody>,
+
+	<InspectorImage
+		setAttributes={ setAttributes }
+		include={ [
+			'imageCaption',
+			'imageHoverEffect',
+			'imageHighlightEffect',
+		] }
+		imageCaptionSettings={ imageCaptionSettings }
+		imageHoverEffect={ imageHoverEffect }
+		imageHoverEffectSettings={ imageHoverEffectSettings }
+		imageHighlightEffect={ imageHighlightEffect }
+		imageHighlightEffectSettings={ imageHighlightEffectSettings }
+	/>,
 
 ];
 

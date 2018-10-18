@@ -30,7 +30,7 @@ const {
  */
 import composeWithSettingsEditor 		from '../store/compose/composeWithSettingsEditor.js';
 
-let Inspector = ({
+let InspectorCommon = ({
 	updateSetting,
 	transitionTime,
 	itemsSource,
@@ -96,7 +96,7 @@ let Inspector = ({
 		<PanelBody
 			title={ __( 'Common settings for all cgb blocks within this post', 'cgb' ) }
 			icon="welcome-widgets-menus"
-			initialOpen={ true }
+			initialOpen={ false }
 			className={ 'cgb-inspector-panel' }
 		>
 			<TextControl
@@ -147,7 +147,13 @@ let Inspector = ({
 					<TreeSelect
 						multiple
 						label={ __( 'Include taxonomy terms', 'cgb' ) }
-						help={ ! cgbBlocks.is_active_wp_rest_filter ? sprintf( __('Rest filters need to be enabled to use this feature. Try this plugin: %s', 'cgb' ), 'https://wordpress.org/plugins/wp-rest-filter/' ) : '' }
+						help={ ! cgbBlocks.is_active_wp_rest_filter && [
+							<p>{ __('Rest filters need to be enabled to use this feature', 'cgb' ) }</p>,
+							<p>
+								{ __('Try this plugin', 'cgb' ) + ': ' }
+								<a href={ 'https://wordpress.org/plugins/wp-rest-filter/' } target={ '_blank' }>WP Rest Filter</a>
+							</p>,
+						] }
 						disabled={ ! cgbBlocks.is_active_wp_rest_filter }
 						style={ ! cgbBlocks.is_active_wp_rest_filter ? { color: 'rgba( 51, 51, 51, 0.5 )', } : {} }
 						selectedId={ itemsSource.options.includeTaxonomyTerms }
@@ -186,7 +192,7 @@ let Inspector = ({
 	];
 };
 
-Inspector = withSelect( ( select ) => {
+InspectorCommon = withSelect( ( select ) => {
 	const {
 		getEntitiesByKind,
 		getTaxonomies,
@@ -207,11 +213,11 @@ Inspector = withSelect( ( select ) => {
 		taxonomies: taxonomies,
 		getEntityRecords: getEntityRecords,
 	}
-} )( Inspector );
+} )( InspectorCommon );
 
-Inspector = composeWithSettingsEditor( Inspector, [
+InspectorCommon = composeWithSettingsEditor( InspectorCommon, [
 	'transitionTime',
 	'itemsSource',
 ] );
 
-export default Inspector;
+export default InspectorCommon;

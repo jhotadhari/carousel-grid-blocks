@@ -11,7 +11,8 @@ import {
 } from "react-sortable-hoc";
 
 
-import getCgbDefault				from '../getCgbDefault';
+import getCgbDefault					from '../getCgbDefault';
+import rgbaToCssProp					from '../utils/rgbaToCssProp';
 
 import composeWithItemsFrontend 		from '../store/compose/composeWithItemsFrontend.js';
 import composeWithSettingsFrontend 		from '../store/compose/composeWithSettingsFrontend.js';
@@ -25,6 +26,8 @@ let GridItem = ({
 	direction,						// from 	Grid -> GridGallery
 	items,							// from 	items
 	transitionTime,					// from 	settings
+	itemsSource,					// from 	settings
+	imageCaptionSettings,			// from 	attributes -> Grid -> GridGallery
 	imageHoverEffect,				// from 	attributes -> Grid -> GridGallery
 	imageHoverEffectSettings,				// from 	attributes -> Grid -> GridGallery
 	imageHighlightEffect,			// from 	attributes -> Grid -> GridGallery
@@ -42,17 +45,27 @@ let GridItem = ({
 	const getImageStyle = ( sortIndex ) => {
 		let style = {};
 		switch( imageHighlightEffect ) {
-		case 'boxShadow':
-			const boxShadowWidth = get( imageHighlightEffectSettings, ['boxShadowWidth'] ) || get( getCgbDefault( 'imageHighlightEffectSettings' ), ['boxShadowWidth'] );
-			const boxShadowColor = get( imageHighlightEffectSettings, ['boxShadowColor'] ) || get( getCgbDefault( 'imageHighlightEffectSettings' ), ['boxShadowColor'] );
-			style = {
-				...style,
-				transition: 'box-shadow ' + ( transitionTime / 1000 ) + 's',
-				boxShadow: sortIndex === selectedIndex ? `${boxShadowWidth}px ${boxShadowWidth}px ${boxShadowColor}, ${boxShadowWidth}px -${boxShadowWidth}px ${boxShadowColor}, -${boxShadowWidth}px ${boxShadowWidth}px ${boxShadowColor}, -${boxShadowWidth}px -${boxShadowWidth}px ${boxShadowColor}` : 'none',
-			};
+			case 'boxShadow':
+				const boxShadowWidth = get( imageHighlightEffectSettings, ['boxShadowWidth'] ) || get( getCgbDefault( 'imageHighlightEffectSettings' ), ['boxShadowWidth'] );
+				const boxShadowColor = rgbaToCssProp( get( imageHighlightEffectSettings, ['boxShadowColor'] ) || get( getCgbDefault( 'imageHighlightEffectSettings' ), ['boxShadowColor'] ) );
+				style = {
+					...style,
+					transition: 'box-shadow ' + ( transitionTime / 1000 ) + 's',
+					boxShadow: sortIndex === selectedIndex ? `${boxShadowWidth}px ${boxShadowWidth}px ${boxShadowColor}, ${boxShadowWidth}px -${boxShadowWidth}px ${boxShadowColor}, -${boxShadowWidth}px ${boxShadowWidth}px ${boxShadowColor}, -${boxShadowWidth}px -${boxShadowWidth}px ${boxShadowColor}` : 'none',
+				};
+				break;
 		}
 		return style;
 	}
+
+	const controls = [
+		'fullscreen',
+		...( 'custom' === itemsSource.key ? [
+			'selectImage',
+			'remove',
+			'dragHandle'
+		] : [] ),
+	];
 
 	return (
 		<ItemComponent
@@ -64,13 +77,10 @@ let GridItem = ({
 			key={ items[sortIndex]['key'] }
 			item={ items[sortIndex] }
 			className={ 'cgb-block-grid-item' }
+			imageCaptionSettings={ imageCaptionSettings }
 			imageHoverEffect={ imageHoverEffect }
-			controls={ [
-				'selectImage',
-				'fullscreen',
-				'remove',
-				'dragHandle',
-			] }
+			imageHoverEffectSettings={ imageHoverEffectSettings }
+			controls={ controls }
 		/>
 	);
 };
@@ -112,6 +122,7 @@ GridItem = composeWithItemsFrontend( GridItem, [
 
 GridItem = composeWithSettingsFrontend( GridItem, [
 	'transitionTime',
+	'itemsSource',
 ] );
 
 GridItem = SortableElement( GridItem );

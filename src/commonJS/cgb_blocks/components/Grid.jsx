@@ -1,4 +1,6 @@
-
+/**
+ * Internal dependencies
+ */
 import GridGallery from './GridGallery.jsx';
 
 class Grid extends React.Component {
@@ -13,12 +15,13 @@ class Grid extends React.Component {
 			moveItem,							// from items
 			gridSettings,								// from atts
 
-			transitionTime,						// from settings
+			// transitionTime,						// from settings
+			imageCaptionSettings,				// from atts
 			imageHoverEffect,					// from atts
-			imageHoverEffectSettings,					// from atts
+			imageHoverEffectSettings,			// from atts
 			imageHighlightEffect,				// from atts
 			imageHighlightEffectSettings,		// from atts
-			ItemComponent,		// from atts
+			ItemComponent,						// from atts
 		} = this.props;
 
 		return ([
@@ -27,12 +30,13 @@ class Grid extends React.Component {
 				{ items.length &&
 					<GridGallery
 						items={ items }
+						gridSettings={ gridSettings }
+						imageCaptionSettings={ imageCaptionSettings }
 						imageHoverEffect={ imageHoverEffect }
 						imageHoverEffectSettings={ imageHoverEffectSettings }
 						imageHighlightEffect={ imageHighlightEffect }
 						imageHighlightEffectSettings={ imageHighlightEffectSettings }
 
-						gridSettings={ gridSettings }
 
 						axis={ 'xy' }
 						useDragHandle={ true }

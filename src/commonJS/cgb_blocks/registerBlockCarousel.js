@@ -40,24 +40,32 @@ const registerBlockCarousel = () => {
 					type: 'block',
 					blocks: [ 'cgb/grid' ],
 					transform: ( {
+						imageSource,
 						imageIds,
 						settings,
+						imageCaptionSettings,
 						imageHoverEffect,
+						imageHoverEffectSettings,
 					} ) => createBlock( 'cgb/grid', {
+						imageSource: imageSource,
 						imageIds: imageIds || [],
 						settings: settings || '',
+						imageCaptionSettings: imageCaptionSettings || JSON.stringify( getCgbDefault( 'imageCaptionSettings' ) ),
 						imageHoverEffect: imageHoverEffect || getCgbDefault( 'imageHoverEffect' ),
+						imageHoverEffectSettings: imageHoverEffectSettings || JSON.stringify( getCgbDefault( 'imageHoverEffectSettings' ) ),
+
+						// gridSettings: JSON.stringify( getCgbDefault( 'gridSettings' ) ),
+						// imageHighlightEffect: getCgbDefault( 'imageHighlightEffect' ),
+						// imageHighlightEffectSettings: JSON.stringify( getCgbDefault( 'imageHighlightEffectSettings' ) ),
 					} ),
 				},
 			],
 		},
 		attributes: {
-
 			imageSource: {		// common
 				type: 'string',
 				default: 'custom',		// custom || posts
 			},
-
 			imageIds: {			// common
 				type: 'array',
 				default: [],
@@ -65,6 +73,10 @@ const registerBlockCarousel = () => {
 			settings: {			// common
 				type: 'string',
 				default: '',
+			},
+			imageCaptionSettings: {
+				type: 'string',
+				default:  JSON.stringify( getCgbDefault( 'imageCaptionSettings' ) ),
 			},
 			imageHoverEffect: {
 				type: 'string',
@@ -81,6 +93,7 @@ const registerBlockCarousel = () => {
 			} = attributes;
 
 			const imageHoverEffectSettings = parseSerialized( attributes.imageHoverEffectSettings );
+			const imageCaptionSettings = parseSerialized( attributes.imageCaptionSettings );
 
 			if ( ! attributes.scriptsloaded) {
 				// load the main editor component, rerender the block
@@ -98,7 +111,6 @@ const registerBlockCarousel = () => {
 				} = cgbBlocks.components;
 
 				return ([
-
 					<BlockControls>
 						<div className={ 'components-toolbar' }>
 							<CarouselToolbar/>
@@ -108,12 +120,14 @@ const registerBlockCarousel = () => {
 					<InspectorControls>
 						<CarouselInspector
 							setAttributes={ setAttributes }
+							imageCaptionSettings={ imageCaptionSettings }
 							imageHoverEffect={ imageHoverEffect }
 							imageHoverEffectSettings={ imageHoverEffectSettings }
 						/>
 					</InspectorControls>,
 
 					<Carousel
+						imageCaptionSettings={ imageCaptionSettings }
 						imageHoverEffect={ imageHoverEffect }
 						imageHoverEffectSettings={ imageHoverEffectSettings }
 					/>

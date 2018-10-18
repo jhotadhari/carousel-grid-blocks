@@ -79,25 +79,6 @@ const composeWithContainerEditor = ( component ) => compose( [
 				} = this.props;
 
 				pullSettingsFromAttributes();
-				this.pullItems();
-			}
-
-			pullItems(){
-				const {
-					pullItemsFromAttributes,
-					pullItemsFromArchive,
-					pullSettingsFromAttributes,
-					itemsSource,
-				} = this.props;
-
-				switch( itemsSource.key ) {
-					case 'custom':
-						pullItemsFromAttributes();
-						break;
-					case 'archivePostType':
-						pullItemsFromArchive( itemsSource.key, itemsSource.options, Math.random() );
-						break;
-				};
 			}
 
 			render() {

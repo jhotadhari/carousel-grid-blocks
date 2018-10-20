@@ -20,10 +20,6 @@ const {
  */
 import InspectorCommon			from './InspectorCommon.jsx';
 import InspectorImage			from './InspectorImage.jsx';
-// import getCgbDefault			from '../getCgbDefault';
-// import getInspectorOptions		from '../getInspectorOptions';
-
-
 
 const GridInspector = ({
 	setAttributes,
@@ -33,8 +29,8 @@ const GridInspector = ({
 	imageHoverEffectSettings,
 	imageHighlightEffect,
 	imageHighlightEffectSettings,
-}) => [
-	<InspectorCommon/>,
+}) => <>
+	<InspectorCommon/>
 
 
 	<PanelBody
@@ -67,7 +63,7 @@ const GridInspector = ({
 			} ) }
 		/>
 
-	</PanelBody>,
+	</PanelBody>
 
 	<InspectorImage
 		setAttributes={ setAttributes }
@@ -81,8 +77,8 @@ const GridInspector = ({
 		imageHoverEffectSettings={ imageHoverEffectSettings }
 		imageHighlightEffect={ imageHighlightEffect }
 		imageHighlightEffectSettings={ imageHighlightEffectSettings }
-	/>,
+	/>
 
-];
+</>;
 
 export default GridInspector;

@@ -41,8 +41,6 @@ const getInspectorOptions = key => {
 				{ label: __( 'Caption', 'cgb' ), value: 'caption' },	// ??? translate de Beschriftung
 			];
 			break;
-
-
 	}
 	return applyFilters( 'cgb/GridInspector/options/' + key, options );
 }

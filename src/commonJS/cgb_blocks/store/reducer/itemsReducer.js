@@ -55,7 +55,6 @@ export function setSelected( state = { items: [ ...DEFAULT_STATE.items ] }, acti
 	};
 }
 
-// export function overwriteItems( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 export function overwriteItems( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 	const { items } = state;
 	const { newItems } = action;

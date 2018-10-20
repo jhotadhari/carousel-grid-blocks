@@ -24,31 +24,26 @@ class Grid extends React.Component {
 			ItemComponent,						// from atts
 		} = this.props;
 
-		return ([
-			<div>
+		return <>
+			{ items.length &&
+				<GridGallery
+					items={ items }
+					gridSettings={ gridSettings }
+					imageCaptionSettings={ imageCaptionSettings }
+					imageHoverEffect={ imageHoverEffect }
+					imageHoverEffectSettings={ imageHoverEffectSettings }
+					imageHighlightEffect={ imageHighlightEffect }
+					imageHighlightEffectSettings={ imageHighlightEffectSettings }
 
-				{ items.length &&
-					<GridGallery
-						items={ items }
-						gridSettings={ gridSettings }
-						imageCaptionSettings={ imageCaptionSettings }
-						imageHoverEffect={ imageHoverEffect }
-						imageHoverEffectSettings={ imageHoverEffectSettings }
-						imageHighlightEffect={ imageHighlightEffect }
-						imageHighlightEffectSettings={ imageHighlightEffectSettings }
-
-
-						axis={ 'xy' }
-						useDragHandle={ true }
-						onSortEnd={ ( { oldIndex, newIndex } ) => {
-							moveItem( oldIndex, newIndex )
-						} }
-						ItemComponent={ ItemComponent }
-					/>
-				}
-
-			</div>
-		]);
+					axis={ 'xy' }
+					useDragHandle={ true }
+					onSortEnd={ ( { oldIndex, newIndex } ) => {
+						moveItem( oldIndex, newIndex )
+					} }
+					ItemComponent={ ItemComponent }
+				/>
+			}
+		</>;
 
 	}
 }

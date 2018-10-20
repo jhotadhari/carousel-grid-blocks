@@ -17,12 +17,29 @@ class Item extends React.Component {
 		super(props);
 	}
 
+	componentDidMount( ) {
+		this.maybeFetchItem();
+	}
+
+	componentDidUpdate( prevProps, prevState ) {
+		this.maybeFetchItem();
+	}
+
+	maybeFetchItem() {
+		const {
+			fetchItem,
+			item,
+			index,
+		} = this.props;
+		if ( undefined !== item.id && ! item.fetched )
+			fetchItem( index, item );
+	}
+
 	render() {
 		const {
 			index,				// from 	GridGallery -> GridItem
 			item,				// from		GridItem
 			items,				// from 	items
-			fetchItem,			// from 	items
 			className,			// from 	GridItem
 			controls,			// from 	GridItem
 			setSelected,		// from 	items
@@ -51,9 +68,6 @@ class Item extends React.Component {
 
 		const height = photo ? photo.height : null;
 		const width = photo ? photo.width : null;
-
-		if ( undefined !== item.id && ! item.fetched )
-			fetchItem( index, item );
 
 		const {
 			show,
@@ -115,27 +129,19 @@ class Item extends React.Component {
 		const CaptionPart = ( { partKey } ) => {
 			switch( partKey ){
 				case 'title':
-					return [
-						<div
+					return  <div
 							className={ className + '-info-title' }
-						>
-							{ title }
-						</div>
-					];
+						>{ title }</div>;
 				case 'caption':
-					return [
-						<div
+					return  <div
 							dangerouslySetInnerHTML={ { __html: caption } }
 							className={ className + '-info-caption' }
-						>
-						</div>
-					];
+						></div>;
 			}
-
-			return [ <span>{ '' }</span> ];
+			return <span>{ '' }</span>;
 		};
 
-		return ([
+		return (
 			<div
 				onClick={ ( event ) => 'BUTTON' !== event.target.tagName ? setSelected( undefined === index ? 0 : index ) : null }
 				className={ [
@@ -205,7 +211,7 @@ class Item extends React.Component {
 
 			</div>
 
-		]);
+		);
 
 	}
 }

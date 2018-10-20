@@ -1,20 +1,19 @@
 /**
  * External dependencies
  */
+
 import PropTypes from 'prop-types';
+
 /**
  * Internal dependencies
  */
 import registerCgbStoreFrontend 	from './cgb_blocks/store/registerCgbStoreFrontend';
-registerCgbStoreFrontend();
-// compose
 import composeWithItems 		from './cgb_blocks/store/compose/composeWithItemsFrontend';
 import composeWithSettings 		from './cgb_blocks/store/compose/composeWithSettingsFrontend';
 import composeWithContainer		from './cgb_blocks/store/compose/composeWithContainerFrontend';
-const composeWithProps = injectedProps => WrappedComponent => {
-	const WithProps = props => <WrappedComponent{...injectedProps} {...props} />
-	return WithProps
-};
+import composeWithProps		from './cgb_blocks/store/compose/composeWithProps';
+
+registerCgbStoreFrontend();
 
 cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
 

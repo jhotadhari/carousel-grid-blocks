@@ -34,7 +34,6 @@ const composeWithSettingsEditor = ( component, settingKeys ) => compose( [
 	withDispatch( ( dispatch, ownProps ) => {
 
 		const {
-			pushSettingsToAttribues,
 			updateSetting,
 		} = dispatch( 'cgb-store' );
 
@@ -43,7 +42,6 @@ const composeWithSettingsEditor = ( component, settingKeys ) => compose( [
 		return {
 			updateSetting: concatenateReducers([
 				updateSetting,
-				pushSettingsToAttribues,
 			]),
 		};
 

@@ -29,8 +29,8 @@ const {
 /**
  * Internal dependencies
  */
-import { DEFAULT_ITEM, DEFAULT_STATE } 	from '../constants';
-import getCgbBlocks 					from '../../utils/getCgbBlocks';
+import getCgbBlocks						from '../../utils/getCgbBlocks';
+import { DEFAULT_ITEM, DEFAULT_STATE }	from '../constants';
 import {
 	ensureOneItem,
 	ensureOneSelected,
@@ -73,15 +73,6 @@ export function pullItemsFromAttributes( state = { items: [ ...DEFAULT_STATE.ite
 	return {
 		...state,
 		items: newItems,
-	};
-}
-
-export function pushItemsToAttribues( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
-	const { items } = state;
-	const blocks = getCgbBlocks();
-	[...blocks].map( block => updateBlockAttributes( block.clientId, { imageIds: pluck( [...items], 'id' ) } ) );
-	return {
-		...state,
 	};
 }
 
@@ -142,7 +133,6 @@ export function moveItem( state = { items: [ ...DEFAULT_STATE.items ] }, action 
 	const { items } = state;
 	const { index, newIndex } = action;
 	const newItems = arrayMove( [...items], index, newIndex );
-
 	return {
 		...state,
 		items: [
@@ -160,9 +150,6 @@ const itemsReducer = ( state = { items: [ ...DEFAULT_STATE.items ] }, action ) =
 
 		case 'OVERWRITE_ITEMS':
 			return overwriteItems( state, action );
-
-		case 'PUSH_ITEMS_TO_ATTRIBUES':
-			return pushItemsToAttribues( state, action );
 
 		case 'ENSURE_ONE_ITEM':
 			return ensureOneItem( state, action );

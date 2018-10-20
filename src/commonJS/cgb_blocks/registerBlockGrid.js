@@ -108,6 +108,8 @@ const registerBlockGrid = () => {
 				imageHighlightEffect,
 			} = attributes;
 
+			// ??? use className
+
 			const gridSettings = parseSerialized( attributes.gridSettings );
 			const imageCaptionSettings = parseSerialized( attributes.imageCaptionSettings );
 			const imageHighlightEffectSettings = parseSerialized( attributes.imageHighlightEffectSettings );
@@ -117,11 +119,11 @@ const registerBlockGrid = () => {
 				// load the main editor component, rerender the block
 				loadJS( [cgbBlocks.pluginDirUrl + '/js/cgb_blocks_editor.min.js'] ).then( () => setAttributes( { scriptsloaded: true } ) );
 				// until loaded, display placeholder
-				return ([ <Placeholder/> ]);
+				return <Placeholder/>;
 			} else {
 
 				const {
-					GridToolbar,
+					Toolbar,
 					GridInspector,
 					Grid,
 				} = cgbBlocks.components;
@@ -130,7 +132,7 @@ const registerBlockGrid = () => {
 
 					<BlockControls>
 						<div className={ 'components-toolbar' }>
-							<GridToolbar/>
+							<Toolbar/>
 						</div>
 					</BlockControls>,
 

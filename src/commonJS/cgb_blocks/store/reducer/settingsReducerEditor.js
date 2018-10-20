@@ -49,18 +49,6 @@ export function pullSettingsFromAttributes( state = { settings: { ...DEFAULT_STA
 	};
 }
 
-export function pushSettingsToAttribues( state = { settings: { ...DEFAULT_STATE.settings } }, action ) {
-	const { settings } = state;
-	const blocks = getCgbBlocks();
-	const newSettingsAttr = JSON.stringify( { ...settings } );
-	[...blocks].map( block => {
-		updateBlockAttributes( block.clientId, { settings: newSettingsAttr } );
-	} );
-	return {
-		...state,
-	};
-}
-
 export function updateSetting( state = { settings: { ...DEFAULT_STATE.settings } }, action ) {
 	const { settings } = state;
 	const { key, newValue } = action;
@@ -78,9 +66,6 @@ const settingsReducerEditor = ( state = { settings: { ...DEFAULT_STATE.settings 
 
 		case 'PULL_SETTINGS_FROM_ATTRIBUTES':
 			return pullSettingsFromAttributes( state, action );
-
-		case 'PUSH_SETTINGS_TO_ATTRIBUES':
-			return pushSettingsToAttribues( state, action );
 
 		case 'UPDATE_SETTING':
 			return updateSetting( state, action );

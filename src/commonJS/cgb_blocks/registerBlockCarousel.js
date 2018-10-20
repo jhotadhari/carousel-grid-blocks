@@ -53,10 +53,6 @@ const registerBlockCarousel = () => {
 						imageCaptionSettings: imageCaptionSettings || JSON.stringify( getCgbDefault( 'imageCaptionSettings' ) ),
 						imageHoverEffect: imageHoverEffect || getCgbDefault( 'imageHoverEffect' ),
 						imageHoverEffectSettings: imageHoverEffectSettings || JSON.stringify( getCgbDefault( 'imageHoverEffectSettings' ) ),
-
-						// gridSettings: JSON.stringify( getCgbDefault( 'gridSettings' ) ),
-						// imageHighlightEffect: getCgbDefault( 'imageHighlightEffect' ),
-						// imageHighlightEffectSettings: JSON.stringify( getCgbDefault( 'imageHighlightEffectSettings' ) ),
 					} ),
 				},
 			],
@@ -99,13 +95,11 @@ const registerBlockCarousel = () => {
 				// load the main editor component, rerender the block
 				loadJS( [cgbBlocks.pluginDirUrl + '/js/cgb_blocks_editor.min.js'] ).then( () => setAttributes( { scriptsloaded: true } ) );
 				// until loaded, display a placeholder
-				return ([
-					<Placeholder/>
-				]);
+				return <Placeholder/>;
 			} else {
 
 				const {
-					CarouselToolbar,
+					Toolbar,
 					CarouselInspector,
 					Carousel,
 				} = cgbBlocks.components;
@@ -113,7 +107,7 @@ const registerBlockCarousel = () => {
 				return ([
 					<BlockControls>
 						<div className={ 'components-toolbar' }>
-							<CarouselToolbar/>
+							<Toolbar/>
 						</div>
 					</BlockControls>,
 

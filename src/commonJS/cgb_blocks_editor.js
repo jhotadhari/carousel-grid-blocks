@@ -2,23 +2,19 @@
  * External dependencies
  */
 import PropTypes from 'prop-types';
+
 /**
  * Internal dependencies
  */
 import registerCgbStoreEditor 		from './cgb_blocks/store/registerCgbStoreEditor';
-registerCgbStoreEditor();
-// compose
 import composeWithItems 		from './cgb_blocks/store/compose/composeWithItemsEditor';
 import composeWithSettings 		from './cgb_blocks/store/compose/composeWithSettingsEditor';
 import composeWithContainer		from './cgb_blocks/store/compose/composeWithContainerEditor';
-const composeWithProps = injectedProps => WrappedComponent => {
-	const WithProps = props => <WrappedComponent{...injectedProps} {...props} />
-	return WithProps
-};
+import composeWithProps		from './cgb_blocks/store/compose/composeWithProps';
 
+registerCgbStoreEditor();
 
 cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
-
 
 /**
  *	ItemControls
@@ -95,15 +91,24 @@ cgbBlocks.components.Carousel = _Carousel;
 
 /**
  *	Inspector
+ *
+ */
+import GridInspector 			from './cgb_blocks/components/GridInspector.jsx';
+import CarouselInspector 		from './cgb_blocks/components/CarouselInspector.jsx';
+cgbBlocks.components.CarouselInspector = CarouselInspector;
+cgbBlocks.components.GridInspector = GridInspector;
+
+/**
  *	Toolbar
  *
  */
-import CarouselInspector 		from './cgb_blocks/components/CarouselInspector.jsx';
-import CarouselToolbar 			from './cgb_blocks/components/CarouselToolbar.jsx';
-cgbBlocks.components.CarouselInspector = CarouselInspector;
-cgbBlocks.components.CarouselToolbar = CarouselToolbar;
+import Toolbar 					from './cgb_blocks/components/Toolbar.jsx';
+let _Toolbar = Toolbar;
+_Toolbar = composeWithItems( Toolbar, [
+	'addItems',
+] );
 
-import GridInspector 			from './cgb_blocks/components/GridInspector.jsx';
-import GridToolbar 				from './cgb_blocks/components/GridToolbar.jsx';
-cgbBlocks.components.GridInspector = GridInspector;
-cgbBlocks.components.GridToolbar = GridToolbar;
+_Toolbar = composeWithSettings( _Toolbar, [
+	'itemsSource',
+] );
+cgbBlocks.components.Toolbar = _Toolbar;

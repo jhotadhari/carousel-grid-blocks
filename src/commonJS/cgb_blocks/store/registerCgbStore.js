@@ -32,19 +32,27 @@ const registerCgbStore = ( {
 		resolvers,
 	} );
 
-	let currentItemsSource = select( 'cgb-store' ).getItemsSource();
-	let unsubscribe = null;
-	const initItems = ( unsubscribe ) => {
-		let previousItemsSource = currentItemsSource;
-		currentItemsSource = select( 'cgb-store' ).getItemsSource();
+	cgbBlocks.store = cgbBlocks.store;
 
+	const {
+		pullItemsFromArchive,
+		getItemsSource,
+		getItems,
+		getSettings,
+	} = select( 'cgb-store' );
+
+	const {
+		pullItemsFromAttributes,
+		ensureOneItem,
+		ensureOneSelected,
+	} = dispatch( 'cgb-store' );
+
+	let currentItemsSource = getItemsSource();
+
+	const pullItems = () => {
+		let previousItemsSource = currentItemsSource;
+		currentItemsSource = getItemsSource();
 		if ( ! isEqual( previousItemsSource, currentItemsSource ) ) {
-			const { pullItemsFromArchive } = select( 'cgb-store' );
-			const {
-				pullItemsFromAttributes,
-				ensureOneItem,
-				ensureOneSelected,
-			} = dispatch( 'cgb-store' );
 			switch( currentItemsSource.key ) {
 				case 'custom':
 					const _pullItemsFromAttributes =  concatenateReducers([
@@ -59,12 +67,9 @@ const registerCgbStore = ( {
 					break;
 			};
 		}
-
-		if ( null !== unsubscribe && 'function' === typeof unsubscribe )
-			unsubscribe();
 	};
 
-	unsubscribe = store.subscribe( initItems )
+	store.subscribe( pullItems )
 
 	return store;
 };

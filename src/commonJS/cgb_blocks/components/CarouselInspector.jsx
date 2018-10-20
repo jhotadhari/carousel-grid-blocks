@@ -11,15 +11,15 @@ const {
  * Internal dependencies
  */
 import InspectorCommon 					from './InspectorCommon.jsx';
-import InspectorImage			from './InspectorImage.jsx';
+import InspectorImage					from './InspectorImage.jsx';
 
 const CarouselInspector = ({
 	setAttributes,
 	imageCaptionSettings,
 	imageHoverEffect,
 	imageHoverEffectSettings,
-}) => [
-	<InspectorCommon/>,
+}) => <>
+	<InspectorCommon/>
 
 	<PanelBody
 		title={'Carousel settings'}
@@ -31,7 +31,7 @@ const CarouselInspector = ({
 			nix ???
 		</span>
 
-	</PanelBody>,
+	</PanelBody>
 
 	<InspectorImage
 		setAttributes={ setAttributes }
@@ -42,9 +42,7 @@ const CarouselInspector = ({
 		imageCaptionSettings={ imageCaptionSettings }
 		imageHoverEffect={ imageHoverEffect }
 		imageHoverEffectSettings={ imageHoverEffectSettings }
-	/>,
-
-
-];
+	/>
+</>;
 
 export default CarouselInspector;

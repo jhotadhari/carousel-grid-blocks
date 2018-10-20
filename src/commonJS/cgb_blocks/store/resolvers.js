@@ -6,6 +6,7 @@ import {
 	filter,
 	findWhere,
 } from 'underscore';
+
 /**
  * WordPress dependencies
  */
@@ -19,8 +20,6 @@ const {
 import {
 	updateItem,
 	overwriteItems,
-	// ensureOneItem,
-	// ensureOneSelected,
 } from './actions/actions';
 
 import { DEFAULT_ITEM } 	from './constants';

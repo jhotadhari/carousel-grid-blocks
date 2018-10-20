@@ -92,104 +92,102 @@ let InspectorCommon = ({
 			: posttype.baseURL;
 	};
 
-	return [
+	return <PanelBody
+		title={ __( 'Common settings for all cgb blocks within this post', 'cgb' ) }
+		icon="welcome-widgets-menus"
+		initialOpen={ false }
+		className={ 'cgb-inspector-panel' }
+	>
+		<TextControl
+			label={ 'Transition Time [ms]' }
+			value={ transitionTime }
+			type={ 'number' }
+			onChange={ ( newVal ) => updateSetting( 'transitionTime', parseInt( newVal ) ) }
+		/>
+
 		<PanelBody
-			title={ __( 'Common settings for all cgb blocks within this post', 'cgb' ) }
-			icon="welcome-widgets-menus"
-			initialOpen={ false }
-			className={ 'cgb-inspector-panel' }
+			title={ __( 'Source', 'cgb' ) }
+			initialOpen={ true }
 		>
-			<TextControl
-				label={ 'Transition Time [ms]' }
-				value={ transitionTime }
-				type={ 'number' }
-				onChange={ ( newVal ) => updateSetting( 'transitionTime', parseInt( newVal ) ) }
+			<SelectControl
+				value={ itemsSource.key }
+				options={ [
+					{ label: 'Custom', value: 'custom' },
+					{ label: 'Post Type Archive', value: 'archivePostType' },
+				] }
+				onChange={ ( newVal ) => updateSetting( 'itemsSource', {
+					...itemsSource,
+					key: newVal,
+				} ) }
 			/>
 
-			<PanelBody
-				title={ __( 'Source', 'cgb' ) }
-				initialOpen={ true }
-			>
+			{ 'archivePostType' === itemsSource.key &&
 				<SelectControl
-					value={ itemsSource.key }
-					options={ [
-						{ label: 'Custom', value: 'custom' },
-						{ label: 'Post Type Archive', value: 'archivePostType' },
-					] }
-					onChange={ ( newVal ) => updateSetting( 'itemsSource', {
+					label={ __( 'Post Type', 'cgb' ) }
+					value={ findIndex( posttypes, posttype => posttype.name === itemsSource.options.posttype ) }
+					options={ [...posttypes].map( ( posttype, index ) => {
+						return { label: posttype.name, value: index };
+					} ) }
+					onChange={ ( index ) => updateSetting( 'itemsSource', {
 						...itemsSource,
-						key: newVal,
+						options: {
+							...itemsSource.options,
+							posttype: posttypes[index]['name'],
+							url: newItemSourceUrl( {
+								posttype: posttypes[index],
+								serializedTaxonomyTerms: [],
+							} ),
+						},
 					} ) }
 				/>
+			}
 
-				{ 'archivePostType' === itemsSource.key &&
-					<SelectControl
-						label={ __( 'Post Type', 'cgb' ) }
-						value={ findIndex( posttypes, posttype => posttype.name === itemsSource.options.posttype ) }
-						options={ [...posttypes].map( ( posttype, index ) => {
-							return { label: posttype.name, value: index };
-						} ) }
-						onChange={ ( index ) => updateSetting( 'itemsSource', {
+			{ 'archivePostType' === itemsSource.key &&
+				<TreeSelect
+					multiple
+					label={ __( 'Include taxonomy terms', 'cgb' ) }
+					help={ ! cgbBlocks.is_active_wp_rest_filter && [
+						<p>{ __('Rest filters need to be enabled to use this feature', 'cgb' ) }</p>,
+						<p>
+							{ __('Try this plugin', 'cgb' ) + ': ' }
+							<a href={ 'https://wordpress.org/plugins/wp-rest-filter/' } target={ '_blank' }>WP Rest Filter</a>
+						</p>,
+					] }
+					disabled={ ! cgbBlocks.is_active_wp_rest_filter }
+					style={ ! cgbBlocks.is_active_wp_rest_filter ? { color: 'rgba( 51, 51, 51, 0.5 )', } : {} }
+					selectedId={ itemsSource.options.includeTaxonomyTerms }
+					tree={ getTaxonomyTermTree( itemsSource.options.posttype ) }
+					onChange={ ( serializedTaxonomyTerms ) => {
+						let newIncludeTaxonomyTerms = [];
+						let filteredSerializedTaxonomyTerms = [];
+						if ( serializedTaxonomyTerms.length ) {
+							filteredSerializedTaxonomyTerms = reject( serializedTaxonomyTerms, str => str.includes( '\"term\":null'  ) );
+							if ( filteredSerializedTaxonomyTerms.length ) {
+								newIncludeTaxonomyTerms = filteredSerializedTaxonomyTerms;
+							} else {
+								newIncludeTaxonomyTerms = itemsSource.options.includeTaxonomyTerms || [];
+							}
+						} else {
+							newIncludeTaxonomyTerms = [];
+						}
+						updateSetting( 'itemsSource', {
 							...itemsSource,
 							options: {
 								...itemsSource.options,
-								posttype: posttypes[index]['name'],
+								includeTaxonomyTerms: newIncludeTaxonomyTerms,
 								url: newItemSourceUrl( {
-									posttype: posttypes[index],
-									serializedTaxonomyTerms: [],
-								} ),
+									posttype: find( posttypes, posttype => posttype.name === itemsSource.options.posttype ),
+									serializedTaxonomyTerms: newIncludeTaxonomyTerms },
+								),
 							},
-						} ) }
-					/>
-				}
+						} );
+					} }
+				/>
+			}
 
-				{ 'archivePostType' === itemsSource.key &&
-					<TreeSelect
-						multiple
-						label={ __( 'Include taxonomy terms', 'cgb' ) }
-						help={ ! cgbBlocks.is_active_wp_rest_filter && [
-							<p>{ __('Rest filters need to be enabled to use this feature', 'cgb' ) }</p>,
-							<p>
-								{ __('Try this plugin', 'cgb' ) + ': ' }
-								<a href={ 'https://wordpress.org/plugins/wp-rest-filter/' } target={ '_blank' }>WP Rest Filter</a>
-							</p>,
-						] }
-						disabled={ ! cgbBlocks.is_active_wp_rest_filter }
-						style={ ! cgbBlocks.is_active_wp_rest_filter ? { color: 'rgba( 51, 51, 51, 0.5 )', } : {} }
-						selectedId={ itemsSource.options.includeTaxonomyTerms }
-						tree={ getTaxonomyTermTree( itemsSource.options.posttype ) }
-						onChange={ ( serializedTaxonomyTerms ) => {
-							let newIncludeTaxonomyTerms = [];
-							let filteredSerializedTaxonomyTerms = [];
-							if ( serializedTaxonomyTerms.length ) {
-								filteredSerializedTaxonomyTerms = reject( serializedTaxonomyTerms, str => str.includes( '\"term\":null'  ) );
-								if ( filteredSerializedTaxonomyTerms.length ) {
-									newIncludeTaxonomyTerms = filteredSerializedTaxonomyTerms;
-								} else {
-									newIncludeTaxonomyTerms = itemsSource.options.includeTaxonomyTerms || [];
-								}
-							} else {
-								newIncludeTaxonomyTerms = [];
-							}
-							updateSetting( 'itemsSource', {
-								...itemsSource,
-								options: {
-									...itemsSource.options,
-									includeTaxonomyTerms: newIncludeTaxonomyTerms,
-									url: newItemSourceUrl( {
-										posttype: find( posttypes, posttype => posttype.name === itemsSource.options.posttype ),
-										serializedTaxonomyTerms: newIncludeTaxonomyTerms },
-									),
-								},
-							} );
-						} }
-					/>
-				}
+		</PanelBody>
 
-			</PanelBody>
-
-		</PanelBody>,
-	];
+	</PanelBody>;
 };
 
 InspectorCommon = withSelect( ( select ) => {

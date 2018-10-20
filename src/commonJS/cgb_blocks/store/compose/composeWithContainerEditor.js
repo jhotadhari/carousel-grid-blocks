@@ -26,58 +26,32 @@ const {
 // pull state from attributes, overwrites store state
 const composeWithContainerEditor = ( component ) => compose( [
 	withSelect( ( select ) => {
-		const props = {};
-
 		const {
 			getItems,
 			getSetting,
 			pullItemsFromArchive,
 		} = select( 'cgb-store' );
-
-		const itemsSource = getSetting( 'itemsSource' );
-		props.items = getItems();
-		props.itemsSource = itemsSource;
-		props.pullItemsFromArchive = pullItemsFromArchive;
-
-		return props;
+		return {
+			items: getItems(),
+			itemsSource: getSetting( 'itemsSource' ),
+			pullItemsFromArchive: pullItemsFromArchive,
+		};
 	} ),
 	withDispatch( ( dispatch, ownProps ) => {
-
-		const props = {};
-
 		const {
-			pullItemsFromAttributes,
 			pullSettingsFromAttributes,
-			ensureOneItem,
-			ensureOneSelected,
-			pushItemsToAttribues,
-			pushSettingsToAttribues,
 		} = dispatch( 'cgb-store' );
-
 		return {
-			pullItemsFromAttributes: concatenateReducers([	// items
-				pullItemsFromAttributes,
-				ensureOneItem,
-				ensureOneSelected,
-				pushItemsToAttribues,
-			]),
-			pullSettingsFromAttributes: concatenateReducers([	// settings
-				pullSettingsFromAttributes,
-				pushSettingsToAttribues,
-			]),
+			pullSettingsFromAttributes,
 		};
-
 	} ),
 
 	createHigherOrderComponent( ( WrappedComponent ) => {
-
 		return class extends Component {
-
 			componentDidMount() {
 				const {
 					pullSettingsFromAttributes,
 				} = this.props;
-
 				pullSettingsFromAttributes();
 			}
 
@@ -85,14 +59,12 @@ const composeWithContainerEditor = ( component ) => compose( [
 				return (
 					<WrappedComponent
 						{ ...this.props }
-						pullItemsFromAttributes={ this.pullItemsFromAttributes }
-						pullSettingsFromAttributes={ this.pullSettingsFromAttributes }
 					/>
 				);
 			}
 
 		};
-	}, 'withPull' )
+	}, 'withPullSettings' )
 
 ] )( component );
 

@@ -10,7 +10,9 @@ import {
   SortableElement,
 } from "react-sortable-hoc";
 
-
+/**
+ * Internal dependencies
+ */
 import getCgbDefault					from '../getCgbDefault';
 import rgbaToCssProp					from '../utils/rgbaToCssProp';
 

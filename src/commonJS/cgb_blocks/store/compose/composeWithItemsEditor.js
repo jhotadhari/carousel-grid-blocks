@@ -51,7 +51,6 @@ const composeWithItemsEditor = ( component, requested ) => compose( [
 		const props = {};
 
 		const {
-			pushItemsToAttribues,
 			addItems,
 			removeItem,
 			updateItem,
@@ -69,10 +68,7 @@ const composeWithItemsEditor = ( component, requested ) => compose( [
 			switch( prop ){
 
 				case 'addItems':
-					props[prop] = concatenateReducers([
-						addItems,
-						pushItemsToAttribues,
-					]);
+					props[prop] = addItems;
 					break;
 
 				case 'removeItem':
@@ -80,14 +76,12 @@ const composeWithItemsEditor = ( component, requested ) => compose( [
 						removeItem,
 						ensureOneItem,
 						ensureOneSelected,
-						pushItemsToAttribues,
 					]);
 					break;
 
 				case 'updateItem':
 					props[prop] = concatenateReducers([
 						updateItem,
-						pushItemsToAttribues,
 					]);
 					break;
 
@@ -95,7 +89,6 @@ const composeWithItemsEditor = ( component, requested ) => compose( [
 					props[prop] = concatenateReducers([
 						updateItemFromMedia,
 						ensureOneSelected,
-						pushItemsToAttribues,
 					]);
 					break;
 
@@ -107,7 +100,6 @@ const composeWithItemsEditor = ( component, requested ) => compose( [
 					props[prop] = concatenateReducers([
 						moveItem,
 						ensureOneSelected,
-						pushItemsToAttribues,
 					]);
 					break;
 

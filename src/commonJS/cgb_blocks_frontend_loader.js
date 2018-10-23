@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				const imageHoverEffectSettings = data.imageHoverEffectSettings || getCgbDefault( 'imageHoverEffectSettings' );
 				const imageHighlightEffect = data.imageHighlightEffect ||getCgbDefault( 'imageHighlightEffect' );
 				const imageHighlightEffectSettings = data.imageHighlightEffectSettings || getCgbDefault( 'imageHighlightEffectSettings' );
+				const imageControlsSettings = data.imageControlsSettings || getCgbDefault( 'imageControlsSettings' );
 				const imageCaptionSettings = data.imageCaptionSettings || getCgbDefault( 'imageCaptionSettings' );
 
 				[... blockWrapper.getElementsByClassName( 'cgb-grid' )].map( ( grid ) => {
@@ -57,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						imageHoverEffectSettings={ imageHoverEffectSettings }
 						imageHighlightEffect={ imageHighlightEffect }
 						imageHighlightEffectSettings={ imageHighlightEffectSettings }
+						imageControlsSettings={ imageControlsSettings }
 						imageCaptionSettings={ imageCaptionSettings }
 					/>, grid );
 				});
@@ -65,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					ReactDOM.render( <Carousel
 						imageHoverEffect={ imageHoverEffect }
 						imageHoverEffectSettings={ imageHoverEffectSettings }
+						imageControlsSettings={ imageControlsSettings }
 						imageCaptionSettings={ imageCaptionSettings }
 					/>, carousel );
 				});

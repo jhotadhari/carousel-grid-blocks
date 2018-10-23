@@ -50,6 +50,28 @@ const getCgbDefault = key => {
 					'caption',
 				],
 			} );
+
+		case 'imageControlsSettings':
+			return applyFilters( 'cgb.default.imageControlsSettings', {
+				show: 'showOnhover',			// hide showOnhover showIfSelected
+				position: 'center',
+				margin: '10%',
+				padding: '0.5em',
+				backgroundColor: {
+					r: '220',
+					g: '220',
+					b: '220',
+					a: '0.8',
+				},
+				controls: [
+					'link',
+					'fullscreen',
+				],
+				linkControlSettings: {
+					newTab: false,
+					linkTo: 'post',	// 'attachment'
+				}
+			} );
 	}
 };
 

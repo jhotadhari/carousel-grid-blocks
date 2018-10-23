@@ -24,6 +24,7 @@ import InspectorImage			from './InspectorImage.jsx';
 const GridInspector = ({
 	setAttributes,
 	gridSettings,
+	imageControlsSettings,
 	imageCaptionSettings,
 	imageHoverEffect,
 	imageHoverEffectSettings,
@@ -31,7 +32,6 @@ const GridInspector = ({
 	imageHighlightEffectSettings,
 }) => <>
 	<InspectorCommon/>
-
 
 	<PanelBody
 		title={'Grid settings'}
@@ -71,7 +71,9 @@ const GridInspector = ({
 			'imageCaption',
 			'imageHoverEffect',
 			'imageHighlightEffect',
+			'imageControls',
 		] }
+		imageControlsSettings={ imageControlsSettings }
 		imageCaptionSettings={ imageCaptionSettings }
 		imageHoverEffect={ imageHoverEffect }
 		imageHoverEffectSettings={ imageHoverEffectSettings }

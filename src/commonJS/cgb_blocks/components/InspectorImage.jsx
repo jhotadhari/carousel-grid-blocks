@@ -21,6 +21,7 @@ const {
     PanelBody,
     ColorPalette,
     BaseControl,
+    ToggleControl,
 } = wp.components;
 
 /**
@@ -33,6 +34,7 @@ import ColorPaletteAlpha				from './ColorPaletteAlpha.jsx';
 let InspectorImage = ({
 	setAttributes,
 	include,
+	imageControlsSettings,
 	imageCaptionSettings,
 	imageHoverEffect,
 	imageHoverEffectSettings,
@@ -209,6 +211,158 @@ let InspectorImage = ({
 					} ) }
 				/>
 			</> }
+		</PanelBody>
+	}
+
+	{ include.includes( 'imageControls' ) &&
+		<PanelBody
+			title={'Controls'}
+			initialOpen={ false }
+		>
+
+			<SelectControl
+				label={ __( 'Show Controls', 'expa' ) }
+				value={ get( imageControlsSettings, ['show'] ) }
+				options={ getInspectorOptions( 'imageControlsShow' ) }
+					onChange={ ( newVal ) => setAttributes( {
+						imageControlsSettings: JSON.stringify( {
+							...imageControlsSettings,
+							show: newVal,
+						} )
+					} ) }
+			/>
+
+			{ 'hide' !== get( imageControlsSettings, ['show'] ) && <>
+
+				<SelectControl
+					label={ __( 'Position', 'cgb' ) }
+					value={ get( imageControlsSettings, ['position'] ) }
+					options={ getInspectorOptions( 'imageControlsPosition' ) }
+						onChange={ ( newVal ) => setAttributes( {
+							imageControlsSettings: JSON.stringify( {
+								...imageControlsSettings,
+								position: newVal,
+							} )
+						} ) }
+				/>
+
+				<div
+					className={ 'cgb-inspector-flex-row' }
+				>
+					<TextControl
+						label={ __( 'Margin', 'cgb' ) }
+						value={ get( imageControlsSettings, ['margin'] ) }
+						onChange={ ( newVal ) => setAttributes( {
+							imageControlsSettings: JSON.stringify( {
+								...imageControlsSettings,
+								margin: newVal,
+							} )
+						} ) }
+					/>
+
+					<TextControl
+						label={ __( 'Padding', 'cgb' ) }
+						value={ get( imageControlsSettings, ['padding'] ) }
+						onChange={ ( newVal ) => setAttributes( {
+							imageControlsSettings: JSON.stringify( {
+								...imageControlsSettings,
+								padding: newVal,
+							} )
+						} ) }
+					/>
+				</div>
+
+				<div
+					className={ 'cgb-inspector-flex-row' }
+				>
+					<BaseControl
+						label={ __( 'Background', 'cgb' ) }
+					>
+						<ColorPaletteAlpha
+
+							value={ get( imageControlsSettings, ['backgroundColor'] ) }
+							onChange={ ( newVal ) => setAttributes( {
+								imageControlsSettings: JSON.stringify( {
+									...imageControlsSettings,
+									backgroundColor: newVal.rgb,
+								} )
+							} ) }
+						/>
+					</BaseControl>
+
+					{ false &&
+						<BaseControl
+							label={ __( 'Font Color', 'cgb' ) }
+						>
+							<ColorPalette
+								value={ get( imageControlsSettings, ['color'] ) }
+								onChange={ ( newVal ) => setAttributes( {
+									imageControlsSettings: JSON.stringify( {
+										...imageControlsSettings,
+										color: newVal,
+									} )
+								} ) }
+							/>
+						</BaseControl>
+					}
+				</div>
+
+				<SelectControl
+					multiple
+					label={ __( 'Controls', 'cgb' ) }
+					value={ get( imageControlsSettings, ['controls'] ) }
+					options={ getInspectorOptions( 'imageControls' ) }
+					onChange={ ( newVal ) => setAttributes( {
+						imageControlsSettings: JSON.stringify( {
+							...imageControlsSettings,
+							controls: newVal,
+						} )
+					} ) }
+				/>
+
+				{ get( imageControlsSettings, ['controls'] ).includes( 'link' ) &&
+
+
+					<PanelBody
+						title={'Link Control'}
+						initialOpen={ true }
+					>
+
+						<ToggleControl
+							label={ 'Open link in new tab?' }
+							checked={ get( imageControlsSettings, [ 'linkControlSettings', 'newTab' ] ) }
+							onChange={ ( newVal ) => setAttributes( {
+								imageControlsSettings: JSON.stringify( {
+									...imageControlsSettings,
+									linkControlSettings: {
+										...get( imageControlsSettings, [ 'linkControlSettings' ] ),
+										newTab: newVal,
+									},
+								} )
+							} ) }
+						/>
+
+						<SelectControl
+							label={ __( 'Link to', 'cgb' ) }
+							value={  get( imageControlsSettings, [ 'linkControlSettings', 'linkTo' ] ) }
+							options={ getInspectorOptions( 'imageControlsLinkLinkTo' ) }
+							onChange={ ( newVal ) => setAttributes( {
+								imageControlsSettings: JSON.stringify( {
+									...imageControlsSettings,
+									linkControlSettings: {
+										...get( imageControlsSettings, [ 'linkControlSettings' ] ),
+										linkTo: newVal,
+									},
+								} )
+							} ) }
+						/>
+
+					</PanelBody>
+
+				}
+
+			</> }
+
 		</PanelBody>
 	}
 

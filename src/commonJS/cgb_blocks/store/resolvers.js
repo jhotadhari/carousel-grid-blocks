@@ -2,6 +2,9 @@
 const shortid = require('shortid');
 
 import {
+	get,
+} from 'lodash';
+import {
 	pluck,
 	filter,
 	findWhere,
@@ -30,15 +33,13 @@ export function* fetchItem( state, index, item ) {
 
 	let newItem = undefined;
 	yield null === id || undefined === id ? items[index] : apiFetch( { path: '/wp/v2/media/' + id } ).then( ( response ) => {
-
 		newItem = {
 			...DEFAULT_ITEM,
 			...item,
-			// key: items[index]['key'] ? items[index]['key'] : shortid.generate(),
 			key: item.key ? item.key : shortid.generate(),
-			// selected: items[index]['selected'],
 			selected: item.key.selected,
 			fetched: true,
+
 			// img atts
 			src: response.source_url,
 			srcSet: response.cgb_srcset,
@@ -68,22 +69,34 @@ export function* pullItemsFromArchive( state, key, options, ) {
 		case 'archivePostType':
 			const { url } = options;
 
-			let newItemIds = undefined;
+			let responseItems = undefined;
 			const fetched = yield apiFetch( { path: url } ).then( ( response ) => {
-				newItemIds = pluck( response, 'featured_media').filter( id => 0 !== id );
-				return newItemIds;
+				responseItems = [...response].map( responseItem => { return {
+					featured_media: responseItem.featured_media,
+					title: responseItem.title.rendered,
+					link: responseItem.link,
+					excerpt: get( responseItem ['excerpt','rendered'], '' ),
+				} } ).filter( ( { featured_media } ) => 0 !== featured_media );
+				return responseItems;
 			} );
 
-			if ( undefined !== newItemIds ) {
-				const newItems =  [...newItemIds].map( ( id ) => {
-					const item = findWhere( items, { id: id } );
+			if ( undefined !== responseItems ) {
+				const newItems =  [...responseItems].map( ( {
+					featured_media,
+					link,
+					title,
+					excerpt,
+				} ) => {
+					const item = findWhere( items, { id: featured_media } );
 					return item ? item : {
 						...DEFAULT_ITEM,
-						id: id,
+						id: featured_media,
+						postLink: link,
+						postTitle: title,
+						postExcerpt: excerpt,
 						key: shortid.generate(),
 					};
 				});
-
 				yield overwriteItems( newItems );
 				yield newItems;
 			}

@@ -19,6 +19,7 @@ const getInspectorOptions = key => {
 				{ label: __( 'Box Shadow', 'cgb' ), value: 'boxShadow' },
 			];
 			break;
+		case 'imageControlsShow':
 		case 'imageCaptionShow':
 			options = [
 				{ label: __( 'Show', 'cgb' ), value: 'show' },
@@ -27,6 +28,7 @@ const getInspectorOptions = key => {
 				{ label: __( 'Show if selected', 'cgb' ), value: 'showIfSelected' },
 			];
 			break;
+		case 'imageControlsPosition':
 		case 'imageCaptionPosition':
 			options = [
 				{ label: __( 'Bottom', 'cgb' ), value: 'bottom' },
@@ -37,8 +39,22 @@ const getInspectorOptions = key => {
 			break;
 		case 'imageCaptionParts':
 			options = [
-				{ label: __( 'Title', 'cgb' ), value: 'title' },
-				{ label: __( 'Caption', 'cgb' ), value: 'caption' },	// ??? translate de Beschriftung
+				{ label: __( 'Image Title', 'cgb' ), value: 'title' },
+				{ label: __( 'Image Caption', 'cgb' ), value: 'caption' },	// ??? translate de Beschriftung
+				{ label: __( 'Post Title', 'cgb' ), value: 'postTitle' },
+				{ label: __( 'Post Excerpt', 'cgb' ), value: 'postExcerpt' },
+			];
+			break;
+		case 'imageControls':
+			options = [
+				{ label: __( 'Fullscreen', 'cgb' ), value: 'fullscreen' },
+				{ label: __( 'Link', 'cgb' ), value: 'link' },
+			];
+			break;
+		case 'imageControlsLinkLinkTo':
+			options = [
+				{ label: __( 'Post (if source is archive)', 'cgb' ), value: 'post' },
+				{ label: __( 'Attachment', 'cgb' ), value: 'attachment' },
 			];
 			break;
 	}

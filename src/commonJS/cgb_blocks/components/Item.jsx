@@ -4,7 +4,20 @@
 import PropTypes from 'prop-types';
 import {
 	filter,
+	get,
 } from 'lodash';
+
+/**
+ * WordPress dependencies
+ */
+const {
+	__,
+	// sprintf,
+} = wp.i18n;
+const {
+    Button,
+    Dashicon,
+} = wp.components
 
 /**
  * Internal dependencies
@@ -15,6 +28,7 @@ class Item extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.overlayStyle = this.overlayStyle.bind( this );
 	}
 
 	componentDidMount( ) {
@@ -35,78 +49,31 @@ class Item extends React.Component {
 			fetchItem( index, item );
 	}
 
-	render() {
+	overlayStyle( settings, type ) {
 		const {
-			index,				// from 	GridGallery -> GridItem
-			item,				// from		GridItem
-			items,				// from 	items
-			className,			// from 	GridItem
-			controls,			// from 	GridItem
-			setSelected,		// from 	items
-			itemStyle,			// from 	GridItem
-			imageStyle,			// from 	GridItem
-			imgStyle,			// from 	GridItem
-			photo,				// from 	items -> Grid -> GridGallery -> GridItem
-
-			transitionTime,
-			imageCaptionSettings,
-			imageHoverEffect,
-			imageHoverEffectSettings,
-
-			ItemControlsComponent,
-		} = this.props;
-
-		const {
-			src,
-			alt,
-			srcSet,
-			sizes,
-			title,
-			caption,
-			orientation,
-		} = item;
-
-		const height = photo ? photo.height : null;
-		const width = photo ? photo.width : null;
-
-		const {
-			show,
-			position,
 			margin,
 			padding,
 			backgroundColor,
 			color,
-			parts,
-		} = imageCaptionSettings;
+			position,
+		} = settings;
 
-		const marginParts = {
-			val: margin.match(/\d+/g),
-			unit: margin.match(/\D+/g),
-		};
+		return {
+			// type imageCaption
+			width: 'imageCaption' === type && 'calc( 100% - ' + ( margin.match(/\d+/g) * 2 ) + margin.match(/\D+/g) + ' )',
+			margin: 'imageCaption' === type && 'auto ' + margin,
 
-		let captionIsVisible = false;
-		switch( show ){
-			case 'show':
-				captionIsVisible = true;
-				break
-			case 'hide':
-				captionIsVisible = false;
-				break
-			case 'showOnhover':
-				captionIsVisible = 'showOnhover';
-				break
-			case 'showIfSelected':
-				captionIsVisible = item.selected;
-				break
-		}
+			// type imageControls
+			width: 'imageControls' === type && 'auto',
+			margin: 'imageControls' === type && 'auto',
+			left: 'imageControls' === type && '50%',
+			transform: 'imageControls' === type && 'translate(-50%, -50%)',
 
-		const captionStyle = {
-			width: 'calc( 100% - ' + ( marginParts.val * 2 ) + marginParts.unit + ' )',
-			margin: 'auto ' + margin,
+			// all types
 			padding: padding,
 			background: rgbaToCssProp( backgroundColor ),
 			color: color,
-			transition: 'opacity ' + ( transitionTime / 1000 ) + 's',
+			transition: 'opacity 0.35s',
 			...( 'bottom' === position && { bottom: margin } ),
 			...( 'top' === position && { top: margin } ),
 			...( 'top' === position && { display: 'table' } ),
@@ -125,7 +92,64 @@ class Item extends React.Component {
 				height: '100%',
 			} ),
 		};
+	}
 
+	render() {
+		const {
+			index,				// from 	GridGallery -> GridItem
+			item,				// from		GridItem
+			items,				// from 	items
+			className,			// from 	GridItem
+			controls,			// from 	GridItem
+			setSelected,		// from 	items
+			itemStyle,			// from 	GridItem
+			imageStyle,			// from 	GridItem
+			imgStyle,			// from 	GridItem
+			photo,				// from 	items -> Grid -> GridGallery -> GridItem
+
+			transitionTime,
+			imageControlsSettings,
+			imageCaptionSettings,
+			imageHoverEffect,
+			imageHoverEffectSettings,
+
+			ItemControlsComponent,
+		} = this.props;
+
+		const {
+			src,
+			alt,
+			srcSet,
+			sizes,
+			title,
+			caption,
+			orientation,
+
+			postLink,
+			postTitle,
+			postExcerpt,
+			postContent,
+		} = item;
+
+		const height = photo ? photo.height : null;
+		const width = photo ? photo.width : null;
+
+		// caption
+		let captionIsVisible = false;
+		switch( imageCaptionSettings.show ){
+			case 'show':
+				captionIsVisible = true;
+				break
+			case 'hide':
+				captionIsVisible = false;
+				break
+			case 'showOnhover':
+				captionIsVisible = 'showOnhover';
+				break
+			case 'showIfSelected':
+				captionIsVisible = item.selected;
+				break
+		}
 		const CaptionPart = ( { partKey } ) => {
 			switch( partKey ){
 				case 'title':
@@ -137,6 +161,75 @@ class Item extends React.Component {
 							dangerouslySetInnerHTML={ { __html: caption } }
 							className={ className + '-info-caption' }
 						></div>;
+				case 'postTitle':
+					return  <div
+							className={ className + '-info-post-title' }
+						>{ postTitle }</div>;
+				case 'postExcerpt':
+					return  <div
+							dangerouslySetInnerHTML={ { __html: postExcerpt } }
+							className={ className + '-info-excerpt' }
+						></div>;
+			}
+			return <span>{ '' }</span>;
+		};
+
+		// controls
+		let controlsAreVisible = false;
+		switch( imageControlsSettings.show ){
+			case 'show':
+				controlsAreVisible = true;
+				break
+			case 'hide':
+				controlsAreVisible = false;
+				break
+			case 'showOnhover':
+				controlsAreVisible = 'showOnhover';
+				break
+			case 'showIfSelected':
+				controlsAreVisible = item.selected;
+				break
+		}
+		const ImageControl = ( { control, style } ) => {
+			switch( control ){
+				case 'link':
+					let linkUrl, linkTitle;
+					switch( get( imageControlsSettings, ['linkControlSettings', 'linkTo'] ) ) {
+						case 'post':
+							linkUrl = postLink || src;
+							linkTitle = postTitle || title;
+							break;
+						case 'attachment':
+							linkUrl = src;
+							linkTitle = title;
+							break;
+					}
+					return  <div style={ style } className={ className + '-image-control' } >
+							<a
+								href={ linkUrl }
+								title={ linkTitle }
+								target={ get( imageControlsSettings, ['linkControlSettings', 'newTab'] ) ? '_blank' : '_self' }
+							>
+								<Button
+									className={ 'components-icon-button' }
+									aria-label={ linkTitle }
+									title={ linkTitle }
+								>
+									<Dashicon icon={ 'redo' } />
+								</Button>
+							</a>
+						</div>;
+				case 'fullscreen':
+					return  <div style={ style } className={ className + '-image-control' } >
+							<Button
+								className={ 'components-icon-button' }
+								aria-label={ 	__( 'Fullscreen', 'cgb' ) }
+								title={ 		__( 'Fullscreen', 'cgb' ) }
+								onClick={ () => console.log( 'fullscreen' ) }
+							>
+								<Dashicon icon={ 'editor-expand' } />
+							</Button>
+						</div>;
 			}
 			return <span>{ '' }</span>;
 		};
@@ -167,7 +260,7 @@ class Item extends React.Component {
 						alt={ alt }
 						srcSet={ srcSet }
 						sizes={ sizes }
-						title={ title }
+						title={ postTitle.length > 0 ? postTitle : title }
 						style={ imgStyle }
 						className={ [
 							orientation,
@@ -188,9 +281,9 @@ class Item extends React.Component {
 							captionIsVisible === true ? 'is-visible' : 'is-hidden',
 							captionIsVisible === 'showOnhover' ? 'is-visible-on-hover' : null,
 						].filter( a => a !== null ).join(' ') }
-						style={ captionStyle }
+						style={ this.overlayStyle( imageCaptionSettings, 'imageCaption' ) }
 					>
-						{ [...parts].map( part =>
+						{ [...imageCaptionSettings.parts].map( part =>
 							<CaptionPart
 								key={ part }
 								partKey={ part }
@@ -199,29 +292,51 @@ class Item extends React.Component {
 					</div>
 				}
 
+
 				{/*
-					controls
+					image controls (the controls for the user)
 				*/}
-				<ItemControlsComponent
-					className={ className + '-controls cgb-flex-row' }
-					index={ index }
-					item={ item }
-					controls={ controls }
-				/>
+				{ 'hide' !== imageControlsSettings.show &&
+					<div
+						className={ [
+							className + '-image-controls',
+							controlsAreVisible === true ? 'is-visible' : 'is-hidden',
+							controlsAreVisible === 'showOnhover' ? 'is-visible-on-hover' : null,
+						].filter( a => a !== null ).join(' ') }
+						style={ this.overlayStyle( imageControlsSettings, 'imageControls' ) }
+					>
+						<div className={ className + '-image-controls-inner' } >
+							{ [...imageControlsSettings.controls].map( control =>
+								<ImageControl
+									style={ {
+										display: controlsAreVisible ? 'block' : 'none',
+									} }
+									key={ control }
+									control={ control }
+								/>
+							) }
+						</div>
+					</div>
+				}
+
+				{/*
+					item controls (the controls for administration)
+				*/
+					ItemControlsComponent &&
+
+					<ItemControlsComponent
+						className={ className + '-controls cgb-flex-row' }
+						index={ index }
+						item={ item }
+						controls={ controls }
+					/>
+				}
 
 			</div>
 
 		);
 
 	}
-}
-
-Item.propTypes = {
-	style: PropTypes.object,
-}
-
-Item.defaultProps = {
-	style: {},
 }
 
 export default Item;

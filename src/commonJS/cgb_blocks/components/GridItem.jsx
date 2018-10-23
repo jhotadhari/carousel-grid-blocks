@@ -29,6 +29,7 @@ let GridItem = ({
 	items,							// from 	items
 	transitionTime,					// from 	settings
 	itemsSource,					// from 	settings
+	imageControlsSettings,			// from 	attributes -> Grid -> GridGallery
 	imageCaptionSettings,			// from 	attributes -> Grid -> GridGallery
 	imageHoverEffect,				// from 	attributes -> Grid -> GridGallery
 	imageHoverEffectSettings,				// from 	attributes -> Grid -> GridGallery
@@ -79,6 +80,7 @@ let GridItem = ({
 			key={ items[sortIndex]['key'] }
 			item={ items[sortIndex] }
 			className={ 'cgb-block-grid-item' }
+			imageControlsSettings={ imageControlsSettings }
 			imageCaptionSettings={ imageCaptionSettings }
 			imageHoverEffect={ imageHoverEffect }
 			imageHoverEffectSettings={ imageHoverEffectSettings }

@@ -17,11 +17,6 @@ registerCgbStoreFrontend();
 
 cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
 
-/**
- *	ItemControls
- *
- */
-import ItemControls				from './cgb_blocks/components/ItemControlsFrontend.jsx';
 
 /**
  *	Item
@@ -43,8 +38,8 @@ _Item = composeWithItems( _Item, [
 ] );
 _Item = composeWithSettings( _Item, [
 	'transitionTime',
+	'itemsSource',
 ] );
-_Item = composeWithProps( { ItemControlsComponent: ItemControls } )( _Item );
 
 /**
  *	Grid

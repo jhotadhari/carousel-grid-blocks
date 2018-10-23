@@ -19,6 +19,7 @@ const Carousel = ( {
 	itemsSource,
 	transitionTime,
 	imageCaptionSettings,
+	imageControlsSettings,
 	imageHoverEffect,
 	ItemComponent,
 } ) => {
@@ -61,6 +62,7 @@ const Carousel = ( {
 									className={ 'cgb-block-carousel-item' }
 									transitionTime={ transitionTime }
 									imageCaptionSettings={ imageCaptionSettings }
+									imageControlsSettings={ imageControlsSettings }
 									imageHoverEffect={ imageHoverEffect }
 
 									itemStyle={ {} }

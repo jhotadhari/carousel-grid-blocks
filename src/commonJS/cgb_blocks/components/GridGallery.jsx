@@ -26,6 +26,7 @@ class RawGridGallery extends Gallery {
 			ImageComponent,
 			onClick,
 			direction,
+			imageControlsSettings,
 			imageCaptionSettings,
 			imageHoverEffect,
 			imageHoverEffectSettings,
@@ -72,6 +73,7 @@ class RawGridGallery extends Gallery {
 								direction={ direction }
 								key={ photo.key }
 								photo={ photo }
+								imageControlsSettings={ imageControlsSettings }
 								imageCaptionSettings={ imageCaptionSettings }
 								imageHoverEffect={ imageHoverEffect }
 								imageHoverEffectSettings={ imageHoverEffectSettings }
@@ -90,6 +92,7 @@ class RawGridGallery extends Gallery {
 
 const GridGallery = SortableContainer( ( {
 	items,
+	imageControlsSettings,
 	imageCaptionSettings,
 	imageHoverEffect,
 	imageHighlightEffect,
@@ -107,6 +110,7 @@ const GridGallery = SortableContainer( ( {
 		margin={ parseInt( margin ) }
 		direction={ 'row' }
 		ImageComponent={ GridItem }
+		imageControlsSettings={ imageControlsSettings }
 		imageCaptionSettings={ imageCaptionSettings }
 		imageHoverEffect={ imageHoverEffect }
 		imageHighlightEffect={ imageHighlightEffect }

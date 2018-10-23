@@ -49,10 +49,12 @@ const registerCgbStore = ( {
 
 	let currentItemsSource = getItemsSource();
 
+	let initialPulled = false;
 	const pullItems = () => {
 		let previousItemsSource = currentItemsSource;
 		currentItemsSource = getItemsSource();
-		if ( ! isEqual( previousItemsSource, currentItemsSource ) ) {
+		if ( ! initialPulled || ! isEqual( previousItemsSource, currentItemsSource ) ) {
+			initialPulled = true;
 			switch( currentItemsSource.key ) {
 				case 'custom':
 					const _pullItemsFromAttributes =  concatenateReducers([
@@ -66,6 +68,7 @@ const registerCgbStore = ( {
 					pullItemsFromArchive( currentItemsSource.key, currentItemsSource.options, Math.random() );
 					break;
 			};
+
 		}
 	};
 

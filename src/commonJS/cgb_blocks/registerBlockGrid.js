@@ -1,10 +1,11 @@
 /**
  * External dependencies
  */
-import {
-	get,
-} from 'lodash';
+// import {
+// 	get,
+// } from 'lodash';
 import loadJS from 'load-js';
+import extender from 'object-extender';
 
 /**
  * WordPress dependencies
@@ -46,6 +47,7 @@ const registerBlockGrid = () => {
 						imageSource,
 						imageIds,
 						settings,
+						imageControlsSettings,
 						imageCaptionSettings,
 						imageHoverEffect,
 						imageHoverEffectSettings,
@@ -53,6 +55,7 @@ const registerBlockGrid = () => {
 						imageSource: imageSource,
 						imageIds: imageIds || [],
 						settings: settings || '',
+						imageControlsSettings: imageControlsSettings || JSON.stringify( getCgbDefault( 'imageControlsSettings' ) ),
 						imageCaptionSettings: imageCaptionSettings || JSON.stringify( getCgbDefault( 'imageCaptionSettings' ) ),
 						imageHoverEffect: imageHoverEffect || getCgbDefault( 'imageHoverEffect' ),
 						imageHoverEffectSettings: imageHoverEffectSettings || JSON.stringify( getCgbDefault( 'imageHoverEffectSettings' ) ),
@@ -78,9 +81,13 @@ const registerBlockGrid = () => {
 				type: 'string',
 				default:  JSON.stringify( getCgbDefault( 'gridSettings' ) ),
 			},
+			imageControlsSettings: {
+				type: 'string',
+				default: JSON.stringify( getCgbDefault( 'imageControlsSettings' ) ),
+			},
 			imageCaptionSettings: {
 				type: 'string',
-				default:  JSON.stringify( getCgbDefault( 'imageCaptionSettings' ) ),
+				default: JSON.stringify( getCgbDefault( 'imageCaptionSettings' ) ),
 			},
 			imageHoverEffect: {
 				type: 'string',
@@ -110,10 +117,11 @@ const registerBlockGrid = () => {
 
 			// ??? use className
 
-			const gridSettings = parseSerialized( attributes.gridSettings );
-			const imageCaptionSettings = parseSerialized( attributes.imageCaptionSettings );
-			const imageHighlightEffectSettings = parseSerialized( attributes.imageHighlightEffectSettings );
-			const imageHoverEffectSettings = parseSerialized( attributes.imageHoverEffectSettings );
+			const gridSettings = extender.merge( getCgbDefault( 'gridSettings' ), parseSerialized( attributes.gridSettings ) );
+			const imageControlsSettings = extender.merge( getCgbDefault( 'imageControlsSettings' ), parseSerialized( attributes.imageControlsSettings ) );
+			const imageCaptionSettings = extender.merge( getCgbDefault( 'imageCaptionSettings' ), parseSerialized( attributes.imageCaptionSettings ) );
+			const imageHighlightEffectSettings = extender.merge( getCgbDefault( 'imageHighlightEffectSettings' ), parseSerialized( attributes.imageHighlightEffectSettings ) );
+			const imageHoverEffectSettings = extender.merge( getCgbDefault( 'imageHoverEffectSettings' ), parseSerialized( attributes.imageHoverEffectSettings ) );
 
 			if ( ! attributes.scriptsloaded) {
 				// load the main editor component, rerender the block
@@ -140,6 +148,7 @@ const registerBlockGrid = () => {
 						<GridInspector
 							setAttributes={ setAttributes }
 							gridSettings={ gridSettings }
+							imageControlsSettings={ imageControlsSettings }
 							imageCaptionSettings={ imageCaptionSettings }
 							imageHoverEffect={ imageHoverEffect }
 							imageHoverEffectSettings={ imageHoverEffectSettings }
@@ -150,6 +159,7 @@ const registerBlockGrid = () => {
 
 					<Grid
 						gridSettings={ gridSettings }
+						imageControlsSettings={ imageControlsSettings }
 						imageCaptionSettings={ imageCaptionSettings }
 						imageHoverEffect={ imageHoverEffect }
 						imageHoverEffectSettings={ imageHoverEffectSettings }

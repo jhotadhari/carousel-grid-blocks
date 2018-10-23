@@ -54,6 +54,7 @@
     "load-grunt-tasks": "^3.5.2",
     "load-js": "^3.0.2",
     "node-bourbon": "^4.2.8",
+    "object-extender": "^2.0.4",
     "prop-types": "^15.6.2",
     "react-color": "^2.14.1",
     "react-photo-gallery": "^6.2.1",

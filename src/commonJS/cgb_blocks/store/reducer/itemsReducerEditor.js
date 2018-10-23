@@ -90,6 +90,8 @@ export function updateItemFromMedia( state = { items: [ ...DEFAULT_STATE.items ]
 			'orientation'
 		] ),
 		src: media.url,
+		postLink: media.url,
+		postTitle: media.title,
 		mediaSizes: media.sizes,
 		fetched: false,	// need sizes, srcSet...
 	};
@@ -114,6 +116,8 @@ export function addItems( state = { items: [ ...DEFAULT_STATE.items ] }, action 
 				'orientation'
 			] ),
 			src: media.url,
+			postLink: media.url,
+			postTitle: media.title,
 			mediaSizes: media.sizes,
 			key: shortid.generate(),
 		}

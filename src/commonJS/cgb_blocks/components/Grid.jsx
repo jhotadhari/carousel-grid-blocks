@@ -16,6 +16,7 @@ class Grid extends React.Component {
 			gridSettings,								// from atts
 
 			// transitionTime,						// from settings
+			imageControlsSettings,				// from atts
 			imageCaptionSettings,				// from atts
 			imageHoverEffect,					// from atts
 			imageHoverEffectSettings,			// from atts
@@ -29,6 +30,7 @@ class Grid extends React.Component {
 				<GridGallery
 					items={ items }
 					gridSettings={ gridSettings }
+					imageControlsSettings={ imageControlsSettings }
 					imageCaptionSettings={ imageCaptionSettings }
 					imageHoverEffect={ imageHoverEffect }
 					imageHoverEffectSettings={ imageHoverEffectSettings }

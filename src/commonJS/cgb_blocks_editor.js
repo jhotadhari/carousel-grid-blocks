@@ -20,7 +20,7 @@ cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components
  *	ItemControls
  *
  */
-import ItemControls				from './cgb_blocks/components/ItemControlsEditor.jsx';
+import ItemControls				from './cgb_blocks/components/ItemControls.jsx';
 
 /**
  *	Item

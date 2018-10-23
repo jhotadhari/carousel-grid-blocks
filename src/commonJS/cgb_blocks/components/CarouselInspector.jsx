@@ -15,6 +15,7 @@ import InspectorImage					from './InspectorImage.jsx';
 
 const CarouselInspector = ({
 	setAttributes,
+	imageControlsSettings,
 	imageCaptionSettings,
 	imageHoverEffect,
 	imageHoverEffectSettings,
@@ -30,7 +31,6 @@ const CarouselInspector = ({
 		<span>
 			nix ???
 		</span>
-
 	</PanelBody>
 
 	<InspectorImage
@@ -38,7 +38,9 @@ const CarouselInspector = ({
 		include={ [
 			'imageCaption',
 			'imageHoverEffect',
+			'imageControls',
 		] }
+		imageControlsSettings={ imageControlsSettings }
 		imageCaptionSettings={ imageCaptionSettings }
 		imageHoverEffect={ imageHoverEffect }
 		imageHoverEffectSettings={ imageHoverEffectSettings }

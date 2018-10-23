@@ -2,6 +2,7 @@
  * External dependencies
  */
 import loadJS from 'load-js';
+import extender from 'object-extender';
 
 /**
  * WordPress dependencies
@@ -43,6 +44,7 @@ const registerBlockCarousel = () => {
 						imageSource,
 						imageIds,
 						settings,
+						imageControlsSettings,
 						imageCaptionSettings,
 						imageHoverEffect,
 						imageHoverEffectSettings,
@@ -50,6 +52,7 @@ const registerBlockCarousel = () => {
 						imageSource: imageSource,
 						imageIds: imageIds || [],
 						settings: settings || '',
+						imageControlsSettings: imageControlsSettings || JSON.stringify( getCgbDefault( 'imageControlsSettings' ) ),
 						imageCaptionSettings: imageCaptionSettings || JSON.stringify( getCgbDefault( 'imageCaptionSettings' ) ),
 						imageHoverEffect: imageHoverEffect || getCgbDefault( 'imageHoverEffect' ),
 						imageHoverEffectSettings: imageHoverEffectSettings || JSON.stringify( getCgbDefault( 'imageHoverEffectSettings' ) ),
@@ -70,6 +73,10 @@ const registerBlockCarousel = () => {
 				type: 'string',
 				default: '',
 			},
+			imageControlsSettings: {
+				type: 'string',
+				default: JSON.stringify( getCgbDefault( 'imageControlsSettings' ) ),
+			},
 			imageCaptionSettings: {
 				type: 'string',
 				default:  JSON.stringify( getCgbDefault( 'imageCaptionSettings' ) ),
@@ -88,8 +95,9 @@ const registerBlockCarousel = () => {
 				imageHoverEffect,
 			} = attributes;
 
-			const imageHoverEffectSettings = parseSerialized( attributes.imageHoverEffectSettings );
-			const imageCaptionSettings = parseSerialized( attributes.imageCaptionSettings );
+			const imageControlsSettings = extender.merge( getCgbDefault( 'imageControlsSettings' ), parseSerialized( attributes.imageControlsSettings ) );
+			const imageCaptionSettings = extender.merge( getCgbDefault( 'imageCaptionSettings' ), parseSerialized( attributes.imageCaptionSettings ) );
+			const imageHoverEffectSettings = extender.merge( getCgbDefault( 'imageHoverEffectSettings' ), parseSerialized( attributes.imageHoverEffectSettings ) );
 
 			if ( ! attributes.scriptsloaded) {
 				// load the main editor component, rerender the block
@@ -114,6 +122,7 @@ const registerBlockCarousel = () => {
 					<InspectorControls>
 						<CarouselInspector
 							setAttributes={ setAttributes }
+							imageControlsSettings={ imageControlsSettings }
 							imageCaptionSettings={ imageCaptionSettings }
 							imageHoverEffect={ imageHoverEffect }
 							imageHoverEffectSettings={ imageHoverEffectSettings }
@@ -121,6 +130,7 @@ const registerBlockCarousel = () => {
 					</InspectorControls>,
 
 					<Carousel
+						imageControlsSettings={ imageControlsSettings }
 						imageCaptionSettings={ imageCaptionSettings }
 						imageHoverEffect={ imageHoverEffect }
 						imageHoverEffectSettings={ imageHoverEffectSettings }

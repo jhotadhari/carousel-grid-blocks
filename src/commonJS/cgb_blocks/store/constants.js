@@ -6,6 +6,10 @@ export const DEFAULT_ITEM = {
 	selected: false,
 	fetched: false,
 
+	postLink: '',
+	postTitle: '',
+	postExcerpt: '',
+
 	// img atts
 	src: cgbBlocks.pluginDirUrl + '/images/placeholder.jpg',
 	srcSet: undefined,

@@ -55,7 +55,7 @@ let InspectorImage = ({
 		>
 
 			<SelectControl
-				label={ __( 'Show Caption', 'expa' ) }
+				label={ __( 'Show Caption', 'cgb' ) }
 				value={ get( imageCaptionSettings, ['show'] ) }
 				options={ getInspectorOptions( 'imageCaptionShow' ) }
 					onChange={ ( newVal ) => setAttributes( {
@@ -221,7 +221,7 @@ let InspectorImage = ({
 		>
 
 			<SelectControl
-				label={ __( 'Show Controls', 'expa' ) }
+				label={ __( 'Show Controls', 'cgb' ) }
 				value={ get( imageControlsSettings, ['show'] ) }
 				options={ getInspectorOptions( 'imageControlsShow' ) }
 					onChange={ ( newVal ) => setAttributes( {

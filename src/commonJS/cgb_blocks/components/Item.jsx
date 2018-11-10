@@ -321,8 +321,8 @@ class Item extends React.Component {
 
 				{/*
 					item controls (the controls for administration)
-				*/
-					ItemControlsComponent &&
+				*/}
+				{ ItemControlsComponent &&
 
 					<ItemControlsComponent
 						className={ className + '-controls cgb-flex-row' }

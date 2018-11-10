@@ -10,6 +10,7 @@ const getCgbDefault = key => {
 			return applyFilters( 'cgb.default.gridSettings', {
 				columns: 'auto',
 				margin: '5',
+				itemSizes: 'maintainRatios',
 			} );
 
 		case 'imageHoverEffect':

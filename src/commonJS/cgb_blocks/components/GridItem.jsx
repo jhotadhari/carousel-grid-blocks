@@ -21,6 +21,9 @@ import composeWithSettingsFrontend 		from '../store/compose/composeWithSettingsF
 
 // ImageComponent
 let GridItem = ({
+	containerWidth,
+	columns,
+	gridSettings,
 	margin,							// from 	attributes -> Grid -> GridGallery
 	sortIndex,						// from 	GridGallery
 	selectedIndex,					// from 	items
@@ -70,9 +73,31 @@ let GridItem = ({
 		] : [] ),
 	];
 
+	let itemStyle = {
+		margin: margin + 'px',
+	};
+	let itemEqualWidth = ( containerWidth / columns ) - ( 2 * margin );
+	switch ( get( gridSettings, ['itemSizes'] ) ) {
+		case 'maintainRatios':
+			break;
+		case 'equalWidths':
+			itemStyle = {
+				...itemStyle,
+				width: itemEqualWidth + 'px',
+			};
+			break;
+		case 'square':
+			itemStyle = {
+				...itemStyle,
+				width: itemEqualWidth + 'px',
+				height: itemEqualWidth + 'px',
+			};
+			break;
+	}
+
 	return (
 		<ItemComponent
-			itemStyle={ { margin: margin + 'px' } }
+			itemStyle={ itemStyle }
 			imageStyle={ { ...getImageStyle( sortIndex ) } }
 			imgStyle={ { ...imgStyle } }
 			photo={ photo }

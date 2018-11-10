@@ -20,6 +20,7 @@ const {
  */
 import InspectorCommon			from './InspectorCommon.jsx';
 import InspectorImage			from './InspectorImage.jsx';
+import getInspectorOptions		from '../getInspectorOptions';
 
 const GridInspector = ({
 	setAttributes,
@@ -61,6 +62,18 @@ const GridInspector = ({
 					margin: newVal,
 				} ),
 			} ) }
+		/>
+
+		<SelectControl
+			label={ __( 'Item sizes and aspect ratio', 'cgb' ) }
+			value={ get( gridSettings, ['itemSizes'] ) }
+			options={ getInspectorOptions( 'gridItemSizes' ) }
+				onChange={ ( newVal ) => setAttributes( {
+					gridSettings: JSON.stringify( {
+						...gridSettings,
+						itemSizes: newVal,
+					} ),
+				} ) }
 		/>
 
 	</PanelBody>

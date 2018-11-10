@@ -57,6 +57,13 @@ const getInspectorOptions = key => {
 				{ label: __( 'Attachment', 'cgb' ), value: 'attachment' },
 			];
 			break;
+		case 'gridItemSizes':
+			options = [
+				{ label: __( 'Maintain aspect ratios', 'cgb' ), value: 'maintainRatios' },
+				{ label: __( 'Equal widths', 'cgb' ), value: 'equalWidths' },
+				{ label: __( 'Display as squares', 'cgb' ), value: 'square' },
+			];
+			break;
 	}
 	return applyFilters( 'cgb/GridInspector/options/' + key, options );
 }

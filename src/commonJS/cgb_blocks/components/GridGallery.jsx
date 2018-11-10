@@ -26,6 +26,7 @@ class RawGridGallery extends Gallery {
 			ImageComponent,
 			onClick,
 			direction,
+			gridSettings,
 			imageControlsSettings,
 			imageCaptionSettings,
 			imageHoverEffect,
@@ -67,12 +68,15 @@ class RawGridGallery extends Gallery {
 					{ thumbs.map( ( photo, index ) => {
 						return (
 							<ImageComponent
+								containerWidth={ containerWidth }
+								columns={ columns }
 								margin={ margin }
 								index={ index }
 								sortIndex={ index }
 								direction={ direction }
 								key={ photo.key }
 								photo={ photo }
+								gridSettings={ gridSettings }
 								imageControlsSettings={ imageControlsSettings }
 								imageCaptionSettings={ imageCaptionSettings }
 								imageHoverEffect={ imageHoverEffect }
@@ -109,6 +113,7 @@ const GridGallery = SortableContainer( ( {
 		columns={ undefined === columns || isNaN( columns ) ? undefined : parseInt( columns ) }
 		margin={ parseInt( margin ) }
 		direction={ 'row' }
+		gridSettings={ gridSettings }
 		ImageComponent={ GridItem }
 		imageControlsSettings={ imageControlsSettings }
 		imageCaptionSettings={ imageCaptionSettings }

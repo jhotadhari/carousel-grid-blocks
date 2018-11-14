@@ -5,7 +5,7 @@
 import {
 	findIndex,
 	isArray,
-} from 'underscore';
+} from 'lodash';
 
 const findSelectedIndex = ( items ) => isArray( items ) ? findIndex( items , ( item ) => item.selected ) : -1;
 

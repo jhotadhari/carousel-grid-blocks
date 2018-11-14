@@ -2,18 +2,15 @@
  * External dependencies
  */
 import {
+	get,
+	find,
 	pick,
-	pluck,
-	findWhere,
-} from 'underscore';
+} from 'lodash';
 
 const shortid = require('shortid');
 
 import arrayMove from 'array-move';
 
-import {
-	get,
-} from 'lodash';
 
 /**
  * WordPress dependencies
@@ -62,7 +59,7 @@ export function pullItemsFromAttributes( state = { items: [ ...DEFAULT_STATE.ite
 	}, [] );
 
 	const newItems = [...imagesIds].map( ( id ) => {
-		const item = findWhere( items, { id: id } );
+		const item = find( items, { id: id } );
 		return item ? item : {
 			...DEFAULT_ITEM,
 			id: id,

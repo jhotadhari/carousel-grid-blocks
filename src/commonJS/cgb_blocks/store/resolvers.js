@@ -3,12 +3,10 @@ const shortid = require('shortid');
 
 import {
 	get,
-} from 'lodash';
-import {
-	pluck,
+	find,
+	isEqual,
 	filter,
-	findWhere,
-} from 'underscore';
+} from 'lodash';
 
 /**
  * WordPress dependencies
@@ -87,7 +85,7 @@ export function* pullItemsFromArchive( state, key, options, ) {
 					title,
 					excerpt,
 				} ) => {
-					const item = findWhere( items, { id: featured_media } );
+					const item = find( items, { id: featured_media } );
 					return item ? item : {
 						...DEFAULT_ITEM,
 						id: featured_media,

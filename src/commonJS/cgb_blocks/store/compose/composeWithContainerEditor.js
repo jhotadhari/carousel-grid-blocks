@@ -4,7 +4,7 @@
 import concatenateReducers from 'redux-concatenate-reducers';
 import {
 	isEqual,
-} from 'underscore';
+} from 'lodash';
 
 /**
  * WordPress dependencies

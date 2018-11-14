@@ -79,12 +79,15 @@ class Cgb_Register_Blocks {
 
 	public function enqueue_block_assets() {
 
-		if ( ! is_admin() )
-			$this->register_gutenberg_assets();
 
 		// enqueue style
 		$handle = $this->get_handle( 'common' );
-		$deps = is_admin() ? array( 'wp-edit-blocks' ) : array();
+		$deps = is_admin() ? array(
+			'dashicons',
+			'wp-edit-blocks',
+		) : array(
+			'dashicons',
+		);
 		wp_enqueue_style(
 			$handle,
 			Cgb_Carousel_Grid_Blocks::plugin_dir_url() . '/css/' . $handle . '.min.css',
@@ -99,16 +102,13 @@ class Cgb_Register_Blocks {
 			'wp-i18n',
 			'wp-element',
 		) : array(
-			'utils',
-			'wp-data',
-			'wp-api',
-			'wp-i18n',
-			'wp-blocks',
 			'lodash',
-			'underscore',
 			'react',
 			'react-dom',
-			'wp-components',
+			'wp-data',
+			'wp-i18n',
+			'wp-api-fetch',
+			'wp-html-entities',
 		);
 
 		wp_register_script(
@@ -123,28 +123,6 @@ class Cgb_Register_Blocks {
 		wp_localize_script( $handle, 'cgbBlocks', $this->get_localize_data() );
 		wp_enqueue_script( $handle );
 
-	}
-
-	protected function register_gutenberg_assets() {
-		$suffix = SCRIPT_DEBUG ? '' : '.min';
-		$react_suffix = ( SCRIPT_DEBUG ? '.development' : '.production' ) . $suffix;
-		wp_register_script(
-			'react',
-			'https://unpkg.com/react@16.4.1/umd/react' . $react_suffix . '.js'
-		);
-		wp_register_script(
-			'react-dom',
-			'https://unpkg.com/react-dom@16.4.1/umd/react-dom' . $react_suffix . '.js',
-			array( 'react' )
-		);
-		$moment_script = SCRIPT_DEBUG ? 'moment.js' : 'min/moment.min.js';
-		wp_register_script(
-			'moment',
-			'https://unpkg.com/moment@2.22.1/' . $moment_script,
-			array()
-		);
-
-		gutenberg_register_scripts_and_styles();
 	}
 
 	public function register_rest_fields() {

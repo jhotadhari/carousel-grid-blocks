@@ -2,12 +2,7 @@
  * External dependencies
  */
 import {
-	// pick,
-	// pluck,
-	findWhere,
-} from 'underscore';
-
-import {
+	find,
 	get,
 	isEmpty,
 } from 'lodash';
@@ -47,7 +42,7 @@ export function pullItemsFromAttributes( state = { items: [ ...DEFAULT_STATE.ite
 	}, [] );
 
 	const newItems = [...imagesIds].map( ( id ) => {
-		const item = findWhere( items, { id: id } );
+		const item = find( items, { id: id } );
 		return item ? item : {
 			...DEFAULT_ITEM,
 			id: id,

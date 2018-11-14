@@ -5,7 +5,7 @@ import {
 	filter,
 	flatten,
 	chain,
-} from 'underscore';
+} from 'lodash';
 
 /**
  * WordPress dependencies

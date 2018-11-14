@@ -12,12 +12,10 @@ import {
  */
 const {
 	__,
-	// sprintf,
 } = wp.i18n;
 const {
-    Button,
-    Dashicon,
-} = wp.components
+	decodeEntities,
+} = wp.htmlEntities;
 
 /**
  * Internal dependencies
@@ -134,6 +132,14 @@ class Item extends React.Component {
 		const height = photo ? photo.height : null;
 		const width = photo ? photo.width : null;
 
+
+
+		// const height = photo ? Math.min( photo.width, photo.height) : null;
+		// const width = photo ? Math.min( photo.width, photo.height) : null;
+
+
+		// console.log( 'height, width', height, width );		// ??? debug
+
 		// caption
 		let captionIsVisible = false;
 		switch( imageCaptionSettings.show ){
@@ -155,7 +161,7 @@ class Item extends React.Component {
 				case 'title':
 					return  <div
 							className={ className + '-info-title' }
-						>{ title }</div>;
+						>{ decodeEntities( title ) }</div>;
 				case 'caption':
 					return  <div
 							dangerouslySetInnerHTML={ { __html: caption } }
@@ -163,8 +169,9 @@ class Item extends React.Component {
 						></div>;
 				case 'postTitle':
 					return  <div
+							dangerouslySetInnerHTML={ { __html: postTitle } }
 							className={ className + '-info-post-title' }
-						>{ postTitle }</div>;
+						></div>;
 				case 'postExcerpt':
 					return  <div
 							dangerouslySetInnerHTML={ { __html: postExcerpt } }
@@ -197,7 +204,7 @@ class Item extends React.Component {
 					switch( get( imageControlsSettings, ['linkControlSettings', 'linkTo'] ) ) {
 						case 'post':
 							linkUrl = postLink || src;
-							linkTitle = postTitle || title;
+							linkTitle = decodeEntities( postTitle || title );
 							break;
 						case 'attachment':
 							linkUrl = src;
@@ -210,25 +217,29 @@ class Item extends React.Component {
 								title={ linkTitle }
 								target={ get( imageControlsSettings, ['linkControlSettings', 'newTab'] ) ? '_blank' : '_self' }
 							>
-								<Button
+
+								<button
 									className={ 'components-icon-button' }
 									aria-label={ linkTitle }
 									title={ linkTitle }
 								>
-									<Dashicon icon={ 'redo' } />
-								</Button>
+									<span className={ [ 'dashicons', 'dashicons-redo' ].join( ' ' ) }></span>
+								</button>
+
 							</a>
 						</div>;
 				case 'fullscreen':
 					return  <div style={ style } className={ className + '-image-control' } >
-							<Button
+
+							<button
 								className={ 'components-icon-button' }
 								aria-label={ 	__( 'Fullscreen', 'cgb' ) }
 								title={ 		__( 'Fullscreen', 'cgb' ) }
 								onClick={ () => console.log( 'fullscreen' ) }
 							>
-								<Dashicon icon={ 'editor-expand' } />
-							</Button>
+								<span className={ [ 'dashicons', 'dashicons-editor-expand' ].join( ' ' ) }></span>
+							</button>
+
 						</div>;
 			}
 			return <span>{ '' }</span>;

@@ -132,14 +132,6 @@ class Item extends React.Component {
 		const height = photo ? photo.height : null;
 		const width = photo ? photo.width : null;
 
-
-
-		// const height = photo ? Math.min( photo.width, photo.height) : null;
-		// const width = photo ? Math.min( photo.width, photo.height) : null;
-
-
-		// console.log( 'height, width', height, width );		// ??? debug
-
 		// caption
 		let captionIsVisible = false;
 		switch( imageCaptionSettings.show ){

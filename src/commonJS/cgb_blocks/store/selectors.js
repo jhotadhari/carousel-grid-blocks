@@ -11,17 +11,17 @@ import {
 
 import findSelectedIndex from '../utils/findSelectedIndex';
 
-// items
+// items fetch
 export function pullItemsFromArchive( state, key, options, random ) {
 	return state.itemsReducer.items;
 }
-
-export function getItems( state ) {
-	return state.itemsReducer.items;
+export function fetchItem( items, index, item ) {
+	return item;
 };
 
-export function fetchItem( state, index, item ) {
-	return item;
+// items
+export function getItems( state ) {
+	return state.itemsReducer.items;
 };
 
 export function getSelectedIndex( state ) {

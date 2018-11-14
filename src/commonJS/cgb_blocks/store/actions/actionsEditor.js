@@ -1,5 +1,6 @@
 
 import {
+	fetchFromAPI,
 	pullItemsFromAttributes,
 	ensureOneItem,
 	ensureOneSelected,
@@ -9,6 +10,7 @@ import {
 }	from './actions';
 
 export{
+	fetchFromAPI,
 	pullItemsFromAttributes,
 	ensureOneItem,
 	ensureOneSelected,

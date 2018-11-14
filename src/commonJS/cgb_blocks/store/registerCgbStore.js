@@ -19,6 +19,7 @@ const registerCgbStore = ( {
 	reducer,
 	actions,
 	selectors,
+	controls,
 	resolvers,
 }) => {
 
@@ -29,10 +30,11 @@ const registerCgbStore = ( {
 		reducer,
 		actions,
 		selectors,
+		controls,
 		resolvers,
 	} );
 
-	cgbBlocks.store = cgbBlocks.store;
+	cgbBlocks.store = store;
 
 	const {
 		pullItemsFromArchive,
@@ -65,7 +67,7 @@ const registerCgbStore = ( {
 					_pullItemsFromAttributes();
 					break;
 				case 'archivePostType':
-					pullItemsFromArchive( currentItemsSource.key, currentItemsSource.options, Math.random() );
+					pullItemsFromArchive( store.getState(), currentItemsSource.key, currentItemsSource.options, Math.random() );
 					break;
 			};
 

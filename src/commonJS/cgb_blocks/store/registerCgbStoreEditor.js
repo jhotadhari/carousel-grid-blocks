@@ -26,12 +26,14 @@ import reducerEditor 		from './reducer/reducerEditor';
 import * as actionsEditor 	from './actions/actionsEditor';
 import * as selectors 		from './selectors';
 import * as resolvers 		from './resolvers';
+import controls 			from './controls';
 
 const registerCgbStoreEditor = () => {
 	const store = registerCgbStore({
 		reducer: reducerEditor,
 		actions: actionsEditor,
 		selectors,
+		controls,
 		resolvers,
 	});
 

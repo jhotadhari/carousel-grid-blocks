@@ -43,6 +43,9 @@ Upload and install this Plugin the same way you'd install any other plugin.
 
 == Changelog ==
 
+0.0.4
+see commit messages
+
 0.0.3
 Added support for post type archives as image sources
 

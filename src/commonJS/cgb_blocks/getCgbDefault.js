@@ -14,7 +14,7 @@ const getCgbDefault = key => {
 			} );
 
 		case 'imageHoverEffect':
-			return applyFilters( 'cgb.default.imageHighlightEffect', 'scale' );
+			return applyFilters( 'cgb.default.imageHoverEffect', 'scale' );
 
 		case 'imageHoverEffectSettings':
 			return applyFilters( 'cgb.default.imageHighlightEffectSettings', {} );

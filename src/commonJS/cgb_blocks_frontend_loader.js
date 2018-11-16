@@ -2,6 +2,7 @@
  * External dependencies
  */
 import loadJS from 'load-js';
+import extender from 'object-extender';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -42,13 +43,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		[...blockWrappers].map( ( blockWrapper ) => {
 
 			const data = parseSerialized( blockWrapper.getAttribute('data-cgb') );
-			const gridSettings = data.gridSettings || getCgbDefault( 'gridSettings' );
+
+			// object
+			const gridSettings = extender.merge( getCgbDefault( 'gridSettings' ), data.gridSettings );
+			const imageHoverEffectSettings = extender.merge( getCgbDefault( 'imageHoverEffectSettings' ), data.imageHoverEffectSettings );
+			const imageHighlightEffectSettings = extender.merge( getCgbDefault( 'imageHighlightEffectSettings' ), data.imageHighlightEffectSettings );
+			const imageControlsSettings = extender.merge( getCgbDefault( 'imageControlsSettings' ), data.imageControlsSettings );
+			const imageCaptionSettings = extender.merge( getCgbDefault( 'imageCaptionSettings' ), data.imageCaptionSettings );
+			// string
 			const imageHoverEffect = data.imageHoverEffect || getCgbDefault( 'imageHoverEffect' );
-			const imageHoverEffectSettings = data.imageHoverEffectSettings || getCgbDefault( 'imageHoverEffectSettings' );
 			const imageHighlightEffect = data.imageHighlightEffect ||getCgbDefault( 'imageHighlightEffect' );
-			const imageHighlightEffectSettings = data.imageHighlightEffectSettings || getCgbDefault( 'imageHighlightEffectSettings' );
-			const imageControlsSettings = data.imageControlsSettings || getCgbDefault( 'imageControlsSettings' );
-			const imageCaptionSettings = data.imageCaptionSettings || getCgbDefault( 'imageCaptionSettings' );
 
 			[... blockWrapper.getElementsByClassName( 'cgb-grid' )].map( ( grid ) => {
 				ReactDOM.render( <Grid

@@ -1,9 +1,6 @@
 /**
  * External dependencies
  */
-// import {
-// 	get,
-// } from 'lodash';
 import loadJS from 'load-js';
 import extender from 'object-extender';
 

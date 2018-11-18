@@ -13,6 +13,34 @@ const getCgbDefault = key => {
 				itemSizes: 'maintainRatios',
 			} );
 
+		case 'carouselSettings':
+			return applyFilters( 'cgb.default.carouselSettings', {
+				// dimensions
+				maxWidth: {
+					value: 100,
+					unit: 'percent',			// px || percent
+				},
+				resizeToContainerWidth: true,
+				maxHeight: {
+					setMaxHeight: false,
+					value: 400,
+					unit: 'px',			// px
+				},
+				resizeToScreenHeight: {
+					resize: true,
+					value: 10,
+					unit: 'percent',	// px || percent
+				},
+				// react-responsive-carousel options
+				showArrows: true,
+				showStatus: true,
+				showIndicators: true,
+				infiniteLoop: true,
+				autoPlay: false,
+				interval: 5000,
+				stopOnHover: true,
+			} );
+
 		case 'imageHoverEffect':
 			return applyFilters( 'cgb.default.imageHoverEffect', 'scale' );
 

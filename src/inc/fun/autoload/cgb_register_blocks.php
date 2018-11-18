@@ -173,6 +173,7 @@ class Cgb_Register_Blocks {
 		$attributes = cgb_decode_attributes( $attributes, array(
 			'settings',
 			'gridSettings',
+			'carouselSettings',
 			'imageHoverEffectSettings',
 			'imageHighlightEffectSettings',
 			'imageControlsSettings',

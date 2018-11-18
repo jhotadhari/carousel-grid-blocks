@@ -32,8 +32,8 @@ const registerBlockCarousel = () => {
 		category: 'common',
 		supports: {
 			html: false,
-			align: true,
-			align: [ 'left', 'right', 'full' ],
+			// align: true,
+			// align: [ 'left', 'right', 'full' ],
 		},
 		transforms: {
 			to: [
@@ -73,6 +73,10 @@ const registerBlockCarousel = () => {
 				type: 'string',
 				default: '',
 			},
+			carouselSettings: {
+				type: 'string',
+				default:  JSON.stringify( getCgbDefault( 'carouselSettings' ) ),
+			},
 			imageControlsSettings: {
 				type: 'string',
 				default: JSON.stringify( getCgbDefault( 'imageControlsSettings' ) ),
@@ -95,6 +99,7 @@ const registerBlockCarousel = () => {
 				imageHoverEffect,
 			} = attributes;
 
+			const carouselSettings = extender.merge( getCgbDefault( 'carouselSettings' ), parseSerialized( attributes.carouselSettings ) );
 			const imageControlsSettings = extender.merge( getCgbDefault( 'imageControlsSettings' ), parseSerialized( attributes.imageControlsSettings ) );
 			const imageCaptionSettings = extender.merge( getCgbDefault( 'imageCaptionSettings' ), parseSerialized( attributes.imageCaptionSettings ) );
 			const imageHoverEffectSettings = extender.merge( getCgbDefault( 'imageHoverEffectSettings' ), parseSerialized( attributes.imageHoverEffectSettings ) );
@@ -122,6 +127,7 @@ const registerBlockCarousel = () => {
 					<InspectorControls>
 						<CarouselInspector
 							setAttributes={ setAttributes }
+							carouselSettings={ carouselSettings }
 							imageControlsSettings={ imageControlsSettings }
 							imageCaptionSettings={ imageCaptionSettings }
 							imageHoverEffect={ imageHoverEffect }
@@ -130,6 +136,7 @@ const registerBlockCarousel = () => {
 					</InspectorControls>,
 
 					<Carousel
+						carouselSettings={ carouselSettings }
 						imageControlsSettings={ imageControlsSettings }
 						imageCaptionSettings={ imageCaptionSettings }
 						imageHoverEffect={ imageHoverEffect }

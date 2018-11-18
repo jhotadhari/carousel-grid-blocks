@@ -15,10 +15,6 @@ const {
 } = wp.data;
 
 const {
-	getBlock,
-} = select( 'core/editor' );
-
-const {
 	updateBlockAttributes,
 } = dispatch( 'core/editor' );
 

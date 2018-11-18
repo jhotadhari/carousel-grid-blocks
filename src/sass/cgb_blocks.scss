@@ -34,6 +34,34 @@
     }
 }
 
+.components-base-control.cgb-columns-field .components-base-control__field {
+    display: flex;
+    flex-wrap: wrap;
+
+    & > .components-base-control__label {
+        flex-basis: 100%;
+        flex-shrink: 0;
+        flex-grow: 1;
+    }
+
+    & > .components-base-control {
+        flex-shrink: 1;
+        flex-grow: 1;
+        flex-basis: 50%;
+
+        &.cgb-columns-field-30 {
+            flex-basis: 30px;
+            flex-shrink: 0;
+        }
+
+        &.cgb-columns-field-full {
+            flex-basis: 100%;
+            flex-shrink: 0;
+        }
+    }
+
+}
+
 body.gutenberg-editor-page,
 body {
 
@@ -173,6 +201,11 @@ body {
         }
 
         &-carousel {
+
+            // ??? hard coded center. use gb aligns
+            .carousel {
+                margin: 0px auto;
+            }
 
             .control-dots {
                 list-style: none;

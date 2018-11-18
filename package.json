@@ -61,6 +61,7 @@
     "react-responsive-carousel": "^3.1.42",
     "react-sortable-hoc": "^0.8.3",
     "redux-concatenate-reducers": "^1.0.0",
+    "resize-observer-polyfill": "^1.5.0",
     "shortid": "^2.2.13",
     "sort-object": "^3.0.2",
     "time-grunt": "^1.4.0",

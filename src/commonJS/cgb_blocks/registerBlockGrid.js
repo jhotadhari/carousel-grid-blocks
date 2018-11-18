@@ -32,8 +32,8 @@ const registerBlockGrid = () => {
 		category: 'common',
 		supports: {
 			html: false,
-			align: true,
-			align: [ 'left', 'right', 'full' ],
+			// align: true,
+			// align: [ 'left', 'right', 'full' ],
 		},
 		transforms: {
 			to: [

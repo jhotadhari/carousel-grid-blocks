@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			// object
 			const gridSettings = extender.merge( getCgbDefault( 'gridSettings' ), data.gridSettings );
+			const carouselSettings = extender.merge( getCgbDefault( 'carouselSettings' ), data.carouselSettings );
 			const imageHoverEffectSettings = extender.merge( getCgbDefault( 'imageHoverEffectSettings' ), data.imageHoverEffectSettings );
 			const imageHighlightEffectSettings = extender.merge( getCgbDefault( 'imageHighlightEffectSettings' ), data.imageHighlightEffectSettings );
 			const imageControlsSettings = extender.merge( getCgbDefault( 'imageControlsSettings' ), data.imageControlsSettings );
@@ -68,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			[...blockWrapper.getElementsByClassName( 'cgb-carousel' )].map( ( carousel ) => {
 				ReactDOM.render( <Carousel
+					carouselSettings={ carouselSettings }
 					imageHoverEffect={ imageHoverEffect }
 					imageHoverEffectSettings={ imageHoverEffectSettings }
 					imageControlsSettings={ imageControlsSettings }

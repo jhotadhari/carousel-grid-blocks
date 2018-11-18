@@ -1,9 +1,6 @@
 /**
  * External dependencies
  */
-import {
-	get,
-} from 'lodash';
 import Gallery from 'react-photo-gallery';
 import { SortableContainer } from 'react-sortable-hoc';
 import { computeSizes, computeSizesColumns } from '../../vendor/react-photo-gallery/utils';	// from 'react-photo-gallery/src/utils';  // why doesn't that work?

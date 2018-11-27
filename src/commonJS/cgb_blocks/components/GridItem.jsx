@@ -13,7 +13,6 @@ import {
 /**
  * Internal dependencies
  */
-import getCgbDefault					from '../getCgbDefault';
 import rgbaToCssProp					from '../utils/rgbaToCssProp';
 
 import composeWithItemsFrontend 		from '../store/compose/composeWithItemsFrontend.js';
@@ -52,8 +51,8 @@ let GridItem = ({
 		let style = {};
 		switch( imageHighlightEffect ) {
 			case 'boxShadow':
-				const boxShadowWidth = get( imageHighlightEffectSettings, ['boxShadowWidth'] ) || get( getCgbDefault( 'imageHighlightEffectSettings' ), ['boxShadowWidth'] );
-				const boxShadowColor = rgbaToCssProp( get( imageHighlightEffectSettings, ['boxShadowColor'] ) || get( getCgbDefault( 'imageHighlightEffectSettings' ), ['boxShadowColor'] ) );
+				const boxShadowWidth = get( imageHighlightEffectSettings, ['boxShadowWidth'] );
+				const boxShadowColor = rgbaToCssProp( get( imageHighlightEffectSettings, ['boxShadowColor'] ) );
 				style = {
 					...style,
 					transition: 'box-shadow ' + ( transitionTime / 1000 ) + 's',

@@ -52,10 +52,10 @@ const registerBlockCarousel = () => {
 						imageSource: imageSource,
 						imageIds: imageIds || [],
 						settings: settings || '',
-						imageControlsSettings: imageControlsSettings || JSON.stringify( getCgbDefault( 'imageControlsSettings' ) ),
-						imageCaptionSettings: imageCaptionSettings || JSON.stringify( getCgbDefault( 'imageCaptionSettings' ) ),
-						imageHoverEffect: imageHoverEffect || getCgbDefault( 'imageHoverEffect' ),
-						imageHoverEffectSettings: imageHoverEffectSettings || JSON.stringify( getCgbDefault( 'imageHoverEffectSettings' ) ),
+						imageControlsSettings: imageControlsSettings || JSON.stringify( getCgbDefault( 'imageControlsSettings', { blockName: 'cgb/carousel' } ) ),
+						imageCaptionSettings: imageCaptionSettings || JSON.stringify( getCgbDefault( 'imageCaptionSettings', { blockName: 'cgb/carousel' } ) ),
+						imageHoverEffect: imageHoverEffect || getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/carousel' } ),
+						imageHoverEffectSettings: imageHoverEffectSettings || JSON.stringify( getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/carousel' } ) ),
 					} ),
 				},
 			],
@@ -75,34 +75,32 @@ const registerBlockCarousel = () => {
 			},
 			carouselSettings: {
 				type: 'string',
-				default:  JSON.stringify( getCgbDefault( 'carouselSettings' ) ),
+				default:  JSON.stringify( getCgbDefault( 'carouselSettings', { blockName: 'cgb/carousel' } ) ),
 			},
 			imageControlsSettings: {
 				type: 'string',
-				default: JSON.stringify( getCgbDefault( 'imageControlsSettings' ) ),
+				default: JSON.stringify( getCgbDefault( 'imageControlsSettings', { blockName: 'cgb/carousel' } ) ),
 			},
 			imageCaptionSettings: {
 				type: 'string',
-				default:  JSON.stringify( getCgbDefault( 'imageCaptionSettings' ) ),
+				default:  JSON.stringify( getCgbDefault( 'imageCaptionSettings', { blockName: 'cgb/carousel' } ) ),
 			},
 			imageHoverEffect: {
 				type: 'string',
-				default: getCgbDefault( 'imageHoverEffect' ),
+				default: getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/carousel' } ),
 			},
 			imageHoverEffectSettings: {
 				type: 'string',
-				default:  JSON.stringify( getCgbDefault( 'imageHoverEffectSettings' ) ),
+				default:  JSON.stringify( getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/carousel' } ) ),
 			},
 		},
 		edit( {  attributes, className, setAttributes } ) {
-			const {
-				imageHoverEffect,
-			} = attributes;
 
-			const carouselSettings = extender.merge( getCgbDefault( 'carouselSettings' ), parseSerialized( attributes.carouselSettings ) );
-			const imageControlsSettings = extender.merge( getCgbDefault( 'imageControlsSettings' ), parseSerialized( attributes.imageControlsSettings ) );
-			const imageCaptionSettings = extender.merge( getCgbDefault( 'imageCaptionSettings' ), parseSerialized( attributes.imageCaptionSettings ) );
-			const imageHoverEffectSettings = extender.merge( getCgbDefault( 'imageHoverEffectSettings' ), parseSerialized( attributes.imageHoverEffectSettings ) );
+			const imageHoverEffect = attributes.imageHoverEffect || getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/carousel' } );
+			const carouselSettings = extender.merge( getCgbDefault( 'carouselSettings', { blockName: 'cgb/carousel' } ), parseSerialized( attributes.carouselSettings ) );
+			const imageControlsSettings = extender.merge( getCgbDefault( 'imageControlsSettings', { blockName: 'cgb/carousel' } ), parseSerialized( attributes.imageControlsSettings ) );
+			const imageCaptionSettings = extender.merge( getCgbDefault( 'imageCaptionSettings', { blockName: 'cgb/carousel' } ), parseSerialized( attributes.imageCaptionSettings ) );
+			const imageHoverEffectSettings = extender.merge( getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/carousel' } ), parseSerialized( attributes.imageHoverEffectSettings ) );
 
 			if ( ! attributes.scriptsloaded) {
 				// load the main editor component, rerender the block

@@ -27,7 +27,6 @@ const {
 /**
  * Internal dependencies
  */
-import getCgbDefault					from '../getCgbDefault';
 import getInspectorOptions				from '../getInspectorOptions';
 import ColorPaletteAlpha				from './ColorPaletteAlpha.jsx';
 
@@ -193,7 +192,7 @@ let InspectorImage = ({
 						onChange={ ( newVal ) => setAttributes( {
 							imageHighlightEffectSettings: JSON.stringify( {
 								...imageHighlightEffectSettings,
-								boxShadowColor: undefined !== newVal ? newVal.rgb : get( getCgbDefault( 'imageHighlightEffectSettings' ), ['boxShadowColor'] ),
+								boxShadowColor: undefined !== newVal ? newVal.rgb : get( imageHighlightEffectSettings, ['boxShadowColor'] ),
 							} )
 						} ) }
 					/>
@@ -206,7 +205,7 @@ let InspectorImage = ({
 					onChange={ ( newVal ) => setAttributes( {
 						imageHighlightEffectSettings: JSON.stringify( {
 							...imageHighlightEffectSettings,
-							boxShadowWidth: undefined !== newVal ? newVal : get( getCgbDefault( 'imageHighlightEffectSettings' ), ['boxShadowWidth'] ),
+							boxShadowWidth: undefined !== newVal ? newVal : get( imageHighlightEffectSettings, ['boxShadowWidth'] ),
 						} )
 					} ) }
 				/>

@@ -3,7 +3,7 @@
  */
 const { applyFilters } = wp.hooks;
 
-const getCgbDefault = key => {
+const getCgbDefault = ( key, args ) => {
 	switch( key ){
 
 		case 'gridSettings':
@@ -11,7 +11,7 @@ const getCgbDefault = key => {
 				columns: 'auto',
 				margin: '5',
 				itemSizes: 'maintainRatios',
-			} );
+			}, args );
 
 		case 'carouselSettings':
 			return applyFilters( 'cgb.default.carouselSettings', {
@@ -39,16 +39,16 @@ const getCgbDefault = key => {
 				autoPlay: false,
 				interval: 5000,
 				stopOnHover: true,
-			} );
+			}, args );
 
 		case 'imageHoverEffect':
-			return applyFilters( 'cgb.default.imageHoverEffect', 'scale' );
+			return applyFilters( 'cgb.default.imageHoverEffect', 'scale', args );
 
 		case 'imageHoverEffectSettings':
-			return applyFilters( 'cgb.default.imageHighlightEffectSettings', {} );
+			return applyFilters( 'cgb.default.imageHighlightEffectSettings', {}, args );
 
 		case 'imageHighlightEffect':
-			return applyFilters( 'cgb.default.imageHighlightEffect', 'boxShadow' );
+			return applyFilters( 'cgb.default.imageHighlightEffect', 'boxShadow', args );
 
 		case 'imageHighlightEffectSettings':
 			return applyFilters( 'cgb.default.imageHighlightEffectSettings', {
@@ -59,7 +59,7 @@ const getCgbDefault = key => {
 					a: '0.8',
 				},
 				boxShadowWidth: '5',
-			} );
+			}, args );
 
 		case 'imageCaptionSettings':
 			return applyFilters( 'cgb.default.imageCaptionSettings', {
@@ -78,7 +78,7 @@ const getCgbDefault = key => {
 					'title',
 					'caption',
 				],
-			} );
+			}, args );
 
 		case 'imageControlsSettings':
 			return applyFilters( 'cgb.default.imageControlsSettings', {
@@ -100,7 +100,7 @@ const getCgbDefault = key => {
 					newTab: false,
 					linkTo: 'post',	// 'attachment'
 				}
-			} );
+			}, args );
 	}
 };
 

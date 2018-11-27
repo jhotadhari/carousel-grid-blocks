@@ -44,36 +44,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			const data = parseSerialized( blockWrapper.getAttribute('data-cgb') );
 
-			// object
-			const gridSettings = extender.merge( getCgbDefault( 'gridSettings' ), data.gridSettings );
-			const carouselSettings = extender.merge( getCgbDefault( 'carouselSettings' ), data.carouselSettings );
-			const imageHoverEffectSettings = extender.merge( getCgbDefault( 'imageHoverEffectSettings' ), data.imageHoverEffectSettings );
-			const imageHighlightEffectSettings = extender.merge( getCgbDefault( 'imageHighlightEffectSettings' ), data.imageHighlightEffectSettings );
-			const imageControlsSettings = extender.merge( getCgbDefault( 'imageControlsSettings' ), data.imageControlsSettings );
-			const imageCaptionSettings = extender.merge( getCgbDefault( 'imageCaptionSettings' ), data.imageCaptionSettings );
-			// string
-			const imageHoverEffect = data.imageHoverEffect || getCgbDefault( 'imageHoverEffect' );
-			const imageHighlightEffect = data.imageHighlightEffect ||getCgbDefault( 'imageHighlightEffect' );
 
 			[... blockWrapper.getElementsByClassName( 'cgb-grid' )].map( ( grid ) => {
 				ReactDOM.render( <Grid
-					gridSettings={ gridSettings }
-					imageHoverEffect={ imageHoverEffect }
-					imageHoverEffectSettings={ imageHoverEffectSettings }
-					imageHighlightEffect={ imageHighlightEffect }
-					imageHighlightEffectSettings={ imageHighlightEffectSettings }
-					imageControlsSettings={ imageControlsSettings }
-					imageCaptionSettings={ imageCaptionSettings }
+					gridSettings={ extender.merge( getCgbDefault( 'gridSettings', { blockName: 'cgb/grid' } ), data.gridSettings ) }
+					imageHoverEffect={ data.imageHoverEffect || getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/grid' } ) }
+					imageHoverEffectSettings={ extender.merge( getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/grid' } ), data.imageHoverEffectSettings ) }
+					imageHighlightEffect={ data.imageHighlightEffect ||getCgbDefault( 'imageHighlightEffect', { blockName: 'cgb/grid' } ) }
+					imageHighlightEffectSettings={ extender.merge( getCgbDefault( 'imageHighlightEffectSettings', { blockName: 'cgb/grid' } ), data.imageHighlightEffectSettings ) }
+					imageControlsSettings={ extender.merge( getCgbDefault( 'imageControlsSettings', { blockName: 'cgb/grid' } ), data.imageControlsSettings ) }
+					imageCaptionSettings={ extender.merge( getCgbDefault( 'imageCaptionSettings', { blockName: 'cgb/grid' } ), data.imageCaptionSettings ) }
 				/>, grid );
 			});
 
 			[...blockWrapper.getElementsByClassName( 'cgb-carousel' )].map( ( carousel ) => {
 				ReactDOM.render( <Carousel
-					carouselSettings={ carouselSettings }
-					imageHoverEffect={ imageHoverEffect }
-					imageHoverEffectSettings={ imageHoverEffectSettings }
-					imageControlsSettings={ imageControlsSettings }
-					imageCaptionSettings={ imageCaptionSettings }
+					carouselSettings={ extender.merge( getCgbDefault( 'carouselSettings', { blockName: 'cgb/carousel' } ), data.carouselSettings ) }
+					imageHoverEffect={ data.imageHoverEffect || getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/carousel' } ) }
+					imageHoverEffectSettings={ extender.merge( getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/carousel' } ), data.imageHoverEffectSettings ) }
+					imageControlsSettings={ extender.merge( getCgbDefault( 'imageControlsSettings', { blockName: 'cgb/carousel' } ), data.imageControlsSettings ) }
+					imageCaptionSettings={ extender.merge( getCgbDefault( 'imageCaptionSettings', { blockName: 'cgb/carousel' } ), data.imageCaptionSettings ) }
 				/>, carousel );
 			});
 

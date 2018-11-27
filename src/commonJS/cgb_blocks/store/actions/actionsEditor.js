@@ -19,13 +19,6 @@ export{
 	updateItem,
 }
 
-export function pushItemsToAttribues() {
-	return {
-		type: 'PUSH_ITEMS_TO_ATTRIBUES',
-	};
-}
-
-
 export function addItems( medias ) {
 	return {
 		type: 'ADD_ITEMS',

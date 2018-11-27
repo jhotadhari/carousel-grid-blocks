@@ -61,7 +61,7 @@ const CarouselInspector = ({
 
 			<SelectControl
 				value={ get( carouselSettings, ['maxWidth', 'unit'] ) }
-				className={ 'cgb-columns-field-30' }
+				className={ 'cgb-columns-field-30 cgb-columns-field-no-margin' }
 				options={ [
 					{ label: 'px', value: 'px' },
 					{ label: '%', value: 'percent' },
@@ -112,7 +112,7 @@ const CarouselInspector = ({
 
 				<SelectControl
 					value={ get( carouselSettings, ['maxHeight', 'unit'] ) }
-					className={ 'cgb-columns-field-30' }
+					className={ 'cgb-columns-field-30 cgb-columns-field-no-margin' }
 					options={ [
 						{ label: 'px', value: 'px' },
 					] }
@@ -165,7 +165,7 @@ const CarouselInspector = ({
 
 				<SelectControl
 					value={ get( carouselSettings, ['resizeToScreenHeight', 'unit'] ) }
-					className={ 'cgb-columns-field-30' }
+					className={ 'cgb-columns-field-30 cgb-columns-field-no-margin' }
 					options={ [
 						{ label: 'px', value: 'px' },
 						{ label: '%', value: 'percent' },

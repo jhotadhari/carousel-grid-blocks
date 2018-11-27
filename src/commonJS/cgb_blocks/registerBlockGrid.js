@@ -52,10 +52,10 @@ const registerBlockGrid = () => {
 						imageSource: imageSource,
 						imageIds: imageIds || [],
 						settings: settings || '',
-						imageControlsSettings: imageControlsSettings || JSON.stringify( getCgbDefault( 'imageControlsSettings' ) ),
-						imageCaptionSettings: imageCaptionSettings || JSON.stringify( getCgbDefault( 'imageCaptionSettings' ) ),
-						imageHoverEffect: imageHoverEffect || getCgbDefault( 'imageHoverEffect' ),
-						imageHoverEffectSettings: imageHoverEffectSettings || JSON.stringify( getCgbDefault( 'imageHoverEffectSettings' ) ),
+						imageControlsSettings: imageControlsSettings || JSON.stringify( getCgbDefault( 'imageControlsSettings', { blockName: 'cgb/grid' } ) ),
+						imageCaptionSettings: imageCaptionSettings || JSON.stringify( getCgbDefault( 'imageCaptionSettings', { blockName: 'cgb/grid' } ) ),
+						imageHoverEffect: imageHoverEffect || getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/grid' } ),
+						imageHoverEffectSettings: imageHoverEffectSettings || JSON.stringify( getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/grid' } ) ),
 					} ),
 				},
 			],
@@ -76,49 +76,49 @@ const registerBlockGrid = () => {
 			},
 			gridSettings: {
 				type: 'string',
-				default:  JSON.stringify( getCgbDefault( 'gridSettings' ) ),
+				default:  JSON.stringify( getCgbDefault( 'gridSettings', { blockName: 'cgb/grid' } ) ),
 			},
 			imageControlsSettings: {
 				type: 'string',
-				default: JSON.stringify( getCgbDefault( 'imageControlsSettings' ) ),
+				default: JSON.stringify( getCgbDefault( 'imageControlsSettings', { blockName: 'cgb/grid' } ) ),
 			},
 			imageCaptionSettings: {
 				type: 'string',
-				default: JSON.stringify( getCgbDefault( 'imageCaptionSettings' ) ),
+				default: JSON.stringify( getCgbDefault( 'imageCaptionSettings', { blockName: 'cgb/grid' } ) ),
 			},
 			imageHoverEffect: {
 				type: 'string',
-				default: getCgbDefault( 'imageHoverEffect' ),
+				default: getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/grid' } ),
 			},
 			imageHoverEffectSettings: {
 				type: 'string',
-				default:  JSON.stringify( getCgbDefault( 'imageHoverEffectSettings' ) ),
+				default:  JSON.stringify( getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/grid' } ) ),
 			},
 
 			imageHighlightEffect: {
 				type: 'string',
-				default:  getCgbDefault( 'imageHighlightEffect' ),
+				default:  getCgbDefault( 'imageHighlightEffect', { blockName: 'cgb/grid' } ),
 			},
 			imageHighlightEffectSettings: {
 				type: 'string',
-				default:  JSON.stringify( getCgbDefault( 'imageHighlightEffectSettings' ) ),
+				default:  JSON.stringify( getCgbDefault( 'imageHighlightEffectSettings', { blockName: 'cgb/grid' } ) ),
 			},
 		},
 		edit( {  attributes, className, setAttributes } ) {
 			const {
-				columns,
-				margin,
-				imageHoverEffect,
-				imageHighlightEffect,
+				// columns,
+				// margin,
 			} = attributes;
 
 			// ??? use className
 
-			const gridSettings = extender.merge( getCgbDefault( 'gridSettings' ), parseSerialized( attributes.gridSettings ) );
-			const imageControlsSettings = extender.merge( getCgbDefault( 'imageControlsSettings' ), parseSerialized( attributes.imageControlsSettings ) );
-			const imageCaptionSettings = extender.merge( getCgbDefault( 'imageCaptionSettings' ), parseSerialized( attributes.imageCaptionSettings ) );
-			const imageHighlightEffectSettings = extender.merge( getCgbDefault( 'imageHighlightEffectSettings' ), parseSerialized( attributes.imageHighlightEffectSettings ) );
-			const imageHoverEffectSettings = extender.merge( getCgbDefault( 'imageHoverEffectSettings' ), parseSerialized( attributes.imageHoverEffectSettings ) );
+			const imageHoverEffect = attributes.imageHoverEffect || getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/grid' } );
+			const imageHighlightEffect = attributes.imageHighlightEffect || getCgbDefault( 'imageHighlightEffect', { blockName: 'cgb/grid' } );
+			const gridSettings = extender.merge( getCgbDefault( 'gridSettings', { blockName: 'cgb/grid' } ), parseSerialized( attributes.gridSettings ) );
+			const imageControlsSettings = extender.merge( getCgbDefault( 'imageControlsSettings', { blockName: 'cgb/grid' } ), parseSerialized( attributes.imageControlsSettings ) );
+			const imageCaptionSettings = extender.merge( getCgbDefault( 'imageCaptionSettings', { blockName: 'cgb/grid' } ), parseSerialized( attributes.imageCaptionSettings ) );
+			const imageHighlightEffectSettings = extender.merge( getCgbDefault( 'imageHighlightEffectSettings', { blockName: 'cgb/grid' } ), parseSerialized( attributes.imageHighlightEffectSettings ) );
+			const imageHoverEffectSettings = extender.merge( getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/grid' } ), parseSerialized( attributes.imageHoverEffectSettings ) );
 
 			if ( ! attributes.scriptsloaded) {
 				// load the main editor component, rerender the block

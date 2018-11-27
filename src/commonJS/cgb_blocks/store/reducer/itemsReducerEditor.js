@@ -19,10 +19,6 @@ const {
 	dispatch,
 } = wp.data;
 
-const {
-	updateBlockAttributes,
-} = dispatch( 'core/editor' );
-
 /**
  * Internal dependencies
  */

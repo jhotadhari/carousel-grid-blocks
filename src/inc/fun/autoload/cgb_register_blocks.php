@@ -79,6 +79,8 @@ class Cgb_Register_Blocks {
 
 	public function enqueue_block_assets() {
 
+		if ( ! apply_filters( 'cgb_enqueue_block_assets', true ) )
+			return;
 
 		// enqueue style
 		$handle = $this->get_handle( 'common' );

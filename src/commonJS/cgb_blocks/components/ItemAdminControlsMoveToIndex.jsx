@@ -19,7 +19,7 @@ const {
  */
 import composeWithItemsEditor 		from '../store/compose/composeWithItemsEditor.js';
 
-class ItemControlsMoveToIndex extends React.Component {
+class ItemAdminControlsMoveToIndex extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -88,16 +88,16 @@ class ItemControlsMoveToIndex extends React.Component {
 
 
 
-ItemControlsMoveToIndex.propTypes = {
+ItemAdminControlsMoveToIndex.propTypes = {
 	items: PropTypes.array,
 	index: PropTypes.number,
 	moveItem: PropTypes.func,
 	onClose: PropTypes.func,
 }
 
-ItemControlsMoveToIndex = composeWithItemsEditor( ItemControlsMoveToIndex, [
+ItemAdminControlsMoveToIndex = composeWithItemsEditor( ItemAdminControlsMoveToIndex, [
 	'moveItem',
 	'items',
 ] );
 
-export default ItemControlsMoveToIndex;
+export default ItemAdminControlsMoveToIndex;

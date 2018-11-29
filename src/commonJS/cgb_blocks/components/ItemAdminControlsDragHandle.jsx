@@ -15,9 +15,9 @@ const {
  * Internal dependencies
  */
 import composeWithItemsEditor 		from '../store/compose/composeWithItemsEditor.js';
-import ItemControlsMoveToIndex 				from './ItemControlsMoveToIndex.jsx';
+import ItemAdminControlsMoveToIndex 				from './ItemAdminControlsMoveToIndex.jsx';
 
-const ItemControlsDragHandle = SortableHandle( ( { disabled, label } ) => { return (
+const ItemAdminControlsDragHandle = SortableHandle( ( { disabled, label } ) => { return (
 	<Tooltip text={ label }>
 		<div
 			className={ 'components-icon-button components-button' }
@@ -38,4 +38,4 @@ const ItemControlsDragHandle = SortableHandle( ( { disabled, label } ) => { retu
 	</Tooltip>
 ) } );
 
-export default ItemControlsDragHandle;
+export default ItemAdminControlsDragHandle;

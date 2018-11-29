@@ -92,6 +92,7 @@ const GridInspector = ({
 		imageHoverEffectSettings={ imageHoverEffectSettings }
 		imageHighlightEffect={ imageHighlightEffect }
 		imageHighlightEffectSettings={ imageHighlightEffectSettings }
+		blockName={ 'cgb/grid' }
 	/>
 
 </>;

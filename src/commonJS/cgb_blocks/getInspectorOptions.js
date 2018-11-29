@@ -4,7 +4,7 @@
 const { __ } = wp.i18n;
 const { applyFilters } = wp.hooks;
 
-const getInspectorOptions = key => {
+const getInspectorOptions = ( key, args ) => {
 	let options = [];
 	switch( key ) {
 		case 'imageHoverEffect':
@@ -29,6 +29,13 @@ const getInspectorOptions = key => {
 			];
 			break;
 		case 'imageControlsPosition':
+			options = [
+				{ label: __( 'Bottom', 'cgb' ), value: 'bottom' },
+				{ label: __( 'Top', 'cgb' ), value: 'top' },
+				{ label: __( 'Center', 'cgb' ), value: 'center' },
+				{ label: __( 'Full', 'cgb' ), value: 'full' },
+			];
+			break;
 		case 'imageCaptionPosition':
 			options = [
 				{ label: __( 'Bottom', 'cgb' ), value: 'bottom' },
@@ -36,6 +43,8 @@ const getInspectorOptions = key => {
 				{ label: __( 'Center', 'cgb' ), value: 'center' },
 				{ label: __( 'Full', 'cgb' ), value: 'full' },
 			];
+			if ( 'cgb/carousel' === args.blockName )
+				options.push( { label: __( 'Below', 'cgb' ), value: 'below' } );
 			break;
 		case 'indicatorsPosition':
 			options = [

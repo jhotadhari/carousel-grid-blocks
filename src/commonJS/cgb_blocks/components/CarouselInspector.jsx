@@ -303,6 +303,7 @@ const CarouselInspector = ({
 		imageCaptionSettings={ imageCaptionSettings }
 		imageHoverEffect={ imageHoverEffect }
 		imageHoverEffectSettings={ imageHoverEffectSettings }
+		blockName={ 'cgb/carousel' }
 	/>
 </>;
 

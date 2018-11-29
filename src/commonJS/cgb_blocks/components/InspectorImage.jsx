@@ -39,7 +39,7 @@ let InspectorImage = ({
 	imageHoverEffectSettings,
 	imageHighlightEffect,
 	imageHighlightEffectSettings,
-
+	blockName,
 }) => <PanelBody
 	title={'Image settings'}
 	icon="format-image"
@@ -70,7 +70,7 @@ let InspectorImage = ({
 				<SelectControl
 					label={ __( 'Position', 'cgb' ) }
 					value={ get( imageCaptionSettings, ['position'] ) }
-					options={ getInspectorOptions( 'imageCaptionPosition' ) }
+					options={ getInspectorOptions( 'imageCaptionPosition', { blockName } ) }
 						onChange={ ( newVal ) => setAttributes( {
 							imageCaptionSettings: JSON.stringify( {
 								...imageCaptionSettings,

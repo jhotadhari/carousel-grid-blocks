@@ -174,10 +174,12 @@ class Carousel extends React.Component {
 							showThumbs={ false }
 							dynamicHeight={ true }
 							selectedItem={ selectedIndex }
-							onChange={ ( event ) => setSelected( event ) }			// on beging
+							onChange={ ( event ) => setSelected( event ) }
 							onClickItem={ ( event ) => console.log( 'onClickItem', event ) }
 							transitionTime={ transitionTime }
 							width={ this.getWidth() }
+							imageCaptionSettings={ imageCaptionSettings }
+							items={ items }
 						>
 							{ [...items].map( ( item, index ) => {
 

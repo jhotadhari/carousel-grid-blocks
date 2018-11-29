@@ -1,9 +1,15 @@
+/*
+ * External dependencies
+ */
 import { Carousel } from 'react-responsive-carousel';
 import Swipe from 'react-easy-swipe';
-
 import klass from 'react-responsive-carousel/lib/cssClasses';
 import CSSTranslate from 'react-responsive-carousel/lib/CSSTranslate';
 
+/**
+ * Internal dependencies
+ */
+import ItemCaption				 		from './ItemCaption.jsx';
 
 class CarouselCustom extends Carousel {
 
@@ -134,6 +140,13 @@ class CarouselCustom extends Carousel {
                     { this.renderStatus() }
                 </div>
 
+                { 'hide' !== this.props.imageCaptionSettings.show && 'below' === this.props.imageCaptionSettings.position &&
+                	<ItemCaption
+						imageCaptionSettings={ this.props.imageCaptionSettings }
+						className={ 'cgb-block-carousel-item-info' }
+						item={ this.props.items[this.props.selectedItem] }
+                	/>
+                }
 
 				<div className={ 'carousel carousel-controls' } style={{width: this.props.width}}>
 					{ 'below' === this.props.arrowsPosition && <button type="button" className={klass.ARROW_PREV(!hasPrev)} onClick={this.decrement} /> }

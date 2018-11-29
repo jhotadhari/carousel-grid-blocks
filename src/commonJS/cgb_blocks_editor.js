@@ -17,10 +17,10 @@ registerCgbStoreEditor();
 cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
 
 /**
- *	ItemControls
+ *	ItemAdminControls
  *
  */
-import ItemControls				from './cgb_blocks/components/ItemControls.jsx';
+import ItemAdminControls				from './cgb_blocks/components/ItemAdminControls.jsx';
 
 /**
  *	Item
@@ -46,7 +46,7 @@ _Item = composeWithSettings( _Item, [
 	'transitionTime',
 ] );
 
-_Item = composeWithProps( { ItemControlsComponent: ItemControls } )( _Item );
+_Item = composeWithProps( { ItemAdminControlsComponent: ItemAdminControls } )( _Item );
 
 /**
  *	Grid

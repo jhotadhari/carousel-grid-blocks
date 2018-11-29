@@ -2,109 +2,166 @@
  * External dependencies
  */
 import PropTypes from 'prop-types';
+import {
+	filter,
+	get,
+} from 'lodash';
+
 
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
 const {
-    IconButton,
-} = wp.components;
-
+	__,
+} = wp.i18n;
 const {
-	MediaUpload,
-} = wp.editor;
+	decodeEntities,
+} = wp.htmlEntities;
 
 /**
  * Internal dependencies
  */
-import composeWithItemsEditor 				from '../store/compose/composeWithItemsEditor.js';
-// import composeWithSettingsEditor 			from '../store/compose/composeWithSettingsEditor.js';
-import ItemControlsMoveToIndex 				from './ItemControlsMoveToIndex.jsx';
-import ItemControlsDragHandle 				from './ItemControlsDragHandle.jsx';
+import rgbaToCssProp					from '../utils/rgbaToCssProp';
 
-let ItemControlsEditor = ( {
+let ItemControls = ( {
+	imageControlsSettings,
 	className,
-	index,
-	item: {
-		id,
-		fetched,
+	item,
+} ) => {
+
+	const {
+		postTitle,
+		src,
 		title,
-		orientation
-	},
-	items,
-	updateItemFromMedia,
-	removeItem,
-	moveItem,
-	controls,
-} ) => <div className={ className }>
+		postLink,
+	} = item;
 
-	<div className="cgb-block-item-controls-inner">
+	const {
+		margin,
+		padding,
+		backgroundColor,
+		color,
+		position,
+	} = imageControlsSettings;
 
-		{ controls.includes( 'dragHandle' ) &&
-			<ItemControlsDragHandle
-				disabled={ items.length === 1 }
-				label={ __( 'Move Image', 'cgb' ) }
-			/>
-		}
 
-		{ controls.includes( 'moveLeft' ) &&
-			<IconButton
-				icon="arrow-left-alt2"
-				label={ __( 'Move Image Left', 'cgb' ) }
-				onClick={ () => moveItem( index, index - 1 ) }
-				disabled={ items.length === 1 || index === 0 }
-			/>
-		}
+	let controlsAreVisible = false;
+	switch( imageControlsSettings.show ){
+		case 'show':
+			controlsAreVisible = true;
+			break
+		case 'hide':
+			controlsAreVisible = false;
+			break
+		case 'showOnhover':
+			controlsAreVisible = 'showOnhover';
+			break
+		case 'showIfSelected':
+			controlsAreVisible = item.selected;
+			break
+	};
 
-		{ controls.includes( 'moveImage' ) &&
-			<ItemControlsMoveToIndex
-				index={ index }
-			/>
-		}
+	const style = {
+		// type imageControls
+		width:'auto',
+		margin:'auto',
+		left:'50%',
+		transform:'translate(-50%, -50%)',
 
-		{ controls.includes( 'moveRight' ) &&
-			<IconButton
-				icon="arrow-right-alt2"
-				label={ __( 'Move Image Right', 'cgb' ) }
-				onClick={ () => moveItem( index, index + 1 ) }
-				disabled={ items.length === 1 || index + 1 === items.length }
-			/>
-		}
+		// for all types. same as imageCaption
+		padding: padding,
+		background: rgbaToCssProp( backgroundColor ),
+		color: color,
+		transition: 'opacity 0.35s',
+		...( 'bottom' === position && { bottom: margin } ),
+		...( 'top' === position && { top: margin } ),
+		...( 'top' === position && { display: 'table' } ),
+		...( 'center' === position && {
+			top: '50%',
+			left: '50%',
+			transform: 'translate(-50%, -50%)',
+			margin: 'auto',
+			display: 'table',
+		} ),
+		...( 'full' === position && {
+			top: '0',
+			left: '0',
+			margin: '0',
+			width: '100%',
+			height: '100%',
+		} ),
+	};
 
-		{ controls.includes( 'selectImage' ) &&
-			<MediaUpload
-				type="image"
-				value={ id }
-				onSelect={ ( media ) => updateItemFromMedia( index, media ) }
-				render={ ({ open }) =>
-					<IconButton
-						icon="format-image"
-						label={ __( 'Select Image', 'cgb' ) }
-						onClick={ open }
-					/>
+
+	const ImageControl = ( { control, style } ) => {
+		switch( control ){
+			case 'link':
+				let linkUrl, linkTitle;
+				switch( get( imageControlsSettings, ['linkControlSettings', 'linkTo'] ) ) {
+					case 'post':
+						linkUrl = postLink || src;
+						linkTitle = decodeEntities( postTitle || title );
+						break;
+					case 'attachment':
+						linkUrl = src;
+						linkTitle = title;
+						break;
 				}
-			/>
-		}
+				return  <div style={ style } className={ className + '-control' } >
+						<a
+							href={ linkUrl }
+							title={ linkTitle }
+							target={ get( imageControlsSettings, ['linkControlSettings', 'newTab'] ) ? '_blank' : '_self' }
+						>
 
-		{ controls.includes( 'remove' ) &&
-			<IconButton
-				icon="minus"
-				className={ 'remove' }
-				label={ __( 'Remove Image From Block', 'cgb' ) }
-				onClick={ () => removeItem( index ) }
-			/>
-		}
+							<button
+								className={ 'components-icon-button' }
+								aria-label={ linkTitle }
+								title={ linkTitle }
+							>
+								<span className={ [ 'dashicons', 'dashicons-redo' ].join( ' ' ) }></span>
+							</button>
 
+						</a>
+					</div>;
+			case 'fullscreen':
+				return  <div style={ style } className={ className + '-control' } >
+
+						<button
+							className={ 'components-icon-button' }
+							aria-label={ 	__( 'Fullscreen', 'cgb' ) }
+							title={ 		__( 'Fullscreen', 'cgb' ) }
+							onClick={ () => console.log( 'fullscreen' ) }
+						>
+							<span className={ [ 'dashicons', 'dashicons-editor-expand' ].join( ' ' ) }></span>
+						</button>
+
+					</div>;
+		}
+		return <span>{ '' }</span>;
+	};
+
+
+	return <div
+		className={ [
+			className,
+			controlsAreVisible === true ? 'is-visible' : 'is-hidden',
+			controlsAreVisible === 'showOnhover' ? 'is-visible-on-hover' : null,
+		].filter( a => a !== null ).join(' ') }
+		style={ style }
+	>
+		<div className={ className + '-inner' } >
+			{ [...imageControlsSettings.controls].map( control =>
+				<ImageControl
+					style={ {
+						display: controlsAreVisible ? 'block' : 'none',
+					} }
+					key={ control }
+					control={ control }
+				/>
+			) }
+		</div>
 	</div>
+};
 
-</div>;
-
-ItemControlsEditor = composeWithItemsEditor( ItemControlsEditor, [
-	'updateItemFromMedia',
-	'removeItem',
-	'moveItem',
-	'items',
-] );
-
-export default ItemControlsEditor;
+export default ItemControls;

@@ -290,6 +290,18 @@ const CarouselInspector = ({
 			/>
 		</> }
 
+		<SelectControl
+			label={ __( 'Animation', 'cgb'  ) }
+			value={ get( carouselSettings, ['animation'] ) }
+			options={ getInspectorOptions( 'animation' ) }
+			onChange={ ( newVal ) => setAttributes( {
+				carouselSettings: JSON.stringify( {
+					...carouselSettings,
+					animation: newVal,
+				} ),
+			} ) }
+		/>
+
 	</PanelBody>
 
 	<InspectorImage

@@ -35,6 +35,40 @@ class CarouselCustom extends Carousel {
 		);
     }
 
+    renderItems() {
+        return React.Children.map( this.props.children, (item, index) => {
+            const itemClass = klass.ITEM(true, index === this.state.selectedItem);
+            const slideProps = {
+                ref: (e) => this.setItemsRef(e, index),
+                key: 'itemKey' + index,
+                className: klass.ITEM(true, index === this.state.selectedItem),
+                onClick: this.handleClickItem.bind(this, index, item)
+            };
+
+            if (this.props.centerMode && this.props.axis === 'horizontal') {
+                slideProps.style = {
+                    minWidth: this.props.centerSlidePercentage + '%'
+                };
+            }
+
+            if ( 'fade' === this.props.animation ) {
+            	slideProps.style = {
+            		...slideProps.style,
+            		position: 'absolute',
+            		opacity: index === this.state.selectedItem ? 1 : 0,
+
+					transition: 'opacity ' + ( this.props.transitionTime / 1000 ) + 's',
+            	};
+            }
+
+            return (
+                <li {...slideProps}>
+                    { item }
+                </li>
+            );
+        });
+    }
+
     render() {
         if (!this.props.children || React.Children.count(this.props.children) === 0) {
             return null;
@@ -53,32 +87,35 @@ class CarouselCustom extends Carousel {
         // obj to hold the transformations and styles
         let itemListStyles = {};
 
-        const currentPosition = this.getPosition(this.state.selectedItem);
-
-        // if 3d is available, let's take advantage of the performance of transform
-        const transformProp = CSSTranslate(currentPosition + '%', this.props.axis);
-
-        const transitionTime = this.props.transitionTime + 'ms';
-
-        itemListStyles = {
-                    'WebkitTransform': transformProp,
-                       'MozTransform': transformProp,
-                        'MsTransform': transformProp,
-                         'OTransform': transformProp,
-                          'transform': transformProp,
-                        'msTransform': transformProp
-        };
-
-        if (!this.state.swiping) {
-            itemListStyles = {
-                ...itemListStyles,
-               'WebkitTransitionDuration': transitionTime,
-                  'MozTransitionDuration': transitionTime,
-                   'MsTransitionDuration': transitionTime,
-                    'OTransitionDuration': transitionTime,
-                     'transitionDuration': transitionTime,
-                   'msTransitionDuration': transitionTime
-            }
+        switch( this.props.animation ){
+			case 'fade':
+				itemListStyles = {};
+				break;
+			case 'slide':
+				const currentPosition = this.getPosition(this.state.selectedItem);
+				// if 3d is available, let's take advantage of the performance of transform
+				const transformProp = CSSTranslate(currentPosition + '%', this.props.axis);
+				const transitionTime = this.props.transitionTime + 'ms';
+				itemListStyles = {
+							'WebkitTransform': transformProp,
+							   'MozTransform': transformProp,
+								'MsTransform': transformProp,
+								 'OTransform': transformProp,
+								  'transform': transformProp,
+								'msTransform': transformProp
+				};
+				if ( ! this.state.swiping ) {
+					itemListStyles = {
+						...itemListStyles,
+					   'WebkitTransitionDuration': transitionTime,
+						  'MozTransitionDuration': transitionTime,
+						   'MsTransitionDuration': transitionTime,
+							'OTransitionDuration': transitionTime,
+							 'transitionDuration': transitionTime,
+						   'msTransitionDuration': transitionTime
+					}
+				}
+				break;
         }
 
         let swiperProps = {
@@ -110,10 +147,6 @@ class CarouselCustom extends Carousel {
             containerStyles.height = this.state.itemSize;
         }
 
-
-
-
-
         return (
             <div className={this.props.className} ref={this.setCarouselWrapperRef}>
                 <div className={klass.CAROUSEL(true)} style={{width: this.props.width}}>
@@ -126,10 +159,12 @@ class CarouselCustom extends Carousel {
                                 {...swiperProps}
                                 allowMouseEvents={this.props.emulateTouch}>
                               { this.renderItems() }
+                              { console.log( 'debug', swiperProps ) }
                             </Swipe> :
                             <ul
                                 className={klass.SLIDER(true, this.state.swiping)}
-                                style={itemListStyles}>
+                                style={ itemListStyles }
+							>
                                 { this.renderItems() }
                             </ul>
                         }
@@ -141,11 +176,13 @@ class CarouselCustom extends Carousel {
                 </div>
 
                 { 'hide' !== this.props.imageCaptionSettings.show && 'below' === this.props.imageCaptionSettings.position &&
-                	<ItemCaption
-						imageCaptionSettings={ this.props.imageCaptionSettings }
-						className={ 'cgb-block-carousel-item-info' }
-						item={ this.props.items[this.props.selectedItem] }
-                	/>
+                	<div className={ 'carousel' } style={{width: this.props.width}}>
+						<ItemCaption
+							imageCaptionSettings={ this.props.imageCaptionSettings }
+							className={ 'cgb-block-carousel-item-info' }
+							item={ this.props.items[this.props.selectedItem] }
+						/>
+                	</div>
                 }
 
 				<div className={ 'carousel carousel-controls' } style={{width: this.props.width}}>

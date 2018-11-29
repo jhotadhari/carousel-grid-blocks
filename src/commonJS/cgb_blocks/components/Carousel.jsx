@@ -140,7 +140,7 @@ class Carousel extends React.Component {
 			autoPlay,
 			interval,
 			stopOnHover,
-
+			animation,
 		} = carouselSettings;
 
 		const controls = [
@@ -178,8 +178,10 @@ class Carousel extends React.Component {
 							onClickItem={ ( event ) => console.log( 'onClickItem', event ) }
 							transitionTime={ transitionTime }
 							width={ this.getWidth() }
+							swipeable={ 'slide' === animation }
 							imageCaptionSettings={ imageCaptionSettings }
 							items={ items }
+							animation={ animation }
 						>
 							{ [...items].map( ( item, index ) => {
 

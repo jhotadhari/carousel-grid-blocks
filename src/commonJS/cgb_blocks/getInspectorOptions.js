@@ -85,6 +85,15 @@ const getInspectorOptions = ( key, args ) => {
 				{ label: __( 'Display as squares', 'cgb' ), value: 'square' },
 			];
 			break;
+		case 'animation':
+			options = [
+				{ label: __( 'Slide', 'cgb' ), value: 'slide' },
+				{ label: __( 'Fade', 'cgb' ), value: 'fade' },
+			];
+			break;
+
+
+
 	}
 	return applyFilters( 'cgb/GridInspector/options/' + key, options );
 }

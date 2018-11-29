@@ -42,6 +42,7 @@ const getCgbDefault = ( key, args ) => {
 				// more options
 				arrowsPosition: 'insideImage',
 				indicatorsPosition: 'bottom',
+				animation: 'slide',
 
 			}, args );
 

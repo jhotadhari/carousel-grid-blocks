@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import { Carousel as ResponsiveCarousel } from 'react-responsive-carousel';
 import ResizeObserver from 'resize-observer-polyfill';
 
 /**
@@ -12,6 +11,7 @@ const { __ } = wp.i18n;
 /**
  * Internal dependencies
  */
+import CarouselCustom from './CarouselCustom.jsx';
 
 class Carousel extends React.Component {
 
@@ -132,8 +132,10 @@ class Carousel extends React.Component {
 
 		const {
 			showArrows,
+			arrowsPosition,
 			showStatus,
 			showIndicators,
+			indicatorsPosition,
 			infiniteLoop,
 			autoPlay,
 			interval,
@@ -159,10 +161,12 @@ class Carousel extends React.Component {
 					<div className="cgb-block-carousel"
 					>
 
-						<ResponsiveCarousel
+						<CarouselCustom
 							showArrows={ showArrows }
+							arrowsPosition={ arrowsPosition }
 							showStatus={ showStatus ? items.length > 1 : false }
 							showIndicators={ showIndicators ? items.length > 1 : false }
+							indicatorsPosition={ indicatorsPosition }
 							infiniteLoop={ infiniteLoop }
 							autoPlay={ autoPlay }
 							interval={ interval }
@@ -197,7 +201,7 @@ class Carousel extends React.Component {
 								);
 
 							} ) }
-						</ResponsiveCarousel>
+						</CarouselCustom>
 
 					</div>
 				}

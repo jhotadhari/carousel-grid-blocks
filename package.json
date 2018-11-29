@@ -75,5 +75,7 @@
     "underscore": "global:_",
     "backbone": "global:Backbone"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react-easy-swipe": "0.0.17"
+  }
 }

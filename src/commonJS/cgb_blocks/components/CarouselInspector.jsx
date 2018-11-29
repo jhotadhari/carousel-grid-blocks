@@ -20,6 +20,7 @@ const {
 /**
  * Internal dependencies
  */
+import getInspectorOptions				from '../getInspectorOptions';
 import InspectorCommon 					from './InspectorCommon.jsx';
 import InspectorImage					from './InspectorImage.jsx';
 
@@ -193,6 +194,20 @@ const CarouselInspector = ({
 				} ),
 			} ) }
 		/>
+		{ get( carouselSettings, ['showArrows'] ) &&
+			<SelectControl
+				label={ __( 'arrowsPosition', 'cgb'  ) }
+				value={ get( carouselSettings, ['arrowsPosition'] ) }
+				options={ getInspectorOptions( 'arrowsPosition' ) }
+				onChange={ ( newVal ) => setAttributes( {
+					carouselSettings: JSON.stringify( {
+						...carouselSettings,
+						arrowsPosition: newVal,
+					} ),
+				} ) }
+			/>
+		}
+
 
 		<ToggleControl
 			label={ __( 'showStatus', 'cgb'  ) }
@@ -215,6 +230,19 @@ const CarouselInspector = ({
 				} ),
 			} ) }
 		/>
+		{ get( carouselSettings, ['showIndicators'] ) &&
+			<SelectControl
+				label={ __( 'indicatorsPosition', 'cgb'  ) }
+				value={ get( carouselSettings, ['indicatorsPosition'] ) }
+				options={ getInspectorOptions( 'indicatorsPosition' ) }
+				onChange={ ( newVal ) => setAttributes( {
+					carouselSettings: JSON.stringify( {
+						...carouselSettings,
+						indicatorsPosition: newVal,
+					} ),
+				} ) }
+			/>
+		}
 
 		<ToggleControl
 			label={ __( 'infiniteLoop', 'cgb'  ) }

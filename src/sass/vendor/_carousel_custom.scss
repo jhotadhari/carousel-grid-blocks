@@ -1,0 +1,67 @@
+
+@import "./carousel";
+
+.cgb-block-carousel {
+
+    .carousel-controls {
+        position: relative;
+        min-height: 30px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .control-arrow {
+            top: 0;
+            margin-top: 0;
+            position: relative;
+            align-self: center;
+        }
+
+    }
+
+    .carousel .control-dots {
+        text-align: center;
+        width: 100%;
+        margin: 10px 0;
+        padding: 0;
+
+        &.position-bottom {
+            position: absolute;
+            bottom: 0;
+        }
+
+        &.position-below {
+            position: relative;
+            bottom: unset;
+            margin: 10px 0;
+        }
+
+        .dot {
+            -webkit-transition: opacity 0.25s ease-in;
+            -moz-transition: opacity 0.25s ease-in;
+            -ms-transition: opacity 0.25s ease-in;
+            -o-transition: opacity 0.25s ease-in;
+            transition: opacity 0.25s ease-in;
+            opacity: 0.3;
+            filter: alpha(opacity=30);
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
+            background: #fff;
+            border-radius: 50%;
+            width: 8px;
+            height: 8px;
+            cursor: pointer;
+            display: inline-block;
+            margin: 0 8px;
+            &.selected,
+            &:hover {
+                opacity: 1;
+                filter: alpha(opacity=100);
+            }
+        }
+    }
+
+
+}
+
+
+

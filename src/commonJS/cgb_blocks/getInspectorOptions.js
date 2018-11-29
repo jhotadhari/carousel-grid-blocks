@@ -37,6 +37,18 @@ const getInspectorOptions = key => {
 				{ label: __( 'Full', 'cgb' ), value: 'full' },
 			];
 			break;
+		case 'indicatorsPosition':
+			options = [
+				{ label: __( 'Bottom', 'cgb' ), value: 'bottom' },
+				{ label: __( 'Below', 'cgb' ), value: 'below' },
+			];
+			break;
+		case 'arrowsPosition':
+			options = [
+				{ label: __( 'Inside Image', 'cgb' ), value: 'insideImage' },
+				{ label: __( 'Below', 'cgb' ), value: 'below' },
+			];
+			break;
 		case 'imageCaptionParts':
 			options = [
 				{ label: __( 'Image Title', 'cgb' ), value: 'title' },

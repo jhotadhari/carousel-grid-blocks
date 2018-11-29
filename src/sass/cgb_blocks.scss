@@ -79,7 +79,7 @@
 body.gutenberg-editor-page,
 body {
 
-    @import "./vendor/carousel";
+    @import "./vendor/carousel_custom";
 
     .cgb-block {
 
@@ -221,7 +221,7 @@ body {
                 margin: 0px auto;
             }
 
-            .control-dots {
+            .carousel .control-dots {
                 list-style: none;
 
                 .dot {

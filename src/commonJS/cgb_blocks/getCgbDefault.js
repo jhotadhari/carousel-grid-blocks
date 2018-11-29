@@ -39,6 +39,10 @@ const getCgbDefault = ( key, args ) => {
 				autoPlay: false,
 				interval: 5000,
 				stopOnHover: true,
+				// more options
+				arrowsPosition: 'insideImage',
+				indicatorsPosition: 'bottom',
+
 			}, args );
 
 		case 'imageHoverEffect':

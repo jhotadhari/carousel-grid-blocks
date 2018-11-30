@@ -42,3 +42,14 @@ export function getSetting( state, key ) {
 export function getItemsSource( state ) {
 	return getSetting( state, 'itemsSource' );
 };
+
+// ui
+export function isFullscreen( state ) {
+	return state.uiReducer.ui.isFullscreen;
+};
+
+export function getActiveFullscreenId( state ) {
+	return state.uiReducer.ui.fullscreenIds.length ? state.uiReducer.ui.fullscreenIds[0] : false;
+};
+
+

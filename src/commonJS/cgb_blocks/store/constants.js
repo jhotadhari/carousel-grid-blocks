@@ -45,6 +45,10 @@ export const DEFAULT_STATE = {
 			},
 		}
 	},
+	ui: {
+		isFullscreen: false,
+		fullscreenIds: [],
+	},
 };
 
 

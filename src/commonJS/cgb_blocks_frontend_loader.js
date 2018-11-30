@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const {
 			Grid,
 			Carousel,
+			Fullscreen,
 		} = cgbBlocks.components;
 
 		[...blockWrappers].map( ( blockWrapper ) => {
@@ -46,25 +47,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 			[... blockWrapper.getElementsByClassName( 'cgb-grid' )].map( ( grid ) => {
-				ReactDOM.render( <Grid
-					gridSettings={ extender.merge( getCgbDefault( 'gridSettings', { blockName: 'cgb/grid' } ), data.gridSettings ) }
-					imageHoverEffect={ data.imageHoverEffect || getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/grid' } ) }
-					imageHoverEffectSettings={ extender.merge( getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/grid' } ), data.imageHoverEffectSettings ) }
-					imageHighlightEffect={ data.imageHighlightEffect ||getCgbDefault( 'imageHighlightEffect', { blockName: 'cgb/grid' } ) }
-					imageHighlightEffectSettings={ extender.merge( getCgbDefault( 'imageHighlightEffectSettings', { blockName: 'cgb/grid' } ), data.imageHighlightEffectSettings ) }
-					imageControlsSettings={ extender.merge( getCgbDefault( 'imageControlsSettings', { blockName: 'cgb/grid' } ), data.imageControlsSettings ) }
-					imageCaptionSettings={ extender.merge( getCgbDefault( 'imageCaptionSettings', { blockName: 'cgb/grid' } ), data.imageCaptionSettings ) }
-				/>, grid );
+				ReactDOM.render( <>
+					<Grid
+						gridSettings={ extender.merge( getCgbDefault( 'gridSettings', { blockName: 'cgb/grid' } ), data.gridSettings ) }
+						imageHoverEffect={ data.imageHoverEffect || getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/grid' } ) }
+						imageHoverEffectSettings={ extender.merge( getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/grid' } ), data.imageHoverEffectSettings ) }
+						imageHighlightEffect={ data.imageHighlightEffect ||getCgbDefault( 'imageHighlightEffect', { blockName: 'cgb/grid' } ) }
+						imageHighlightEffectSettings={ extender.merge( getCgbDefault( 'imageHighlightEffectSettings', { blockName: 'cgb/grid' } ), data.imageHighlightEffectSettings ) }
+						imageControlsSettings={ extender.merge( getCgbDefault( 'imageControlsSettings', { blockName: 'cgb/grid' } ), data.imageControlsSettings ) }
+						imageCaptionSettings={ extender.merge( getCgbDefault( 'imageCaptionSettings', { blockName: 'cgb/grid' } ), data.imageCaptionSettings ) }
+					/>
+					<Fullscreen
+						Carousel= { Carousel }
+						carouselSettings={ getCgbDefault( 'carouselSettings', { blockName: 'cgb/fullscreen' } ) }
+						imageHoverEffect={ getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/fullscreen' } ) }
+						imageHoverEffectSettings={ getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/fullscreen' } ) }
+						imageControlsSettings={ getCgbDefault( 'imageControlsSettings', { blockName: 'cgb/fullscreen' } ) }
+						imageCaptionSettings={ getCgbDefault( 'imageCaptionSettings', { blockName: 'cgb/fullscreen' } ) }
+					/>
+				</>, grid );
 			});
 
 			[...blockWrapper.getElementsByClassName( 'cgb-carousel' )].map( ( carousel ) => {
-				ReactDOM.render( <Carousel
-					carouselSettings={ extender.merge( getCgbDefault( 'carouselSettings', { blockName: 'cgb/carousel' } ), data.carouselSettings ) }
-					imageHoverEffect={ data.imageHoverEffect || getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/carousel' } ) }
-					imageHoverEffectSettings={ extender.merge( getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/carousel' } ), data.imageHoverEffectSettings ) }
-					imageControlsSettings={ extender.merge( getCgbDefault( 'imageControlsSettings', { blockName: 'cgb/carousel' } ), data.imageControlsSettings ) }
-					imageCaptionSettings={ extender.merge( getCgbDefault( 'imageCaptionSettings', { blockName: 'cgb/carousel' } ), data.imageCaptionSettings ) }
-				/>, carousel );
+				ReactDOM.render( <>
+					<Carousel
+						carouselSettings={ extender.merge( getCgbDefault( 'carouselSettings', { blockName: 'cgb/carousel' } ), data.carouselSettings ) }
+						imageHoverEffect={ data.imageHoverEffect || getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/carousel' } ) }
+						imageHoverEffectSettings={ extender.merge( getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/carousel' } ), data.imageHoverEffectSettings ) }
+						imageControlsSettings={ extender.merge( getCgbDefault( 'imageControlsSettings', { blockName: 'cgb/carousel' } ), data.imageControlsSettings ) }
+						imageCaptionSettings={ extender.merge( getCgbDefault( 'imageCaptionSettings', { blockName: 'cgb/carousel' } ), data.imageCaptionSettings ) }
+					/>
+					<Fullscreen
+						Carousel= { Carousel }
+						carouselSettings={ getCgbDefault( 'carouselSettings', { blockName: 'cgb/fullscreen' } ) }
+						imageHoverEffect={ getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/fullscreen' } ) }
+						imageHoverEffectSettings={ getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/fullscreen' } ) }
+						imageControlsSettings={ getCgbDefault( 'imageControlsSettings', { blockName: 'cgb/fullscreen' } ) }
+						imageCaptionSettings={ getCgbDefault( 'imageCaptionSettings', { blockName: 'cgb/fullscreen' } ) }
+					/>
+				</>, carousel );
 			});
 
 		});

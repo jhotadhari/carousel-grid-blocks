@@ -222,6 +222,7 @@ body {
 
             .carousel .control-dots {
                 list-style: none;
+                z-index: 10;
 
                 .dot {
                     width: 11px;        // ??? move theme
@@ -231,7 +232,6 @@ body {
 
             }
         }
-
 
     }
 }
@@ -265,3 +265,23 @@ body {
 
 }
 
+
+.fullscreen {
+    .cgb-block {
+        height: 100%;
+        .cgb-block-carousel {
+            height: 100%;
+
+            & > div {
+                height: 100%;
+                .carousel {
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+        }
+
+    }
+
+
+}

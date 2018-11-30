@@ -10,7 +10,8 @@ import registerCgbStoreEditor 		from './cgb_blocks/store/registerCgbStoreEditor'
 import composeWithItems 		from './cgb_blocks/store/compose/composeWithItemsEditor';
 import composeWithSettings 		from './cgb_blocks/store/compose/composeWithSettingsEditor';
 import composeWithContainer		from './cgb_blocks/store/compose/composeWithContainerEditor';
-import composeWithProps		from './cgb_blocks/store/compose/composeWithProps';
+import composeWithUi			from './cgb_blocks/store/compose/composeWithUiEditor';
+import composeWithProps			from './cgb_blocks/store/compose/composeWithProps';
 
 registerCgbStoreEditor();
 
@@ -45,6 +46,8 @@ _Item = composeWithItems( _Item, [
 _Item = composeWithSettings( _Item, [
 	'transitionTime',
 ] );
+
+_Item = composeWithUi( _Item );
 
 _Item = composeWithProps( { ItemAdminControlsComponent: ItemAdminControls } )( _Item );
 
@@ -88,6 +91,15 @@ _Carousel = composeWithSettings( _Carousel, [
 ] );
 _Carousel = composeWithProps( { ItemComponent: _Item } )( _Carousel );
 cgbBlocks.components.Carousel = _Carousel;
+
+/**
+ *	Fullscreen
+ *
+ */
+import Fullscreen			 			from './cgb_blocks/components/Fullscreen.jsx';
+let _Fullscreen = Fullscreen;
+_Fullscreen = composeWithUi( _Fullscreen );
+cgbBlocks.components.Fullscreen = _Fullscreen;
 
 /**
  *	Inspector

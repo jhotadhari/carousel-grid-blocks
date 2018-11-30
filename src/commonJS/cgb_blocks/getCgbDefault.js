@@ -4,6 +4,7 @@
 const { applyFilters } = wp.hooks;
 
 const getCgbDefault = ( key, args ) => {
+
 	switch( key ){
 
 		case 'gridSettings':
@@ -14,7 +15,9 @@ const getCgbDefault = ( key, args ) => {
 			}, args );
 
 		case 'carouselSettings':
-			return applyFilters( 'cgb.default.carouselSettings', {
+
+
+			const carouselSettings = {
 				// dimensions
 				maxWidth: {
 					value: 100,
@@ -39,13 +42,16 @@ const getCgbDefault = ( key, args ) => {
 				autoPlay: false,
 				interval: 5000,
 				stopOnHover: true,
+				useKeyboardArrows: false,
 				// more options
 				arrowsPosition: 'insideImage',
 				indicatorsPosition: 'bottom',
 				animation: 'slide',
 
-			}, args );
-
+			};
+			if ( 'cgb/fullscreen' === args.blockName )
+				carouselSettings.useKeyboardArrows = true;
+			return applyFilters( 'cgb.default.carouselSettings', carouselSettings, args );
 		case 'imageHoverEffect':
 			return applyFilters( 'cgb.default.imageHoverEffect', 'scale', args );
 
@@ -86,7 +92,7 @@ const getCgbDefault = ( key, args ) => {
 			}, args );
 
 		case 'imageControlsSettings':
-			return applyFilters( 'cgb.default.imageControlsSettings', {
+			const imageControlsSettings = {
 				show: 'showOnhover',			// hide showOnhover showIfSelected
 				position: 'center',
 				margin: '10%',
@@ -105,7 +111,11 @@ const getCgbDefault = ( key, args ) => {
 					newTab: false,
 					linkTo: 'post',	// 'attachment'
 				}
-			}, args );
+			};
+
+			if ( 'cgb/fullscreen' === args.blockName )
+				imageControlsSettings.show = 'hide';
+			return applyFilters( 'cgb.default.imageControlsSettings', imageControlsSettings, args );
 	}
 };
 

@@ -17,6 +17,22 @@ class CarouselCustom extends Carousel {
 		super(props);
 	}
 
+    componentDidUpdate(prevProps, prevState) {
+        if (!prevProps.children && this.props.children && !this.state.initialized) {
+            this.setupCarousel();
+        }
+        if (prevState.swiping && !this.state.swiping) {
+            // We stopped swiping, ensure we are heading to the new/current slide and not stuck
+            this.resetPosition();
+        }
+
+        // fix
+        if ( prevProps.width !== this.props.width ) {
+        	this.updateSizes();
+        }
+
+    }
+
     renderControls() {
         if ( ! this.props.showIndicators )
             return null
@@ -56,6 +72,7 @@ class CarouselCustom extends Carousel {
             		...slideProps.style,
             		position: 'absolute',
             		opacity: index === this.state.selectedItem ? 1 : 0,
+            		zIndex: index === this.state.selectedItem ? 1 : 0,
 
 					transition: 'opacity ' + ( this.props.transitionTime / 1000 ) + 's',
             	};

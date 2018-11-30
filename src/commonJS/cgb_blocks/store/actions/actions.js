@@ -62,3 +62,20 @@ export function pullSettingsFromAttributes( blocks ) {
 		blocks,
 	};
 }
+
+/*
+	ui
+*/
+export function toggleFullscreen( isFull ) {
+	return {
+		type: 'TOGGLE_FULLSCREEN',
+		isFull,
+	};
+}
+
+export function addFullscreenId( newId ) {
+	return {
+		type: 'ADD_FULLSCREEN_ID',
+		newId,
+	};
+}

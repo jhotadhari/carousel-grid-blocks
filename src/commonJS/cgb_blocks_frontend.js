@@ -8,10 +8,11 @@ import PropTypes from 'prop-types';
  * Internal dependencies
  */
 import registerCgbStoreFrontend 	from './cgb_blocks/store/registerCgbStoreFrontend';
-import composeWithItems 		from './cgb_blocks/store/compose/composeWithItemsFrontend';
-import composeWithSettings 		from './cgb_blocks/store/compose/composeWithSettingsFrontend';
-import composeWithContainer		from './cgb_blocks/store/compose/composeWithContainerFrontend';
-import composeWithProps		from './cgb_blocks/store/compose/composeWithProps';
+import composeWithItems 			from './cgb_blocks/store/compose/composeWithItemsFrontend';
+import composeWithSettings 			from './cgb_blocks/store/compose/composeWithSettingsFrontend';
+import composeWithContainer			from './cgb_blocks/store/compose/composeWithContainerFrontend';
+import composeWithUi				from './cgb_blocks/store/compose/composeWithUiFrontend';
+import composeWithProps				from './cgb_blocks/store/compose/composeWithProps';
 
 registerCgbStoreFrontend();
 
@@ -40,6 +41,8 @@ _Item = composeWithSettings( _Item, [
 	'transitionTime',
 	'itemsSource',
 ] );
+
+_Item = composeWithUi( _Item );
 
 /**
  *	Grid
@@ -80,3 +83,12 @@ _Carousel = composeWithSettings( _Carousel, [
 ] );
 _Carousel = composeWithProps( { ItemComponent: _Item } )( _Carousel );
 cgbBlocks.components.Carousel = _Carousel;
+
+/**
+ *	Fullscreen
+ *
+ */
+import Fullscreen			 			from './cgb_blocks/components/Fullscreen.jsx';
+let _Fullscreen = Fullscreen;
+_Fullscreen = composeWithUi( _Fullscreen );
+cgbBlocks.components.Fullscreen = _Fullscreen;

@@ -27,6 +27,7 @@ let ItemControls = ( {
 	imageControlsSettings,
 	className,
 	item,
+	toggleFullscreen,
 } ) => {
 
 	const {
@@ -131,7 +132,7 @@ let ItemControls = ( {
 							className={ 'components-icon-button' }
 							aria-label={ 	__( 'Fullscreen', 'cgb' ) }
 							title={ 		__( 'Fullscreen', 'cgb' ) }
-							onClick={ () => console.log( 'fullscreen' ) }
+							onClick={ () => toggleFullscreen() }
 						>
 							<span className={ [ 'dashicons', 'dashicons-editor-expand' ].join( ' ' ) }></span>
 						</button>
@@ -163,5 +164,9 @@ let ItemControls = ( {
 		</div>
 	</div>
 };
+
+
+
+
 
 export default ItemControls;

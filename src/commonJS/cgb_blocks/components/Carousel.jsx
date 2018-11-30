@@ -52,10 +52,13 @@ class Carousel extends React.Component {
 			selectedIndex,
 		} = this.props;
 
+		console.log( 'debug carouselSettings', carouselSettings );		// ??? debug
+
 		const {
 			maxWidth,
 			maxHeight,
 			resizeToScreenHeight,
+			resizeToContainerWidth,
 		} = carouselSettings;
 
 		const currentItem = items[selectedIndex];
@@ -83,6 +86,8 @@ class Carousel extends React.Component {
 					screenHeightCalc = screenHeight * ( 1 - ( resizeToScreenHeight.value / 100 ) );
 					break;
 			}
+			console.log( 'debug screenHeightCalc', screenHeightCalc );		// ??? debug
+
 			maxHeightCalc = maxHeightCalc ? Math.min( maxHeightCalc, screenHeightCalc ) : screenHeightCalc;
 		}
 
@@ -99,11 +104,19 @@ class Carousel extends React.Component {
 				maxWidthCalc = ( maxWidth.value / 100 ) * containerWidth;
 				break;
 		};
-		maxWidthCalc = carouselSettings.resizeToContainerWidth ? Math.min( maxWidthCalc, containerWidth ) : maxWidthCalc;
+		maxWidthCalc = resizeToContainerWidth ? Math.min( maxWidthCalc, containerWidth ) : maxWidthCalc;
 
-		return ( maxWidthByMaxHeight
+
+		const width = ( maxWidthByMaxHeight
 			? maxWidthCalc > maxWidthByMaxHeight ? maxWidthByMaxHeight : maxWidthCalc
 			: maxWidthCalc ) + 'px';
+
+		console.log( 'debug width', width );		// ??? debug
+
+		return width;
+
+
+
 	}
 
 
@@ -140,6 +153,7 @@ class Carousel extends React.Component {
 			autoPlay,
 			interval,
 			stopOnHover,
+			useKeyboardArrows,
 			animation,
 		} = carouselSettings;
 
@@ -158,8 +172,7 @@ class Carousel extends React.Component {
 			<div className="cgb-block">
 
 				{ items.length > 0 &&
-					<div className="cgb-block-carousel"
-					>
+					<div className="cgb-block-carousel">
 
 						<CarouselCustom
 							showArrows={ showArrows }
@@ -175,10 +188,10 @@ class Carousel extends React.Component {
 							dynamicHeight={ true }
 							selectedItem={ selectedIndex }
 							onChange={ ( event ) => setSelected( event ) }
-							onClickItem={ ( event ) => console.log( 'onClickItem', event ) }
 							transitionTime={ transitionTime }
 							width={ this.getWidth() }
 							swipeable={ 'slide' === animation }
+							useKeyboardArrows={ useKeyboardArrows }
 							imageCaptionSettings={ imageCaptionSettings }
 							items={ items }
 							animation={ animation }

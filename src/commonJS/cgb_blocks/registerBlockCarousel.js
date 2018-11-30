@@ -113,14 +113,15 @@ const registerBlockCarousel = () => {
 					Toolbar,
 					CarouselInspector,
 					Carousel,
+					Fullscreen,
 				} = cgbBlocks.components;
 
-				return ([
+				return ( <>
 					<BlockControls>
 						<div className={ 'components-toolbar' }>
 							<Toolbar/>
 						</div>
-					</BlockControls>,
+					</BlockControls>
 
 					<InspectorControls>
 						<CarouselInspector
@@ -131,7 +132,7 @@ const registerBlockCarousel = () => {
 							imageHoverEffect={ imageHoverEffect }
 							imageHoverEffectSettings={ imageHoverEffectSettings }
 						/>
-					</InspectorControls>,
+					</InspectorControls>
 
 					<Carousel
 						carouselSettings={ carouselSettings }
@@ -140,7 +141,17 @@ const registerBlockCarousel = () => {
 						imageHoverEffect={ imageHoverEffect }
 						imageHoverEffectSettings={ imageHoverEffectSettings }
 					/>
-				]);
+
+					<Fullscreen
+						Carousel= { Carousel }
+						carouselSettings={ getCgbDefault( 'carouselSettings', { blockName: 'cgb/fullscreen' } ) }
+						imageHoverEffect={ getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/fullscreen' } ) }
+						imageHoverEffectSettings={ getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/fullscreen' } ) }
+						imageControlsSettings={ getCgbDefault( 'imageControlsSettings', { blockName: 'cgb/fullscreen' } ) }
+						imageCaptionSettings={ getCgbDefault( 'imageCaptionSettings', { blockName: 'cgb/fullscreen' } ) }
+					/>
+
+				</> );
 			}
 
 		},

@@ -68,6 +68,9 @@ class Item extends React.Component {
 			imageHoverEffectSettings,
 
 			ItemAdminControlsComponent,
+
+			isFullscreen,
+			toggleFullscreen,
 		} = this.props;
 
 		const {
@@ -143,6 +146,8 @@ class Item extends React.Component {
 						imageControlsSettings={ imageControlsSettings }
 						className={ className + '-image-controls' }
 						item={ item }
+						isFullscreen={ isFullscreen }
+						toggleFullscreen={ toggleFullscreen }
 					/>
 				}
 

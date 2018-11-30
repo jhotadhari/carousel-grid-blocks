@@ -7,6 +7,8 @@ import {
 	setSelected,
 	pullSettingsFromAttributes,
 	updateItem,
+	toggleFullscreen,
+	addFullscreenId,
 }	from './actions';
 
 export{
@@ -17,4 +19,6 @@ export{
 	setSelected,
 	pullSettingsFromAttributes,
 	updateItem,
+	toggleFullscreen,
+	addFullscreenId,
 }

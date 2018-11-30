@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carousel-grid-blocks 0.0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-29 13:39+0530\n"
+"POT-Creation-Date: 2018-11-30 16:00+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,74 +46,87 @@ msgstr ""
 msgid "Show if selected"
 msgstr ""
 
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:34
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:42
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:33
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:41
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:51
 msgid "Bottom"
 msgstr ""
 
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:35
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:34
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:42
 msgid "Top"
 msgstr ""
 
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:36
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:35
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:43
 msgid "Center"
 msgstr ""
 
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:37
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:36
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:44
 msgid "Full"
 msgstr ""
 
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:43
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:49
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:47
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:52
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:58
 msgid "Below"
 msgstr ""
 
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:48
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:57
 msgid "Inside Image"
 msgstr ""
 
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:54
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:63
 msgid "Image Title"
 msgstr ""
 
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:55
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:64
 msgid "Image Caption"
 msgstr ""
 
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:56
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:65
 msgid "Post Title"
 msgstr ""
 
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:57
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:66
 msgid "Post Excerpt"
 msgstr ""
 
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:62
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:71
 msgid "Fullscreen"
 msgstr ""
 
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:63
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:72
 msgid "Link"
 msgstr ""
 
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:68
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:77
 msgid "Post (if source is archive)"
 msgstr ""
 
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:69
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:78
 msgid "Attachment"
 msgstr ""
 
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:74
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:83
 msgid "Maintain aspect ratios"
 msgstr ""
 
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:75
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:84
 msgid "Equal widths"
 msgstr ""
 
-#: src/commonJS/cgb_blocks/getInspectorOptions.js:76
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:85
 msgid "Display as squares"
+msgstr ""
+
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:90
+msgid "Slide"
+msgstr ""
+
+#: src/commonJS/cgb_blocks/getInspectorOptions.js:91
+msgid "Fade"
 msgstr ""
 
 #: src/commonJS/cgb_blocks/registerBlockCarousel.js:30

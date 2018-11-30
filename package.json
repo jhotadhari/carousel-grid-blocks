@@ -57,6 +57,7 @@
     "object-extender": "^2.0.4",
     "prop-types": "^15.6.2",
     "react-color": "^2.14.1",
+    "react-full-screen": "^0.2.3",
     "react-photo-gallery": "^6.2.1",
     "react-responsive-carousel": "^3.1.42",
     "react-sortable-hoc": "^0.8.3",

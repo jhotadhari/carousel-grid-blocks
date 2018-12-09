@@ -30,6 +30,7 @@ const registerBlockGrid = () => {
 		title: __( 'Cgb Image Grid' ),
 		icon: 'grid-view',
 		category: 'common',
+		// description: __( '???', 'cgb' ),	// ???
 		supports: {
 			html: false,
 			// align: true,

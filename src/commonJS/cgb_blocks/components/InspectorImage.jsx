@@ -108,34 +108,53 @@ let InspectorImage = ({
 				<div
 					className={ 'cgb-inspector-flex-row' }
 				>
-					<BaseControl
-						label={ __( 'Background', 'cgb' ) }
-					>
-						<ColorPaletteAlpha
+					<ToggleControl
+						label={ __( 'Custom Background Color', 'cgb'  ) }
+						checked={ get( imageCaptionSettings, ['cutomBackgroundColor'] ) }
+						onChange={ ( newVal ) => setAttributes( {
+							imageCaptionSettings: JSON.stringify( {
+								...imageCaptionSettings,
+								cutomBackgroundColor: newVal,
+							} ),
+						} ) }
+					/>
 
-							value={ get( imageCaptionSettings, ['backgroundColor'] ) }
-							onChange={ ( newVal ) => setAttributes( {
-								imageCaptionSettings: JSON.stringify( {
-									...imageCaptionSettings,
-									backgroundColor: newVal.rgb,
-								} )
-							} ) }
-						/>
-					</BaseControl>
+					<ColorPaletteAlpha
+						value={ get( imageCaptionSettings, ['backgroundColor'] ) }
+						className={ 'no-clear' }
+						onChange={ ( newVal ) => setAttributes( {
+							imageCaptionSettings: JSON.stringify( {
+								...imageCaptionSettings,
+								backgroundColor: newVal.rgb,
+							} )
+						} ) }
+					/>
+				</div>
 
-					<BaseControl
-						label={ __( 'Font Color', 'cgb' ) }
-					>
-						<ColorPalette
-							value={ get( imageCaptionSettings, ['color'] ) }
-							onChange={ ( newVal ) => setAttributes( {
-								imageCaptionSettings: JSON.stringify( {
-									...imageCaptionSettings,
-									color: newVal,
-								} )
-							} ) }
-						/>
-					</BaseControl>
+				<div
+					className={ 'cgb-inspector-flex-row' }
+				>
+					<ToggleControl
+						label={ __( 'Custom Font Color', 'cgb'  ) }
+						checked={ get( imageCaptionSettings, ['customColor'] ) }
+						onChange={ ( newVal ) => setAttributes( {
+							imageCaptionSettings: JSON.stringify( {
+								...imageCaptionSettings,
+								customColor: newVal,
+							} ),
+						} ) }
+					/>
+
+					<ColorPalette
+						className={ 'no-clear' }
+						value={ get( imageCaptionSettings, ['color'] ) }
+						onChange={ ( newVal ) => setAttributes( {
+							imageCaptionSettings: JSON.stringify( {
+								...imageCaptionSettings,
+								color: newVal,
+							} )
+						} ) }
+					/>
 				</div>
 
 				<SelectControl
@@ -188,6 +207,7 @@ let InspectorImage = ({
 					label={ __( 'Box shadow color', 'cgb' ) }
 				>
 					<ColorPaletteAlpha
+						className={ 'no-clear' }
 						value={ get( imageHighlightEffectSettings, ['boxShadowColor'] ) }
 						onChange={ ( newVal ) => setAttributes( {
 							imageHighlightEffectSettings: JSON.stringify( {
@@ -278,7 +298,7 @@ let InspectorImage = ({
 						label={ __( 'Background', 'cgb' ) }
 					>
 						<ColorPaletteAlpha
-
+							className={ 'no-clear' }
 							value={ get( imageControlsSettings, ['backgroundColor'] ) }
 							onChange={ ( newVal ) => setAttributes( {
 								imageControlsSettings: JSON.stringify( {
@@ -294,6 +314,7 @@ let InspectorImage = ({
 							label={ __( 'Font Color', 'cgb' ) }
 						>
 							<ColorPalette
+								className={ 'no-clear' }
 								value={ get( imageControlsSettings, ['color'] ) }
 								onChange={ ( newVal ) => setAttributes( {
 									imageControlsSettings: JSON.stringify( {

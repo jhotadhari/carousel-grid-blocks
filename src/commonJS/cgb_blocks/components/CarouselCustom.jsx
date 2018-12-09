@@ -151,7 +151,10 @@ class CarouselCustom extends Carousel {
             swiperProps.onSwipeLeft = this.increment;
             swiperProps.onSwipeRight = this.decrement;
 
-            if (this.props.dynamicHeight) {
+            if ( this.props.height ) {
+                swiperProps.style.height = this.props.height;
+                containerStyles.height = this.props.height;
+            } else if ( this.props.dynamicHeight ) {
                 const itemHeight = this.getVariableImageHeight(this.state.selectedItem);
                 swiperProps.style.height = itemHeight || 'auto';
                 containerStyles.height = itemHeight || 'auto';
@@ -193,7 +196,7 @@ class CarouselCustom extends Carousel {
                 </div>
 
                 { 'hide' !== this.props.imageCaptionSettings.show && 'below' === this.props.imageCaptionSettings.position &&
-                	<div className={ 'carousel' } style={{width: this.props.width}}>
+                	<div className={ 'carousel' }>
 						<ItemCaption
 							imageCaptionSettings={ this.props.imageCaptionSettings }
 							className={ 'cgb-block-carousel-item-info' }
@@ -202,7 +205,7 @@ class CarouselCustom extends Carousel {
                 	</div>
                 }
 
-				<div className={ 'carousel carousel-controls' } style={{width: this.props.width}}>
+				<div className={ 'carousel carousel-controls' }>
 					{ 'below' === this.props.arrowsPosition && <button type="button" className={klass.ARROW_PREV(!hasPrev)} onClick={this.decrement} /> }
 					{ 'below' === this.props.indicatorsPosition && this.renderControls() }
 					{ 'below' === this.props.arrowsPosition && <button type="button" className={klass.ARROW_NEXT(!hasNext)} onClick={this.increment} /> }

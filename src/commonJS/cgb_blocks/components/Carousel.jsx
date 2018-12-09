@@ -24,6 +24,7 @@ class Carousel extends React.Component {
 		};
 
 		this.getWidth = this.getWidth.bind( this );
+		this.getHeight = this.getHeight.bind( this );
 	}
 
 	componentDidMount() {
@@ -47,78 +48,103 @@ class Carousel extends React.Component {
 		} = this.state;
 
 		const {
-			carouselSettings,
+			carouselSettings: {
+				imageFit,
+				width,
+				// height,
+				maxWidth,
+				maxHeight,
+				resizeToScreenHeight,
+			},
 			items,
 			selectedIndex,
 		} = this.props;
 
-		console.log( 'debug carouselSettings', carouselSettings );		// ??? debug
-
-		const {
-			maxWidth,
-			maxHeight,
-			resizeToScreenHeight,
-			resizeToContainerWidth,
-		} = carouselSettings;
-
 		const currentItem = items[selectedIndex];
 		const screenHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
-		// maxHeightCalc
-		let maxHeightCalc = false;
-		if ( maxHeight.setMaxHeight ) {
-			switch( maxHeight.unit ) {
-				case 'px':
-					maxHeightCalc = maxHeight.value;
-					break;
-				case 'percent':
-					maxHeightCalc = ( maxHeight.value / 100 ) * screenHeight;
-					break;
-			}
+		switch( imageFit ) {
+			case 'contain':
+
+				// maxHeightCalc
+				let maxHeightCalc = false;
+				if ( maxHeight.setMaxHeight ) {
+					switch( maxHeight.unit ) {
+						case 'px':
+							maxHeightCalc = maxHeight.value;
+							break;
+						// case 'percent':
+						// 	maxHeightCalc = ( maxHeight.value / 100 ) * screenHeight;
+						// 	break;
+					}
+				}
+				if ( resizeToScreenHeight.resize ) {
+					let screenHeightCalc;
+					switch( resizeToScreenHeight.unit ) {
+						case 'px':
+							screenHeightCalc = screenHeight - resizeToScreenHeight.value;
+							break;
+						case 'percent':
+							screenHeightCalc = screenHeight * ( 1 - ( resizeToScreenHeight.value / 100 ) );
+							break;
+					}
+					maxHeightCalc = maxHeightCalc ? Math.min( maxHeightCalc, screenHeightCalc ) : screenHeightCalc;
+				}
+
+				// maxWidthByMaxHeight
+				const maxWidthByMaxHeight = maxHeightCalc ? ( currentItem.width * maxHeightCalc ) /  currentItem.height : false;
+
+				// maxWidthCalc
+				let maxWidthCalc;
+				switch( maxWidth.unit ) {
+					case 'px':
+						maxWidthCalc = maxWidth.value;
+						break;
+					case 'percent':
+						maxWidthCalc = ( maxWidth.value / 100 ) * containerWidth;
+						break;
+				};
+				maxWidthCalc = Math.min( maxWidthCalc, containerWidth );
+
+				return ( maxWidthByMaxHeight
+					? maxWidthCalc > maxWidthByMaxHeight ? maxWidthByMaxHeight : maxWidthCalc
+					: maxWidthCalc ) + 'px';
+
+			case 'cover':
+
+				switch( width.unit ) {
+					case 'px':
+						return width.value + 'px';
+					case 'percent':
+						return ( ( width.value / 100 ) * containerWidth ) + 'px';
+
+				}
 		}
-		if ( resizeToScreenHeight.resize ) {
-			let screenHeightCalc;
-			switch( resizeToScreenHeight.unit ) {
-				case 'px':
-					screenHeightCalc = screenHeight - resizeToScreenHeight.value;
-					break;
-				case 'percent':
-					screenHeightCalc = screenHeight * ( 1 - ( resizeToScreenHeight.value / 100 ) );
-					break;
-			}
-			console.log( 'debug screenHeightCalc', screenHeightCalc );		// ??? debug
-
-			maxHeightCalc = maxHeightCalc ? Math.min( maxHeightCalc, screenHeightCalc ) : screenHeightCalc;
-		}
-
-		// maxWidthByMaxHeight
-		const maxWidthByMaxHeight = maxHeightCalc ? ( currentItem.width * maxHeightCalc ) /  currentItem.height : false;
-
-		// maxWidthCalc
-		let maxWidthCalc;
-		switch( maxWidth.unit ) {
-			case 'px':
-				maxWidthCalc = maxWidth.value;
-				break;
-			case 'percent':
-				maxWidthCalc = ( maxWidth.value / 100 ) * containerWidth;
-				break;
-		};
-		maxWidthCalc = resizeToContainerWidth ? Math.min( maxWidthCalc, containerWidth ) : maxWidthCalc;
-
-
-		const width = ( maxWidthByMaxHeight
-			? maxWidthCalc > maxWidthByMaxHeight ? maxWidthByMaxHeight : maxWidthCalc
-			: maxWidthCalc ) + 'px';
-
-		console.log( 'debug width', width );		// ??? debug
-
-		return width;
-
-
-
 	}
 
+	getHeight() {
+
+		const {
+			carouselSettings: {
+				imageFit,
+				height,
+			},
+		} = this.props;
+
+		const screenHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+		switch( imageFit ) {
+			case 'contain':
+				return false;
+			case 'cover':
+				switch( height.unit ) {
+					case 'px':
+						return height.value + 'px';
+					case 'percent':
+						return ( ( height.value / 100 ) * screenHeight ) + 'px';
+				}
+		}
+	}
 
 	render() {
 
@@ -131,7 +157,20 @@ class Carousel extends React.Component {
 			return <div ref={ c => (this._carousel = c ) } />;
 
 		const {
-			carouselSettings,
+			carouselSettings: {
+				imageFit,
+				showArrows,
+				arrowsPosition,
+				showStatus,
+				showIndicators,
+				indicatorsPosition,
+				infiniteLoop,
+				autoPlay,
+				interval,
+				stopOnHover,
+				useKeyboardArrows,
+				animation,
+			},
 			items,
 			selectedIndex,
 			setSelected,
@@ -143,19 +182,6 @@ class Carousel extends React.Component {
 			ItemComponent,
 		} = this.props;
 
-		const {
-			showArrows,
-			arrowsPosition,
-			showStatus,
-			showIndicators,
-			indicatorsPosition,
-			infiniteLoop,
-			autoPlay,
-			interval,
-			stopOnHover,
-			useKeyboardArrows,
-			animation,
-		} = carouselSettings;
 
 		const controls = [
 			'fullscreen',
@@ -175,6 +201,8 @@ class Carousel extends React.Component {
 					<div className="cgb-block-carousel">
 
 						<CarouselCustom
+							className={ 'image-fit-' + imageFit }
+							axis={ 'horizontal' }
 							showArrows={ showArrows }
 							arrowsPosition={ arrowsPosition }
 							showStatus={ showStatus ? items.length > 1 : false }
@@ -190,6 +218,7 @@ class Carousel extends React.Component {
 							onChange={ ( event ) => setSelected( event ) }
 							transitionTime={ transitionTime }
 							width={ this.getWidth() }
+							height={ this.getHeight() }
 							swipeable={ 'slide' === animation }
 							useKeyboardArrows={ useKeyboardArrows }
 							imageCaptionSettings={ imageCaptionSettings }

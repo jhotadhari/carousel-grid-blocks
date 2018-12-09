@@ -41,172 +41,282 @@ const CarouselInspector = ({
 		className={ 'cgb-inspector-panel' }
 	>
 
-		<BaseControl
-			label={ __( 'Max Width', 'cgb'  ) }
-			className={ 'cgb-columns-field' }
-		>
-
-			<TextControl
-				value={ get( carouselSettings, ['maxWidth', 'value'] ) }
-				type={ 'number' }
-				onChange={ ( newVal ) => setAttributes( {
-					carouselSettings: JSON.stringify( {
-						...carouselSettings,
-						maxWidth: {
-							...get( carouselSettings, ['maxWidth'] ),
-							value: newVal,
-						},
-					} ),
-				} ) }
-			/>
+		<div className={ 'cgb-controls-box' }>
 
 			<SelectControl
-				value={ get( carouselSettings, ['maxWidth', 'unit'] ) }
-				className={ 'cgb-columns-field-30 cgb-columns-field-no-margin' }
-				options={ [
-					{ label: 'px', value: 'px' },
-					{ label: '%', value: 'percent' },
-				] }
+				label={ __( 'Image Fit', 'cgb'  ) }
+				value={ get( carouselSettings, ['imageFit'] ) }
+				options={ getInspectorOptions( 'imageFit' ) }
 				onChange={ ( newVal ) => setAttributes( {
 					carouselSettings: JSON.stringify( {
 						...carouselSettings,
-						maxWidth: {
-							...get( carouselSettings, ['maxWidth'] ),
-							unit: newVal,
-						},
+						imageFit: newVal,
 					} ),
 				} ) }
 			/>
-		</BaseControl>
 
-		<ToggleControl
-			label={ __( 'Set Max Height', 'cgb'  ) }
-			checked={ get( carouselSettings, ['maxHeight', 'setMaxHeight'] ) }
-			onChange={ ( newVal ) => setAttributes( {
-				carouselSettings: JSON.stringify( {
-					...carouselSettings,
-					maxHeight: {
-						...get( carouselSettings, ['maxHeight'] ),
-						setMaxHeight: newVal === true,
-					},
-				} ),
-			} ) }
-		/>
-		{ get( carouselSettings, ['maxHeight', 'setMaxHeight'] ) &&
-			<BaseControl
-				className={ 'cgb-columns-field' }
-			>
+			{ 'cover' === get( carouselSettings, ['imageFit'] ) && <>
 
-				<TextControl
-					value={ get( carouselSettings, ['maxHeight', 'value'] ) }
-					type={ 'number' }
+				<BaseControl
+					label={ __( 'Width', 'cgb'  ) }
+					className={ 'cgb-columns-field' }
+				>
+
+					<TextControl
+						value={ get( carouselSettings, ['width', 'value'] ) }
+						type={ 'number' }
+						onChange={ ( newVal ) => setAttributes( {
+							carouselSettings: JSON.stringify( {
+								...carouselSettings,
+								width: {
+									...get( carouselSettings, ['width'] ),
+									value: newVal,
+								},
+							} ),
+						} ) }
+					/>
+
+					<SelectControl
+						value={ get( carouselSettings, ['width', 'unit'] ) }
+						className={ 'cgb-columns-field-30 cgb-columns-field-no-margin' }
+						options={ [
+							{ label: 'px', value: 'px' },
+							{ label: '%', value: 'percent' },
+						] }
+						onChange={ ( newVal ) => setAttributes( {
+							carouselSettings: JSON.stringify( {
+								...carouselSettings,
+								width: {
+									...get( carouselSettings, ['width'] ),
+									unit: newVal,
+								},
+							} ),
+						} ) }
+					/>
+				</BaseControl>
+
+				<BaseControl
+					label={ __( 'Height', 'cgb'  ) }
+					className={ 'cgb-columns-field' }
+				>
+
+					<TextControl
+						value={ get( carouselSettings, ['height', 'value'] ) }
+						type={ 'number' }
+						onChange={ ( newVal ) => setAttributes( {
+							carouselSettings: JSON.stringify( {
+								...carouselSettings,
+								height: {
+									...get( carouselSettings, ['height'] ),
+									value: newVal,
+								},
+							} ),
+						} ) }
+					/>
+
+					<SelectControl
+						value={ get( carouselSettings, ['height', 'unit'] ) }
+						className={ 'cgb-columns-field-30 cgb-columns-field-no-margin' }
+						options={ [
+							{ label: 'px', value: 'px' },
+							{ label: '%', value: 'percent' },
+						] }
+						onChange={ ( newVal ) => setAttributes( {
+							carouselSettings: JSON.stringify( {
+								...carouselSettings,
+								height: {
+									...get( carouselSettings, ['height'] ),
+									unit: newVal,
+								},
+							} ),
+						} ) }
+					/>
+				</BaseControl>
+
+			</> }
+
+			{ 'contain' === get( carouselSettings, ['imageFit'] ) && <>
+
+
+				<BaseControl
+					label={ __( 'Max Width', 'cgb'  ) }
+					className={ 'cgb-columns-field' }
+				>
+
+					<TextControl
+						value={ get( carouselSettings, ['maxWidth', 'value'] ) }
+						type={ 'number' }
+						onChange={ ( newVal ) => setAttributes( {
+							carouselSettings: JSON.stringify( {
+								...carouselSettings,
+								maxWidth: {
+									...get( carouselSettings, ['maxWidth'] ),
+									value: newVal,
+								},
+							} ),
+						} ) }
+					/>
+
+					<SelectControl
+						value={ get( carouselSettings, ['maxWidth', 'unit'] ) }
+						className={ 'cgb-columns-field-30 cgb-columns-field-no-margin' }
+						options={ [
+							{ label: 'px', value: 'px' },
+							{ label: '%', value: 'percent' },
+						] }
+						onChange={ ( newVal ) => setAttributes( {
+							carouselSettings: JSON.stringify( {
+								...carouselSettings,
+								maxWidth: {
+									...get( carouselSettings, ['maxWidth'] ),
+									unit: newVal,
+								},
+							} ),
+						} ) }
+					/>
+				</BaseControl>
+
+				<ToggleControl
+					label={ __( 'Set Max Height', 'cgb'  ) }
+					checked={ get( carouselSettings, ['maxHeight', 'setMaxHeight'] ) }
 					onChange={ ( newVal ) => setAttributes( {
 						carouselSettings: JSON.stringify( {
 							...carouselSettings,
 							maxHeight: {
 								...get( carouselSettings, ['maxHeight'] ),
-								value: newVal,
+								setMaxHeight: newVal === true,
 							},
 						} ),
 					} ) }
 				/>
+				{ get( carouselSettings, ['maxHeight', 'setMaxHeight'] ) &&
+					<BaseControl
+						className={ 'cgb-columns-field' }
+					>
 
-				<SelectControl
-					value={ get( carouselSettings, ['maxHeight', 'unit'] ) }
-					className={ 'cgb-columns-field-30 cgb-columns-field-no-margin' }
-					options={ [
-						{ label: 'px', value: 'px' },
-					] }
-					onChange={ ( newVal ) => setAttributes( {
-						carouselSettings: JSON.stringify( {
-							...carouselSettings,
-							maxHeight: {
-								...get( carouselSettings, ['maxHeight'] ),
-								unit: newVal,
-							},
-						} ),
-					} ) }
-				/>
-			</BaseControl>
-		}
+						<TextControl
+							value={ get( carouselSettings, ['maxHeight', 'value'] ) }
+							type={ 'number' }
+							onChange={ ( newVal ) => setAttributes( {
+								carouselSettings: JSON.stringify( {
+									...carouselSettings,
+									maxHeight: {
+										...get( carouselSettings, ['maxHeight'] ),
+										value: newVal,
+									},
+								} ),
+							} ) }
+						/>
 
-		<ToggleControl
-			label={ __( 'Resize to screen height', 'cgb'  ) }
-			checked={ get( carouselSettings, ['resizeToScreenHeight', 'resize'] ) }
-			onChange={ ( newVal ) => setAttributes( {
-				carouselSettings: JSON.stringify( {
-					...carouselSettings,
-					resizeToScreenHeight: {
-						...get( carouselSettings, ['resizeToScreenHeight'] ),
-						resize: newVal === true,
-					},
-				} ),
-			} ) }
-		/>
-		{ get( carouselSettings, ['resizeToScreenHeight', 'resize'] ) &&
+						<SelectControl
+							value={ get( carouselSettings, ['maxHeight', 'unit'] ) }
+							className={ 'cgb-columns-field-30 cgb-columns-field-no-margin' }
+							options={ [
+								{ label: 'px', value: 'px' },
+							] }
+							onChange={ ( newVal ) => setAttributes( {
+								carouselSettings: JSON.stringify( {
+									...carouselSettings,
+									maxHeight: {
+										...get( carouselSettings, ['maxHeight'] ),
+										unit: newVal,
+									},
+								} ),
+							} ) }
+						/>
+					</BaseControl>
+				}
 
-			<BaseControl
-				className={ 'cgb-columns-field' }
-				label={ __( 'Screen Height Margin', 'cgb'  ) }
-			>
-
-				<TextControl
-					value={ get( carouselSettings, ['resizeToScreenHeight', 'value'] ) }
-					type={ 'number' }
-					onChange={ ( newVal ) => setAttributes( {
-						carouselSettings: JSON.stringify( {
-							...carouselSettings,
-							resizeToScreenHeight: {
-								...get( carouselSettings, ['resizeToScreenHeight'] ),
-								value: newVal,
-							},
-						} ),
-					} ) }
-				/>
-
-				<SelectControl
-					value={ get( carouselSettings, ['resizeToScreenHeight', 'unit'] ) }
-					className={ 'cgb-columns-field-30 cgb-columns-field-no-margin' }
-					options={ [
-						{ label: 'px', value: 'px' },
-						{ label: '%', value: 'percent' },
-					] }
+				<ToggleControl
+					label={ __( 'Resize to screen height', 'cgb'  ) }
+					checked={ get( carouselSettings, ['resizeToScreenHeight', 'resize'] ) }
 					onChange={ ( newVal ) => setAttributes( {
 						carouselSettings: JSON.stringify( {
 							...carouselSettings,
 							resizeToScreenHeight: {
 								...get( carouselSettings, ['resizeToScreenHeight'] ),
-								unit: newVal,
+								resize: newVal === true,
 							},
 						} ),
 					} ) }
 				/>
-			</BaseControl>
-		}
+				{ get( carouselSettings, ['resizeToScreenHeight', 'resize'] ) &&
 
-		<ToggleControl
-			label={ __( 'showArrows', 'cgb'  ) }
-			checked={ get( carouselSettings, ['showArrows'] ) }
-			onChange={ ( newVal ) => setAttributes( {
-				carouselSettings: JSON.stringify( {
-					...carouselSettings,
-					showArrows: newVal === true,
-				} ),
-			} ) }
-		/>
-		{ get( carouselSettings, ['showArrows'] ) &&
-			<SelectControl
-				label={ __( 'arrowsPosition', 'cgb'  ) }
-				value={ get( carouselSettings, ['arrowsPosition'] ) }
-				options={ getInspectorOptions( 'arrowsPosition' ) }
+					<BaseControl
+						className={ 'cgb-columns-field' }
+						label={ __( 'Screen Height Margin', 'cgb'  ) }
+					>
+
+						<TextControl
+							value={ get( carouselSettings, ['resizeToScreenHeight', 'value'] ) }
+							type={ 'number' }
+							onChange={ ( newVal ) => setAttributes( {
+								carouselSettings: JSON.stringify( {
+									...carouselSettings,
+									resizeToScreenHeight: {
+										...get( carouselSettings, ['resizeToScreenHeight'] ),
+										value: newVal,
+									},
+								} ),
+							} ) }
+						/>
+
+						<SelectControl
+							value={ get( carouselSettings, ['resizeToScreenHeight', 'unit'] ) }
+							className={ 'cgb-columns-field-30 cgb-columns-field-no-margin' }
+							options={ [
+								{ label: 'px', value: 'px' },
+								{ label: '%', value: 'percent' },
+							] }
+							onChange={ ( newVal ) => setAttributes( {
+								carouselSettings: JSON.stringify( {
+									...carouselSettings,
+									resizeToScreenHeight: {
+										...get( carouselSettings, ['resizeToScreenHeight'] ),
+										unit: newVal,
+									},
+								} ),
+							} ) }
+						/>
+					</BaseControl>
+				}
+
+			</> }
+
+		</div>
+
+
+
+
+
+
+		<div className={ get( carouselSettings, ['showArrows'] ) && 'cgb-controls-box' }>
+			<ToggleControl
+				label={ __( 'showArrows', 'cgb'  ) }
+				checked={ get( carouselSettings, ['showArrows'] ) }
 				onChange={ ( newVal ) => setAttributes( {
 					carouselSettings: JSON.stringify( {
 						...carouselSettings,
-						arrowsPosition: newVal,
+						showArrows: newVal === true,
 					} ),
 				} ) }
 			/>
-		}
+			{ get( carouselSettings, ['showArrows'] ) &&
+				<SelectControl
+					label={ __( 'arrowsPosition', 'cgb'  ) }
+					value={ get( carouselSettings, ['arrowsPosition'] ) }
+					options={ getInspectorOptions( 'arrowsPosition' ) }
+					onChange={ ( newVal ) => setAttributes( {
+						carouselSettings: JSON.stringify( {
+							...carouselSettings,
+							arrowsPosition: newVal,
+						} ),
+					} ) }
+				/>
+			}
+		</div>
+
+
 
 
 		<ToggleControl
@@ -220,29 +330,34 @@ const CarouselInspector = ({
 			} ) }
 		/>
 
-		<ToggleControl
-			label={ __( 'showIndicators', 'cgb'  ) }
-			checked={ get( carouselSettings, ['showIndicators'] ) }
-			onChange={ ( newVal ) => setAttributes( {
-				carouselSettings: JSON.stringify( {
-					...carouselSettings,
-					showIndicators: newVal === true,
-				} ),
-			} ) }
-		/>
-		{ get( carouselSettings, ['showIndicators'] ) &&
-			<SelectControl
-				label={ __( 'indicatorsPosition', 'cgb'  ) }
-				value={ get( carouselSettings, ['indicatorsPosition'] ) }
-				options={ getInspectorOptions( 'indicatorsPosition' ) }
+
+
+
+		<div className={ get( carouselSettings, ['showIndicators'] ) && 'cgb-controls-box' }>
+			<ToggleControl
+				label={ __( 'showIndicators', 'cgb'  ) }
+				checked={ get( carouselSettings, ['showIndicators'] ) }
 				onChange={ ( newVal ) => setAttributes( {
 					carouselSettings: JSON.stringify( {
 						...carouselSettings,
-						indicatorsPosition: newVal,
+						showIndicators: newVal === true,
 					} ),
 				} ) }
 			/>
-		}
+			{ get( carouselSettings, ['showIndicators'] ) &&
+				<SelectControl
+					label={ __( 'indicatorsPosition', 'cgb'  ) }
+					value={ get( carouselSettings, ['indicatorsPosition'] ) }
+					options={ getInspectorOptions( 'indicatorsPosition' ) }
+					onChange={ ( newVal ) => setAttributes( {
+						carouselSettings: JSON.stringify( {
+							...carouselSettings,
+							indicatorsPosition: newVal,
+						} ),
+					} ) }
+				/>
+			}
+		</div>
 
 		<ToggleControl
 			label={ __( 'infiniteLoop', 'cgb'  ) }
@@ -255,40 +370,46 @@ const CarouselInspector = ({
 			} ) }
 		/>
 
-		<ToggleControl
-			label={ __( 'autoPlay', 'cgb'  ) }
-			checked={ get( carouselSettings, ['autoPlay'] ) }
-			onChange={ ( newVal ) => setAttributes( {
-				carouselSettings: JSON.stringify( {
-					...carouselSettings,
-					autoPlay: newVal === true,
-				} ),
-			} ) }
-		/>
-		{ get( carouselSettings, ['autoPlay'] ) && <>
-			<TextControl
-				label={ __( 'autoPlay interval', 'cgb'  ) }
-				value={ get( carouselSettings, ['interval'] ) }
-				type={ 'number' }
-				onChange={ ( newVal ) => setAttributes( {
-					carouselSettings: JSON.stringify( {
-						...carouselSettings,
-						interval: newVal,
-					} ),
-				} ) }
-			/>
 
+		<div className={ get( carouselSettings, ['autoPlay'] ) && 'cgb-controls-box' }>
 			<ToggleControl
-				label={ __( 'stopOnHover', 'cgb'  ) }
-				checked={ get( carouselSettings, ['stopOnHover'] ) }
+				label={ __( 'autoPlay', 'cgb'  ) }
+				checked={ get( carouselSettings, ['autoPlay'] ) }
 				onChange={ ( newVal ) => setAttributes( {
 					carouselSettings: JSON.stringify( {
 						...carouselSettings,
-						stopOnHover: newVal === true,
+						autoPlay: newVal === true,
 					} ),
 				} ) }
 			/>
-		</> }
+			{ get( carouselSettings, ['autoPlay'] ) && <>
+				<TextControl
+					label={ __( 'autoPlay interval', 'cgb'  ) }
+					value={ get( carouselSettings, ['interval'] ) }
+					type={ 'number' }
+					onChange={ ( newVal ) => setAttributes( {
+						carouselSettings: JSON.stringify( {
+							...carouselSettings,
+							interval: newVal,
+						} ),
+					} ) }
+				/>
+
+				<ToggleControl
+					label={ __( 'stopOnHover', 'cgb'  ) }
+					checked={ get( carouselSettings, ['stopOnHover'] ) }
+					onChange={ ( newVal ) => setAttributes( {
+						carouselSettings: JSON.stringify( {
+							...carouselSettings,
+							stopOnHover: newVal === true,
+						} ),
+					} ) }
+				/>
+			</> }
+		</div>
+
+
+
 
 		<SelectControl
 			label={ __( 'Animation', 'cgb'  ) }

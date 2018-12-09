@@ -34,7 +34,9 @@ let ItemCaption = ( {
 	const {
 		margin,
 		padding,
+		cutomBackgroundColor,
 		backgroundColor,
+		customColor,
 		color,
 		position,
 	} = imageCaptionSettings;
@@ -63,8 +65,10 @@ let ItemCaption = ( {
 
 		// for all types. same as imageControls
 		padding: padding,
-		background: rgbaToCssProp( backgroundColor ),
-		color: color,
+
+		...( cutomBackgroundColor && { background: rgbaToCssProp( backgroundColor ) } ),
+		...( customColor && { color: color } ),
+
 		transition: 'opacity 0.35s',
 		...( 'bottom' === position && { bottom: margin } ),
 		...( 'top' === position && { top: margin } ),

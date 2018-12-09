@@ -18,22 +18,34 @@ const getCgbDefault = ( key, args ) => {
 
 
 			const carouselSettings = {
+
 				// dimensions
-				maxWidth: {
-					value: 100,
-					unit: 'percent',			// px || percent
-				},
-				resizeToContainerWidth: true,
-				maxHeight: {
-					setMaxHeight: false,
-					value: 400,
-					unit: 'px',			// px
-				},
-				resizeToScreenHeight: {
-					resize: true,
-					value: 10,
-					unit: 'percent',	// px || percent
-				},
+				imageFit: 'contain',	// 'cover' | 'contain'
+				// 'cover' === imageFit
+					width: {
+						value: 100,
+						unit: 'percent',			// px || percent
+					},
+					height: {
+						value: 80,
+						unit: 'percent',					// px || percent
+					},
+				// 'contain' === imageFit
+					maxWidth: {
+						value: 100,
+						unit: 'percent',			// px || percent
+					},
+					maxHeight: {
+						setMaxHeight: false,
+						value: 400,
+						unit: 'px',					// px
+					},
+					resizeToScreenHeight: {
+						resize: true,
+						value: 10,
+						unit: 'percent',			// px || percent
+					},
+
 				// react-responsive-carousel options
 				showArrows: true,
 				showStatus: true,
@@ -43,6 +55,7 @@ const getCgbDefault = ( key, args ) => {
 				interval: 5000,
 				stopOnHover: true,
 				useKeyboardArrows: false,
+
 				// more options
 				arrowsPosition: 'insideImage',
 				indicatorsPosition: 'bottom',
@@ -78,12 +91,14 @@ const getCgbDefault = ( key, args ) => {
 				position: 'bottom',
 				margin: '10%',
 				padding: '0.5em',
+				cutomBackgroundColor: true,
 				backgroundColor: {
 					r: '220',
 					g: '220',
 					b: '220',
 					a: '0.8',
 				},
+				customColor: true,
 				color: '#111',
 				parts: [
 					'title',

@@ -7,6 +7,12 @@ const { applyFilters } = wp.hooks;
 const getInspectorOptions = ( key, args ) => {
 	let options = [];
 	switch( key ) {
+		case 'imageFit':
+			options = [
+				{ label: __( 'Contain', 'cgb' ), value: 'contain' },
+				{ label: __( 'Cover', 'cgb' ), value: 'cover' },
+			];
+			break;
 		case 'imageHoverEffect':
 			options = [
 				{ label: __( 'None', 'cgb' ), value: 'none' },

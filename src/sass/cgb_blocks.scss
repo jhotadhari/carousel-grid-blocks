@@ -17,7 +17,7 @@
 
         .cgb-inspector-flex-row {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: start;
 
             & > * {
@@ -25,8 +25,17 @@
                 &:first-child {
                     margin-left: 0;
                 }
+                flex-grow: 1;
             }
         }
+
+        .components-color-palette.no-clear {
+            .components-color-palette__clear {
+                display: none;
+            }
+
+        }
+
     }
 
     .cgb-block-item-controls-popover {
@@ -35,6 +44,12 @@
         }
     }
 
+    .cgb-controls-box {
+        padding: 5px;
+        border: solid 1px gray;
+        border-radius: 3px;
+        margin: 0 0 1em 0;
+    }
 
     .components-base-control.cgb-columns-field .components-base-control__field {
         display: flex;
@@ -52,6 +67,7 @@
             flex-grow: 1;
             flex-basis: 50%;
             margin-right: 7px;
+            margin-bottom: 0;
 
             &.cgb-columns-field-no-margin {
                 margin-right: 0;
@@ -116,14 +132,10 @@ body {
                 z-index: 5;
             }
 
-
-
-
             &-image-controls,           // imageControls, the controls for the user
             &-info {
                 position: absolute;
                 width: calc( 100% - 2em );
-                background: #ccc;
                 margin: auto 1em;
                 padding: 0.5em;
                 display: block;
@@ -214,6 +226,15 @@ body {
         }
 
         &-carousel {
+
+            .image-fit-cover {
+                .slide {
+                    height: 100%;
+                    .cgb-block-carousel-item {
+                        height: 100%;
+                    }
+                }
+            }
 
             // ??? hard coded center. use gb aligns
             .carousel {

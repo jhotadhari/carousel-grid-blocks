@@ -20,7 +20,6 @@ const {
 /**
  * Internal dependencies
  */
-import rgbaToCssProp					from '../utils/rgbaToCssProp';
 import ItemCaption				 		from './ItemCaption.jsx';
 import ItemControls				 		from './ItemControls.jsx';
 

@@ -2,8 +2,8 @@
 Tags: gutenberg,block,slider,grid,gallery
 Donate link: https://waterproof-webdesign.info/donate
 Contributors: jhotadhari
-Tested up to: 4.9.8
-Requires at least: 4.9.6
+Tested up to: 5.0
+Requires at least: 5.0
 Requires PHP: 5.6
 Stable tag: trunk
 License: GNU General Public License v2 or later
@@ -42,6 +42,9 @@ Upload and install this Plugin the same way you'd install any other plugin.
 == Upgrade Notice ==
 
 == Changelog ==
+
+0.1.0
+WordPress 5.0 compatible, no backwards compatibility. See commit msgs for other changes and new features.
 
 0.0.4
 see commit messages

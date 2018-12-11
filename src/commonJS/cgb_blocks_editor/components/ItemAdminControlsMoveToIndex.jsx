@@ -17,7 +17,7 @@ const {
 /**
  * Internal dependencies
  */
-import composeWithItemsEditor 		from '../store/compose/composeWithItemsEditor.js';
+import composeWithItemsEditor 		from '../../cgb_blocks/store/compose/composeWithItemsEditor.js';
 
 class ItemAdminControlsMoveToIndex extends React.Component {
 

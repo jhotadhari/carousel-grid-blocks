@@ -213,6 +213,8 @@ class Cgb_Carousel_Grid_Blocks {
 			false,
 			self::plugin_dir_basename() . '/languages'
 		);
+		// just a test string to ensure generated pot file will not be empty
+		$test = __( 'test', 'cgb' );
 	}
 
 	public function include_inc_dep_autoload() {

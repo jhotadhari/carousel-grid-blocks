@@ -60,7 +60,8 @@ module.exports = function(grunt){
 		// add language tasks
 		tasks = tasks.concat([
 			'pot',			// language
-			'_potomo',		// language
+			'potomo',		// language
+			'po2json',		// language
 		] );
 
 		// run tasks

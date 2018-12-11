@@ -14,8 +14,8 @@ const {
 /**
  * Internal dependencies
  */
-import composeWithItemsEditor 		from '../store/compose/composeWithItemsEditor.js';
-import ItemAdminControlsMoveToIndex 				from './ItemAdminControlsMoveToIndex.jsx';
+import composeWithItemsEditor 			from '../../cgb_blocks/store/compose/composeWithItemsEditor.js';
+import ItemAdminControlsMoveToIndex 	from './ItemAdminControlsMoveToIndex.jsx';
 
 const ItemAdminControlsDragHandle = SortableHandle( ( { disabled, label } ) => { return (
 	<Tooltip text={ label }>

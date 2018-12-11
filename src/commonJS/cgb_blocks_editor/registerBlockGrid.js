@@ -20,9 +20,9 @@ const {
 /**
  * Internal dependencies
  */
-import parseSerialized 		from './utils/parseSerialized';
-import getCgbDefault		from './getCgbDefault';
-import Placeholder 			from './components/Placeholder.jsx';
+import parseSerialized 		from '../cgb_blocks/utils/parseSerialized';
+import getCgbDefault		from '../cgb_blocks/getCgbDefault';
+import Placeholder 			from '../cgb_blocks/components/Placeholder.jsx';
 
 const registerBlockGrid = () => {
 

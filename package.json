@@ -18,8 +18,8 @@
   "licenseUri": "http://www.gnu.org/licenses/gpl-2.0.html",
   "tags": "gutenberg,block,slider,grid,gallery",
   "donateLink": "https://waterproof-webdesign.info/donate",
-  "wpVersionTested": "4.9.8",
-  "wpRequiresAtLeast": "4.9.6",
+  "wpVersionTested": "5.0",
+  "wpRequiresAtLeast": "5.0",
   "phpRequiresAtLeast": "5.6",
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -43,6 +43,7 @@
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-uglify-es": "^3.3.0",
     "grunt-contrib-watch": "^1.1.0",
+    "grunt-po2json": "^0.3.0",
     "grunt-pot": "^0.3.0",
     "grunt-potomo": "^3.4.0",
     "grunt-rsync": "^2.0.1",
@@ -55,8 +56,10 @@
     "load-js": "^3.0.2",
     "node-bourbon": "^4.2.8",
     "object-extender": "^2.0.4",
+    "po2json": "^1.0.0-alpha",
     "prop-types": "^15.6.2",
     "react-color": "^2.14.1",
+    "react-easy-swipe": "0.0.17",
     "react-full-screen": "^0.2.3",
     "react-photo-gallery": "^6.2.1",
     "react-responsive-carousel": "^3.1.42",
@@ -76,7 +79,5 @@
     "underscore": "global:_",
     "backbone": "global:Backbone"
   },
-  "dependencies": {
-    "react-easy-swipe": "0.0.17"
-  }
+  "dependencies": {}
 }

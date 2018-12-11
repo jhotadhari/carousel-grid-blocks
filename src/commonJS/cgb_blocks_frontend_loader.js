@@ -7,18 +7,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 /**
- * WordPress dependencies
- */
-const { setLocaleData } = wp.i18n;
-
-/**
  * Internal dependencies
  */
 import getCgbDefault 		from './cgb_blocks/getCgbDefault';
 import parseSerialized 		from './cgb_blocks/utils/parseSerialized';
 import Placeholder 			from './cgb_blocks/components/Placeholder.jsx';
-
-setLocaleData( cgbBlocks.locale, 'cgb' );
 
 document.addEventListener('DOMContentLoaded', () => {
 

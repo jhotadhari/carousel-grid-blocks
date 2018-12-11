@@ -28,7 +28,7 @@ const {
 /**
  * Internal dependencies
  */
-import composeWithSettingsEditor 		from '../store/compose/composeWithSettingsEditor.js';
+import composeWithSettingsEditor 		from '../../cgb_blocks/store/compose/composeWithSettingsEditor.js';
 
 let InspectorCommon = ({
 	updateSetting,

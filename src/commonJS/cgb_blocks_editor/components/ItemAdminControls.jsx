@@ -18,9 +18,8 @@ const {
 /**
  * Internal dependencies
  */
-import composeWithItemsEditor 				from '../store/compose/composeWithItemsEditor.js';
-// import composeWithSettingsEditor 			from '../store/compose/composeWithSettingsEditor.js';
-import ItemAdminControlsMoveToIndex 				from './ItemAdminControlsMoveToIndex.jsx';
+import composeWithItemsEditor 					from '../../cgb_blocks/store/compose/composeWithItemsEditor.js';
+import ItemAdminControlsMoveToIndex 			from './ItemAdminControlsMoveToIndex.jsx';
 import ItemAdminControlsDragHandle 				from './ItemAdminControlsDragHandle.jsx';
 
 let ItemAdminControls = ( {

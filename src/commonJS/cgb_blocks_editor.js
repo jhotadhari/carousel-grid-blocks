@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 /**
  * Internal dependencies
  */
-import registerCgbStoreEditor 		from './cgb_blocks/store/registerCgbStoreEditor';
+import registerCgbStoreEditor 	from './cgb_blocks/store/registerCgbStoreEditor';
 import composeWithItems 		from './cgb_blocks/store/compose/composeWithItemsEditor';
 import composeWithSettings 		from './cgb_blocks/store/compose/composeWithSettingsEditor';
 import composeWithContainer		from './cgb_blocks/store/compose/composeWithContainerEditor';
@@ -21,7 +21,7 @@ cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components
  *	ItemAdminControls
  *
  */
-import ItemAdminControls				from './cgb_blocks/components/ItemAdminControls.jsx';
+import ItemAdminControls		from './cgb_blocks_editor/components/ItemAdminControls.jsx';
 
 /**
  *	Item
@@ -105,8 +105,8 @@ cgbBlocks.components.Fullscreen = _Fullscreen;
  *	Inspector
  *
  */
-import GridInspector 			from './cgb_blocks/components/GridInspector.jsx';
-import CarouselInspector 		from './cgb_blocks/components/CarouselInspector.jsx';
+import GridInspector 			from './cgb_blocks_editor/components/GridInspector.jsx';
+import CarouselInspector 		from './cgb_blocks_editor/components/CarouselInspector.jsx';
 cgbBlocks.components.CarouselInspector = CarouselInspector;
 cgbBlocks.components.GridInspector = GridInspector;
 
@@ -114,7 +114,7 @@ cgbBlocks.components.GridInspector = GridInspector;
  *	Toolbar
  *
  */
-import Toolbar 					from './cgb_blocks/components/Toolbar.jsx';
+import Toolbar 					from './cgb_blocks_editor/components/Toolbar.jsx';
 let _Toolbar = Toolbar;
 _Toolbar = composeWithItems( Toolbar, [
 	'addItems',

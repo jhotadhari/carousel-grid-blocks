@@ -71,7 +71,6 @@ class Cgb_Register_Blocks {
 	protected function get_localize_data(){
 		return array(
 			'pluginDirUrl' => Cgb_Carousel_Grid_Blocks::plugin_dir_url(),
-			'locale' => gutenberg_get_jed_locale_data( 'cgb' ),
 			'is_active_wp_rest_filter' => class_exists( 'Wp_Rest_Filter_Loader' ),
 		);
 		return array();
@@ -121,10 +120,10 @@ class Cgb_Register_Blocks {
 			true
 		);
 
-		// enqueue script
+		// localize, set translation and enqueue script
 		wp_localize_script( $handle, 'cgbBlocks', $this->get_localize_data() );
+		wp_set_script_translations( $handle, 'cgb', Cgb_Carousel_Grid_Blocks::plugin_dir_path() . 'languages' );
 		wp_enqueue_script( $handle );
-
 	}
 
 	public function register_rest_fields() {

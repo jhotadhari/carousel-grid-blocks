@@ -23,6 +23,10 @@
 # include dir src
 !/src
 !src/**/*
+src/languages/*.json
+src/languages/**/*.json
+src/languages/*.mo
+src/languages/**/*.mo
 
 # include dir dist/trunk
 !/dist

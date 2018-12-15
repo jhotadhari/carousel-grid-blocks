@@ -67,7 +67,7 @@ const getInspectorOptions = ( key, args ) => {
 		case 'imageCaptionParts':
 			options = [
 				{ label: __( 'Image Title', 'cgb' ), value: 'title' },
-				{ label: __( 'Image Caption', 'cgb' ), value: 'caption' },	// ??? translate de Beschriftung
+				{ label: __( 'Image Caption', 'cgb' ), value: 'caption' },
 				{ label: __( 'Post Title', 'cgb' ), value: 'postTitle' },
 				{ label: __( 'Post Excerpt', 'cgb' ), value: 'postExcerpt' },
 			];

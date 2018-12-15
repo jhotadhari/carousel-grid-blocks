@@ -14,11 +14,6 @@ const {
     Dropdown,
 } = wp.components;
 
-/**
- * Internal dependencies
- */
-import composeWithItemsEditor 		from '../../cgb_blocks/store/compose/composeWithItemsEditor.js';
-
 class ItemAdminControlsMoveToIndex extends React.Component {
 
 	constructor(props) {
@@ -84,20 +79,11 @@ class ItemAdminControlsMoveToIndex extends React.Component {
 }
 
 
-
-
-
-
 ItemAdminControlsMoveToIndex.propTypes = {
 	items: PropTypes.array,
 	index: PropTypes.number,
 	moveItem: PropTypes.func,
 	onClose: PropTypes.func,
 }
-
-ItemAdminControlsMoveToIndex = composeWithItemsEditor( ItemAdminControlsMoveToIndex, [
-	'moveItem',
-	'items',
-] );
 
 export default ItemAdminControlsMoveToIndex;

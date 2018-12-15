@@ -3,6 +3,9 @@
  */
 import loadJS from 'load-js';
 import extender from 'object-extender';
+import {
+	get,
+} from 'lodash';
 
 /**
  * WordPress dependencies
@@ -16,13 +19,17 @@ const {
 	InspectorControls,
 	BlockControls,
 } = wp.editor;
+const {
+	select,
+} = wp.data;
 
 /**
  * Internal dependencies
  */
-import parseSerialized 		from '../cgb_blocks/utils/parseSerialized';
-import getCgbDefault		from '../cgb_blocks/getCgbDefault';
-import Placeholder 			from '../cgb_blocks/components/Placeholder.jsx';
+import parseSerialized 				from '../cgb_blocks/utils/parseSerialized';
+import getCgbDefault				from '../cgb_blocks/getCgbDefault';
+import PlaceholderSpinner 			from '../cgb_blocks/components/PlaceholderSpinner.jsx';
+import PlaceholderChooseGroup 		from './components/PlaceholderChooseGroup.jsx';
 
 const registerBlockGrid = () => {
 
@@ -30,7 +37,9 @@ const registerBlockGrid = () => {
 		title: __( 'Cgb Image Grid' ),
 		icon: 'grid-view',
 		category: 'common',
-		// description: __( '???', 'cgb' ),	// ???
+		description:__( 'Display multiple images in a rich grid.', 'cgb' ),
+		keywords: [ __( 'gallery' ), __( 'images' ), __( 'photos' ) ],
+		reusable: false,
 		supports: {
 			html: false,
 			// align: true,
@@ -42,6 +51,7 @@ const registerBlockGrid = () => {
 					type: 'block',
 					blocks: [ 'cgb/carousel' ],
 					transform: ( {
+						blockGroupId,
 						imageSource,
 						imageIds,
 						settings,
@@ -50,6 +60,7 @@ const registerBlockGrid = () => {
 						imageHoverEffect,
 						imageHoverEffectSettings,
 					} ) => createBlock( 'cgb/carousel', {
+						blockGroupId: blockGroupId,
 						imageSource: imageSource,
 						imageIds: imageIds || [],
 						settings: settings || '',
@@ -62,6 +73,11 @@ const registerBlockGrid = () => {
 			],
 		},
 		attributes: {
+
+			blockGroupId: {
+				type: 'string',
+				default: '',
+			},
 
 			imageSource: {		// common
 				type: 'string',
@@ -106,12 +122,8 @@ const registerBlockGrid = () => {
 			},
 		},
 		edit( {  attributes, className, setAttributes } ) {
-			const {
-				// columns,
-				// margin,
-			} = attributes;
 
-			// ??? use className
+			const { blockGroupId } = attributes;
 
 			const imageHoverEffect = attributes.imageHoverEffect || getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/grid' } );
 			const imageHighlightEffect = attributes.imageHighlightEffect || getCgbDefault( 'imageHighlightEffect', { blockName: 'cgb/grid' } );
@@ -121,11 +133,22 @@ const registerBlockGrid = () => {
 			const imageHighlightEffectSettings = extender.merge( getCgbDefault( 'imageHighlightEffectSettings', { blockName: 'cgb/grid' } ), parseSerialized( attributes.imageHighlightEffectSettings ) );
 			const imageHoverEffectSettings = extender.merge( getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/grid' } ), parseSerialized( attributes.imageHoverEffectSettings ) );
 
-			if ( ! attributes.scriptsloaded) {
-				// load the main editor component, rerender the block
+			const classNameSorted = className.split( ' ' ).sort( ( a, b ) => {
+				if ( 'wp-block-cgb-grid-block' === a ) return 1;
+				if ( 'wp-block-cgb-grid-block' === b ) return -1;
+				return 0;
+			} ).join( ' ' );
+
+			if ( ! attributes.scriptsloaded ) {
 				loadJS( [cgbBlocks.pluginDirUrl + '/js/cgb_blocks_editor.min.js'] ).then( () => setAttributes( { scriptsloaded: true } ) );
-				// until loaded, display placeholder
-				return <Placeholder/>;
+				return <PlaceholderSpinner/>;
+			} else if ( ! blockGroupId.length ) {
+				return <PlaceholderChooseGroup setAttributes={ setAttributes }/>;
+			} else if ( ! attributes.setupDone ) {
+				const setupDone = cgbBlocks.setupGroup( blockGroupId );
+				if ( setupDone )
+					setAttributes( { setupDone: true } );
+				return <PlaceholderSpinner/>;
 			} else {
 
 				const {
@@ -134,7 +157,8 @@ const registerBlockGrid = () => {
 					Grid,
 					Carousel,
 					Fullscreen,
-				} = cgbBlocks.components;
+					PlaceholderChooseItems,
+				} = get( cgbBlocks, ['components',blockGroupId] );
 
 				return (<>
 
@@ -146,6 +170,7 @@ const registerBlockGrid = () => {
 
 					<InspectorControls>
 						<GridInspector
+							blockGroupId={ blockGroupId }
 							setAttributes={ setAttributes }
 							gridSettings={ gridSettings }
 							imageControlsSettings={ imageControlsSettings }
@@ -158,6 +183,7 @@ const registerBlockGrid = () => {
 					</InspectorControls>
 
 					<Grid
+						className={ classNameSorted }
 						gridSettings={ gridSettings }
 						imageControlsSettings={ imageControlsSettings }
 						imageCaptionSettings={ imageCaptionSettings }
@@ -165,6 +191,7 @@ const registerBlockGrid = () => {
 						imageHoverEffectSettings={ imageHoverEffectSettings }
 						imageHighlightEffect={ imageHighlightEffect }
 						imageHighlightEffectSettings={ imageHighlightEffectSettings }
+						PlaceholderNoItems={ PlaceholderChooseItems }
 					/>
 
 					<Fullscreen

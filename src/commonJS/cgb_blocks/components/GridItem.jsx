@@ -15,9 +15,6 @@ import {
  */
 import rgbaToCssProp					from '../utils/rgbaToCssProp';
 
-import composeWithItemsFrontend 		from '../store/compose/composeWithItemsFrontend.js';
-import composeWithSettingsFrontend 		from '../store/compose/composeWithSettingsFrontend.js';
-
 // ImageComponent
 let GridItem = ({
 	containerWidth,
@@ -141,17 +138,6 @@ let GridItem = ({
 // 	},
 // 	direction: PropTypes.string,
 // };
-
-GridItem = composeWithItemsFrontend( GridItem, [
-	'items',
-	'selectedIndex',
-] );
-
-
-GridItem = composeWithSettingsFrontend( GridItem, [
-	'transitionTime',
-	'itemsSource',
-] );
 
 GridItem = SortableElement( GridItem );
 

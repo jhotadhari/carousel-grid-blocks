@@ -22,7 +22,10 @@ import getCgbBlocks 		from '../../utils/getCgbBlocks';
 
 export function pullSettingsFromAttributes( state = { settings: { ...DEFAULT_STATE.settings } }, action ) {
 	const { settings } = state;
-	const blocks = getCgbBlocks();
+	const { blockGroupId } = action;
+
+	const blocks = getCgbBlocks( blockGroupId );
+
 	const newSettings = {
 		...settings,
 		...[...blocks].reduce( ( acc, block ) => {

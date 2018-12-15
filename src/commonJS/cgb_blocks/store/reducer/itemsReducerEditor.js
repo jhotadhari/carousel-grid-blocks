@@ -5,6 +5,8 @@ import {
 	get,
 	find,
 	pick,
+	startsWith,
+	filter,
 } from 'lodash';
 
 const shortid = require('shortid');
@@ -25,8 +27,6 @@ const {
 import getCgbBlocks						from '../../utils/getCgbBlocks';
 import { DEFAULT_ITEM, DEFAULT_STATE }	from '../constants';
 import {
-	ensureOneItem,
-	ensureOneSelected,
 	updateItem,
 	setSelected,
 	overwriteItems,
@@ -46,7 +46,8 @@ export function removeItem( state = { items: [ ...DEFAULT_STATE.items ] }, actio
 
 export function pullItemsFromAttributes( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 	const { items } = state;
-	const blocks = getCgbBlocks();
+	const { blockGroupId } = action;
+	const blocks = getCgbBlocks( blockGroupId );
 
 	const imagesIds = [...blocks].reduce( ( acc, block ) => {
 		if ( acc.length ) return acc;
@@ -98,6 +99,10 @@ export function updateItemFromMedia( state = { items: [ ...DEFAULT_STATE.items ]
 export function addItems( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 	const { items } = state;
 	const { medias } = action;
+
+	if ( undefined !== find( medias, media => startsWith( media.url, 'blob' ) ) )
+		return state;
+
 	const additionalItems = [...medias].map( media => {
 		return {
 			...DEFAULT_ITEM,
@@ -115,12 +120,12 @@ export function addItems( state = { items: [ ...DEFAULT_STATE.items ] }, action 
 			key: shortid.generate(),
 		}
 	});
-	// empty current items, if it's just the one default image
-	const currentItems = 1 === items.length && null === items[0]['id'] ? [] : [...items];
+
 	return {
 		...state,
 		items: [
-			...currentItems,
+			// ...currentItems,
+			...items,
 			...additionalItems,
 		],
 	};
@@ -147,12 +152,6 @@ const itemsReducer = ( state = { items: [ ...DEFAULT_STATE.items ] }, action ) =
 
 		case 'OVERWRITE_ITEMS':
 			return overwriteItems( state, action );
-
-		case 'ENSURE_ONE_ITEM':
-			return ensureOneItem( state, action );
-
-		case 'ENSURE_ONE_SELECTED':
-			return ensureOneSelected( state, action );
 
 		case 'ADD_ITEMS':
 			return addItems( state, action );

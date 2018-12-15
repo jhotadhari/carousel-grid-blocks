@@ -2,23 +2,21 @@
 import {
 	fetchFromAPI,
 	pullItemsFromAttributes,
-	ensureOneItem,
-	ensureOneSelected,
 	setSelected,
 	pullSettingsFromAttributes,
 	updateItem,
 	toggleFullscreen,
 	addFullscreenId,
+	removeFullscreenId,
 }	from './actions';
 
 export{
 	fetchFromAPI,
 	pullItemsFromAttributes,
-	ensureOneItem,
-	ensureOneSelected,
 	setSelected,
 	pullSettingsFromAttributes,
 	updateItem,
 	toggleFullscreen,
 	addFullscreenId,
+	removeFullscreenId,
 }

@@ -2,125 +2,59 @@
  * External dependencies
  */
 import PropTypes from 'prop-types';
+import {
+	get,
+} from 'lodash';
 
 /**
  * Internal dependencies
  */
-import registerCgbStoreEditor 	from './cgb_blocks/store/registerCgbStoreEditor';
-import composeWithItems 		from './cgb_blocks/store/compose/composeWithItemsEditor';
-import composeWithSettings 		from './cgb_blocks/store/compose/composeWithSettingsEditor';
-import composeWithContainer		from './cgb_blocks/store/compose/composeWithContainerEditor';
-import composeWithUi			from './cgb_blocks/store/compose/composeWithUiEditor';
-import composeWithProps			from './cgb_blocks/store/compose/composeWithProps';
+import registerCgbStore					 	from './cgb_blocks/store/registerCgbStoreEditor';
+import setupItemAdminControlsMoveToIndex	from './cgb_blocks_editor/setup/setupItemAdminControlsMoveToIndex';
+import setupItemAdminControlsDragHandle		from './cgb_blocks_editor/setup/setupItemAdminControlsDragHandle';
+import setupItemAdminControls				from './cgb_blocks_editor/setup/setupItemAdminControls';
+import setupItem							from './cgb_blocks_editor/setup/setupItem';
+import setupGridItem						from './cgb_blocks_editor/setup/setupGridItem';
+import setupGrid							from './cgb_blocks_editor/setup/setupGrid';
+import setupCarousel			 			from './cgb_blocks_editor/setup/setupCarousel';
+import setupFullscreen			 			from './cgb_blocks_editor/setup/setupFullscreen';
+import setupChooseSource					from './cgb_blocks_editor/setup/setupChooseSource';
+import setupPlaceholderChooseItems			from './cgb_blocks_editor/setup/setupPlaceholderChooseItems';
+import setupInspectorPanelGroupSettings		from './cgb_blocks_editor/setup/setupInspectorPanelGroupSettings';
+import setupInspectorPanelGroup	 			from './cgb_blocks_editor/setup/setupInspectorPanelGroup';
+import setupGridInspector 					from './cgb_blocks_editor/setup/setupGridInspector';
+import setupCarouselInspector 				from './cgb_blocks_editor/setup/setupCarouselInspector';
+import setupToolbar 						from './cgb_blocks_editor/setup/setupToolbar';
 
-registerCgbStoreEditor();
+const setupGroup = blockGroupId => {
 
-cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
+	if ( undefined !== get( cgbBlocks, ['stores',blockGroupId] ) ) return blockGroupId;
 
-/**
- *	ItemAdminControls
- *
- */
-import ItemAdminControls		from './cgb_blocks_editor/components/ItemAdminControls.jsx';
+	cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
+	cgbBlocks.stores = undefined !== cgbBlocks.stores ? cgbBlocks.stores : {};
+	cgbBlocks.components[blockGroupId] = undefined !== cgbBlocks.components[blockGroupId] ? cgbBlocks.components[blockGroupId] : {};
 
-/**
- *	Item
- *
- */
-import Item						from './cgb_blocks/components/Item.jsx';
-let _Item = Item;
-_Item.propTypes = {
-	style: PropTypes.object,
-}
-_Item.defaultProps = {
-	style: {},
-}
-_Item = composeWithItems( _Item, [
-	'items',
-	'fetchItem',
-	'selectedIndex',
-	'setSelected',
-	'removeItem',
-] );
+	// register store
+	registerCgbStore( blockGroupId );
 
-_Item = composeWithSettings( _Item, [
-	'transitionTime',
-] );
+	// setup components
+	setupItemAdminControlsMoveToIndex( blockGroupId );
+	setupItemAdminControlsDragHandle( blockGroupId );
+	setupItemAdminControls( blockGroupId );
+	setupItem( blockGroupId );
+	setupGridItem( blockGroupId );
+	setupGrid( blockGroupId );
+	setupCarousel( blockGroupId );
+	setupFullscreen( blockGroupId );
+	setupChooseSource( blockGroupId );
+	setupPlaceholderChooseItems( blockGroupId );
+	setupInspectorPanelGroupSettings( blockGroupId );
+	setupInspectorPanelGroup( blockGroupId );
+	setupGridInspector( blockGroupId );
+	setupCarouselInspector( blockGroupId );
+	setupToolbar( blockGroupId );
 
-_Item = composeWithUi( _Item );
+	return blockGroupId;
+};
 
-_Item = composeWithProps( { ItemAdminControlsComponent: ItemAdminControls } )( _Item );
-
-/**
- *	Grid
- *
- */
-import Grid			 			from './cgb_blocks/components/Grid.jsx';
-let _Grid = Grid;
-_Grid = composeWithItems( _Grid, [
-	'items',
-	'photoSet',
-	'moveItem',
-] )
-
-_Grid = composeWithContainer( _Grid );
-
-_Grid = composeWithSettings( _Grid, [
-	'transitionTime',
-] );
-_Grid = composeWithProps( { ItemComponent: _Item } )( _Grid );
-cgbBlocks.components.Grid = _Grid;
-
-/**
- *	Carousel
- *
- */
-import Carousel			 			from './cgb_blocks/components/Carousel.jsx';
-let _Carousel = Carousel;
-_Carousel = composeWithItems( _Carousel, [
-	'items',
-	'selectedIndex',
-	'setSelected',
-] )
-
-_Carousel = composeWithContainer( _Carousel );
-
-_Carousel = composeWithSettings( _Carousel, [
-	'itemsSource',
-	'transitionTime',
-] );
-_Carousel = composeWithProps( { ItemComponent: _Item } )( _Carousel );
-cgbBlocks.components.Carousel = _Carousel;
-
-/**
- *	Fullscreen
- *
- */
-import Fullscreen			 			from './cgb_blocks/components/Fullscreen.jsx';
-let _Fullscreen = Fullscreen;
-_Fullscreen = composeWithUi( _Fullscreen );
-cgbBlocks.components.Fullscreen = _Fullscreen;
-
-/**
- *	Inspector
- *
- */
-import GridInspector 			from './cgb_blocks_editor/components/GridInspector.jsx';
-import CarouselInspector 		from './cgb_blocks_editor/components/CarouselInspector.jsx';
-cgbBlocks.components.CarouselInspector = CarouselInspector;
-cgbBlocks.components.GridInspector = GridInspector;
-
-/**
- *	Toolbar
- *
- */
-import Toolbar 					from './cgb_blocks_editor/components/Toolbar.jsx';
-let _Toolbar = Toolbar;
-_Toolbar = composeWithItems( Toolbar, [
-	'addItems',
-] );
-
-_Toolbar = composeWithSettings( _Toolbar, [
-	'itemsSource',
-] );
-cgbBlocks.components.Toolbar = _Toolbar;
+cgbBlocks.setupGroup = setupGroup;

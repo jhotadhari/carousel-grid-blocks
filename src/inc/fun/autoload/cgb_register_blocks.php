@@ -17,7 +17,6 @@ class Cgb_Register_Blocks {
 	protected $handles = array(
 		'editor' => 'cgb_blocks_editor',
 		'frontend' => 'cgb_blocks_frontend',
-		'common' => 'cgb_blocks',
 	);
 
 	protected $rest_fields = array(
@@ -50,9 +49,9 @@ class Cgb_Register_Blocks {
 			foreach( $this->namspaces as $namspace ) {
 				register_block_type( $namspace, array(
 					'editor_script' => $this->get_handle( 'editor' ),
-					'editor_style' => $this->get_handle( 'common' ),
+					'editor_style' => $this->get_handle( 'editor' ),
 					'script' => $this->get_handle( 'frontend' ),
-					'style' => $this->get_handle( 'common' ),
+					'style' => $this->get_handle( 'frontend' ),
 					'render_callback' => array( $this, 'render_' . str_replace( 'cgb/', '', $namspace ) ),
 				) );
 			}
@@ -82,13 +81,10 @@ class Cgb_Register_Blocks {
 			return;
 
 		// enqueue style
-		$handle = $this->get_handle( 'common' );
+		$handle = is_admin() ? $this->get_handle( 'editor' ) : $this->get_handle( 'frontend' );
 		$deps = is_admin() ? array(
-			'dashicons',
 			'wp-edit-blocks',
-		) : array(
-			'dashicons',
-		);
+		) : array();
 		wp_enqueue_style(
 			$handle,
 			Cgb_Carousel_Grid_Blocks::plugin_dir_url() . '/css/' . $handle . '.min.css',
@@ -97,7 +93,6 @@ class Cgb_Register_Blocks {
 		);
 
 		// register script
-		$handle = is_admin() ? $this->get_handle( 'editor' ) : $this->get_handle( 'frontend' );
 		$deps = is_admin() ? array(
 			'wp-blocks',
 			'wp-i18n',

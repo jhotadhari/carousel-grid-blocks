@@ -18,11 +18,11 @@ const {
 /**
  * Internal dependencies
  */
-import InspectorCommon			from './InspectorCommon.jsx';
-import InspectorImage			from './InspectorImage.jsx';
+import InspectorPanelImage			from './InspectorPanelImage.jsx';
 import getInspectorOptions		from '../getInspectorOptions';
 
 const GridInspector = ({
+	blockGroupId,
 	setAttributes,
 	gridSettings,
 	imageControlsSettings,
@@ -31,70 +31,81 @@ const GridInspector = ({
 	imageHoverEffectSettings,
 	imageHighlightEffect,
 	imageHighlightEffectSettings,
-}) => <>
-	<InspectorCommon/>
+}) => {
 
-	<PanelBody
-		title={'Grid settings'}
-		icon="grid-view"
-		initialOpen={ false }
-		className={ 'cgb-inspector-panel' }
-	>
+	const InspectorPanelGroup = get( cgbBlocks, ['components',blockGroupId,'InspectorPanelGroup'] );
 
-		<TextControl
-			label={ __( 'Columns', 'cgb'  ) + ' [int|"auto"]' }
-			value={ get( gridSettings, ['columns'] ) }
-			onChange={ ( newVal ) => setAttributes( {
-				gridSettings: JSON.stringify( {
-					...gridSettings,
-					columns: newVal,
-				} ),
-			} ) }
+	return <>
+
+		<InspectorPanelGroup
+			setAttributes={ setAttributes }
+			blockGroupId={ blockGroupId }
+			blockName={ 'cgb/carousel' }
 		/>
 
-		<TextControl
-			label={ __( 'Margin', 'cgb'  ) + ' [px]' }
-			value={ get( gridSettings, ['margin'] ) }
-			type={ 'number' }
-			onChange={ ( newVal ) => setAttributes( {
-				gridSettings: JSON.stringify( {
-					...gridSettings,
-					margin: newVal,
-				} ),
-			} ) }
-		/>
+		<PanelBody
+			title={'Grid settings'}
+			icon="grid-view"
+			initialOpen={ false }
+			className={ 'cgb-inspector-panel' }
+		>
 
-		<SelectControl
-			label={ __( 'Item sizes and aspect ratio', 'cgb' ) }
-			value={ get( gridSettings, ['itemSizes'] ) }
-			options={ getInspectorOptions( 'gridItemSizes' ) }
+			<TextControl
+				label={ __( 'Columns', 'cgb'  ) + ' [int|"auto"]' }
+				value={ get( gridSettings, ['columns'] ) }
 				onChange={ ( newVal ) => setAttributes( {
 					gridSettings: JSON.stringify( {
 						...gridSettings,
-						itemSizes: newVal,
+						columns: newVal,
 					} ),
 				} ) }
+			/>
+
+			<TextControl
+				label={ __( 'Margin', 'cgb'  ) + ' [px]' }
+				value={ get( gridSettings, ['margin'] ) }
+				type={ 'number' }
+				onChange={ ( newVal ) => setAttributes( {
+					gridSettings: JSON.stringify( {
+						...gridSettings,
+						margin: newVal,
+					} ),
+				} ) }
+			/>
+
+			<SelectControl
+				label={ __( 'Item sizes and aspect ratio', 'cgb' ) }
+				value={ get( gridSettings, ['itemSizes'] ) }
+				options={ getInspectorOptions( 'gridItemSizes' ) }
+					onChange={ ( newVal ) => setAttributes( {
+						gridSettings: JSON.stringify( {
+							...gridSettings,
+							itemSizes: newVal,
+						} ),
+					} ) }
+			/>
+
+		</PanelBody>
+
+		<InspectorPanelImage
+			setAttributes={ setAttributes }
+			include={ [
+				'imageCaption',
+				'imageHoverEffect',
+				'imageHighlightEffect',
+				'imageControls',
+			] }
+			imageControlsSettings={ imageControlsSettings }
+			imageCaptionSettings={ imageCaptionSettings }
+			imageHoverEffect={ imageHoverEffect }
+			imageHoverEffectSettings={ imageHoverEffectSettings }
+			imageHighlightEffect={ imageHighlightEffect }
+			imageHighlightEffectSettings={ imageHighlightEffectSettings }
+			blockName={ 'cgb/grid' }
 		/>
 
-	</PanelBody>
+	</>;
 
-	<InspectorImage
-		setAttributes={ setAttributes }
-		include={ [
-			'imageCaption',
-			'imageHoverEffect',
-			'imageHighlightEffect',
-			'imageControls',
-		] }
-		imageControlsSettings={ imageControlsSettings }
-		imageCaptionSettings={ imageCaptionSettings }
-		imageHoverEffect={ imageHoverEffect }
-		imageHoverEffectSettings={ imageHoverEffectSettings }
-		imageHighlightEffect={ imageHighlightEffect }
-		imageHighlightEffectSettings={ imageHighlightEffectSettings }
-		blockName={ 'cgb/grid' }
-	/>
-
-</>;
+};
 
 export default GridInspector;

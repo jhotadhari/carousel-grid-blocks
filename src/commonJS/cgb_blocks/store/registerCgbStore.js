@@ -4,6 +4,8 @@
 import concatenateReducers from 'redux-concatenate-reducers'
 import {
 	isEqual,
+	get,
+	set,
 } from 'lodash';
 
 /**
@@ -15,7 +17,7 @@ const {
 	dispatch,
 } = wp.data;
 
-const registerCgbStore = ( {
+const registerCgbStore = ( blockGroupId, {
 	reducer,
 	actions,
 	selectors,
@@ -23,10 +25,10 @@ const registerCgbStore = ( {
 	resolvers,
 }) => {
 
-	if ( undefined !== cgbBlocks.store )
-		return cgbBlocks.store;
+	if ( undefined !== get( cgbBlocks, ['stores',blockGroupId] ) )
+		return get( cgbBlocks, ['stores',blockGroupId] );
 
-	const store = registerStore( 'cgb-store', {
+	const store = registerStore( blockGroupId, {
 		reducer,
 		actions,
 		selectors,
@@ -34,20 +36,18 @@ const registerCgbStore = ( {
 		resolvers,
 	} );
 
-	cgbBlocks.store = store;
+	set( cgbBlocks, ['stores',blockGroupId], store );
 
 	const {
 		pullItemsFromArchive,
 		getItemsSource,
 		getItems,
 		getSettings,
-	} = select( 'cgb-store' );
+	} = select( blockGroupId );
 
 	const {
 		pullItemsFromAttributes,
-		ensureOneItem,
-		ensureOneSelected,
-	} = dispatch( 'cgb-store' );
+	} = dispatch( blockGroupId );
 
 	let currentItemsSource = getItemsSource();
 
@@ -59,12 +59,7 @@ const registerCgbStore = ( {
 			initialPulled = true;
 			switch( currentItemsSource.key ) {
 				case 'custom':
-					const _pullItemsFromAttributes =  concatenateReducers([
-						pullItemsFromAttributes,
-						ensureOneItem,
-						ensureOneSelected,
-					]);
-					_pullItemsFromAttributes();
+					pullItemsFromAttributes( blockGroupId );
 					break;
 				case 'archivePostType':
 					pullItemsFromArchive( store.getState(), currentItemsSource.key, currentItemsSource.options, Math.random() );

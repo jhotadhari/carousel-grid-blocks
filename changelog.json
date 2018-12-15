@@ -2,6 +2,9 @@
   "next": [
     ""
   ],
+  "0.2.0": [
+    "Added block group feature"
+  ],
   "0.1.0": [
     "WordPress 5.0 compatible, no backwards compatibility. See commit msgs for other changes and new features."
   ],

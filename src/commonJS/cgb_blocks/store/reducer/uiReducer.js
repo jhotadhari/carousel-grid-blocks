@@ -3,6 +3,7 @@
  */
 import {
 	isBoolean,
+	find,
 } from 'lodash';
 
 /**
@@ -36,5 +37,25 @@ export function addFullscreenId( state = { ui: { ...DEFAULT_STATE.ui } }, action
 	return {
 		...state,
 		ui: newUi,
+	};
+}
+
+export function removeFullscreenId( state = { ui: { ...DEFAULT_STATE.ui } }, action ) {
+	const {
+		ui,
+		ui: { fullscreenIds },
+	} = state;
+	const { removeId } = action;
+
+	const index = find( fullscreenIds, fullscreenId => fullscreenId === removeId );
+
+	const newFullscreenIds = undefined === index ? fullscreenIds : fullscreenIds.splice( index, 1 );
+
+	return {
+		...state,
+		ui: {
+			...ui,
+			fullscreenIds: newFullscreenIds,
+		},
 	};
 }

@@ -15,12 +15,10 @@ const getCgbDefault = ( key, args ) => {
 			}, args );
 
 		case 'carouselSettings':
-
-
-			const carouselSettings = {
+			let carouselSettings = {
 
 				// dimensions
-				imageFit: 'contain',	// 'cover' | 'contain'
+				imageFit: 'contain',				// 'cover' | 'contain'
 				// 'cover' === imageFit
 					width: {
 						value: 100,
@@ -28,7 +26,7 @@ const getCgbDefault = ( key, args ) => {
 					},
 					height: {
 						value: 80,
-						unit: 'percent',					// px || percent
+						unit: 'percent',			// px || percent
 					},
 				// 'contain' === imageFit
 					maxWidth: {
@@ -62,11 +60,16 @@ const getCgbDefault = ( key, args ) => {
 				animation: 'slide',
 
 			};
-			if ( 'cgb/fullscreen' === args.blockName )
-				carouselSettings.useKeyboardArrows = true;
+			switch( args.blockName ) {
+				case 'cgb/fullscreen':
+					carouselSettings = {
+						...carouselSettings,
+						useKeyboardArrows: true,
+					};
+			}
 			return applyFilters( 'cgb.default.carouselSettings', carouselSettings, args );
 		case 'imageHoverEffect':
-			return applyFilters( 'cgb.default.imageHoverEffect', 'scale', args );
+			return applyFilters( 'cgb.default.imageHoverEffect', 'none', args );
 
 		case 'imageHoverEffectSettings':
 			return applyFilters( 'cgb.default.imageHighlightEffectSettings', {}, args );
@@ -86,7 +89,7 @@ const getCgbDefault = ( key, args ) => {
 			}, args );
 
 		case 'imageCaptionSettings':
-			return applyFilters( 'cgb.default.imageCaptionSettings', {
+			let imageCaptionSettings = {
 				show: 'show',			// hide showOnhover showIfSelected
 				position: 'bottom',
 				margin: '10%',
@@ -104,10 +107,18 @@ const getCgbDefault = ( key, args ) => {
 					'title',
 					'caption',
 				],
-			}, args );
+			};
+			switch( args.blockName ) {
+				case 'cgb/grid':
+					imageCaptionSettings = {
+						...imageCaptionSettings,
+						show: 'hide',
+					};
+			}
+			return applyFilters( 'cgb.default.imageCaptionSettings', imageCaptionSettings, args );
 
 		case 'imageControlsSettings':
-			const imageControlsSettings = {
+			let imageControlsSettings = {
 				show: 'showOnhover',			// hide showOnhover showIfSelected
 				position: 'center',
 				margin: '10%',
@@ -119,7 +130,7 @@ const getCgbDefault = ( key, args ) => {
 					a: '0.8',
 				},
 				controls: [
-					'link',
+					// 'link',
 					'fullscreen',
 				],
 				linkControlSettings: {
@@ -127,9 +138,14 @@ const getCgbDefault = ( key, args ) => {
 					linkTo: 'post',	// 'attachment'
 				}
 			};
-
-			if ( 'cgb/fullscreen' === args.blockName )
-				imageControlsSettings.show = 'hide';
+			switch( args.blockName ) {
+				case 'cgb/grid':
+				case 'cgb/fullscreen':
+					imageControlsSettings = {
+						...imageControlsSettings,
+						show: 'hide',
+					};
+			}
 			return applyFilters( 'cgb.default.imageControlsSettings', imageControlsSettings, args );
 	}
 };

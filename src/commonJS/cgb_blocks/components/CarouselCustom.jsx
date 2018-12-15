@@ -179,7 +179,6 @@ class CarouselCustom extends Carousel {
                                 {...swiperProps}
                                 allowMouseEvents={this.props.emulateTouch}>
                               { this.renderItems() }
-                              { console.log( 'debug', swiperProps ) }
                             </Swipe> :
                             <ul
                                 className={klass.SLIDER(true, this.state.swiping)}

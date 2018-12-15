@@ -2,16 +2,16 @@
  * Internal dependencies
  */
 import registerCgbStore 	from './registerCgbStore';
-import reducerFrontend 		from './reducer/reducerFrontend';
-import * as actionsFrontend from './actions/actionsFrontend';
+import reducer 		from './reducer/reducerFrontend';
+import * as actions from './actions/actionsFrontend';
 import * as selectors 		from './selectors';
 import * as resolvers 		from './resolvers';
 import controls 			from './controls';
 
-const registerCgbStoreFrontend = () => {
-	registerCgbStore({
-		reducer: reducerFrontend,
-		actions: actionsFrontend,
+const registerCgbStoreFrontend = blockGroupId => {
+	const store = registerCgbStore( blockGroupId, {
+		reducer,
+		actions,
 		selectors,
 		controls,
 		resolvers,

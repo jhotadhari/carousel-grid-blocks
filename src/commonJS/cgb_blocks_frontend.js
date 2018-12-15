@@ -1,94 +1,40 @@
 /**
  * External dependencies
  */
-
 import PropTypes from 'prop-types';
+import {
+	get,
+} from 'lodash';
 
 /**
  * Internal dependencies
  */
-import registerCgbStoreFrontend 	from './cgb_blocks/store/registerCgbStoreFrontend';
-import composeWithItems 			from './cgb_blocks/store/compose/composeWithItemsFrontend';
-import composeWithSettings 			from './cgb_blocks/store/compose/composeWithSettingsFrontend';
-import composeWithContainer			from './cgb_blocks/store/compose/composeWithContainerFrontend';
-import composeWithUi				from './cgb_blocks/store/compose/composeWithUiFrontend';
-import composeWithProps				from './cgb_blocks/store/compose/composeWithProps';
+import registerCgbStore		 	from './cgb_blocks/store/registerCgbStoreFrontend';
+import setupItem					from './cgb_blocks_frontend/setup/setupItem';
+import setupGridItem				from './cgb_blocks_frontend/setup/setupGridItem';
+import setupGrid					from './cgb_blocks_frontend/setup/setupGrid';
+import setupCarousel			 	from './cgb_blocks_frontend/setup/setupCarousel';
+import setupFullscreen			 	from './cgb_blocks_frontend/setup/setupFullscreen';
 
-registerCgbStoreFrontend();
+const setupGroup = blockGroupId => {
 
-cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
+	if ( undefined !== get( cgbBlocks, ['stores',blockGroupId] ) ) return blockGroupId;
 
+	cgbBlocks.components = undefined !== cgbBlocks.components ? cgbBlocks.components : {};
+	cgbBlocks.stores = undefined !== cgbBlocks.stores ? cgbBlocks.stores : {};
+	cgbBlocks.components[blockGroupId] = undefined !== cgbBlocks.components[blockGroupId] ? cgbBlocks.components[blockGroupId] : {};
 
-/**
- *	Item
- *
- */
-import Item						from './cgb_blocks/components/Item.jsx';
-let _Item = Item;
-_Item.propTypes = {
-	style: PropTypes.object,
-}
-_Item.defaultProps = {
-	style: {},
-}
-_Item = composeWithItems( _Item, [
-	'items',
-	'fetchItem',
-	'selectedIndex',
-	'setSelected',
-] );
-_Item = composeWithSettings( _Item, [
-	'transitionTime',
-	'itemsSource',
-] );
+	// register store
+	registerCgbStore( blockGroupId );
 
-_Item = composeWithUi( _Item );
+	// setup components
+	setupItem( blockGroupId );
+	setupGridItem( blockGroupId );
+	setupGrid( blockGroupId );
+	setupCarousel( blockGroupId );
+	setupFullscreen( blockGroupId );
 
-/**
- *	Grid
- *
- */
-import Grid			 			from './cgb_blocks/components/Grid.jsx';
-let _Grid = Grid;
-_Grid = composeWithItems( _Grid, [
-	'items',
-	'photoSet',
-] )
+	return blockGroupId;
+};
 
-_Grid = composeWithContainer( _Grid );
-
-_Grid = composeWithSettings( _Grid, [
-	'transitionTime',
-] );
-_Grid = composeWithProps( { ItemComponent: _Item } )( _Grid );
-cgbBlocks.components.Grid = _Grid;
-
-/**
- *	Carousel
- *
- */
-import Carousel			 			from './cgb_blocks/components/Carousel.jsx';
-let _Carousel = Carousel;
-_Carousel = composeWithItems( _Carousel, [
-	'items',
-	'selectedIndex',
-	'setSelected',
-] )
-
-_Carousel = composeWithContainer( _Carousel );
-
-_Carousel = composeWithSettings( _Carousel, [
-	'itemsSource',
-	'transitionTime',
-] );
-_Carousel = composeWithProps( { ItemComponent: _Item } )( _Carousel );
-cgbBlocks.components.Carousel = _Carousel;
-
-/**
- *	Fullscreen
- *
- */
-import Fullscreen			 			from './cgb_blocks/components/Fullscreen.jsx';
-let _Fullscreen = Fullscreen;
-_Fullscreen = composeWithUi( _Fullscreen );
-cgbBlocks.components.Fullscreen = _Fullscreen;
+cgbBlocks.setupGroup = setupGroup;

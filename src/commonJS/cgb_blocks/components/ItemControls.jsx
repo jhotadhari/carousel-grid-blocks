@@ -28,6 +28,8 @@ let ItemControls = ( {
 	className,
 	item,
 	toggleFullscreen,
+	getIndexByKey,
+	setSelected,
 } ) => {
 
 	const {
@@ -35,6 +37,7 @@ let ItemControls = ( {
 		src,
 		title,
 		postLink,
+		key,
 	} = item;
 
 	const {
@@ -132,7 +135,10 @@ let ItemControls = ( {
 							className={ 'components-icon-button' }
 							aria-label={ 	__( 'Fullscreen', 'cgb' ) }
 							title={ 		__( 'Fullscreen', 'cgb' ) }
-							onClick={ () => toggleFullscreen() }
+							onClick={ () => {
+								setSelected( getIndexByKey( key ) );
+								toggleFullscreen();
+							} }
 						>
 							<span className={ [ 'dashicons', 'dashicons-editor-expand' ].join( ' ' ) }></span>
 						</button>

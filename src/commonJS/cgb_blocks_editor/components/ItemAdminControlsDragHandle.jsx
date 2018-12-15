@@ -11,12 +11,6 @@ const {
     Tooltip,
 } = wp.components;
 
-/**
- * Internal dependencies
- */
-import composeWithItemsEditor 			from '../../cgb_blocks/store/compose/composeWithItemsEditor.js';
-import ItemAdminControlsMoveToIndex 	from './ItemAdminControlsMoveToIndex.jsx';
-
 const ItemAdminControlsDragHandle = SortableHandle( ( { disabled, label } ) => { return (
 	<Tooltip text={ label }>
 		<div

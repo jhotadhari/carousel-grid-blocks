@@ -10,35 +10,24 @@ import {
 const shortid = require('shortid');
 
 /**
- * WordPress dependencies
- */
-
-/**
  * Internal dependencies
  */
 import { DEFAULT_ITEM, DEFAULT_STATE } 	from '../constants';
 import {
-	ensureOneItem,
-	ensureOneSelected,
 	updateItem,
 	setSelected,
 	overwriteItems,
 }						 				from './itemsReducer';
+import parseSerialized					from '../../utils/parseSerialized';
 
 export function pullItemsFromAttributes( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 	const { items } = state;
+	const { blockGroupId } = action;
 	const blockWrappers = document.getElementsByClassName( 'cgb-block-wrapper' );
 	const imagesIds = [...blockWrappers].reduce( ( acc, blockWrapper ) => {
 		if ( acc.length ) return acc;
-			const serializedData = blockWrapper.getAttribute('data-cgb');
-			let data = {};
-			try {
-				data = JSON.parse( serializedData );
-			} catch(e) {
-				data = {};
-			}
-			const blockImageIds = get( data, [ 'imageIds' ] );
-			return undefined !== blockImageIds ? blockImageIds : acc;
+		const data = parseSerialized( blockWrapper.getAttribute('data-cgb') );
+		return data.blockGroupId === blockGroupId ? get( data, [ 'imageIds' ], acc ) : acc;
 	}, [] );
 
 	const newItems = [...imagesIds].map( ( id ) => {
@@ -64,12 +53,6 @@ const itemsReducerFrontend = ( state = { items: [ ...DEFAULT_STATE.items ] }, ac
 
 		case 'OVERWRITE_ITEMS':
 			return overwriteItems( state, action );
-
-		case 'ENSURE_ONE_ITEM':
-			return ensureOneItem( state, action );
-
-		case 'ENSURE_ONE_SELECTED':
-			return ensureOneSelected( state, action );
 
 		case 'UPDATE_ITEM':
 			return updateItem( state, action );

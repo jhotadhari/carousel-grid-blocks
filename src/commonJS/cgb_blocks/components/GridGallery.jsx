@@ -1,15 +1,17 @@
 /**
  * External dependencies
  */
+// import PropTypes from 'prop-types';
 import Gallery from 'react-photo-gallery';
 import { SortableContainer } from 'react-sortable-hoc';
 import { computeSizes, computeSizesColumns } from '../../vendor/react-photo-gallery/utils';	// from 'react-photo-gallery/src/utils';  // why doesn't that work?
-
+import {
+	get,
+} from 'lodash';
 /**
  * Internal dependencies
  */
 import itemsToPhotoSet 	from '../utils/itemsToPhotoSet';
-import GridItem 		from './GridItem.jsx';
 
 class RawGridGallery extends Gallery {
 
@@ -92,6 +94,7 @@ class RawGridGallery extends Gallery {
 }
 
 const GridGallery = SortableContainer( ( {
+	blockGroupId,
 	items,
 	imageControlsSettings,
 	imageCaptionSettings,
@@ -111,7 +114,7 @@ const GridGallery = SortableContainer( ( {
 		margin={ parseInt( margin ) }
 		direction={ 'row' }
 		gridSettings={ gridSettings }
-		ImageComponent={ GridItem }
+		ImageComponent={ get( cgbBlocks, ['components',blockGroupId,'GridItem'] ) }
 		imageControlsSettings={ imageControlsSettings }
 		imageCaptionSettings={ imageCaptionSettings }
 		imageHoverEffect={ imageHoverEffect }
@@ -120,6 +123,5 @@ const GridGallery = SortableContainer( ( {
 		ItemComponent={ ItemComponent }
 	/>;
 });
-
 
 export default GridGallery;

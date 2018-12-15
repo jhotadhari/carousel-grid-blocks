@@ -65,6 +65,9 @@ const handles = [
 				'src/commonJS/' + handle + '/**/*.js',
 				'src/commonJS/' + handle + '/**/*.jsx',
 				'<%= pattern.global_exclude %>',
+
+				// exclude
+				'!src/commonJS/cgb_blocks/utils/slugify.js',
 			],
 		}],
 	};

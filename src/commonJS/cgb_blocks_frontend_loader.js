@@ -5,13 +5,16 @@ import loadJS from 'load-js';
 import extender from 'object-extender';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+	get,
+} from 'lodash';
 
 /**
  * Internal dependencies
  */
 import getCgbDefault 		from './cgb_blocks/getCgbDefault';
 import parseSerialized 		from './cgb_blocks/utils/parseSerialized';
-import Placeholder 			from './cgb_blocks/components/Placeholder.jsx';
+import PlaceholderSpinner 	from './cgb_blocks/components/PlaceholderSpinner.jsx';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -21,27 +24,32 @@ document.addEventListener('DOMContentLoaded', () => {
 	// display placeholder element
 	[...blockWrappers].map( ( blockWrapper ) => {
 		[... blockWrapper.getElementsByTagName( 'div' )].map( ( block ) => {
-			ReactDOM.render( <Placeholder/>, block );
+			ReactDOM.render( <PlaceholderSpinner/>, block );
 		});
 	});
 
 	// load app and start
 	loadJS( [cgbBlocks.pluginDirUrl + '/js/cgb_blocks_frontend.min.js'] ).then( () => {
 
-		const {
-			Grid,
-			Carousel,
-			Fullscreen,
-		} = cgbBlocks.components;
-
 		[...blockWrappers].map( ( blockWrapper ) => {
-
 			const data = parseSerialized( blockWrapper.getAttribute('data-cgb') );
+			const { blockGroupId } = data;
+
+			const setupDone = ! blockGroupId ? false : cgbBlocks.setupGroup( blockGroupId );
+			if ( ! setupDone ) return blockWrapper.remove();
+
+			const {
+				Grid,
+				Carousel,
+				Fullscreen,
+			} = get( cgbBlocks, ['components',blockGroupId] );
 
 
 			[... blockWrapper.getElementsByClassName( 'cgb-grid' )].map( ( grid ) => {
+
 				ReactDOM.render( <>
 					<Grid
+						className={ get( data, ['className'], '' ) + ' wp-block-cgb-grid' }
 						gridSettings={ extender.merge( getCgbDefault( 'gridSettings', { blockName: 'cgb/grid' } ), data.gridSettings ) }
 						imageHoverEffect={ data.imageHoverEffect || getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/grid' } ) }
 						imageHoverEffectSettings={ extender.merge( getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/grid' } ), data.imageHoverEffectSettings ) }
@@ -64,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			[...blockWrapper.getElementsByClassName( 'cgb-carousel' )].map( ( carousel ) => {
 				ReactDOM.render( <>
 					<Carousel
+						className={ get( data, ['className'], '' ) + ' wp-block-cgb-carousel' }
 						carouselSettings={ extender.merge( getCgbDefault( 'carouselSettings', { blockName: 'cgb/carousel' } ), data.carouselSettings ) }
 						imageHoverEffect={ data.imageHoverEffect || getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/carousel' } ) }
 						imageHoverEffectSettings={ extender.merge( getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/carousel' } ), data.imageHoverEffectSettings ) }

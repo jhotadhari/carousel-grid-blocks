@@ -3,7 +3,7 @@
 Plugin Name: Carousel Grid Blocks
 Plugin URI: https://waterproof-webdesign.info/wppr_project/carousel-grid-blocks
 Description: Two Gutenberg image blocks that interact with each other and share the same state.
-Version: 0.1.0
+Version: 0.2.0
 Author: jhotadhari
 Author URI: https://waterproof-webdesign.info/
 License: GNU General Public License v2 or later
@@ -23,7 +23,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Cgb_Carousel_Grid_Blocks {
 
 	protected static $instance = null;
-	const VERSION = '0.1.0';
+	const VERSION = '0.2.0';
 	const DB_VERSION = 0;			// int	increase the number if the database needs an update
 	const PLUGIN_SLUG = 'carousel-grid-blocks';
 	const PLUGIN_NAME = 'Carousel Grid Blocks';

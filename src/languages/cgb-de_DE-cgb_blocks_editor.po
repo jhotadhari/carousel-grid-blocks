@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carousel-grid-blocks 0.0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-11 13:45+0530\n"
-"PO-Revision-Date: 2018-12-11 13:46+0530\n"
+"POT-Creation-Date: 2018-12-15 16:32+0530\n"
+"PO-Revision-Date: 2018-12-15 16:33+0530\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,8 +18,8 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/commonJS/cgb_blocks/components/ItemControls.jsx:133
-#: src/commonJS/cgb_blocks/components/ItemControls.jsx:134
+#: src/commonJS/cgb_blocks/components/ItemControls.jsx:136
+#: src/commonJS/cgb_blocks/components/ItemControls.jsx:137
 #: src/commonJS/cgb_blocks_editor/getInspectorOptions.js:77
 msgid "Fullscreen"
 msgstr "Vollbild"
@@ -47,7 +47,7 @@ msgstr ""
 
 #: src/commonJS/cgb_blocks_editor/getInspectorOptions.js:31
 msgid "Show"
-msgstr ""
+msgstr "Anzeigen"
 
 #: src/commonJS/cgb_blocks_editor/getInspectorOptions.js:32
 msgid "Hide"
@@ -94,11 +94,11 @@ msgstr ""
 
 #: src/commonJS/cgb_blocks_editor/getInspectorOptions.js:69
 msgid "Image Title"
-msgstr ""
+msgstr "Bild Titel"
 
 #: src/commonJS/cgb_blocks_editor/getInspectorOptions.js:70
 msgid "Image Caption"
-msgstr ""
+msgstr "Bild Beschriftung"
 
 #: src/commonJS/cgb_blocks_editor/getInspectorOptions.js:71
 msgid "Post Title"
@@ -140,52 +140,52 @@ msgstr ""
 msgid "Fade"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/registerBlockCarousel.js:30
+#: src/commonJS/cgb_blocks_editor/registerBlockCarousel.js:37
 msgid "Cgb Image Carousel"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/registerBlockGrid.js:30
+#: src/commonJS/cgb_blocks_editor/registerBlockGrid.js:37
 msgid "Cgb Image Grid"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:47
-msgid "Image Fit"
+#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:72
+msgid "Width"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:99
-msgid "Height"
+#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:191
+msgid "Set Max Height"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:142
-msgid "Max Width"
-msgstr ""
-
-#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:247
-msgid "Screen Height Margin"
+#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:242
+msgid "Resize to screen height"
 msgstr ""
 
 #: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:306
-msgid "arrowsPosition"
-msgstr ""
-
-#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:323
-msgid "showStatus"
+msgid "showArrows"
 msgstr ""
 
 #: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:349
-msgid "indicatorsPosition"
-msgstr ""
-
-#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:363
-msgid "infiniteLoop"
+msgid "showIndicators"
 msgstr ""
 
 #: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:387
-msgid "autoPlay interval"
+msgid "autoPlay"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:415
-msgid "Animation"
+#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:410
+msgid "stopOnHover"
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/ChooseSource.jsx:84
+msgid "Items Source"
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/ChooseSource.jsx:120
+msgid "Include taxonomy terms"
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/ChooseSource.jsx:122
+msgid "Rest filters need to be enabled to use this feature"
 msgstr ""
 
 #: src/commonJS/cgb_blocks_editor/components/ColorPaletteAlpha.jsx:26
@@ -207,78 +207,107 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/GridInspector.jsx:45
-msgid "Columns"
-msgstr ""
-
-#: src/commonJS/cgb_blocks_editor/components/GridInspector.jsx:68
-msgid "Item sizes and aspect ratio"
-msgstr ""
-
-#: src/commonJS/cgb_blocks_editor/components/InspectorCommon.jsx:96
-msgid "Common settings for all cgb blocks within this post"
-msgstr ""
-
-#: src/commonJS/cgb_blocks_editor/components/InspectorCommon.jsx:126
-msgid "Post Type"
-msgstr ""
-
-#: src/commonJS/cgb_blocks_editor/components/InspectorCommon.jsx:152
-msgid "Try this plugin"
-msgstr ""
-
-#: src/commonJS/cgb_blocks_editor/components/InspectorImage.jsx:57
-msgid "Show Caption"
-msgstr "Beschriftung Anzeigen"
-
-#: src/commonJS/cgb_blocks_editor/components/InspectorImage.jsx:86
-#: src/commonJS/cgb_blocks_editor/components/InspectorImage.jsx:272
+#: src/commonJS/cgb_blocks_editor/components/GridInspector.jsx:65
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:86
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:272
 msgid "Margin"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/InspectorImage.jsx:138
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelGroup.jsx:38
+msgid "Block group"
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelGroup.jsx:59
+msgid "Disconnect"
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelGroupSettings.jsx:40
+msgid "Block group settings"
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelGroupSettings.jsx:46
+msgid "These settings apply to all blocks in this group."
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelGroupSettings.jsx:57
+msgid "Source"
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:57
+msgid "Show Caption"
+msgstr "Beschriftung Anzeigen"
+
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:138
 msgid "Custom Font Color"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/InspectorImage.jsx:184
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:184
 msgid "Hover Effect"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/InspectorImage.jsx:198
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:198
 msgid "Highlight Effect"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/InspectorImage.jsx:243
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:243
 msgid "Show Controls"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/InspectorImage.jsx:332
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:332
 msgid "Controls"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/InspectorImage.jsx:366
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:366
 msgid "Link to"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/ItemAdminControls.jsx:46
+#: src/commonJS/cgb_blocks_editor/components/ItemAdminControls.jsx:48
 msgid "Move Image"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/ItemAdminControls.jsx:82
+#: src/commonJS/cgb_blocks_editor/components/ItemAdminControls.jsx:84
 msgid "Select Image"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/ItemAdminControls.jsx:93
+#: src/commonJS/cgb_blocks_editor/components/ItemAdminControls.jsx:95
 msgid "Remove Image From Block"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/ItemAdminControlsMoveToIndex.jsx:54
-#: src/commonJS/cgb_blocks_editor/components/ItemAdminControlsMoveToIndex.jsx:71
+#: src/commonJS/cgb_blocks_editor/components/ItemAdminControlsMoveToIndex.jsx:49
+#: src/commonJS/cgb_blocks_editor/components/ItemAdminControlsMoveToIndex.jsx:66
 msgid "Move Image To New Position"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/ItemAdminControlsMoveToIndex.jsx:64
+#: src/commonJS/cgb_blocks_editor/components/ItemAdminControlsMoveToIndex.jsx:59
 msgid "New Image Position"
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/PlaceholderChooseGroup.jsx:90
+msgid "Connect to existing block group"
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/PlaceholderChooseGroup.jsx:91
+msgid "Create new block group"
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/PlaceholderChooseItems.jsx:97
+msgid "Choose Items"
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/PlaceholderChooseItems.jsx:98
+msgid ""
+"Drag images, upload new ones, select images from your library or adjust the "
+"the 'Items Source'."
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/PlaceholderChooseItems.jsx:117
+msgid "Upload"
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/PlaceholderChooseItems.jsx:144
+msgid ""
+"No items were found. Try to adjust the query parameter or change 'Items "
+"Source' to 'Custom'"
 msgstr ""
 
 #~ msgid "Left"

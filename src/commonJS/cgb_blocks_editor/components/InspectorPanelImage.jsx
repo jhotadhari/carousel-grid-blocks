@@ -30,7 +30,7 @@ const {
 import getInspectorOptions				from '../getInspectorOptions';
 import ColorPaletteAlpha				from './ColorPaletteAlpha.jsx';
 
-let InspectorImage = ({
+let InspectorPanelImage = ({
 	setAttributes,
 	include,
 	imageControlsSettings,
@@ -389,4 +389,4 @@ let InspectorImage = ({
 </PanelBody>;
 
 
-export default InspectorImage;
+export default InspectorPanelImage;

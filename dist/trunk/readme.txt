@@ -16,22 +16,19 @@ Two Gutenberg image blocks that interact with each other and share the same stat
 
 Two Gutenberg image blocks that interact with each other and share the same state.
 
-**Image sources**
+## Features
 
-The Image source panel is located in the block sidebar. All cgb blocks within one post share the same image source.
+- Display a custom selection of images or show featured images for a certain post type and taxonomy
+- Group several blocks. All blocks within one group share the same state (e.g. same images and selection).
 
-- custom: Select and order the images by yourself.
-- post type archive: Select a post type that supports featured images.
 
 ## Blocks
 
-**Cgb Image Carousel**
-- based on [react-responsive-carousel](http://react-responsive-carousel.js.org/)
+- **Cgb Image Carousel** based on [react-responsive-carousel](http://react-responsive-carousel.js.org/)
+- **Cgb Image Grid** based on [react-photo-gallery](http://neptunian.github.io/react-photo-gallery/)
 
-**Cgb Image Grid**
-- based on [react-photo-gallery](http://neptunian.github.io/react-photo-gallery/)
 
-* This Plugin is generated with [generator-pluginboilerplate version 1.2.3](https://github.com/jhotadhari/generator-pluginboilerplate)
+This Plugin is generated with [generator-pluginboilerplate version 1.2.3](https://github.com/jhotadhari/generator-pluginboilerplate)
 
 == Installation ==
 Upload and install this Plugin the same way you'd install any other plugin.
@@ -42,6 +39,9 @@ Upload and install this Plugin the same way you'd install any other plugin.
 == Upgrade Notice ==
 
 == Changelog ==
+
+0.2.0
+Added block group feature
 
 0.1.0
 WordPress 5.0 compatible, no backwards compatibility. See commit msgs for other changes and new features.

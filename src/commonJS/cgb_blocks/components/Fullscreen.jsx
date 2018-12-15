@@ -15,7 +15,14 @@ class _Fullscreen extends React.Component {
 
 	componentDidMount() {
 		const { addFullscreenId } = this.props;
-		addFullscreenId( this.state.id );
+		const { id } = this.state;
+		addFullscreenId( id );
+	}
+
+	componentWillUnmount() {
+		const { removeFullscreenId } = this.props;
+		const { id } = this.state;
+		removeFullscreenId( id );
 	}
 
 	render() {

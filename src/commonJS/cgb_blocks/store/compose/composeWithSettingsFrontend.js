@@ -9,7 +9,7 @@ const {
 	withSelect,
 } = wp.data;
 
-const composeWithSettingsFrontend = ( component, settingKeys ) => compose( [
+const composeWithSettingsFrontend = ( component, settingKeys, blockGroupId ) => compose( [
 	withSelect( ( select ) => {
 		const props = {};
 
@@ -17,7 +17,7 @@ const composeWithSettingsFrontend = ( component, settingKeys ) => compose( [
 
 		const {
 			getSetting,
-		} = select( 'cgb-store' );
+		} = select( blockGroupId );
 
 		[...settingKeys].map( ( settingKey ) => {
 			props[settingKey] = getSetting( settingKey );

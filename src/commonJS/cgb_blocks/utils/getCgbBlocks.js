@@ -19,16 +19,21 @@ const {
 	getBlock,
 } = select( 'core/editor' );
 
-const getCgbBlocks = ( uidsOrBlocks ) => {
+const getCgbBlocks = ( blockGroupId, uidsOrBlocks ) => {
 	uidsOrBlocks = undefined === uidsOrBlocks ? getBlockOrder() : uidsOrBlocks;
+
 	const cgbBlocks = [...uidsOrBlocks].map( uidOrBlock => {
 		const block = 'string' === typeof uidOrBlock ? getBlock( uidOrBlock ) : uidOrBlock;
-		if ( block.name.startsWith( 'cgb/' ) )
+
+		if ( block.name.startsWith( 'cgb/' ) && block.attributes.blockGroupId === blockGroupId )
 			return block;
+
 		if ( block.innerBlocks.length )
-			return getCgbBlocks( block.innerBlocks );
+			return getCgbBlocks( blockGroupId, block.innerBlocks );
+
 		return null;
 	} );
+
 	// flatten, filter nulls and return
 	return chain( [...cgbBlocks] ).flatten().filter( block => null !== block ).value();
 };

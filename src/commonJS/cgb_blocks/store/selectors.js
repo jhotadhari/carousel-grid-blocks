@@ -3,6 +3,7 @@
  */
 import {
 	get,
+	findIndex,
 } from 'lodash';
 
 /**
@@ -30,6 +31,11 @@ export function getSelectedIndex( state ) {
 	return -1 === selectedIndex ? 0 : selectedIndex;
 };
 
+export function getIndexByKey( state, key ) {
+	const { items } = state.itemsReducer;
+	return findIndex( items , ( item ) => key === item.key );
+};
+
 // settings
 export function getSettings( state ) {
 	return state.settingsReducer.settings;
@@ -49,7 +55,6 @@ export function isFullscreen( state ) {
 };
 
 export function getActiveFullscreenId( state ) {
-	return state.uiReducer.ui.fullscreenIds.length ? state.uiReducer.ui.fullscreenIds[0] : false;
+	const length = state.uiReducer.ui.fullscreenIds.length;
+	return length ? state.uiReducer.ui.fullscreenIds[length-1] : false;
 };
-
-

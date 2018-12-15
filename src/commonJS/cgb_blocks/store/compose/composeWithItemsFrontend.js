@@ -10,7 +10,7 @@ const {
 	withDispatch,
 } = wp.data;
 
-const composeWithItemsFrontend = ( component, requested ) => compose( [
+const composeWithItemsFrontend = ( component, requested, blockGroupId ) => compose( [
 	withSelect( ( select ) => {
 		const props = {};
 
@@ -19,8 +19,9 @@ const composeWithItemsFrontend = ( component, requested ) => compose( [
 		const {
 			getItems,
 			getSelectedIndex,
+			getIndexByKey,
 			fetchItem,
-		} = select( 'cgb-store' );
+		} = select( blockGroupId );
 
 		[...requested].map( ( prop ) => {
 			switch( prop ){
@@ -30,6 +31,10 @@ const composeWithItemsFrontend = ( component, requested ) => compose( [
 
 				case 'selectedIndex':
 					props[prop] = getSelectedIndex();
+					break;
+
+				case 'getIndexByKey':
+					props[prop] = getIndexByKey;
 					break;
 
 				case 'fetchItem':
@@ -47,10 +52,8 @@ const composeWithItemsFrontend = ( component, requested ) => compose( [
 
 		const {
 			updateItem,
-			ensureOneItem,
-			ensureOneSelected,
 			setSelected,
-		} = dispatch( 'cgb-store' );
+		} = dispatch( blockGroupId );
 
 
 		if ( ! requested ) return props;

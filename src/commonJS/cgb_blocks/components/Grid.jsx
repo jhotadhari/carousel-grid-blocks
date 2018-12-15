@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import classNames 		from 'classnames';
+
+/**
  * Internal dependencies
  */
 import GridGallery from './GridGallery.jsx';
@@ -11,6 +16,9 @@ class Grid extends React.Component {
 
 	render() {
 		const {
+			blockGroupId,
+			className,
+
 			items,								// from items
 			moveItem,							// from items
 			gridSettings,								// from atts
@@ -22,29 +30,47 @@ class Grid extends React.Component {
 			imageHoverEffectSettings,			// from atts
 			imageHighlightEffect,				// from atts
 			imageHighlightEffectSettings,		// from atts
-			ItemComponent,						// from atts
+			ItemComponent,
+
+			PlaceholderNoItems,
 		} = this.props;
 
 		return <>
-			{ items.length &&
-				<GridGallery
-					items={ items }
-					gridSettings={ gridSettings }
-					imageControlsSettings={ imageControlsSettings }
-					imageCaptionSettings={ imageCaptionSettings }
-					imageHoverEffect={ imageHoverEffect }
-					imageHoverEffectSettings={ imageHoverEffectSettings }
-					imageHighlightEffect={ imageHighlightEffect }
-					imageHighlightEffectSettings={ imageHighlightEffectSettings }
+			<div className={ classNames( className, 'cgb-block' ) }>
 
-					axis={ 'xy' }
-					useDragHandle={ true }
-					onSortEnd={ ( { oldIndex, newIndex } ) => {
-						moveItem( oldIndex, newIndex )
-					} }
-					ItemComponent={ ItemComponent }
-				/>
-			}
+				{ items.length > 0 &&
+					<div className="cgb-block-grid">
+
+						<GridGallery
+							blockGroupId={ blockGroupId }
+							items={ items }
+							gridSettings={ gridSettings }
+							imageControlsSettings={ imageControlsSettings }
+							imageCaptionSettings={ imageCaptionSettings }
+							imageHoverEffect={ imageHoverEffect }
+							imageHoverEffectSettings={ imageHoverEffectSettings }
+							imageHighlightEffect={ imageHighlightEffect }
+							imageHighlightEffectSettings={ imageHighlightEffectSettings }
+
+							axis={ 'xy' }
+							useDragHandle={ true }
+							onSortEnd={ ( { oldIndex, newIndex } ) => {
+								moveItem( oldIndex, newIndex )
+							} }
+							ItemComponent={ ItemComponent }
+						/>
+					</div>
+				}
+
+				{ items.length === 0 && PlaceholderNoItems &&
+					<PlaceholderNoItems/>
+				}
+
+				{ items.length === 0 && ! PlaceholderNoItems &&
+					<div></div>
+				}
+
+			</div>
 		</>;
 
 	}

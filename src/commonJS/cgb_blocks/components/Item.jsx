@@ -55,6 +55,7 @@ class Item extends React.Component {
 			className,			// from 	GridItem
 			controls,			// from 	GridItem
 			setSelected,		// from 	items
+			getIndexByKey,		// from 	items
 			itemStyle,			// from 	GridItem
 			imageStyle,			// from 	GridItem
 			imgStyle,			// from 	GridItem
@@ -72,18 +73,16 @@ class Item extends React.Component {
 			toggleFullscreen,
 		} = this.props;
 
+		if ( ! item.fetched ) return '';
+
 		const {
 			src,
 			alt,
 			srcSet,
 			sizes,
 			title,
-			// caption,
 			orientation,
-			// postLink,
 			postTitle,
-			// postExcerpt,
-			// postContent,
 		} = item;
 
 		const height = photo ? photo.height : null;
@@ -147,6 +146,8 @@ class Item extends React.Component {
 						item={ item }
 						isFullscreen={ isFullscreen }
 						toggleFullscreen={ toggleFullscreen }
+						getIndexByKey={ getIndexByKey }
+						setSelected={ setSelected }
 					/>
 				}
 

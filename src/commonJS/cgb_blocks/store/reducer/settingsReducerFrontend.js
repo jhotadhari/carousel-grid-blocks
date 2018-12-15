@@ -2,7 +2,7 @@
  * External dependencies
  */
 import {
-	isEmpty,
+	// isEmpty,
 	get,
 } from 'lodash';
 
@@ -10,26 +10,18 @@ import {
  * Internal dependencies
  */
 import { DEFAULT_STATE } 	from '../constants';
+import parseSerialized		from '../../utils/parseSerialized';
 
 export function pullSettingsFromAttributes( state = { settings: { ...DEFAULT_STATE.settings } }, action ) {
 	const { settings } = state;
+	const { blockGroupId } = action;
 	const blockWrappers = document.getElementsByClassName( 'cgb-block-wrapper' );
 	const newSettings = blockWrappers.length === 0 ? { ...settings } : {
 		...DEFAULT_STATE.settings,
 		...[...blockWrappers].reduce( ( acc, blockWrapper ) => {
-			if ( ! isEmpty( acc ) ) return acc;
-			const serializedData = blockWrapper.getAttribute('data-cgb');
-
-			let data = {};
-			try {
-				data = JSON.parse( serializedData );
-			} catch(e) {
-				data = {};
-			}
-
-			const blockSettings = get( data, [ 'settings' ] );
-			return undefined !== blockSettings ? blockSettings : acc;
-
+			if ( acc.length ) return acc;
+			const data = parseSerialized( blockWrapper.getAttribute('data-cgb') );
+			return data.blockGroupId === blockGroupId ? get( data, [ 'settings' ], acc ) : acc;
 		}, {} )
 	};
 	return {

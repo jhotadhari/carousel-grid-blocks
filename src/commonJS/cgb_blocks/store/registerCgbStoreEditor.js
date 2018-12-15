@@ -22,16 +22,16 @@ const {
  */
 import getCgbBlocks 		from '../utils/getCgbBlocks';
 import registerCgbStore 	from './registerCgbStore';
-import reducerEditor 		from './reducer/reducerEditor';
-import * as actionsEditor 	from './actions/actionsEditor';
+import reducer		 		from './reducer/reducerEditor';
+import * as actions		 	from './actions/actionsEditor';
 import * as selectors 		from './selectors';
 import * as resolvers 		from './resolvers';
 import controls 			from './controls';
 
-const registerCgbStoreEditor = () => {
-	const store = registerCgbStore({
-		reducer: reducerEditor,
-		actions: actionsEditor,
+const registerCgbStoreEditor = blockGroupId => {
+	const store = registerCgbStore( blockGroupId, {
+		reducer,
+		actions,
 		selectors,
 		controls,
 		resolvers,
@@ -41,7 +41,7 @@ const registerCgbStoreEditor = () => {
 		getItems,
 		getSettings,
 		getItemsSource,
-	} = select( 'cgb-store' );
+	} = select( blockGroupId );
 
 	let currentItemIds = [...getItems()].map( item => item.id );
 	let currentSettings = getSettings();
@@ -53,7 +53,7 @@ const registerCgbStoreEditor = () => {
 			let previousItemIds = currentItemIds;
 			currentItemIds = [...getItems()].map( item => item.id );
 			if ( ! isEqual( previousItemIds, currentItemIds ) ) {
-				[...getCgbBlocks()].map( block => updateBlockAttributes( block.clientId, {
+				[...getCgbBlocks( blockGroupId )].map( block => updateBlockAttributes( block.clientId, {
 					imageIds: currentItemIds,
 				} ) );
 			}
@@ -62,7 +62,7 @@ const registerCgbStoreEditor = () => {
 		let previousSettings = currentSettings;
 		currentSettings = getSettings();
 		if ( ! isEqual( previousSettings, currentSettings ) ) {
-			[...getCgbBlocks()].map( block => updateBlockAttributes( block.clientId, {
+			[...getCgbBlocks( blockGroupId )].map( block => updateBlockAttributes( block.clientId, {
 				settings: JSON.stringify( currentSettings ),
 			} ) );
 		}

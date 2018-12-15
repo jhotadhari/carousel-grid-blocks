@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import concatenateReducers from 'redux-concatenate-reducers'
-
-/**
  * WordPress dependencies
  */
 const {
@@ -15,7 +10,7 @@ const {
 	withDispatch,
 } = wp.data;
 
-const composeWithItemsEditor = ( component, requested ) => compose( [
+const composeWithItemsEditor = ( component, requested, blockGroupId ) => compose( [
 	withSelect( ( select ) => {
 		const props = {};
 
@@ -24,8 +19,9 @@ const composeWithItemsEditor = ( component, requested ) => compose( [
 		const {
 			getItems,
 			getSelectedIndex,
+			getIndexByKey,
 			fetchItem,
-		} = select( 'cgb-store' );
+		} = select( blockGroupId );
 
 		[...requested].map( ( prop ) => {
 			switch( prop ){
@@ -35,6 +31,10 @@ const composeWithItemsEditor = ( component, requested ) => compose( [
 
 				case 'selectedIndex':
 					props[prop] = getSelectedIndex();
+					break;
+
+				case 'getIndexByKey':
+					props[prop] = getIndexByKey;
 					break;
 
 				case 'fetchItem':
@@ -54,12 +54,10 @@ const composeWithItemsEditor = ( component, requested ) => compose( [
 			addItems,
 			removeItem,
 			updateItem,
-			ensureOneItem,
-			ensureOneSelected,
 			setSelected,
 			updateItemFromMedia,
 			moveItem,
-		} = dispatch( 'cgb-store' );
+		} = dispatch( blockGroupId );
 
 		if ( ! requested ) return props;
 
@@ -72,24 +70,15 @@ const composeWithItemsEditor = ( component, requested ) => compose( [
 					break;
 
 				case 'removeItem':
-					props[prop] = concatenateReducers([
-						removeItem,
-						ensureOneItem,
-						ensureOneSelected,
-					]);
+					props[prop] = removeItem;
 					break;
 
 				case 'updateItem':
-					props[prop] = concatenateReducers([
-						updateItem,
-					]);
+					props[prop] = updateItem;
 					break;
 
 				case 'updateItemFromMedia':
-					props[prop] = concatenateReducers([
-						updateItemFromMedia,
-						ensureOneSelected,
-					]);
+					props[prop] = updateItemFromMedia;
 					break;
 
 				case 'setSelected':
@@ -97,10 +86,7 @@ const composeWithItemsEditor = ( component, requested ) => compose( [
 					break;
 
 				case 'moveItem':
-					props[prop] = concatenateReducers([
-						moveItem,
-						ensureOneSelected,
-					]);
+					props[prop] = moveItem;
 					break;
 
 			};

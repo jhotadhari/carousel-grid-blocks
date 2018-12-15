@@ -33,7 +33,7 @@ export const DEFAULT_ITEM = {
 };
 
 export const DEFAULT_STATE = {
-	items: [{...DEFAULT_ITEM, selected: true}],
+	items: [],
 	settings: {
 		transitionTime: 350,
 		itemsSource: {
@@ -52,7 +52,7 @@ export const DEFAULT_STATE = {
 };
 
 
-// ??? example
+// example
 // itemsSource: {
 // 	key: 'archivePostType',
 // 	options: {

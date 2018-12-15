@@ -10,12 +10,12 @@ const {
 	withDispatch,
 } = wp.data;
 
-const composeWithUi = ( component ) => compose( [
+const composeWithUi = ( component, blockGroupId ) => compose( [
 	withSelect( ( select ) => {
 		const {
 			isFullscreen,
 			getActiveFullscreenId,
-		} = select( 'cgb-store' );
+		} = select( blockGroupId );
 
 		return {
 			isFullscreen: isFullscreen(),
@@ -27,11 +27,13 @@ const composeWithUi = ( component ) => compose( [
 		const {
 			toggleFullscreen,
 			addFullscreenId,
-		} = dispatch( 'cgb-store' );
+			removeFullscreenId,
+		} = dispatch( blockGroupId );
 
 		return {
-			toggleFullscreen: toggleFullscreen,
-			addFullscreenId: addFullscreenId,
+			toggleFullscreen,
+			addFullscreenId,
+			removeFullscreenId,
 		};
 
 	} ),

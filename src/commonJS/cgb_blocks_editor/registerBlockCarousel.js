@@ -3,6 +3,9 @@
  */
 import loadJS from 'load-js';
 import extender from 'object-extender';
+import {
+	get,
+} from 'lodash';
 
 /**
  * WordPress dependencies
@@ -16,13 +19,17 @@ const {
 	InspectorControls,
 	BlockControls,
 } = wp.editor;
+const {
+	select,
+} = wp.data;
 
 /**
  * Internal dependencies
  */
 import parseSerialized 		from '../cgb_blocks/utils/parseSerialized';
 import getCgbDefault		from '../cgb_blocks/getCgbDefault';
-import Placeholder 			from '../cgb_blocks/components/Placeholder.jsx';
+import PlaceholderSpinner 	from '../cgb_blocks/components/PlaceholderSpinner.jsx';
+import PlaceholderChooseGroup 			from './components/PlaceholderChooseGroup.jsx';
 
 const registerBlockCarousel = () => {
 
@@ -30,6 +37,9 @@ const registerBlockCarousel = () => {
 		title: __( 'Cgb Image Carousel' ),
 		icon: 'format-gallery',
 		category: 'common',
+		description:__( 'Display multiple images in a rich carousel.', 'cgb' ),
+		keywords: [ __( 'gallery' ), __( 'images' ), __( 'photos' ) ],
+		reusable: false,
 		supports: {
 			html: false,
 			// align: true,
@@ -41,6 +51,7 @@ const registerBlockCarousel = () => {
 					type: 'block',
 					blocks: [ 'cgb/grid' ],
 					transform: ( {
+						blockGroupId,
 						imageSource,
 						imageIds,
 						settings,
@@ -49,6 +60,7 @@ const registerBlockCarousel = () => {
 						imageHoverEffect,
 						imageHoverEffectSettings,
 					} ) => createBlock( 'cgb/grid', {
+						blockGroupId: blockGroupId,
 						imageSource: imageSource,
 						imageIds: imageIds || [],
 						settings: settings || '',
@@ -61,6 +73,13 @@ const registerBlockCarousel = () => {
 			],
 		},
 		attributes: {
+
+			blockGroupId: {
+				type: 'string',
+				default: '',
+			},
+
+
 			imageSource: {		// common
 				type: 'string',
 				default: 'custom',		// custom || posts
@@ -96,17 +115,30 @@ const registerBlockCarousel = () => {
 		},
 		edit( {  attributes, className, setAttributes } ) {
 
+			const { blockGroupId } = attributes;
+
 			const imageHoverEffect = attributes.imageHoverEffect || getCgbDefault( 'imageHoverEffect', { blockName: 'cgb/carousel' } );
 			const carouselSettings = extender.merge( getCgbDefault( 'carouselSettings', { blockName: 'cgb/carousel' } ), parseSerialized( attributes.carouselSettings ) );
 			const imageControlsSettings = extender.merge( getCgbDefault( 'imageControlsSettings', { blockName: 'cgb/carousel' } ), parseSerialized( attributes.imageControlsSettings ) );
 			const imageCaptionSettings = extender.merge( getCgbDefault( 'imageCaptionSettings', { blockName: 'cgb/carousel' } ), parseSerialized( attributes.imageCaptionSettings ) );
 			const imageHoverEffectSettings = extender.merge( getCgbDefault( 'imageHoverEffectSettings', { blockName: 'cgb/carousel' } ), parseSerialized( attributes.imageHoverEffectSettings ) );
 
-			if ( ! attributes.scriptsloaded) {
-				// load the main editor component, rerender the block
+			const classNameSorted = className.split( ' ' ).sort( ( a, b ) => {
+				if ( 'wp-block-cgb-carousel-block' === a ) return 1;
+				if ( 'wp-block-cgb-carousel-block' === b ) return -1;
+				return 0;
+			} ).join( ' ' );
+
+			if ( ! attributes.scriptsloaded ) {
 				loadJS( [cgbBlocks.pluginDirUrl + '/js/cgb_blocks_editor.min.js'] ).then( () => setAttributes( { scriptsloaded: true } ) );
-				// until loaded, display a placeholder
-				return <Placeholder/>;
+				return <PlaceholderSpinner/>;
+			} else if ( ! blockGroupId.length ) {
+				return <PlaceholderChooseGroup setAttributes={ setAttributes }/>;
+			} else if ( ! attributes.setupDone ) {
+				const setupDone = cgbBlocks.setupGroup( blockGroupId );
+				if ( setupDone )
+					setAttributes( { setupDone: true } );
+				return <PlaceholderSpinner/>;
 			} else {
 
 				const {
@@ -114,7 +146,8 @@ const registerBlockCarousel = () => {
 					CarouselInspector,
 					Carousel,
 					Fullscreen,
-				} = cgbBlocks.components;
+					PlaceholderChooseItems,
+				} = get( cgbBlocks, ['components',blockGroupId] );
 
 				return ( <>
 					<BlockControls>
@@ -125,6 +158,7 @@ const registerBlockCarousel = () => {
 
 					<InspectorControls>
 						<CarouselInspector
+							blockGroupId={ blockGroupId }
 							setAttributes={ setAttributes }
 							carouselSettings={ carouselSettings }
 							imageControlsSettings={ imageControlsSettings }
@@ -135,11 +169,13 @@ const registerBlockCarousel = () => {
 					</InspectorControls>
 
 					<Carousel
+						className={ classNameSorted }
 						carouselSettings={ carouselSettings }
 						imageControlsSettings={ imageControlsSettings }
 						imageCaptionSettings={ imageCaptionSettings }
 						imageHoverEffect={ imageHoverEffect }
 						imageHoverEffectSettings={ imageHoverEffectSettings }
+						PlaceholderNoItems={ PlaceholderChooseItems }
 					/>
 
 					<Fullscreen

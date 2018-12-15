@@ -1,7 +1,8 @@
 /**
  * External dependencies
  */
-import ResizeObserver from 'resize-observer-polyfill';
+import ResizeObserver 	from 'resize-observer-polyfill';
+import classNames 		from 'classnames';
 
 /**
  * WordPress dependencies
@@ -157,6 +158,7 @@ class Carousel extends React.Component {
 			return <div ref={ c => (this._carousel = c ) } />;
 
 		const {
+			className,
 			carouselSettings: {
 				imageFit,
 				showArrows,
@@ -180,8 +182,9 @@ class Carousel extends React.Component {
 			imageControlsSettings,
 			imageHoverEffect,
 			ItemComponent,
-		} = this.props;
 
+			PlaceholderNoItems,
+		} = this.props;
 
 		const controls = [
 			'fullscreen',
@@ -194,8 +197,8 @@ class Carousel extends React.Component {
 			] : [] ),
 		];
 
-		return (
-			<div className="cgb-block">
+		return <>
+			<div className={ classNames( className, 'cgb-block' ) }>
 
 				{ items.length > 0 &&
 					<div className="cgb-block-carousel">
@@ -252,8 +255,16 @@ class Carousel extends React.Component {
 					</div>
 				}
 
+				{ items.length === 0 && PlaceholderNoItems &&
+					<PlaceholderNoItems/>
+				}
+
+				{ items.length === 0 && ! PlaceholderNoItems &&
+					<div></div>
+				}
+
 			</div>
-		);
+		</>;
 
 	}
 

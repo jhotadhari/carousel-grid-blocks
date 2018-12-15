@@ -10,9 +10,10 @@ export function fetchFromAPI( path ) {
 /*
 	items
 */
-export function pullItemsFromAttributes() {
+export function pullItemsFromAttributes( blockGroupId ) {
 	return {
 		type: 'PULL_ITEMS_FROM_ATTRIBUTES',
+		blockGroupId,
 	};
 }
 
@@ -23,19 +24,6 @@ export function overwriteItems( newItems ) {
 	};
 }
 
-export function ensureOneItem() {
-	return {
-		type: 'ENSURE_ONE_ITEM',
-	};
-}
-
-export function ensureOneSelected() {
-	return {
-		type: 'ENSURE_ONE_SELECTED',
-	};
-}
-
-
 export function updateItem( index, newItem ) {
 	return {
 		type: 'UPDATE_ITEM',
@@ -43,7 +31,6 @@ export function updateItem( index, newItem ) {
 		newItem
 	};
 }
-
 
 export function setSelected( newIndex ) {
 	return {
@@ -56,10 +43,12 @@ export function setSelected( newIndex ) {
 	settings
 */
 
-export function pullSettingsFromAttributes( blocks ) {
+// export function pullSettingsFromAttributes( blocks ) {
+export function pullSettingsFromAttributes( blockGroupId ) {
 	return {
 		type: 'PULL_SETTINGS_FROM_ATTRIBUTES',
-		blocks,
+		// blocks,
+		blockGroupId,
 	};
 }
 
@@ -77,5 +66,12 @@ export function addFullscreenId( newId ) {
 	return {
 		type: 'ADD_FULLSCREEN_ID',
 		newId,
+	};
+}
+
+export function removeFullscreenId( removeId ) {
+	return {
+		type: 'REMOVE_FULLSCREEN_ID',
+		removeId,
 	};
 }

@@ -15,7 +15,7 @@ const {
 	withDispatch,
 } = wp.data;
 
-const composeWithSettingsEditor = ( component, settingKeys ) => compose( [
+const composeWithSettingsEditor = ( component, settingKeys, blockGroupId ) => compose( [
 	withSelect( ( select ) => {
 		const props = {};
 
@@ -23,7 +23,7 @@ const composeWithSettingsEditor = ( component, settingKeys ) => compose( [
 
 		const {
 			getSetting,
-		} = select( 'cgb-store' );
+		} = select( blockGroupId );
 
 		[...settingKeys].map( ( settingKey ) => {
 			props[settingKey] = getSetting( settingKey );
@@ -35,7 +35,7 @@ const composeWithSettingsEditor = ( component, settingKeys ) => compose( [
 
 		const {
 			updateSetting,
-		} = dispatch( 'cgb-store' );
+		} = dispatch( blockGroupId );
 
 		if ( ! settingKeys ) return props;
 

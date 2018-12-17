@@ -5,13 +5,13 @@ Two Gutenberg image blocks that interact with each other and share the same stat
 > Further information: [./dist/trunk/README.md](https://github.com/jhotadhari/carousel-grid-blocks/tree/master/dist/trunk)
 
 * Contribution welcome :)
-* For **support**, to **request new plugin-features** or inform me about **issues and bugs** [create a new issue on Github](https://github.com/jhotadhari/carousel-grid-blocks/issues/new) or [add a new topic to WP's support forum](https://wordpress.org/support/plugin/carousel-grid-blocks)
-* Love to get your **feedback**, [Create a new review and rate this Plugin](https://wordpress.org/support/plugin/carousel-grid-blocks/reviews/#new-post), write a tutorial and tell your friends.
+* For **support**, to **request new plugin-features** or inform me about **issues and bugs** [create a new issue on Github](https://github.com/jhotadhari/carousel-grid-blocks/issues/new) ~~or [add a new topic to WP's support forum](https://wordpress.org/support/plugin/carousel-grid-blocks)~~
+* ~~Love to get your **feedback**, [Create a new review and rate this Plugin](https://wordpress.org/support/plugin/carousel-grid-blocks/reviews/#new-post),~~ write a tutorial and tell your friends.
 * [Tell me](https://waterproof-webdesign.info/en/#contact) your wishes, maybe get me a bowl of rice and some masala: [Donate](http://waterproof-webdesign.info/donate)
 
 ## How to install:
 
-carousel-grid-blocks is or will be [available in the official WordPress Plugin repository](https://wordpress.org/plugins/carousel-grid-blocks/). You can install this Plugin the same way you'd install any other plugin.
+~~**Carousel Grid Blocks** is [available in the official WordPress Plugin repository](https://wordpress.org/plugins/carousel-grid-blocks/). You can install this Plugin the same way you'd install any other plugin.~~
 
 To install it from this GitHub Repo:
 

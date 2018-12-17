@@ -14,7 +14,6 @@ module.exports = {
 			}
 			return val;
 		});
-
 		return replacements;
 	},
 };

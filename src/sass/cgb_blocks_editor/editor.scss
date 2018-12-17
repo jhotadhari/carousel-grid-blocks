@@ -114,11 +114,12 @@
     & > .components-base-control {
         flex-shrink: 1;
         flex-grow: 1;
-        flex-basis: 50%;
+        flex-basis: 40%;
         margin-right: 7px;
         margin-bottom: 0;
 
-        &.cgb-columns-field-no-margin {
+        &.cgb-columns-field-no-margin,
+        &:last-child {
             margin-right: 0;
         }
 

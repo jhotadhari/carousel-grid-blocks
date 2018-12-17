@@ -18,12 +18,7 @@ const transform = [
 	[ 'babelify', {
 		plugins: [
 			'@babel/plugin-syntax-dynamic-import',
-			// '@babel/plugin-dynamic-import-node',
-			// 'dynamic-import-node-babel-7',
 		],
-		// transform: [
-		// 	'browserify-require-async',
-		// ],
 		presets: [
 			'@babel/preset-env',
 			'@babel/preset-react',

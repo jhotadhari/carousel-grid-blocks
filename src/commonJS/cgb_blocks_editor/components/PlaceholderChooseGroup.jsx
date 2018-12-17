@@ -138,7 +138,6 @@ class PlaceholderChooseGroup extends React.Component {
 						>
 							<TextControl
 								disabled={ true }
-								className={ 'cgb-columns-field-30' }
 								value={ blockGroupIdPrefix }
 							/>
 

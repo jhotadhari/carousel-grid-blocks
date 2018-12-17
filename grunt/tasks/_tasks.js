@@ -58,11 +58,15 @@ module.exports = function(grunt){
 		}
 
 		// add language tasks
-		tasks = tasks.concat([
-			'pot',			// language
-			'potomo',		// language
-			'po2json',		// language
-		] );
+		tasks = [
+			...tasks,
+			'pot',
+		];
+		tasks = grunt.file.expand( { cwd: 'src/languages/' }, ['*.po'] ).length ? tasks = [
+			...tasks,
+			'potomo',
+			'po2json',
+		] : tasks;
 
 		// run tasks
 		grunt.task.run( tasks );

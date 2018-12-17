@@ -7,6 +7,7 @@
 **Requires PHP:** 5.6  
 **Stable tag:** trunk  
 **License:** GNU General Public License v2 or later  
+**License:** GNU General Public License v2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
 Two Gutenberg image blocks that interact with each other and share the same state.
@@ -39,6 +40,12 @@ Upload and install this Plugin the same way you'd install any other plugin.
 ## Upgrade Notice ##
 
 ## Changelog ##
+
+
+0.2.1
+Added support for GitHub Updater Plugin
+
+Using release assets. See https://github.com/afragen/github-updater/issues/716
 
 0.2.0
 Added block group feature

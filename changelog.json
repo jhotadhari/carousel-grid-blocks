@@ -2,6 +2,11 @@
   "next": [
     ""
   ],
+  "0.2.1": [
+    "Added support for GitHub Updater Plugin",
+    "",
+    "Using release assets. See https://github.com/afragen/github-updater/issues/716"
+  ],
   "0.2.0": [
     "Added block group feature"
   ],

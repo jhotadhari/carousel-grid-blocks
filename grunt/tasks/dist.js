@@ -20,6 +20,12 @@ module.exports = function(grunt){
 			'_setPaths:dist',					// build tasks
 		]);
 
+		// zip
+		tasks = [
+			...tasks,
+			'zip',
+		];
+
 		// git tasks
 		tasks = grunt.option('git') === false ? tasks : [
 			...tasks,

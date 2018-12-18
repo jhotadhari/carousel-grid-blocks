@@ -2,6 +2,11 @@
   "next": [
     ""
   ],
+  "0.2.2": [
+    "Fixed support for GitHub Updater Plugin with release assets",
+    "",
+    "Changed structure of release asset zip. Unzips to a containing folder with the appropriate plugin slug and all plugin files. See https://github.com/afragen/github-updater/issues/716"
+  ],
   "0.2.1": [
     "Added support for GitHub Updater Plugin",
     "",

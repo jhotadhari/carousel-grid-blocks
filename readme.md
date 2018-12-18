@@ -15,7 +15,7 @@ Two Gutenberg image blocks that interact with each other and share the same stat
 
 To install it from this GitHub Repo:
 
-- download the latest release asset from [```Releases```](https://github.com/jhotadhari/carousel-grid-blocks/releases) and unzip it to ```carousel-grid-blocks```.
+- download the latest release asset from [```Releases```](https://github.com/jhotadhari/carousel-grid-blocks/releases).
 - alternatively download the latest distributed version from [```./dist/trunk```](https://github.com/jhotadhari/carousel-grid-blocks/tree/master/dist/trunk) and rename ```trunk``` to ```carousel-grid-blocks```
 - upload to your plugins directory and activate
 

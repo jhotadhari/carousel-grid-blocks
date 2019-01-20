@@ -1,8 +1,8 @@
 module.exports = {
 	options: {
 		poDel: false
-	},			
-	main: { 
+	},
+	main: {
 		files: [{
 			expand: true,
 			cwd: 'src/languages/',
@@ -10,6 +10,6 @@ module.exports = {
 			dest: '<%= dest_path %>/languages',
 			ext: '.mo',
 			nonull: true
-		}]				
+		}]
 	},
 };

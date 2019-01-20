@@ -32,7 +32,6 @@ function initConfigs(grunt, folderPath) {
 			]
 		},
 		pkg: "<%= global['pkg'] %>",
-		wp_installs: grunt.file.readJSON("wp_installs.json"),
 		dest_path:  "<%= global['dest_path'] %>",
 		commit_msg: "<%= global['commit_msg'] %>",
 		changelog: "<%= global['changelog'] %>",

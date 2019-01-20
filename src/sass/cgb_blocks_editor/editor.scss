@@ -175,6 +175,10 @@
 
         }
 
+        &:hover &-controls-inner {
+            display: flex;
+        }
+
     }
 }
 

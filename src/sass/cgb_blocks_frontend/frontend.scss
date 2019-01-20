@@ -199,13 +199,6 @@
 
 
 .cgb-block {
-    &-grid-item,
-    &-carousel-item,
-    &-item {
-        &:hover &-controls-inner {
-            display: flex;
-        }
-    }
 
     // image hover effects
     &-grid-item,

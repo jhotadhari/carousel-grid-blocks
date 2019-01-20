@@ -192,7 +192,7 @@ class Carousel extends React.Component {
 				'selectImage',
 				'remove',
 				'moveLeft',
-				'moveImage',
+				// 'moveImage',	// ??? some bugs
 				'moveRight',
 			] : [] ),
 		];

@@ -18,7 +18,7 @@
   "licenseUri": "http://www.gnu.org/licenses/gpl-2.0.html",
   "tags": "gutenberg,block,slider,grid,gallery",
   "donateLink": "https://waterproof-webdesign.info/donate",
-  "GitHubPluginURI": "https://github.com/jhotadhari/carousel-grid-blocks",
+  "gitHubPluginURI": "https://github.com/jhotadhari/carousel-grid-blocks",
   "wpVersionTested": "5.0",
   "wpRequiresAtLeast": "5.0",
   "phpRequiresAtLeast": "5.6",

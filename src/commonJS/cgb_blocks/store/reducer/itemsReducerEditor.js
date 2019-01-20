@@ -13,7 +13,6 @@ const shortid = require('shortid');
 
 import arrayMove from 'array-move';
 
-
 /**
  * WordPress dependencies
  */
@@ -89,7 +88,7 @@ export function updateItemFromMedia( state = { items: [ ...DEFAULT_STATE.items ]
 		mediaSizes: media.sizes,
 		fetched: false,	// need sizes, srcSet...
 	};
-
+	newItems[index] = newItem;
 	return {
 		...state,
 		items: newItems,

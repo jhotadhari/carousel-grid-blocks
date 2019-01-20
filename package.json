@@ -5,7 +5,7 @@
   "uri": "https://waterproof-webdesign.info/wppr_project/carousel-grid-blocks",
   "textDomain": "cgb",
   "domainPath": "/languages",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Two Gutenberg image blocks that interact with each other and share the same state.",
   "main": "index.js",
   "scripts": {

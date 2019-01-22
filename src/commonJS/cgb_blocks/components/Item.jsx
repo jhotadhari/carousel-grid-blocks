@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {
 	filter,
 	get,
+	orderBy,
 } from 'lodash';
 
 /**
@@ -69,6 +70,8 @@ class Item extends React.Component {
 
 			ItemAdminControlsComponent,
 
+			containerWidth,
+
 			isFullscreen,
 			toggleFullscreen,
 		} = this.props;
@@ -86,7 +89,12 @@ class Item extends React.Component {
 		} = item;
 
 		const height = photo ? photo.height : null;
-		const width = photo ? photo.width : null;
+		const width = photo ? photo.width : containerWidth;
+
+		const possibleSizes = [...sizes].map( size => ( size.width * 0.9 ) > width ? size : null ).filter( v => v !== null );
+		const sizesAttr = possibleSizes.length
+			? orderBy( [...possibleSizes], ['width'], ['asc'] )[0]['attr']
+			: orderBy( [...sizes], ['width'], ['desc'] )[0]['attr'];
 
 		return (
 			<div
@@ -113,7 +121,7 @@ class Item extends React.Component {
 						src={ src }
 						alt={ alt }
 						srcSet={ srcSet }
-						sizes={ sizes }
+						sizes={ sizesAttr }
 						title={ postTitle.length > 0 ? postTitle : title }
 						style={ imgStyle }
 						className={ [

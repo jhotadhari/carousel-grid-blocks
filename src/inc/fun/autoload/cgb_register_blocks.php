@@ -137,21 +137,28 @@ class Cgb_Register_Blocks {
 	}
 
 	public function get_rest_field( $object, $field_name, $request ) {
+		$image_meta = wp_get_attachment_metadata( $object['id'] );
+
 		switch( $field_name ) {
 			case 'cgb_srcset':
-				$image = wp_get_attachment_metadata( $object['id'] );
 				$image_url = wp_get_attachment_url( $object['id'] );
-				$size_array = array();
-				foreach( $image['sizes'] as $size ){
-					array_push( $size_array, array( $size['width'], $size['height'] ) );
+				$srcset_sizes_array = array();
+				foreach( $image_meta['sizes'] as $size ){
+					array_push( $srcset_sizes_array, array( $size['width'], $size['height'] ) );
 				}
-				$srcset = wp_calculate_image_srcset( $size_array, $image_url, $image['image_meta'], $object['id'] );
+				$srcset = wp_calculate_image_srcset( $srcset_sizes_array, $image_url, $image_meta, $object['id'] );
 				return $srcset ? $srcset : $image_url . ' ' .$image['width'] . 'w';
 				break;
 			case 'cgb_sizes':
-				$image = wp_get_attachment_metadata( $object['id'] );
 				$image_url = wp_get_attachment_url( $object['id'] );
-				return wp_calculate_image_sizes( 'full', $image_url, null, $object['id'] );
+				$image_sizes_array = array();
+				foreach( $image_meta['sizes'] as $size_key => $size ){
+					array_push( $image_sizes_array, array(
+						'width' => $size['width'],
+						'attr' => wp_calculate_image_sizes( $size_key, $image_url, $image_meta, $object['id'] )
+					) );
+				}
+				return $image_sizes_array;
 				break;
 		}
 	}

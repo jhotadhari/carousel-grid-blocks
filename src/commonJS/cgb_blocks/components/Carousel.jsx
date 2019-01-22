@@ -246,6 +246,7 @@ class Carousel extends React.Component {
 										imgStyle={ {} }
 
 										controls={ controls }
+										containerWidth={ containerWidth }
 									/>
 								);
 

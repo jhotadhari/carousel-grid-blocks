@@ -113,21 +113,15 @@
 
         }
 
-
         &-image-controls-inner {
             flex-wrap: wrap;
-           .components-button {
+           .button-image-control {
                background: transparentize( #fff, 0.4 );
                margin: 0.25em;
                cursor: pointer;
+               padding: 6px;
                &:hover {
                    background: transparentize( #fff, 0.2 );
-               }
-               &.remove {
-                   color: #f00;
-                   &:hover {
-                       color: #f00;
-                   }
                }
            }
         }
@@ -221,6 +215,12 @@
 
 
 .fullscreen {
+    &-close {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+    }
+
     .cgb-block {
         height: 100%;
         .cgb-block-carousel {

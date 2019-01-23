@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import Fullscreen from "react-full-screen";
+import Fullscreen from 'react-full-screen';
 const shortid = require('shortid');
 
 class _Fullscreen extends React.Component {
@@ -45,7 +45,13 @@ class _Fullscreen extends React.Component {
 					enabled={ isFullscreen }
 					onChange={ isFull => toggleFullscreen( isFull ) }
 				>
-					{ isFullscreen &&
+					{ isFullscreen && <>
+
+						<div
+							className={ 'fullscreen-close' }
+							onClick={ e => toggleFullscreen( false ) }
+						></div>
+
 						<Carousel
 							carouselSettings={ carouselSettings }
 							imageHoverEffect={ imageHoverEffect }
@@ -53,7 +59,7 @@ class _Fullscreen extends React.Component {
 							imageControlsSettings={ imageControlsSettings }
 							imageCaptionSettings={ imageCaptionSettings }
 						/>
-					}
+					</> }
 				</Fullscreen>
 			}
 		</> );

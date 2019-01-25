@@ -137,7 +137,7 @@ let ItemControls = ( {
 							title={ 		__( 'Fullscreen', 'cgb' ) }
 							onClick={ () => {
 								setSelected( getIndexByKey( key ) );
-								toggleFullscreen();
+								toggleFullscreen( true );
 							} }
 						>
 							{ /* https://material.io/tools/icons/?icon=fullscreen&style=baseline */ }

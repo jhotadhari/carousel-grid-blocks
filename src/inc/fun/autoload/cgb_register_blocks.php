@@ -141,17 +141,21 @@ class Cgb_Register_Blocks {
 
 		switch( $field_name ) {
 			case 'cgb_srcset':
+				if ( ! is_array( $image_meta ) || ! array_key_exists( 'sizes', $image_meta ) )
+					return '';
 				$image_url = wp_get_attachment_url( $object['id'] );
 				$srcset_sizes_array = array();
 				foreach( $image_meta['sizes'] as $size ){
 					array_push( $srcset_sizes_array, array( $size['width'], $size['height'] ) );
 				}
 				$srcset = wp_calculate_image_srcset( $srcset_sizes_array, $image_url, $image_meta, $object['id'] );
-				return $srcset ? $srcset : $image_url . ' ' .$image['width'] . 'w';
+				return $srcset ? $srcset : $image_url . ' ' .$image_meta['width'] . 'w';
 				break;
 			case 'cgb_sizes':
-				$image_url = wp_get_attachment_url( $object['id'] );
+				if ( ! is_array( $image_meta ) || ! array_key_exists( 'sizes', $image_meta ) )
+					return array();
 				$image_sizes_array = array();
+				$image_url = wp_get_attachment_url( $object['id'] );
 				foreach( $image_meta['sizes'] as $size_key => $size ){
 					array_push( $image_sizes_array, array(
 						'width' => $size['width'],

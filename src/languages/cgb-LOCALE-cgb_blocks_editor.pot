@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carousel-grid-blocks 0.2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-23 16:52+0530\n"
+"POT-Creation-Date: 2019-01-25 19:16+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -231,7 +231,6 @@ msgstr ""
 
 #: src/commonJS/cgb_blocks_editor/components/GridInspector.jsx:65
 #: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:86
-#: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:272
 msgid "Margin"
 msgstr ""
 
@@ -272,15 +271,23 @@ msgid "Highlight Effect"
 msgstr ""
 
 #: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:243
-msgid "Show Controls"
+msgid "Toggle fullscreen when image is clicked"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:332
-msgid "Controls"
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:268
+msgid "Position"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:366
-msgid "Link to"
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:294
+msgid "Padding"
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:309
+msgid "Background"
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/InspectorPanelImage.jsx:325
+msgid "Font Color"
 msgstr ""
 
 #: src/commonJS/cgb_blocks_editor/components/ItemAdminControls.jsx:48

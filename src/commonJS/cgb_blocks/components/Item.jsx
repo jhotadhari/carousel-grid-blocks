@@ -98,12 +98,19 @@ class Item extends React.Component {
 
 		return (
 			<div
-				onClick={ ( event ) => 'BUTTON' !== event.target.tagName ? setSelected( undefined === index ? 0 : index ) : null }
 				className={ [
 					className,
 					item.selected ? 'selected' : null,
 				].filter( a => a !== null ).join(' ') }
 				style={ {...itemStyle} }
+				onClick={ e => {
+					if ( 'BUTTON' !== e.target.tagName ) {
+						setSelected( undefined === index ? 0 : index );
+						if ( get( imageControlsSettings, ['imgOnClickFullscreen'] ) )
+							toggleFullscreen( true );
+					}
+					return null;
+				} }
 			>
 
 				{/*

@@ -119,6 +119,7 @@ const getCgbDefault = ( key, args ) => {
 
 		case 'imageControlsSettings':
 			let imageControlsSettings = {
+				imgOnClickFullscreen: false,
 				show: 'showOnhover',			// hide showOnhover showIfSelected
 				position: 'center',
 				margin: '10%',

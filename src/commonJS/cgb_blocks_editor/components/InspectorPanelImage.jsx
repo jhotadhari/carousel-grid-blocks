@@ -239,6 +239,17 @@ let InspectorPanelImage = ({
 			initialOpen={ false }
 		>
 
+			<ToggleControl
+				label={ __( 'Toggle fullscreen when image is clicked', 'cgb'  ) }
+				checked={ get( imageControlsSettings, ['imgOnClickFullscreen'] ) }
+				onChange={ ( newVal ) => setAttributes( {
+					imageControlsSettings: JSON.stringify( {
+						...imageControlsSettings,
+						imgOnClickFullscreen: newVal,
+					} ),
+				} ) }
+			/>
+
 			<SelectControl
 				label={ __( 'Show Controls', 'cgb' ) }
 				value={ get( imageControlsSettings, ['show'] ) }

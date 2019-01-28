@@ -19,9 +19,6 @@ const {
 	InspectorControls,
 	BlockControls,
 } = wp.editor;
-const {
-	select,
-} = wp.data;
 
 /**
  * Internal dependencies

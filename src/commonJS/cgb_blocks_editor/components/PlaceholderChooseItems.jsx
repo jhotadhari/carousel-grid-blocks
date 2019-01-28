@@ -2,13 +2,6 @@
  * External dependencies
  */
 import classnames from 'classnames';
-import slugify from 'slugify';
-import {
-	Tab,
-	Tabs,
-	TabList,
-	TabPanel ,
-} from 'react-tabs';
 import {
 	get,
 	keys,
@@ -19,9 +12,6 @@ import {
  */
 const { __ } = wp.i18n;
 const {
-    BaseControl,
-    TextControl,
-    SelectControl,
     Placeholder,
 	Button,
 	FormFileUpload,
@@ -32,14 +22,9 @@ const {
 	mediaUpload,
 } = wp.editor;
 
-const {
-    select,
-} = wp.data;
-
 /**
  * Internal dependencies
  */
-import Icon from './Icon.jsx';
 import PlaceholderSpinner 	from '../../cgb_blocks/components/PlaceholderSpinner.jsx';
 
 const ALLOWED_MEDIA_TYPES = ['image'];

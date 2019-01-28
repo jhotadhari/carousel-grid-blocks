@@ -32,6 +32,13 @@ export function updateItem( index, newItem ) {
 	};
 }
 
+export function removeItem( index ) {
+	return {
+		type: 'REMOVE_ITEM',
+		index,
+	};
+}
+
 export function setSelected( newIndex ) {
 	return {
 		type: 'SET_SELECTED',

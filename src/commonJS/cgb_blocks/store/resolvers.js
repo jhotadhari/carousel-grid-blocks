@@ -17,6 +17,7 @@ const {
 
 import {
 	updateItem,
+	removeItem,
 	overwriteItems,
 	fetchFromAPI,
 } from './actions/actions';
@@ -28,30 +29,34 @@ export function* fetchItem( index, item ) {
 
 	const fetched = yield fetchFromAPI( '/wp/v2/media/' + id );
 
-	const newItem = {
-		...DEFAULT_ITEM,
-		...item,
-		key: item.key ? item.key : shortid.generate(),
-		selected: item.key.selected,
-		fetched: true,
+	if ( 'rest_post_invalid_id' === get( fetched, ['code'] ) ) {
+		yield removeItem( index );
+	} else {
+		const newItem = {
+			...DEFAULT_ITEM,
+			...item,
+			key: item.key ? item.key : shortid.generate(),
+			selected: item.key.selected,
+			fetched: true,
 
-		// img atts
-		src: fetched.source_url,
-		srcSet: fetched.cgb_srcset,
-		sizes: fetched.cgb_sizes,
-		width: fetched.media_details.width,
-		height: fetched.media_details.height,
-		alt: fetched.alt_text,
-		// media fetched
-		id: fetched.id,
-		orientation: fetched.media_details.width > fetched.media_details.height ? 'landscape' : 'portrait',
-		title: fetched.title.rendered,
-		caption: fetched.caption.rendered,
-		mediaSizes: fetched.media_details.sizes,
-	};
+			// img atts
+			src: fetched.source_url,
+			srcSet: fetched.cgb_srcset,
+			sizes: fetched.cgb_sizes,
+			width: fetched.media_details.width,
+			height: fetched.media_details.height,
+			alt: fetched.alt_text,
+			// media fetched
+			id: fetched.id,
+			orientation: fetched.media_details.width > fetched.media_details.height ? 'landscape' : 'portrait',
+			title: fetched.title.rendered,
+			caption: fetched.caption.rendered,
+			mediaSizes: fetched.media_details.sizes,
+		};
 
-	yield updateItem( index, newItem );
-	return newItem;
+		yield updateItem( index, newItem );
+		return newItem;
+	}
 };
 
 export function* pullItemsFromArchive( state, key, options, random ) {

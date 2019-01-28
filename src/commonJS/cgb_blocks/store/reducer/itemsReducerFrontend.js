@@ -15,6 +15,7 @@ const shortid = require('shortid');
 import { DEFAULT_ITEM, DEFAULT_STATE } 	from '../constants';
 import {
 	updateItem,
+	removeItem,
 	setSelected,
 	overwriteItems,
 }						 				from './itemsReducer';
@@ -56,6 +57,9 @@ const itemsReducerFrontend = ( state = { items: [ ...DEFAULT_STATE.items ] }, ac
 
 		case 'UPDATE_ITEM':
 			return updateItem( state, action );
+
+		case 'REMOVE_ITEM':
+			return removeItem( state, action );
 
 		case 'SET_SELECTED':
 			return setSelected( state, action );

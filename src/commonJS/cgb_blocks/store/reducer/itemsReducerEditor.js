@@ -27,21 +27,10 @@ import getCgbBlocks						from '../../utils/getCgbBlocks';
 import { DEFAULT_ITEM, DEFAULT_STATE }	from '../constants';
 import {
 	updateItem,
+	removeItem,
 	setSelected,
 	overwriteItems,
 }						 				from './itemsReducer';
-
-export function removeItem( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
-	const { items } = state;
-	const { index } = action;
-	const newItems = [...items];
-	if ( newItems.length > 0 )
-		newItems.splice( index, 1 );
-	return {
-		...state,
-		items: newItems,
-	};
-}
 
 export function pullItemsFromAttributes( state = { items: [ ...DEFAULT_STATE.items ] }, action ) {
 	const { items } = state;

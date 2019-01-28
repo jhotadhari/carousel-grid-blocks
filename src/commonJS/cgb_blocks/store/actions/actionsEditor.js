@@ -5,6 +5,7 @@ import {
 	setSelected,
 	pullSettingsFromAttributes,
 	updateItem,
+	removeItem,
 	toggleFullscreen,
 	addFullscreenId,
 	removeFullscreenId,
@@ -16,6 +17,7 @@ export{
 	setSelected,
 	pullSettingsFromAttributes,
 	updateItem,
+	removeItem,
 	toggleFullscreen,
 	addFullscreenId,
 	removeFullscreenId,
@@ -25,13 +27,6 @@ export function addItems( medias ) {
 	return {
 		type: 'ADD_ITEMS',
 		medias
-	};
-}
-
-export function removeItem( index ) {
-	return {
-		type: 'REMOVE_ITEM',
-		index,
 	};
 }
 

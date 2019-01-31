@@ -25,7 +25,7 @@ const getCgbBlocks = ( blockGroupId, uidsOrBlocks ) => {
 	const cgbBlocks = [...uidsOrBlocks].map( uidOrBlock => {
 		const block = 'string' === typeof uidOrBlock ? getBlock( uidOrBlock ) : uidOrBlock;
 
-		if ( block.name.startsWith( 'cgb/' ) && block.attributes.blockGroupId === blockGroupId )
+		if ( block.name && block.name.startsWith( 'cgb/' ) && block.attributes.blockGroupId === blockGroupId )
 			return block;
 
 		if ( block.innerBlocks.length )

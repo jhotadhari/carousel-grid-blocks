@@ -12,6 +12,7 @@ const { __ } = wp.i18n;
  * Internal dependencies
  */
 import withTabInfo	from '../withTabInfo'
+import CleanupMediaComponent	from './CleanupMediaComponent.jsx';
 
 class ToolsTabComponent extends React.Component {
 
@@ -22,7 +23,7 @@ class ToolsTabComponent extends React.Component {
 
 		return <div className={ classnames( [ 'tools', className ] ) }>
 
-			Nothing here yet ... coming soon
+			<CleanupMediaComponent/>
 
 		</div>;
 

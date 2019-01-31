@@ -121,8 +121,6 @@ class PlaceholderChooseGroup extends React.Component {
 			setAttributes,
 		} = this.props;
 
-		// const blockGroupIdPrefix = 'cgb/' + select( 'core/editor' ).getCurrentPostId() + '-';
-
 		const titles= [
 			__( 'Connect to existing block group', 'cgb' ),
 			__( 'Create new block group and connect block', 'cgb' ),

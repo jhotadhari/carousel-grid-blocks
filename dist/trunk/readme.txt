@@ -42,6 +42,11 @@ Upload and install this Plugin the same way you'd install any other plugin.
 == Changelog ==
 
 
+0.2.4
+some issues fixes
+
+see commit messages
+
 0.2.3
 some fixes, see commit messages
 

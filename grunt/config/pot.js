@@ -45,6 +45,7 @@ config['phpFiles'] = {
 const handles = [
 	'cgb_blocks_editor',
 	'cgb_blocks_frontend',
+	'cgb_options_page',
 ];
 
 [...handles].map( handle => {

@@ -4,7 +4,6 @@ var getWpInstall = require('../getWpInstall');
 module.exports = function(grunt){
 	grunt.registerTask('local_sync', 'sync to local wp install', function( install, version ){
 
-
 		// check if args
 		if ( arguments.length === 0 )
 			return grunt.warn("local install must be specified");

@@ -1,17 +1,25 @@
+const playSound = require('../playSound');
+
 module.exports = function(grunt){
 
 	// _noticeReady
 	// used by build.js
 	// used by dist.js
-	grunt.registerTask('_noticeReady', 'sub task', function(process) {
+	grunt.registerTask('_noticeReady', 'sub task', function( process ) {
 
 		switch( process ){
+			case undefined:
+				playSound( grunt, 'success_short' );
+				break;
+
 			case 'build':
+				playSound( grunt, 'success' );
 				grunt.log.writeln( '' );
 				grunt.log.writeln( '' );
 				grunt.log.writeln( 'Build done.' );
 				break;
 			case 'dist':
+				playSound( grunt, 'success_long' );
 				grunt.log.writeln( '' );
 				grunt.log.writeln( '' );
 				grunt.log.writeln( 'Dist done.' );

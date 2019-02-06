@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carousel-grid-blocks 0.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-31 17:59+0530\n"
+"POT-Creation-Date: 2019-02-06 18:44+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,31 +17,35 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: src/commonJS/cgb_blocks/components/Item.jsx:117
+msgid "Fullscreen mode is suppressed within the Editor"
+msgstr ""
+
 #: src/commonJS/cgb_blocks/components/ItemControls.jsx:136
 #: src/commonJS/cgb_blocks/components/ItemControls.jsx:137
 msgid "Fullscreen"
 msgstr ""
 
-#: src/commonJS/cgb_options_page/components/CleanupMediaComponent.jsx:177
+#: src/commonJS/cgb_options_page/components/CleanupMediaComponent.jsx:179
 msgid "Media clean up"
 msgstr ""
 
-#: src/commonJS/cgb_options_page/components/CleanupMediaComponent.jsx:194
+#: src/commonJS/cgb_options_page/components/CleanupMediaComponent.jsx:196
 msgid "Fetching Posttypes and Posts"
 msgstr ""
 
-#: src/commonJS/cgb_options_page/components/CleanupMediaComponent.jsx:197
+#: src/commonJS/cgb_options_page/components/CleanupMediaComponent.jsx:199
 msgid "Remove missing image ids from all cgb blocks."
 msgstr ""
 
-#: src/commonJS/cgb_options_page/components/CleanupMediaPostComponent.jsx:305
+#: src/commonJS/cgb_options_page/components/CleanupMediaPostComponent.jsx:308
 msgid "Post Id"
 msgstr ""
 
-#: src/commonJS/cgb_options_page/components/CleanupMediaPostComponent.jsx:318
+#: src/commonJS/cgb_options_page/components/CleanupMediaPostComponent.jsx:321
 msgid "All Image Ids:"
 msgstr ""
 
-#: src/commonJS/cgb_options_page/components/CleanupMediaPostComponent.jsx:329
+#: src/commonJS/cgb_options_page/components/CleanupMediaPostComponent.jsx:332
 msgid "No Images Found"
 msgstr ""

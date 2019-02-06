@@ -2,6 +2,7 @@
  * External dependencies
  */
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import {
 	get,
 } from 'lodash';
@@ -100,7 +101,7 @@ let GridItem = ({
 			index={ sortIndex }
 			key={ items[sortIndex]['key'] }
 			item={ items[sortIndex] }
-			className={ 'cgb-block-grid-item' }
+			className={ classnames( ['is-clickable','cgb-block-grid-item'] ) }
 			imageControlsSettings={ imageControlsSettings }
 			imageCaptionSettings={ imageCaptionSettings }
 			imageHoverEffect={ imageHoverEffect }

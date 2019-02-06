@@ -2,6 +2,7 @@
  * External dependencies
  */
 import classnames 		from 'classnames';
+import ReactTimeout from 'react-timeout'
 import {
 	get,
 	isArray,
@@ -115,6 +116,7 @@ class CleanupMediaPostComponent extends React.Component {
 
 		const {
 			getEntityRecords,
+			setTimeout,
 		} = this.props;
 
 		const {
@@ -207,6 +209,7 @@ class CleanupMediaPostComponent extends React.Component {
 			getEntity,
 			postType,
 			saveEntityRecord,
+			setTimeout,
 		} = this.props;
 
 		const kind = 'postType';
@@ -345,4 +348,4 @@ class CleanupMediaPostComponent extends React.Component {
 	}
 }
 
-export default CleanupMediaPostComponent;
+export default ReactTimeout( CleanupMediaPostComponent );

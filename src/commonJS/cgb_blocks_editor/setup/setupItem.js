@@ -1,11 +1,19 @@
 /**
  * External dependencies
  */
-import PropTypes from 'prop-types';
+import PropTypes 	from 'prop-types';
+import ReactTimeout from 'react-timeout'
 import {
 	set,
 	get,
 } from 'lodash';
+
+/**
+ * WordPress dependencies
+ */
+const {
+	withNotices,
+} = wp.components;
 
 /**
  * Internal dependencies
@@ -41,6 +49,8 @@ const setupItem = blockGroupId => {
 	_Item = composeWithUi( _Item, blockGroupId );
 
 	_Item = composeWithProps( { ItemAdminControlsComponent: get( cgbBlocks, ['components',blockGroupId,'ItemAdminControls'] ) } )( _Item );
+	_Item = withNotices( _Item );
+	_Item = ReactTimeout( _Item );
 
 	set( cgbBlocks, ['components',blockGroupId,'Item'], _Item );
 

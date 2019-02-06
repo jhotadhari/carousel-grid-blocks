@@ -2,6 +2,7 @@
  * External dependencies
  */
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import {
 	filter,
 	get,
@@ -74,6 +75,9 @@ class Item extends React.Component {
 
 			isFullscreen,
 			toggleFullscreen,
+			noticeOperations,
+			noticeUI,
+			setTimeout,
 		} = this.props;
 
 		if ( ! item.fetched ) return '';
@@ -98,16 +102,23 @@ class Item extends React.Component {
 
 		return (
 			<div
-				className={ [
+				className={ classnames( [
+					...( item.selected ? ['selected'] : [] ),
+					...( get( imageControlsSettings, ['imgOnClickFullscreen'] ) ? ['is-clickable'] : [] ),
 					className,
-					item.selected ? 'selected' : null,
-				].filter( a => a !== null ).join(' ') }
+				] ) }
 				style={ {...itemStyle} }
 				onClick={ e => {
 					if ( 'BUTTON' !== e.target.tagName ) {
 						setSelected( undefined === index ? 0 : index );
-						if ( get( imageControlsSettings, ['imgOnClickFullscreen'] ) )
-							toggleFullscreen( true );
+						if ( get( imageControlsSettings, ['imgOnClickFullscreen'] ) ) {
+							if ( ItemAdminControlsComponent ) {	// is editor
+								noticeOperations.createNotice( { content: __( 'Fullscreen mode is suppressed within the Editor', 'cgb' ) } );
+								setTimeout( noticeOperations.removeAllNotices, 2000 );
+							} else  {
+								toggleFullscreen( true );
+							}
+						}
 					}
 					return null;
 				} }
@@ -124,6 +135,7 @@ class Item extends React.Component {
 					].filter( a => a !== null ).join(' ') }
 					style={ imageStyle }
 				>
+
 					<img
 						src={ src }
 						alt={ alt }
@@ -177,6 +189,15 @@ class Item extends React.Component {
 						item={ item }
 						controls={ controls }
 					/>
+				}
+
+				{/*
+					notices
+				*/}
+				{ noticeUI &&
+					<div className={ 'notice-fullscreen' } >
+						{ noticeUI }
+					</div>
 				}
 
 			</div>

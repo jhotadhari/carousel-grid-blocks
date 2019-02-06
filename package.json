@@ -69,6 +69,7 @@
     "react-responsive-carousel": "^3.1.42",
     "react-sortable-hoc": "^0.8.3",
     "react-tabs": "^2.3.0",
+    "react-timeout": "^1.1.2",
     "redux-concatenate-reducers": "^1.0.0",
     "resize-observer-polyfill": "^1.5.0",
     "shortid": "^2.2.13",

@@ -2,6 +2,7 @@
  * External dependencies
  */
 import classnames 		from 'classnames';
+import ReactTimeout		from 'react-timeout'
 import {
 	findIndex,
 	isEqual,
@@ -85,6 +86,7 @@ class CleanupMediaComponent extends React.Component {
 		const {
 			getPostTypes,
 			getEntityRecords,
+			setTimeout,
 		} = this.props;
 
 		const {
@@ -155,7 +157,7 @@ class CleanupMediaComponent extends React.Component {
 			resolvers: [],
 		} );
 
-		setTimeout( () => this.setState( {
+		this.props.setTimeout( () => this.setState( {
 			started: true,
 		} ), 100 );
 	}
@@ -235,4 +237,4 @@ class CleanupMediaComponent extends React.Component {
 	}
 }
 
-export default withCleanup( CleanupMediaComponent );
+export default ReactTimeout( withCleanup( CleanupMediaComponent ) );

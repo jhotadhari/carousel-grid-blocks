@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carousel-grid-blocks 0.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-06 18:44+0530\n"
+"POT-Creation-Date: 2019-02-08 20:31+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/commonJS/cgb_blocks/components/Item.jsx:117
+#: src/commonJS/cgb_blocks/components/Item.jsx:116
 msgid "Fullscreen mode is suppressed within the Editor"
 msgstr ""
 
@@ -178,28 +178,36 @@ msgstr ""
 msgid "Width"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:191
-msgid "Set Max Height"
+#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:168
+msgid "Max Width"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:242
-msgid "Resize to screen height"
+#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:273
+msgid "Screen Height Margin"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:306
-msgid "showArrows"
+#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:332
+msgid "arrowsPosition"
 msgstr ""
 
 #: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:349
-msgid "showIndicators"
+msgid "showStatus"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:387
-msgid "autoPlay"
+#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:375
+msgid "indicatorsPosition"
 msgstr ""
 
-#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:410
-msgid "stopOnHover"
+#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:389
+msgid "infiniteLoop"
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:413
+msgid "autoPlay interval"
+msgstr ""
+
+#: src/commonJS/cgb_blocks_editor/components/CarouselInspector.jsx:438
+msgid "Animation"
 msgstr ""
 
 #: src/commonJS/cgb_blocks_editor/components/ChooseSource.jsx:84

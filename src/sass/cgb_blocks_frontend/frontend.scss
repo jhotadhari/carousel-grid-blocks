@@ -44,6 +44,15 @@
 }
 
 
+@mixin is-clickable() {
+     cursor: pointer;
+     transition: box-shadow 0.3s;
+     box-shadow: none;
+     &:hover {
+         box-shadow: 0px 8px 15px transparentize( black, 0.9 );
+     }
+}
+
 .cgb-block {
 
     &-grid-item,
@@ -75,12 +84,7 @@
         }
 
         &.is-clickable {
-             cursor: pointer;
-             transition: box-shadow 0.3s;
-             box-shadow: none;
-             &:hover {
-                 box-shadow: 0px 8px 15px transparentize( black, 0.9 );
-             }
+            @include is-clickable;
         }
 
         &.selected {
@@ -165,20 +169,16 @@
 .cgb-block {
     &-carousel {
 
+        .is-clickable {
+            @include is-clickable;
+        }
+
         .image-fit-cover {
             .slide {
                 height: 100%;
                 .cgb-block-carousel-item {
                     height: 100%;
                 }
-            }
-        }
-
-		// fix hover bow-shadow
-        .carousel {
-            overflow: visible;
-            .slider-wrapper {
-                overflow: visible;
             }
         }
 
@@ -229,6 +229,10 @@
 
 }
 
+.cgb-clearfix {
+    display: block;
+    clear: both;
+}
 
 .fullscreen {
     &-close {

@@ -161,6 +161,7 @@ class Carousel extends React.Component {
 			className,
 			carouselSettings: {
 				imageFit,
+				innerAlign,
 				showArrows,
 				arrowsPosition,
 				showStatus,
@@ -205,6 +206,8 @@ class Carousel extends React.Component {
 
 						<CarouselCustom
 							className={ 'image-fit-' + imageFit }
+							imageFit={ imageFit }
+							innerAlign={ innerAlign }
 							axis={ 'horizontal' }
 							showArrows={ showArrows }
 							arrowsPosition={ arrowsPosition }
@@ -227,6 +230,7 @@ class Carousel extends React.Component {
 							imageCaptionSettings={ imageCaptionSettings }
 							items={ items }
 							animation={ animation }
+							imageControlsSettings={ imageControlsSettings }
 						>
 							{ [...items].map( ( item, index ) => {
 

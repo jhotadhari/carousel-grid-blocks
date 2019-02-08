@@ -40,7 +40,13 @@ const registerBlockCarousel = () => {
 		supports: {
 			html: false,
 			// align: true,
-			// align: [ 'left', 'right', 'full' ],
+			// align: [
+			// 	'left',
+			// 	'center',
+			// 	'right',
+			// 	'wide',
+			// 	'full',
+			// ],
 		},
 		transforms: {
 			to: [

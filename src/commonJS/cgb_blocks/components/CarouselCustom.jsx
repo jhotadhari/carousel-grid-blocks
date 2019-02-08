@@ -5,6 +5,9 @@ import { Carousel } from 'react-responsive-carousel';
 import Swipe from 'react-easy-swipe';
 import klass from 'react-responsive-carousel/lib/cssClasses';
 import CSSTranslate from 'react-responsive-carousel/lib/CSSTranslate';
+import classnames from 'classnames';
+const { get } = lodash;
+import ReactTimeout		from 'react-timeout'
 
 /**
  * Internal dependencies
@@ -156,8 +159,14 @@ class CarouselCustom extends Carousel {
                 containerStyles.height = this.props.height;
             } else if ( this.props.dynamicHeight ) {
                 const itemHeight = this.getVariableImageHeight(this.state.selectedItem);
-                swiperProps.style.height = itemHeight || 'auto';
-                containerStyles.height = itemHeight || 'auto';
+
+                // fix, item doesn't show up. force rerender
+                if ( null === itemHeight ){
+                	this.props.setTimeout( () => this.setState( { rerender: Math.random() } ), 1500 );
+                }
+
+                swiperProps.style.height = itemHeight || this.state.itemSize;
+                containerStyles.height = itemHeight || this.state.itemSize;
             }
 
         } else {
@@ -168,8 +177,14 @@ class CarouselCustom extends Carousel {
         }
 
         return (
-            <div className={this.props.className} ref={this.setCarouselWrapperRef}>
-                <div className={klass.CAROUSEL(true)} style={{width: this.props.width}}>
+            <div className={ classnames( [this.props.className] )} ref={this.setCarouselWrapperRef}>
+                <div className={ classnames( [
+                	...( get( this.props.imageControlsSettings, ['imgOnClickFullscreen'] ) ? ['is-clickable'] : [] ),
+                	klass.CAROUSEL(true)
+                ] ) } style={ {
+                	width: this.props.width,
+                	...( this.props.imageFit && 'center' !== this.props.innerAlign && { float: this.props.innerAlign, } ),
+                } }>
                     { 'insideImage' === this.props.arrowsPosition && <button type="button" className={klass.ARROW_PREV(!hasPrev)} onClick={this.decrement} /> }
                     <div className={klass.WRAPPER(true, this.props.axis)} style={containerStyles} ref={this.setItemsWrapperRef}>
                         { this.props.swipeable ?
@@ -194,8 +209,12 @@ class CarouselCustom extends Carousel {
                     { this.renderStatus() }
                 </div>
 
+                { this.props.imageFit && 'center' !== this.props.innerAlign &&
+                	<div className={ 'cgb-clearfix' }></div>
+                }
+
                 { 'hide' !== this.props.imageCaptionSettings.show && 'below' === this.props.imageCaptionSettings.position &&
-                	<div className={ 'carousel' }>
+                	<div className={ 'carousel carousel-caption' }>
 						<ItemCaption
 							imageCaptionSettings={ this.props.imageCaptionSettings }
 							className={ 'cgb-block-carousel-item-info' }
@@ -218,4 +237,4 @@ class CarouselCustom extends Carousel {
     }
 }
 
-export default CarouselCustom;
+export default ReactTimeout( CarouselCustom );

@@ -148,6 +148,21 @@ const CarouselInspector = ({
 
 				{ 'contain' === get( carouselSettings, ['imageFit'] ) && <>
 
+					<SelectControl
+						label={ __( 'Inner Align', 'cgb'  ) }
+						value={ get( carouselSettings, ['innerAlign'] ) }
+						options={ [
+							{ label: __( 'Left', 'cgb' ), value: 'left' },
+							{ label: __( 'Center', 'cgb' ), value: 'center' },
+							{ label: __( 'Right', 'cgb' ), value: 'right' },
+						] }
+						onChange={ ( newVal ) => setAttributes( {
+							carouselSettings: JSON.stringify( {
+								...carouselSettings,
+								innerAlign: newVal,
+							} ),
+						} ) }
+					/>
 
 					<BaseControl
 						label={ __( 'Max Width', 'cgb'  ) }

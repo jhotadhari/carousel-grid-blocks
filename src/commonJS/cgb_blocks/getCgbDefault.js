@@ -29,6 +29,7 @@ const getCgbDefault = ( key, args ) => {
 						unit: 'percent',			// px || percent
 					},
 				// 'contain' === imageFit
+					innerAlign: 'left',			// 'left' | 'center' | 'right'
 					maxWidth: {
 						value: 100,
 						unit: 'percent',			// px || percent
@@ -65,6 +66,7 @@ const getCgbDefault = ( key, args ) => {
 					carouselSettings = {
 						...carouselSettings,
 						useKeyboardArrows: true,
+						innerAlign: 'center',
 					};
 			}
 			return applyFilters( 'cgb.default.carouselSettings', carouselSettings, args );

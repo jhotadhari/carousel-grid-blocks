@@ -1,0 +1,393 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/cgb_blocks/components/Item.jsx:118
+msgid "Fullscreen mode is suppressed within the Editor"
+msgstr ""
+
+#: src/js/cgb_blocks/components/ItemControls.jsx:137
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:77
+msgid "Fullscreen"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:111
+msgid "Height"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:153
+msgid "Inner Align"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:156
+msgid "Left"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:157
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:49
+msgid "Center"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:158
+msgid "Right"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:169
+msgid "Max Width"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:207
+msgid "Set Max Height"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:258
+msgid "Resize to screen height"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:274
+msgid "Screen Height Margin"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:322
+msgid "showArrows"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:333
+msgid "arrowsPosition"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:350
+msgid "showStatus"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:365
+msgid "showIndicators"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:376
+msgid "indicatorsPosition"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:390
+msgid "infiniteLoop"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:403
+msgid "autoPlay"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:414
+msgid "autoPlay interval"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:426
+msgid "stopOnHover"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:439
+msgid "Animation"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:59
+msgid "Image Fit"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/CarouselInspector.jsx:73
+msgid "Width"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/ChooseSource.jsx:100
+msgid "Post Type"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/ChooseSource.jsx:122
+msgid "Include taxonomy terms"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/ChooseSource.jsx:124
+msgid "Rest filters need to be enabled to use this feature"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/ChooseSource.jsx:126
+msgid "Try this plugin"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/ChooseSource.jsx:86
+msgid "Items Source"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/ColorPaletteAlpha.jsx:26
+msgid "Custom color picker"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/ColorPaletteAlpha.jsx:48
+#. %s: The name of the color e.g: "vivid red".
+msgid "Color: %s"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/ColorPaletteAlpha.jsx:50
+#. %s: color hex code e.g: "#f00".
+msgid "Color code: %s"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/ColorPaletteAlpha.jsx:91
+msgid "Clear"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/GridInspector.jsx:56
+msgid "Columns"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/GridInspector.jsx:67
+#: src/js/cgb_blocks_editor/components/InspectorPanelImage.jsx:283
+msgid "Margin"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/GridInspector.jsx:79
+msgid "Item sizes and aspect ratio"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelGroup.jsx:40
+msgid "Block group"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelGroup.jsx:47
+msgid "Connected with block group"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelGroup.jsx:61
+msgid "Disconnect"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelGroupSettings.jsx:42
+msgid "Block group settings"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelGroupSettings.jsx:48
+msgid "These settings apply to all blocks in this group."
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelGroupSettings.jsx:59
+msgid "Source"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelImage.jsx:112
+msgid "Custom Background Color"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelImage.jsx:138
+msgid "Custom Font Color"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelImage.jsx:162
+msgid "Parts"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelImage.jsx:184
+msgid "Hover Effect"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelImage.jsx:198
+msgid "Highlight Effect"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelImage.jsx:207
+msgid "Box shadow color"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelImage.jsx:222
+msgid "Box shadow width"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelImage.jsx:243
+msgid "Toggle fullscreen when image is clicked"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelImage.jsx:254
+msgid "Show Controls"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelImage.jsx:268
+msgid "Position"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelImage.jsx:294
+msgid "Padding"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelImage.jsx:309
+msgid "Background"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelImage.jsx:325
+msgid "Font Color"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelImage.jsx:343
+msgid "Controls"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelImage.jsx:377
+msgid "Link to"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/InspectorPanelImage.jsx:57
+msgid "Show Caption"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/ItemAdminControls.jsx:50
+msgid "Move Image"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/ItemAdminControls.jsx:57
+msgid "Move Image Left"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/ItemAdminControls.jsx:72
+msgid "Move Image Right"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/ItemAdminControls.jsx:86
+msgid "Select Image"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/ItemAdminControls.jsx:97
+msgid "Remove Image From Block"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/ItemAdminControlsMoveToIndex.jsx:59
+msgid "New Image Position"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/ItemAdminControlsMoveToIndex.jsx:66
+msgid "Move Image To New Position"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/PlaceholderChooseItems.jsx:104
+msgid "Upload"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/PlaceholderChooseItems.jsx:118
+msgid "Media Library"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/PlaceholderChooseItems.jsx:131
+msgid ""
+"No items were found. Try to adjust the query parameter or change 'Items "
+"Source' to 'Custom'"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/PlaceholderChooseItems.jsx:84
+msgid "Choose Items"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/components/PlaceholderChooseItems.jsx:85
+msgid ""
+"Drag images, upload new ones, select images from your library or adjust the "
+"the 'Items Source'."
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:12
+msgid "Contain"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:13
+msgid "Cover"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:19
+msgid "Scale"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:24
+msgid "None"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:25
+msgid "Box Shadow"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:31
+msgid "Show"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:32
+msgid "Hide"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:33
+msgid "Show on hover"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:34
+msgid "Show if selected"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:48
+msgid "Top"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:50
+msgid "Full"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:57
+msgid "Bottom"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:63
+msgid "Inside Image"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:64
+msgid "Below"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:69
+msgid "Image Title"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:70
+msgid "Image Caption"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:71
+msgid "Post Title"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:72
+msgid "Post Excerpt"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:78
+msgid "Link"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:83
+msgid "Post (if source is archive)"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:84
+msgid "Attachment"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:89
+msgid "Maintain aspect ratios"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:90
+msgid "Equal widths"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:91
+msgid "Display as squares"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:96
+msgid "Slide"
+msgstr ""
+
+#: src/js/cgb_blocks_editor/getInspectorOptions.js:97
+msgid "Fade"
+msgstr ""

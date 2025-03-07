@@ -1,0 +1,9 @@
+// @import "bourbon";
+@import "./vendor/carousel_custom";
+@import '../../node_modules/react-tabs/style/react-tabs.scss';
+
+
+body.post-php {
+    @import "./cgb_blocks_frontend/frontend";
+}
+@import "./cgb_blocks_editor/editor";
